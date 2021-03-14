@@ -7,17 +7,17 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MenuControler">
    <children>
-      <VBox layoutX="213.0" layoutY="107.0" prefHeight="234.0" prefWidth="174.0">
+      <VBox layoutX="313.0" layoutY="167.0" prefHeight="234.0" prefWidth="174.0">
          <children>
-            <Button fx:id="BtnKontrolaHW" mnemonicParsing="false" prefHeight="45.0" prefWidth="190.0" text="Kontrola HW" />
-            <Button fx:id="BTNReklamácia" mnemonicParsing="false" prefHeight="45.0" prefWidth="190.0" text="Reklamácia">
+            <Button fx:id="BtnKontrolaHW" mnemonicParsing="false" onAction="#OnClickKontrolaHW" prefHeight="45.0" prefWidth="190.0" text="Kontrola HW" />
+            <Button fx:id="BtnReklamácia" mnemonicParsing="false" onAction="#OnClickReklamacie" prefHeight="45.0" prefWidth="190.0" text="Reklamácia">
                <VBox.margin>
                   <Insets top="10.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="BTNZaznamakcí" mnemonicParsing="false" prefHeight="45.0" prefWidth="190.0" text="Záznam akcí">
+            <Button fx:id="BtnZaznamakci" mnemonicParsing="false" onAction="#OnClickZaznamAkci" prefHeight="45.0" prefWidth="190.0" text="Záznam akcí">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -27,7 +27,7 @@
             </Button>
          </children>
       </VBox>
-      <Label alignment="CENTER" layoutX="213.0" layoutY="26.0" prefHeight="53.0" prefWidth="174.0" text="MENU">
+      <Label alignment="CENTER" layoutX="313.0" layoutY="32.0" prefHeight="53.0" prefWidth="174.0" text="MENU">
          <font>
             <Font name="Book Antiqua" size="48.0" />
          </font>
