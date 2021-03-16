@@ -2,6 +2,7 @@ import java.beans.Statement;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -22,15 +23,12 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class KontrolaHWControler implements Initializable {
-    
-    Connection connection = null;
-
-    Statement statement = null;
-
-    ResultSet rs = null;
 
     @FXML
     private TableView<Pbv> tabulka;
+
+    @FXML
+    private Button BtnRefresh;
 
     @FXML
     private TableColumn<Pbv, String> ColumSeriovecislo;
@@ -58,10 +56,16 @@ public class KontrolaHWControler implements Initializable {
     @FXML
     private Button Btnspat;
 
-    ObservableList <String> OLsklady = FXCollections.observableArrayList("Sklad 1","Sklad 2","Sklad 3");
-    ObservableList <String> OLzariadenia = FXCollections.observableArrayList("Pbv","Lispettore scanner","MDE","Rabattdrucker","Quail");
+   
 
     ObservableList <Pbv> OLtable = FXCollections.observableArrayList();
+
+    int index = -1;
+
+    Connection conn = null;
+    ResultSet rs = null;
+    PreparedStatement pst = null;
+
     
 
     @FXML
@@ -72,40 +76,54 @@ public class KontrolaHWControler implements Initializable {
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(MenuScene);
         window.show();
+    
+    }
+
+    @FXML
+    void OnClickRefresh(ActionEvent event) throws IOException, SQLException {
+        update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia));
+    }
+
+    public String getVyberZariadenia(ChoiceBox<String> ChoiceBoxTypzariadenia){
+        return ChoiceBoxTypzariadenia.getValue();
+    }
+
+    public void update_Table(String choice) throws SQLException{
+
+        ColumSeriovecislo.setCellValueFactory(new PropertyValueFactory<>("Sc"));
+        ColumNazov.setCellValueFactory(new PropertyValueFactory<>("Nazov"));
+        ColumZaruka.setCellValueFactory(new PropertyValueFactory<>("Zaruka"));
+        ColumDatumprijatia.setCellValueFactory(new PropertyValueFactory<>("Datum_prijatia"));
+        ColumDatumodoslania.setCellValueFactory(new PropertyValueFactory<>("Datum_odoslania"));
+        ColumMiestopouzivania.setCellValueFactory(new PropertyValueFactory<>("Miesto_pouzivania"));
+
+        OLtable = JDBMySQLConnection.getData(choice);
+        tabulka.setItems(OLtable);
+
+    }
+
+    public void setup_Choiceboxs(){
+        ObservableList <String> OLsklady = FXCollections.observableArrayList("Sklad 1","Sklad 2","Sklad 3");
+        ObservableList <String> OLzariadenia = FXCollections.observableArrayList("Pbv","Lispettore scanner","MDE","Rabattdrucker","Quail");
+
+        ChoiceBoxSklad.setItems(OLsklady);
+        ChoiceBoxTypzariadenia.setItems(OLzariadenia);
+
+        ChoiceBoxTypzariadenia.setValue("Pbv");
     }
     
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ChoiceBoxSklad.setItems(OLsklady);
-        ChoiceBoxTypzariadenia.setItems(OLzariadenia);
+        setup_Choiceboxs();
 
         try {
-            Connection con = JDBMySQLConnection.getConnection();
-            ResultSet rs = con.createStatement().executeQuery("SELECT * FROM `pbv-ibahw`");
-
-            while (rs.next()) {
-                OLtable.add(new Pbv(rs.getString("Sériové číslo"),rs.getString("Názov"),rs.getString("Záruka"),rs.getString("Dátum prijatia"),rs.getString("Dátum odoslania"),rs.getString("Miesto používania")));
-            }
-
-            ColumSeriovecislo.setCellValueFactory(new PropertyValueFactory<>("Sc"));
-            ColumNazov.setCellValueFactory(new PropertyValueFactory<>("Nazov"));
-            ColumZaruka.setCellValueFactory(new PropertyValueFactory<>("Zaruka"));
-            ColumDatumprijatia.setCellValueFactory(new PropertyValueFactory<>("Datum_prijatia"));
-            ColumDatumodoslania.setCellValueFactory(new PropertyValueFactory<>("Datum_odoslania"));
-            ColumMiestopouzivania.setCellValueFactory(new PropertyValueFactory<>("Miesto_pouzivania"));
-
-            tabulka.setItems(OLtable);
+            update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia));
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
-       
-
-        
-        
-        
     }
 
 
