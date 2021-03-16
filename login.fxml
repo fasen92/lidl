@@ -9,39 +9,43 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #004fac;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #004fac;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LoginController">
    <children>
-      <AnchorPane layoutX="38.0" layoutY="75.0" prefHeight="350.0" prefWidth="350.0" style="-fx-background-color: #003f8a;">
+      <AnchorPane layoutX="39.0" layoutY="75.0" prefHeight="350.0" prefWidth="350.0" style="-fx-background-color: #003f8a;">
          <children>
-            <TextField layoutX="45.0" layoutY="132.0" prefHeight="38.0" prefWidth="260.0" promptText="Id">
+            <TextField fx:id="txtId" layoutX="45.0" layoutY="150.0" prefHeight="38.0" prefWidth="260.0" promptText="Id">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <PasswordField layoutX="46.0" layoutY="198.0" prefHeight="38.0" prefWidth="260.0" promptText="Heslo">
+            <PasswordField fx:id="txtPassword" layoutX="45.0" layoutY="215.0" prefHeight="38.0" prefWidth="260.0" promptText="Heslo">
                <font>
                   <Font size="15.0" />
                </font>
             </PasswordField>
-            <Button layoutX="46.0" layoutY="263.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="260.0" style="-fx-background-color: #004fac;" text="Prihlásiť" textFill="WHITE">
+            <Button fx:id="btnLogin" layoutX="47.0" layoutY="275.0" mnemonicParsing="false" onAction="#Login" prefHeight="39.0" prefWidth="260.0" style="-fx-background-color: #004fac;" text="Prihlásiť" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
-            <Label layoutX="92.0" layoutY="28.0" prefHeight="87.0" prefWidth="169.0" text="Prihlásenie" textAlignment="CENTER" textFill="WHITE">
+            <Label layoutX="91.0" layoutY="37.0" prefHeight="39.0" prefWidth="169.0" text="Prihlásenie" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font size="35.0" />
                </font>
             </Label>
+            <Label fx:id="txtLabel" layoutX="51.0" layoutY="88.0" prefHeight="39.0" prefWidth="249.0" text="Zadané údaje nie sú validné" textAlignment="CENTER" textFill="RED" textOverrun="CENTER_ELLIPSIS" visible="false">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
-      <ImageView fitHeight="350.0" fitWidth="350.0" layoutX="422.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="350.0" fitWidth="350.0" layoutX="422.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/lidlLogo.png" />
          </image>
       </ImageView>
-      <Label layoutX="772.0" layoutY="14.0" text="X" textFill="WHITE">
+      <Label layoutX="772.0" layoutY="14.0" onMouseClicked="#zavriOkno" text="X" textFill="WHITE">
          <font>
             <Font size="19.0" />
          </font>
