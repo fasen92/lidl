@@ -38,10 +38,10 @@ public static  Connection getConnection() throws SQLException {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                OLPbv.add(new Pbv(rs.getString("Sériové číslo"),rs.getString("Názov"),rs.getString("Záruka"),rs.getString("Dátum prijatia"),rs.getString("Dátum odoslania"),rs.getString("Miesto používania")));
+                OLPbv.add(new Pbv(rs.getString("Typ"),rs.getString("Názov"),rs.getString("Počet"),rs.getString("Sériové číslo"),rs.getString("Dátum odoslania fili"),rs.getString("Záruka"),rs.getString("Poznámka")));
             }
         } catch (Exception e) {
-            //TODO: handle exception
+            
         }
 
         return OLPbv;

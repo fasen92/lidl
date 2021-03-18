@@ -28,35 +28,37 @@ public class KontrolaHWControler implements Initializable {
     private TableView<Pbv> tabulka;
 
     @FXML
-    private Button BtnRefresh;
-
-    @FXML
-    private TableColumn<Pbv, String> ColumSeriovecislo;
+    private TableColumn<Pbv, String> ColumTyp;
 
     @FXML
     private TableColumn<Pbv, String> ColumNazov;
 
     @FXML
-    private TableColumn<Pbv, String> ColumZaruka;
+    private TableColumn<Pbv, String> ColumPocet;
 
     @FXML
-    private TableColumn<Pbv, String> ColumDatumprijatia;
+    private TableColumn<Pbv, String> ColumSC;
 
     @FXML
     private TableColumn<Pbv, String> ColumDatumodoslania;
 
     @FXML
-    private TableColumn<Pbv, String> ColumMiestopouzivania;
+    private TableColumn<Pbv, String> ColumZaruka;
+
+    @FXML
+    private TableColumn<Pbv, String> ColumPoznamka;
 
     @FXML
     private ChoiceBox<String> ChoiceBoxSklad;
 
     @FXML
     private ChoiceBox<String> ChoiceBoxTypzariadenia;
+    
     @FXML
     private Button Btnspat;
 
-   
+    @FXML
+    private Button BtnRefresh;
 
     ObservableList <Pbv> OLtable = FXCollections.observableArrayList();
 
@@ -65,8 +67,6 @@ public class KontrolaHWControler implements Initializable {
     Connection conn = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
-
-    
 
     @FXML
     void OnClickSpat(ActionEvent event) throws IOException {
@@ -89,13 +89,13 @@ public class KontrolaHWControler implements Initializable {
     }
 
     public void update_Table(String choice) throws SQLException{
-
-        ColumSeriovecislo.setCellValueFactory(new PropertyValueFactory<>("Sc"));
+        ColumTyp.setCellValueFactory(new PropertyValueFactory<>("Typ"));
+        ColumSC.setCellValueFactory(new PropertyValueFactory<>("SC"));
         ColumNazov.setCellValueFactory(new PropertyValueFactory<>("Nazov"));
+        ColumPocet.setCellValueFactory(new PropertyValueFactory<>("Pocet"));
         ColumZaruka.setCellValueFactory(new PropertyValueFactory<>("Zaruka"));
-        ColumDatumprijatia.setCellValueFactory(new PropertyValueFactory<>("Datum_prijatia"));
         ColumDatumodoslania.setCellValueFactory(new PropertyValueFactory<>("Datum_odoslania"));
-        ColumMiestopouzivania.setCellValueFactory(new PropertyValueFactory<>("Miesto_pouzivania"));
+        ColumPoznamka.setCellValueFactory(new PropertyValueFactory<>("Poznamka"));
 
         OLtable = JDBMySQLConnection.getData(choice);
         tabulka.setItems(OLtable);
@@ -125,8 +125,5 @@ public class KontrolaHWControler implements Initializable {
         }
 
     }
-
-
-     
 
 }
