@@ -1,4 +1,3 @@
-import java.beans.Statement;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -81,14 +80,17 @@ public class KontrolaHWControler implements Initializable {
 
     @FXML
     void OnClickRefresh(ActionEvent event) throws IOException, SQLException {
-        update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia));
+        update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia),getVyberskladu(ChoiceBoxSklad));
     }
-
+    public String getVyberskladu(ChoiceBox<String> ChoiceBoxSklad){
+        return ChoiceBoxSklad.getValue();
+    }
     public String getVyberZariadenia(ChoiceBox<String> ChoiceBoxTypzariadenia){
         return ChoiceBoxTypzariadenia.getValue();
     }
 
-    public void update_Table(String choice) throws SQLException{
+    public void update_Table(String choiceZariadenie, String choiceSklad) throws SQLException{
+        
         ColumTyp.setCellValueFactory(new PropertyValueFactory<>("Typ"));
         ColumSC.setCellValueFactory(new PropertyValueFactory<>("SC"));
         ColumNazov.setCellValueFactory(new PropertyValueFactory<>("Nazov"));
@@ -97,19 +99,21 @@ public class KontrolaHWControler implements Initializable {
         ColumDatumodoslania.setCellValueFactory(new PropertyValueFactory<>("Datum_odoslania"));
         ColumPoznamka.setCellValueFactory(new PropertyValueFactory<>("Poznamka"));
 
-        OLtable = JDBMySQLConnection.getData(choice);
+        OLtable = JDBMySQLConnection.getData(choiceZariadenie,choiceSklad);
         tabulka.setItems(OLtable);
 
     }
 
     public void setup_Choiceboxs(){
-        ObservableList <String> OLsklady = FXCollections.observableArrayList("Sklad 1","Sklad 2","Sklad 3");
-        ObservableList <String> OLzariadenia = FXCollections.observableArrayList("Pbv","Lispettore scanner","MDE","Rabattdrucker","Quail");
+        ObservableList <String> OLsklady = FXCollections.observableArrayList("Sklad1","Sklad2","Sklad3");
+        ObservableList <String> OLzariadenia = FXCollections.observableArrayList("Pbv","Lispettore-scanner","MDE","Rabattdrucker","Quail");
 
         ChoiceBoxSklad.setItems(OLsklady);
         ChoiceBoxTypzariadenia.setItems(OLzariadenia);
 
         ChoiceBoxTypzariadenia.setValue("Pbv");
+        //to do nacitat podla profilu predvoleny sklad
+        ChoiceBoxSklad.setValue("Sklad1");
     }
     
 
@@ -118,7 +122,7 @@ public class KontrolaHWControler implements Initializable {
         setup_Choiceboxs();
 
         try {
-            update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia));
+            update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia),getVyberskladu(ChoiceBoxSklad));
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
