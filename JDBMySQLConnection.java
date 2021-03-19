@@ -1,4 +1,6 @@
 import java.sql.*;
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -53,6 +55,11 @@ public static  Connection getConnection() throws SQLException {
 
         return null;
         
+    }
+
+    public static ArrayList<Ucet> getUcty() throws SQLException{
+        Connection conn = getConnection();
+        ArrayList<Ucet> UcetList = new ArrayList<Ucet>();
     }
    
     

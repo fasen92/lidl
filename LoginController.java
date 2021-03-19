@@ -2,6 +2,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javafx.scene.Node;
 import javafx.event.ActionEvent;
 import javafx.scene.Parent;
@@ -26,6 +28,8 @@ public class LoginController
     private void zavriOkno(ActionEvent event){
         System.exit(0);
     }
+
+    ArrayList<Ucet> UcetList = new ArrayList<Ucet>();
     
     public void Login(ActionEvent event) throws IOException{
         if(txtId.getText().equals("1234") && txtPassword.getText().equals("pass")){

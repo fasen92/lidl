@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch login",
+            "request": "launch",
+            "mainClass": "login",
+            "projectName": "lidl_77df80b5"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"
@@ -15,8 +22,8 @@
             "name": "Launch Main",
             "request": "launch",
             "mainClass": "Main",
-            "projectName": "lidl_edb497ca",
-            "vmArgs": "--module-path P:/JavaFX/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml"
+            "projectName": "lidl_77df80b5",
+            "vmArgs": "--module-path D:/Ivan/javafx/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml"
         }
     ]
 }

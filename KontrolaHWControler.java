@@ -120,10 +120,9 @@ public class KontrolaHWControler implements Initializable {
         try {
             update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia));
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            
         }
-
     }
 
 
