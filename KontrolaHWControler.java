@@ -1,4 +1,3 @@
-import java.beans.Statement;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -28,35 +27,37 @@ public class KontrolaHWControler implements Initializable {
     private TableView<Pbv> tabulka;
 
     @FXML
-    private Button BtnRefresh;
-
-    @FXML
-    private TableColumn<Pbv, String> ColumSeriovecislo;
+    private TableColumn<Pbv, String> ColumTyp;
 
     @FXML
     private TableColumn<Pbv, String> ColumNazov;
 
     @FXML
-    private TableColumn<Pbv, String> ColumZaruka;
+    private TableColumn<Pbv, String> ColumPocet;
 
     @FXML
-    private TableColumn<Pbv, String> ColumDatumprijatia;
+    private TableColumn<Pbv, String> ColumSC;
 
     @FXML
     private TableColumn<Pbv, String> ColumDatumodoslania;
 
     @FXML
-    private TableColumn<Pbv, String> ColumMiestopouzivania;
+    private TableColumn<Pbv, String> ColumZaruka;
+
+    @FXML
+    private TableColumn<Pbv, String> ColumPoznamka;
 
     @FXML
     private ChoiceBox<String> ChoiceBoxSklad;
 
     @FXML
     private ChoiceBox<String> ChoiceBoxTypzariadenia;
+    
     @FXML
     private Button Btnspat;
 
-   
+    @FXML
+    private Button BtnRefresh;
 
     ObservableList <Pbv> OLtable = FXCollections.observableArrayList();
 
@@ -65,8 +66,6 @@ public class KontrolaHWControler implements Initializable {
     Connection conn = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
-
-    
 
     @FXML
     void OnClickSpat(ActionEvent event) throws IOException {
@@ -81,35 +80,40 @@ public class KontrolaHWControler implements Initializable {
 
     @FXML
     void OnClickRefresh(ActionEvent event) throws IOException, SQLException {
-        update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia));
+        update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia),getVyberskladu(ChoiceBoxSklad));
     }
-
+    public String getVyberskladu(ChoiceBox<String> ChoiceBoxSklad){
+        return ChoiceBoxSklad.getValue();
+    }
     public String getVyberZariadenia(ChoiceBox<String> ChoiceBoxTypzariadenia){
         return ChoiceBoxTypzariadenia.getValue();
     }
 
-    public void update_Table(String choice) throws SQLException{
-
-        ColumSeriovecislo.setCellValueFactory(new PropertyValueFactory<>("Sc"));
+    public void update_Table(String choiceZariadenie, String choiceSklad) throws SQLException{
+        
+        ColumTyp.setCellValueFactory(new PropertyValueFactory<>("Typ"));
+        ColumSC.setCellValueFactory(new PropertyValueFactory<>("SC"));
         ColumNazov.setCellValueFactory(new PropertyValueFactory<>("Nazov"));
+        ColumPocet.setCellValueFactory(new PropertyValueFactory<>("Pocet"));
         ColumZaruka.setCellValueFactory(new PropertyValueFactory<>("Zaruka"));
-        ColumDatumprijatia.setCellValueFactory(new PropertyValueFactory<>("Datum_prijatia"));
         ColumDatumodoslania.setCellValueFactory(new PropertyValueFactory<>("Datum_odoslania"));
-        ColumMiestopouzivania.setCellValueFactory(new PropertyValueFactory<>("Miesto_pouzivania"));
+        ColumPoznamka.setCellValueFactory(new PropertyValueFactory<>("Poznamka"));
 
-        OLtable = JDBMySQLConnection.getData(choice);
+        OLtable = JDBMySQLConnection.getData(choiceZariadenie,choiceSklad);
         tabulka.setItems(OLtable);
 
     }
 
     public void setup_Choiceboxs(){
-        ObservableList <String> OLsklady = FXCollections.observableArrayList("Sklad 1","Sklad 2","Sklad 3");
-        ObservableList <String> OLzariadenia = FXCollections.observableArrayList("Pbv","Lispettore scanner","MDE","Rabattdrucker","Quail");
+        ObservableList <String> OLsklady = FXCollections.observableArrayList("Sklad1","Sklad2","Sklad3");
+        ObservableList <String> OLzariadenia = FXCollections.observableArrayList("Pbv","Lispettore-scanner","MDE","Rabattdrucker","Quail");
 
         ChoiceBoxSklad.setItems(OLsklady);
         ChoiceBoxTypzariadenia.setItems(OLzariadenia);
 
         ChoiceBoxTypzariadenia.setValue("Pbv");
+        //to do nacitat podla profilu predvoleny sklad
+        ChoiceBoxSklad.setValue("Sklad1");
     }
     
 
@@ -118,14 +122,11 @@ public class KontrolaHWControler implements Initializable {
         setup_Choiceboxs();
 
         try {
-            update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia));
+            update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia),getVyberskladu(ChoiceBoxSklad));
         } catch (SQLException e) {
             e.printStackTrace();
             
         }
     }
-
-
-     
 
 }
