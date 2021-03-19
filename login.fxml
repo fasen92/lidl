@@ -45,10 +45,5 @@
             <Image url="@images/lidlLogo.png" />
          </image>
       </ImageView>
-      <Label layoutX="772.0" layoutY="14.0" onMouseClicked="#zavriOkno" text="X" textFill="WHITE">
-         <font>
-            <Font size="19.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>
