@@ -50,6 +50,7 @@ public class KontrolaHWController implements Initializable {
     ResultSet rs = null;
     PreparedStatement pst = null;
 
+    //pripravene na tlacitko spat navrat do menu 
     @FXML
     void OnClickSpat(ActionEvent event) throws IOException {
         Parent MenuParent = FXMLLoader.load(getClass().getResource("Menu.fxml"));
@@ -61,28 +62,24 @@ public class KontrolaHWController implements Initializable {
     
     }
 
+    //refresh button
     @FXML
     void OnClickRefresh(ActionEvent event) throws IOException, SQLException {
-       
-
-        ChoiceBoxValues();
+ 
         update_Table_Main(getVyberZariadenia(ChoiceBoxTypzariadenia),getVyberskladu(ChoiceBoxSklad));
     }
 
     //choice box
-
-   
-
     public String getSklad() {
         return Sklad;
     }
     public String getZariadenia() {
         return Zariadenia;
     }
-    public  String getVyberskladu(ChoiceBox<String> ChoiceBoxSklad){
+    public String getVyberskladu(ChoiceBox<String> ChoiceBoxSklad){
         return ChoiceBoxSklad.getValue();
     }
-    public  String getVyberZariadenia(ChoiceBox<String> ChoiceBoxTypzariadenia){
+    public String getVyberZariadenia(ChoiceBox<String> ChoiceBoxTypzariadenia){
         return ChoiceBoxTypzariadenia.getValue();
     }
 
@@ -92,40 +89,63 @@ public class KontrolaHWController implements Initializable {
         
         if(choiceZariadenie.equals("Pbv")){
             loadPage("TablePbv");
-            
-            //tablePbvControler.update_Table(choiceZariadenie, choiceSklad);
-            
-            
+    
+        
         }
         if (choiceZariadenie.equals("Lispettore-scanner")) {
-            System.out.println("som tam 2");
             loadPage("TableScanner");
             
         }
         
 
     }
-
+    //load Page funkcia pre zvolenie custom fxml sceny
     private void loadPage(String page)  {
         Parent root = null;
+        
 
-        try {
-            root = FXMLLoader.load(getClass().getResource(page+".fxml"));
-            
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        
+        if (page == "TablePbv") {
+            try {
+                TablePbvController tablePbvController;
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(page+".fxml"));
+                root = (Parent) fxmlLoader.load();
+                tablePbvController = fxmlLoader.getController();
+    
+
+                tablePbvController.update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
+                
+                //root = FXMLLoader.load(getClass().getResource(page+".fxml"));
+                
+            } catch (IOException | SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
-
-       
+        if (page.equals("TableScanner")) {
+            try {
+                TableScannerController tableScannerController;
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(page+".fxml"));
+                root = (Parent) fxmlLoader.load();
+                tableScannerController = fxmlLoader.getController();
+    
+                System.out.println(getVyberZariadenia(ChoiceBoxTypzariadenia));
+                System.out.println(getVyberskladu(ChoiceBoxSklad));
+    
+                tableScannerController.update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
+                
+                //root = FXMLLoader.load(getClass().getResource(page+".fxml"));
+                
+            } catch (IOException | SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
 
         BP.setCenter(root);
         
     }
-    public void ChoiceBoxValues(){
-        Sklad = getVyberskladu(ChoiceBoxSklad);
-        Zariadenia = getVyberZariadenia(ChoiceBoxTypzariadenia);
-    }
+    
 
     public void setup_Choiceboxs(){
         ObservableList <String> OLsklady = FXCollections.observableArrayList("Sklad1","Sklad2","Sklad3");
@@ -145,10 +165,8 @@ public class KontrolaHWController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("vytvorenie pozadia");
         setup_Choiceboxs();
-        ChoiceBoxValues();
-
         
-        TablePbvController tablePbvController = new TablePbvController();
+
         
         /*FXMLLoader loader = new FXMLLoader(getClass().getResource("TablePbv.fxml"));
 

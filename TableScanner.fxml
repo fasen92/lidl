@@ -4,10 +4,11 @@
 <?import javafx.scene.control.TableView?>
 
 <TableView fx:id="tabulka" prefHeight="250.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TableScannerController">
+   <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY" /></columnResizePolicy>
    <columns>
       <TableColumn fx:id="ColumTyp" minWidth="-1.0" prefWidth="68.00003051757812" text="Typ" />
       <TableColumn fx:id="ColumNazov" minWidth="-1.0" prefWidth="130.39999389648438" text="Názov" />
-      <TableColumn fx:id="ColumPocet" maxWidth="200.0" minWidth="-1.0" prefWidth="125.199951171875" text="Počet" />
+      <TableColumn fx:id="ColumPocet" minWidth="-1.0" prefWidth="125.199951171875" text="Počet" />
       <TableColumn fx:id="ColumSC" minWidth="-1.0" prefWidth="106.4000244140625" text="Seriové číslo" />
       <TableColumn fx:id="ColumDatumodoslania" minWidth="-1.0" prefWidth="120.0" text="Dátum odoslania" />
       <TableColumn fx:id="ColumZaruka" minWidth="-1.0" prefWidth="116.7999267578125" text="Záruka" />

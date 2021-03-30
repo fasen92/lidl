@@ -11,8 +11,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 
-public class TableScannerController  implements Initializable  {
+public class TableScannerController implements Initializable {
 
     @FXML
     private TableView<Scanner> tabulka;
@@ -40,12 +41,9 @@ public class TableScannerController  implements Initializable  {
 
     ObservableList<Scanner> OLtable = FXCollections.observableArrayList();
 
-    public static void start(){
-        System.out.println("pre init");
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void update_Table(String choiceZariadenie, String choiceSklad) throws SQLException{
+        
+        OLtable = JDBMySQLConnection.getScanner(choiceZariadenie,choiceSklad);  
 
         ColumTyp.setCellValueFactory(new PropertyValueFactory<>("Typ"));
         ColumSC.setCellValueFactory(new PropertyValueFactory<>("SC"));
@@ -55,7 +53,14 @@ public class TableScannerController  implements Initializable  {
         ColumDatumodoslania.setCellValueFactory(new PropertyValueFactory<>("Datum_odoslania"));
         ColumPoznamka.setCellValueFactory(new PropertyValueFactory<>("Poznamka"));
 
+           
         tabulka.setItems(OLtable);
+
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        
         
     }
 

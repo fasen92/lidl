@@ -62,26 +62,26 @@ public class TablePbvController  implements Initializable {
         tabulka.setItems(OLtable);
 
     }
-    public void initData(String zariadenie,String sklad){
+    /*public void initData(String zariadenie,String sklad) {
         this.sklad = sklad;
+        System.out.println(this.sklad+"--------"+sklad);
         this.zariadenie = zariadenie;
-    }
+        System.out.println(this.zariadenie+"--------"+zariadenie);
+
+        try {
+            update_Table(zariadenie, sklad);
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }*/
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-       KontrolaHWController kontrolaHWController = new KontrolaHWController();
-
-        try {
-           update_Table(zariadenie,sklad);
-           //update_Table("Pbv","Sklad2");
-        } catch (SQLException e) {
-            
-            e.printStackTrace();
-        }
-        System.out.println("init TablePbvControler");
-       // System.out.println(kontrolaHWControler.ChoiceBoxSklad.getValue());
+        //neni potreba ked vytvorime instance v HW controler a tak zavolame metody z tohto 
+        //System.out.println("init TablePbvControler");
+       
     
         
     }
