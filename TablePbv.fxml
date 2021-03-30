@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane fx:id="tablePbvControler" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TablePbvController">
+   <children>
+      <TableView fx:id="tabulka" layoutX="10.0" layoutY="10.0" prefHeight="250.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <columns>
+            <TableColumn fx:id="ColumTyp" minWidth="-1.0" prefWidth="68.00003051757812" text="Typ" />
+            <TableColumn fx:id="ColumNazov" minWidth="-1.0" prefWidth="130.39999389648438" text="Názov" />
+            <TableColumn fx:id="ColumPocet" maxWidth="200.0" minWidth="-1.0" prefWidth="125.199951171875" text="Počet" />
+            <TableColumn fx:id="ColumSC" minWidth="-1.0" prefWidth="106.4000244140625" text="Seriové číslo" />
+            <TableColumn fx:id="ColumDatumodoslania" minWidth="-1.0" prefWidth="120.0" text="Dátum odoslania" />
+            <TableColumn fx:id="ColumZaruka" minWidth="-1.0" prefWidth="116.7999267578125" text="Záruka" />
+            <TableColumn fx:id="ColumPoznamka" minWidth="-1.0" prefWidth="128.79998779296875" text="Poznámka" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>

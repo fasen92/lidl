@@ -7,7 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.Node;
-public class MenuControler{
+public class MenuController{
 
     @FXML
     private Button BtnKontrolaHW;
@@ -24,6 +24,7 @@ public class MenuControler{
     public void OnClickKontrolaHW(ActionEvent event)  throws IOException {
         Parent KontrolaHWParent = FXMLLoader.load(getClass().getResource("KontrolaHW.fxml"));
         Scene  KontrolaHWScene = new Scene(KontrolaHWParent);
+        
 
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(KontrolaHWScene);
