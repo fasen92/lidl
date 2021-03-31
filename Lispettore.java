@@ -1,7 +1,7 @@
-public class Pbv {
-    String SC,Nazov,Pocet,Zaruka,Poznamka,Datum_odoslania,Typ;
+public class Lispettore {
+    String SC,Nazov,Pocet,Zaruka,	Poznamka,Datum_odoslania,Typ;
     
-    public Pbv(String Typ,String Nazov,String Pocet,String SC,String Datum_odoslania,String Zaruka,String Poznamka) {
+    public Lispettore(String Typ,String Nazov,String Pocet,String SC,String Datum_odoslania,String Zaruka,String Poznamka) {
         this.Typ =Typ;
         this.SC =SC;
         this.Nazov = Nazov;

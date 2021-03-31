@@ -28,8 +28,8 @@ public class JDBMySQLConnection {
         }
 
     }
-
-    public static ObservableList<Pbv> getData(String choiceZariadenie, String choiceSklad) throws SQLException {
+    //Pbv
+    public static ObservableList<Pbv> getPbv(String choiceZariadenie, String choiceSklad) throws SQLException {
         // first one
         if (choiceZariadenie.equals("Pbv")) {
             Connection conn = getConnection();
@@ -49,13 +49,22 @@ public class JDBMySQLConnection {
 
             }
 
+            OLPbv.get(0).getNazov();
+
             return OLPbv;
 
         }
+
+        return null;
+
+    }
+
+    //scanner
+    public static ObservableList<Scanner> getScanner(String choiceZariadenie, String choiceSklad) throws SQLException{
         // nother one
         if (choiceZariadenie.equals("Lispettore-scanner")) {
             Connection conn = getConnection();
-            ObservableList<Pbv> OLPScanner = FXCollections.observableArrayList();
+            ObservableList<Scanner> OLPScanner = FXCollections.observableArrayList();
 
             try {
                 PreparedStatement ps = conn.prepareStatement("SELECT * FROM `Lispettore-scanner` Where Sklad = ?");
@@ -63,7 +72,7 @@ public class JDBMySQLConnection {
                 ResultSet rs = ps.executeQuery();
 
                 while (rs.next()) {
-                    OLPScanner.add(new Pbv(rs.getString("Typ"), rs.getString("Názov"), rs.getString("Počet"),
+                    OLPScanner.add(new Scanner(rs.getString("Typ"), rs.getString("Názov"), rs.getString("Počet"),
                             rs.getString("Sériové číslo"), rs.getString("Dátum odoslania fili"), rs.getString("Záruka"),
                             rs.getString("Poznámka")));
                 }
@@ -72,30 +81,11 @@ public class JDBMySQLConnection {
             }
             return OLPScanner;
         }
-
         return null;
 
     }
 
-    public static ObservableList<Ucet> getUctyTab() throws SQLException {
-        Connection conn = getConnection();
-        ObservableList<Ucet> UcetList = FXCollections.observableArrayList();
-
-        try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM `ucet`;");
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                UcetList.add(new Ucet(rs.getInt("id"), rs.getString("heslo"), rs.getString("meno"),
-                        rs.getString("priezvisko"), rs.getString("rola"), rs.getString("sklad")));
-            }
-        } catch (Exception e) {
-
-        }
-
-        return UcetList;
-    }
-
+    //ucty
     public static ArrayList<Ucet> getUcty() throws SQLException {
         Connection conn = getConnection();
         ArrayList<Ucet> UcetList = new ArrayList<Ucet>();
@@ -114,4 +104,6 @@ public class JDBMySQLConnection {
 
         return UcetList;
     }
+
+    
 }
