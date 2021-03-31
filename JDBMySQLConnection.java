@@ -99,7 +99,7 @@ public class JDBMySQLConnection {
                         rs.getString("priezvisko"), rs.getString("rola"), rs.getString("sklad")));
             }
         } catch (Exception e) {
-            
+
         }
 
         return UcetList;

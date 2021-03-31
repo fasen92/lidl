@@ -9,7 +9,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MenuController">
    <children>
-      <VBox layoutX="313.0" layoutY="167.0" prefHeight="234.0" prefWidth="174.0">
+      <VBox layoutX="313.0" layoutY="166.0" prefHeight="352.0" prefWidth="174.0">
          <children>
             <Button fx:id="BtnKontrolaHW" mnemonicParsing="false" onAction="#OnClickKontrolaHW" prefHeight="45.0" prefWidth="190.0" text="Kontrola HW" />
             <Button fx:id="BtnReklamácia" mnemonicParsing="false" onAction="#OnClickReklamacie" prefHeight="45.0" prefWidth="190.0" text="Reklamácia">
@@ -18,6 +18,14 @@
                </VBox.margin>
             </Button>
             <Button fx:id="BtnZaznamakci" mnemonicParsing="false" onAction="#OnClickZaznamAkci" prefHeight="45.0" prefWidth="190.0" text="Záznam akcí">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="BtnZamestnanci" mnemonicParsing="false" onAction="#OnClickZamestnanci" prefHeight="45.0" prefWidth="190.0" text="Zoznam zamestnancov " visible="false">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
