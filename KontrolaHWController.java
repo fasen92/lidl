@@ -114,8 +114,7 @@ public class KontrolaHWController implements Initializable {
     
 
                 tablePbvController.update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
-                
-                //root = FXMLLoader.load(getClass().getResource(page+".fxml"));
+
                 
             } catch (IOException | SQLException e) {
                 // TODO Auto-generated catch block
@@ -133,11 +132,10 @@ public class KontrolaHWController implements Initializable {
                 System.out.println(getVyberskladu(ChoiceBoxSklad));
     
                 tableScannerController.update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
-                
-                //root = FXMLLoader.load(getClass().getResource(page+".fxml"));
+
                 
             } catch (IOException | SQLException e) {
-                // TODO Auto-generated catch block
+                
                 e.printStackTrace();
             }
         }
@@ -166,19 +164,7 @@ public class KontrolaHWController implements Initializable {
         System.out.println("vytvorenie pozadia");
         setup_Choiceboxs();
         
-
-        
-        /*FXMLLoader loader = new FXMLLoader(getClass().getResource("TablePbv.fxml"));
-
-        TablePbvController tablePbvController = new TablePbvController();
-        tablePbvController = loader.getController();
-        tablePbvController.initData(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));*/
-
-
-       
-        
         try {
-            //tablePbvController.initData(ChoiceBoxTypzariadenia.getValue(),ChoiceBoxSklad.getValue());
             System.out.println(ChoiceBoxSklad.getValue()); 
             update_Table_Main(ChoiceBoxTypzariadenia.getValue(),ChoiceBoxSklad.getValue());
         } catch (SQLException e) {
