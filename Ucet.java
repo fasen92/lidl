@@ -2,7 +2,8 @@ public class Ucet {
     private int id;
     private String heslo, meno, priezvisko, sklad, rola;
 
-    public Ucet(int id, String heslo, String meno, String priezvisko, String sklad, String rola) {
+
+    public Ucet(int id, String heslo, String meno, String priezvisko, String rola, String sklad) {
         this.id = id;
         this.heslo = heslo;
         this.meno = meno;

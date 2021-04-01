@@ -30,7 +30,6 @@ public class LoginController {
     }
 
     ArrayList<Ucet> UcetList = new ArrayList<Ucet>();
-    Ucet prihlasenyU;
 
     public void Login(ActionEvent event) throws IOException, SQLException {
         UcetList = JDBMySQLConnection.getUcty();
@@ -39,7 +38,8 @@ public class LoginController {
         for (int i = 0; i < UcetList.size(); i++) {
             if (txtId.getText().equals(String.valueOf(UcetList.get(i).getId())) && txtPassword.getText().equals(UcetList.get(i).getHeslo())) {
                 podmnienka = false;
-                prihlasenyU = UcetList.get(i);
+                Singleton x = Singleton.getInstance();
+                x.setUcet(UcetList.get(i));
                 Parent MainMenuParent = FXMLLoader.load(getClass().getResource("Menu.fxml"));
                 Scene MainMenuScene = new Scene(MainMenuParent);         
                 Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -52,9 +52,5 @@ public class LoginController {
             // zobrazi sa ak das zle udaje
             txtLabel.setVisible(true);
         }
-    }
-
-    public Ucet getCurrentUcet(){
-        return prihlasenyU;
     }
 }

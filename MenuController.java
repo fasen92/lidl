@@ -64,12 +64,15 @@ public class MenuController implements Initializable{
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        LoginController loginController;
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Login.fxml"));
-        loginController = fxmlLoader.getController();
-        
-        ucet = loginController.getCurrentUcet();
-        System.out.println(ucet.getMeno());
+
+        Singleton x = Singleton.getInstance();
+        System.out.println(x.ucet.getRola());
+        if(String.valueOf(x.ucet.getRola()).equals("Admin")){
+            BtnZamestnanci.setVisible(true);
+        }else{
+            BtnZamestnanci.setVisible(false);
+        }
+
         
     }
 
