@@ -78,7 +78,7 @@ public class ZoznamZamController implements Initializable {
         ColumnSklad.setCellValueFactory(new PropertyValueFactory<>("sklad"));
         ColumnRola.setCellValueFactory(new PropertyValueFactory<>("rola"));
 
-        UcetTable = JDBMySQLConnection.getUctyTab();
+        //UcetTable = JDBMySQLConnection.getUctyTab();
         TabZamestnanci.setItems(UcetTable);
 
     }
