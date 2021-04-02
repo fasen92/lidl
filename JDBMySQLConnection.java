@@ -105,5 +105,24 @@ public class JDBMySQLConnection {
         return UcetList;
     }
 
+    public static ObservableList<Ucet> getUctyTab() throws SQLException {
+        Connection conn = getConnection();
+        ObservableList<Ucet> UcetList = FXCollections.observableArrayList();
+
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM `ucet`;");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                UcetList.add(new Ucet(rs.getInt("id"), rs.getString("heslo"), rs.getString("meno"),
+                        rs.getString("priezvisko"), rs.getString("rola"), rs.getString("sklad")));
+            }
+        } catch (Exception e) {
+
+        }
+
+        return UcetList;
+    }
+
     
 }

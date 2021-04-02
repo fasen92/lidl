@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,6 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class ZoznamZamController implements Initializable {
@@ -70,6 +72,12 @@ public class ZoznamZamController implements Initializable {
 
     }
 
+    @FXML
+    void OnClickRefresh(ActionEvent event) throws IOException, SQLException {
+
+        update_Table();
+    }
+
     public void update_Table() throws SQLException {
 
         ColumnId.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -78,10 +86,31 @@ public class ZoznamZamController implements Initializable {
         ColumnSklad.setCellValueFactory(new PropertyValueFactory<>("sklad"));
         ColumnRola.setCellValueFactory(new PropertyValueFactory<>("rola"));
 
-        //UcetTable = JDBMySQLConnection.getUctyTab();
+        UcetTable = JDBMySQLConnection.getUctyTab();
         TabZamestnanci.setItems(UcetTable);
 
     }
+
+    private void ClickOnZam(){
+        TabZamestnanci.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event){
+                Singleton x = Singleton.getInstance();
+                x.setUcet(TabZamestnanci.getItems().get(TabZamestnanci.getSelectionModel().getSelectedIndex()));
+            }
+
+            
+
+        });
+        
+        
+    }
+
+    public void StartDetailZam() throws Exception{
+        
+    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -92,5 +121,6 @@ public class ZoznamZamController implements Initializable {
             e.printStackTrace();
 
         }
+        ClickOnZam();
     }
 }

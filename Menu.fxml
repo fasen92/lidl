@@ -40,6 +40,6 @@
             <Font name="Book Antiqua" size="48.0" />
          </font>
       </Label>
-      <Button fx:id="BtnZamestnanci" layoutX="581.0" layoutY="166.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="174.0" text="Zamestnanci" />
+      <Button fx:id="BtnZamestnanci" layoutX="581.0" layoutY="166.0" mnemonicParsing="false" onAction="#OnClickZamestnanci" prefHeight="45.0" prefWidth="174.0" text="Zamestnanci" />
    </children>
 </AnchorPane>
