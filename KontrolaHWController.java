@@ -98,6 +98,12 @@ public class KontrolaHWController implements Initializable {
         if (choiceZariadenie.equals("Quail")) {
             loadPage("TableQuail");
         }
+        if (choiceZariadenie.equals("Ostatné")) {
+         loadPage("TableOstatne");   
+        }
+        if (choiceZariadenie.equals("Rabattdrucker")) {
+            loadPage("TableRabattdrucker");
+        }
         
 
     }
@@ -161,6 +167,42 @@ public class KontrolaHWController implements Initializable {
                 e.printStackTrace();
             }
         }
+        if (page.equals("TableOstatne")) {
+            try {
+                TableOstatneController tableOstatneController;
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(page+".fxml"));
+                root = (Parent) fxmlLoader.load();
+                tableOstatneController = fxmlLoader.getController();
+    
+                System.out.println(getVyberZariadenia(ChoiceBoxTypzariadenia));
+                System.out.println(getVyberskladu(ChoiceBoxSklad));
+    
+                tableOstatneController.update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
+
+                
+            } catch (IOException | SQLException e) {
+                
+                e.printStackTrace();
+            }
+        }
+        if (page.equals("TableRabattdrucker")) {
+            try {
+                TableRabattdruckerController tableRabattdruckerController;
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(page+".fxml"));
+                root = (Parent) fxmlLoader.load();
+                tableRabattdruckerController = fxmlLoader.getController();
+    
+                System.out.println(getVyberZariadenia(ChoiceBoxTypzariadenia));
+                System.out.println(getVyberskladu(ChoiceBoxSklad));
+    
+                tableRabattdruckerController.update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
+
+                
+            } catch (IOException | SQLException e) {
+                
+                e.printStackTrace();
+            }
+        }
         BP.setCenter(root);
         
     }
@@ -168,7 +210,7 @@ public class KontrolaHWController implements Initializable {
 
     public void setup_Choiceboxs(){
         ObservableList <String> OLsklady = FXCollections.observableArrayList("Sklad1","Sklad2","Sklad3");
-        ObservableList <String> OLzariadenia = FXCollections.observableArrayList("Pbv","Lispettore-scanner","MDE","Rabattdrucker","Quail");
+        ObservableList <String> OLzariadenia = FXCollections.observableArrayList("Pbv","Lispettore-scanner","MDE","Rabattdrucker","Quail","Moblný telefon","Ostatné");
 
         ChoiceBoxSklad.setItems(OLsklady);
         ChoiceBoxTypzariadenia.setItems(OLzariadenia);

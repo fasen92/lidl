@@ -117,6 +117,66 @@ public class JDBMySQLConnection {
 
     }
 
+
+
+
+
+    //Ostatne
+    public static ObservableList<Ostatne> getOstatne(String choiceZariadenie, String choiceSklad) throws SQLException{
+        // nother one
+        if (choiceZariadenie.equals("Ostatné")) {
+           
+            Connection conn = getConnection();
+            ObservableList<Ostatne> OLOstatne = FXCollections.observableArrayList();
+
+            try {
+                PreparedStatement ps = conn.prepareStatement("SELECT * FROM `ostatne`  Where Sklad = ?");
+                ps.setString(1, choiceSklad);
+                ResultSet rs = ps.executeQuery();
+                
+                while (rs.next()) {
+                    OLOstatne.add(new Ostatne(rs.getString("Typ"), rs.getString("Názov"), rs.getString("Počet"),
+                            rs.getString("Sériové číslo"),rs.getString("Cislo fili"), rs.getString("Dátum odoslania fili"), rs.getString("Záruka"),
+                            rs.getString("Poznámka")));
+
+                            
+                }
+            } catch (Exception e) {
+                System.out.println("nieco je zle");
+            }
+            return OLOstatne;
+        }
+        return null;
+
+    }
+    //Rabattdrucker
+    public static ObservableList<Rabattdrucker> getRabattdrucker(String choiceZariadenie, String choiceSklad) throws SQLException{
+        // nother one
+        if (choiceZariadenie.equals("Rabattdrucker")) {
+           
+            Connection conn = getConnection();
+            ObservableList<Rabattdrucker> OLRabattdrucker = FXCollections.observableArrayList();
+
+            try {
+                PreparedStatement ps = conn.prepareStatement("SELECT * FROM `rabattdrucker`  Where Sklad = ?");
+                ps.setString(1, choiceSklad);
+                ResultSet rs = ps.executeQuery();
+                
+                while (rs.next()) {
+                    OLRabattdrucker.add(new Rabattdrucker(rs.getString("Typ"), rs.getString("Názov"), rs.getString("Počet"),
+                            rs.getString("Sériové číslo"),rs.getString("Evidencne cislo"),rs.getString("Cislo fili"), rs.getString("Dátum odoslania fili"), rs.getString("Záruka"),
+                            rs.getString("Poznámka")));
+
+                            
+                }
+            } catch (Exception e) {
+                System.out.println("nieco je zle");
+            }
+            return OLRabattdrucker;
+        }
+        return null;
+
+    }
     //ucty
     public static ArrayList<Ucet> getUcty() throws SQLException {
         Connection conn = getConnection();
