@@ -66,11 +66,11 @@ public class MenuController implements Initializable{
     public void initialize(URL arg0, ResourceBundle arg1) {
 
         Singleton x = Singleton.getInstance();
-        if(String.valueOf(x.ucet.getRola()).equals("Admin")){
+        /*if(String.valueOf(x.ucet.getRola()).equals("Admin")){
             BtnZamestnanci.setVisible(true);
         }else{
             BtnZamestnanci.setVisible(false);
-        }
+        }*/
 
         
     }

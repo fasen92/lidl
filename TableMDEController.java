@@ -6,47 +6,55 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class TableOstatneController {
+public class TableMDEController {
 
     @FXML
-    private TableView<Ostatne> tabulka;
+    private TableView<MDE> tabulka;
 
     @FXML
-    private TableColumn<String, Ostatne> ColumTyp;
+    private TableColumn<String, MDE> ColumTyp;
 
     @FXML
-    private TableColumn<String, Ostatne> ColumNazov;
+    private TableColumn<String, MDE> ColumNazov;
 
     @FXML
-    private TableColumn<String, Ostatne> ColumPocet;
+    private TableColumn<String, MDE> ColumPocet;
 
     @FXML
-    private TableColumn<String, Ostatne> ColumSC;
+    private TableColumn<String, MDE> ColumSC;
 
     @FXML
-    private TableColumn<String, Ostatne> ColumCF;
+    private TableColumn<String, MDE> ColumMac;
 
     @FXML
-    private TableColumn<String, Ostatne> ColumDatumodoslania;
+    private TableColumn<String, MDE> ColumIP;
 
     @FXML
-    private TableColumn<String, Ostatne> ColumZaruka;
+    private TableColumn<String, MDE> ColumWifi;
 
     @FXML
-    private TableColumn<String, Ostatne> ColumPoznamka;
+    private TableColumn<String, MDE> ColumCF;
 
-    static ObservableList <Ostatne> OLtable = FXCollections.observableArrayList();
+    @FXML
+    private TableColumn<String, MDE> ColumDatumodoslania;
 
-    
-    
+    @FXML
+    private TableColumn<String, MDE> ColumZaruka;
 
+    @FXML
+    private TableColumn<String, MDE> ColumPoznamka;
+
+    static ObservableList<MDE> OLtable = FXCollections.observableArrayList();
 
     public void update_Table(String choiceZariadenie, String choiceSklad) throws SQLException{
         
-        OLtable = JDBMySQLConnection.getOstatne(choiceZariadenie,choiceSklad);  
+        OLtable = JDBMySQLConnection.getMDE(choiceZariadenie,choiceSklad);  
 
         ColumTyp.setCellValueFactory(new PropertyValueFactory<>("Typ"));
         ColumSC.setCellValueFactory(new PropertyValueFactory<>("SC"));
+        ColumIP.setCellValueFactory(new PropertyValueFactory<>("IP"));
+        ColumMac.setCellValueFactory(new PropertyValueFactory<>("MAC"));
+        ColumWifi.setCellValueFactory(new PropertyValueFactory<>("WIFI"));
         ColumCF.setCellValueFactory(new PropertyValueFactory<>("CF"));
         ColumNazov.setCellValueFactory(new PropertyValueFactory<>("Nazov"));
         ColumPocet.setCellValueFactory(new PropertyValueFactory<>("Pocet"));

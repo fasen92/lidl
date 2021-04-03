@@ -149,6 +149,37 @@ public class JDBMySQLConnection {
         return null;
 
     }
+    //MDE
+    public static ObservableList<MDE> getMDE(String choiceZariadenie, String choiceSklad) throws SQLException{
+        // nother one
+        if (choiceZariadenie.equals("MDE")) {
+           
+            Connection conn = getConnection();
+            ObservableList<MDE> OLMDE = FXCollections.observableArrayList();
+
+            try {
+                PreparedStatement ps = conn.prepareStatement("SELECT * FROM `mde`  Where Sklad = ?");
+                ps.setString(1, choiceSklad);
+                ResultSet rs = ps.executeQuery();
+                String wifi;
+                while (rs.next()) {
+                    if (rs.getBoolean("HuaweiWifi")) {
+                        wifi = "Ano";
+                    }else{
+                        wifi = "Nie";
+                    }
+                    OLMDE.add(new MDE(rs.getString("Typ"), rs.getString("Názov"), rs.getString("Počet"),
+                            rs.getString("Sériové číslo"),rs.getString("MAC adresa"),rs.getString("IP adresa"),wifi,rs.getString("Cislo fili"), rs.getString("Dátum odoslania fili"), rs.getString("Záruka"),
+                            rs.getString("Poznámka")));          
+                }
+            } catch (Exception e) {
+                System.out.println("nieco je zle");
+            }
+            return OLMDE;
+        }
+        return null;
+
+    }
     //Rabattdrucker
     public static ObservableList<Rabattdrucker> getRabattdrucker(String choiceZariadenie, String choiceSklad) throws SQLException{
         // nother one

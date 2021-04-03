@@ -89,7 +89,6 @@ public class KontrolaHWController implements Initializable {
         
         if(choiceZariadenie.equals("Pbv")){
             loadPage("TablePbv");
-
         }
         if (choiceZariadenie.equals("Lispettore-scanner")) {
             loadPage("TableScanner");
@@ -103,6 +102,9 @@ public class KontrolaHWController implements Initializable {
         }
         if (choiceZariadenie.equals("Rabattdrucker")) {
             loadPage("TableRabattdrucker");
+        }
+        if (choiceZariadenie.equals("MDE")) {
+            loadPage("TableMDE");
         }
         
 
@@ -167,6 +169,7 @@ public class KontrolaHWController implements Initializable {
                 e.printStackTrace();
             }
         }
+
         if (page.equals("TableOstatne")) {
             try {
                 TableOstatneController tableOstatneController;
@@ -203,11 +206,28 @@ public class KontrolaHWController implements Initializable {
                 e.printStackTrace();
             }
         }
+        if (page.equals("TableMDE")) {
+            try {
+                TableMDEController tableMDEController;
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(page+".fxml"));
+                root = (Parent) fxmlLoader.load();
+                tableMDEController = fxmlLoader.getController();
+    
+                System.out.println(getVyberZariadenia(ChoiceBoxTypzariadenia));
+                System.out.println(getVyberskladu(ChoiceBoxSklad));
+    
+                tableMDEController.update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
+
+                
+            } catch (IOException | SQLException e) {
+                
+                e.printStackTrace();
+            }
+        }
         BP.setCenter(root);
         
     }
     
-
     public void setup_Choiceboxs(){
         ObservableList <String> OLsklady = FXCollections.observableArrayList("Sklad1","Sklad2","Sklad3");
         ObservableList <String> OLzariadenia = FXCollections.observableArrayList("Pbv","Lispettore-scanner","MDE","Rabattdrucker","Quail","Moblný telefon","Ostatné");
