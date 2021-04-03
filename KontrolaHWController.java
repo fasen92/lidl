@@ -89,12 +89,14 @@ public class KontrolaHWController implements Initializable {
         
         if(choiceZariadenie.equals("Pbv")){
             loadPage("TablePbv");
-    
-        
+
         }
         if (choiceZariadenie.equals("Lispettore-scanner")) {
             loadPage("TableScanner");
             
+        }
+        if (choiceZariadenie.equals("Quail")) {
+            loadPage("TableQuail");
         }
         
 
@@ -121,6 +123,7 @@ public class KontrolaHWController implements Initializable {
                 e.printStackTrace();
             }
         }
+
         if (page.equals("TableScanner")) {
             try {
                 TableScannerController tableScannerController;
@@ -140,6 +143,24 @@ public class KontrolaHWController implements Initializable {
             }
         }
 
+        if (page.equals("TableQuail")) {
+            try {
+                TableQuailController tableQuailController;
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(page+".fxml"));
+                root = (Parent) fxmlLoader.load();
+                tableQuailController = fxmlLoader.getController();
+    
+                System.out.println(getVyberZariadenia(ChoiceBoxTypzariadenia));
+                System.out.println(getVyberskladu(ChoiceBoxSklad));
+    
+                tableQuailController.update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
+
+                
+            } catch (IOException | SQLException e) {
+                
+                e.printStackTrace();
+            }
+        }
         BP.setCenter(root);
         
     }

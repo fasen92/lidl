@@ -41,6 +41,7 @@ public class JDBMySQLConnection {
                 ResultSet rs = ps.executeQuery();
 
                 while (rs.next()) {
+                    
                     OLPbv.add(new Pbv(rs.getString("Typ"), rs.getString("Názov"), rs.getString("Počet"),
                             rs.getString("Sériové číslo"), rs.getString("Dátum odoslania fili"), rs.getString("Záruka"),
                             rs.getString("Poznámka")));
@@ -70,8 +71,9 @@ public class JDBMySQLConnection {
                 PreparedStatement ps = conn.prepareStatement("SELECT * FROM `Lispettore-scanner` Where Sklad = ?");
                 ps.setString(1, choiceSklad);
                 ResultSet rs = ps.executeQuery();
-
+                
                 while (rs.next()) {
+                   System.out.println(ps);
                     OLPScanner.add(new Scanner(rs.getString("Typ"), rs.getString("Názov"), rs.getString("Počet"),
                             rs.getString("Sériové číslo"), rs.getString("Dátum odoslania fili"), rs.getString("Záruka"),
                             rs.getString("Poznámka")));
@@ -80,6 +82,36 @@ public class JDBMySQLConnection {
 
             }
             return OLPScanner;
+        }
+        return null;
+
+    }
+
+    //Quail
+
+    public static ObservableList<Quail> getQuail(String choiceZariadenie, String choiceSklad) throws SQLException{
+        // nother one
+        if (choiceZariadenie.equals("Quail")) {
+           
+            Connection conn = getConnection();
+            ObservableList<Quail> OLQuail = FXCollections.observableArrayList();
+
+            try {
+                PreparedStatement ps = conn.prepareStatement("SELECT * FROM `quail`  Where Sklad = ?");
+                ps.setString(1, choiceSklad);
+                ResultSet rs = ps.executeQuery();
+                
+                while (rs.next()) {
+                    OLQuail.add(new Quail(rs.getString("Typ"), rs.getString("Názov"), rs.getString("Počet"),
+                            rs.getString("Sériové číslo"),rs.getString("Cislo fili"), rs.getString("Dátum odoslania fili"), rs.getString("Záruka"),
+                            rs.getString("Poznámka")));
+
+                            
+                }
+            } catch (Exception e) {
+                System.out.println("nieco je zle");
+            }
+            return OLQuail;
         }
         return null;
 
