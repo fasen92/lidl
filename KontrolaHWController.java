@@ -106,6 +106,9 @@ public class KontrolaHWController implements Initializable {
         if (choiceZariadenie.equals("MDE")) {
             loadPage("TableMDE");
         }
+        if (choiceZariadenie.equals("Moblný telefon")) {
+            loadPage("TableMP");
+        }
         
 
     }
@@ -217,6 +220,24 @@ public class KontrolaHWController implements Initializable {
                 System.out.println(getVyberskladu(ChoiceBoxSklad));
     
                 tableMDEController.update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
+
+                
+            } catch (IOException | SQLException e) {
+                
+                e.printStackTrace();
+            }
+        }
+        if (page.equals("TableMP")) {
+            try {
+                TableMPController tableMPController;
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(page+".fxml"));
+                root = (Parent) fxmlLoader.load();
+                tableMPController = fxmlLoader.getController();
+    
+                System.out.println(getVyberZariadenia(ChoiceBoxTypzariadenia));
+                System.out.println(getVyberskladu(ChoiceBoxSklad));
+    
+                tableMPController.update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
 
                 
             } catch (IOException | SQLException e) {

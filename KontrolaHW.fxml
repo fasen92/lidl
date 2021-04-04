@@ -13,7 +13,8 @@
          <bottom>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                 <children>
-                  <Button fx:id="BtnRefresh" layoutX="46.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickRefresh" prefHeight="26.0" prefWidth="150.0" text="Refresh" />
+                  <Button fx:id="BtnRefresh" layoutX="46.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickRefresh" prefHeight="26.0" prefWidth="150.0" text="Refresh" AnchorPane.leftAnchor="50.0" />
+                  <Button fx:id="BtnMenu" layoutX="673.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickSpat" prefHeight="26.0" prefWidth="150.0" text="Menu" AnchorPane.rightAnchor="50.0" />
                </children>
             </AnchorPane>
          </bottom>

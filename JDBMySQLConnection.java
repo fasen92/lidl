@@ -227,6 +227,33 @@ public class JDBMySQLConnection {
 
         return UcetList;
     }
+    //Telefon pre predajnu skratka MP
+    public static ObservableList<MP> getMP(String choiceZariadenie, String choiceSklad) throws SQLException{
+        // nother one
+        if (choiceZariadenie.equals("Moblný telefon")) {
+           
+            Connection conn = getConnection();
+            ObservableList<MP> OLMP = FXCollections.observableArrayList();
+
+            try {
+                PreparedStatement ps = conn.prepareStatement("SELECT * FROM `mobil-prepredajnu`  Where Sklad = ?");
+                ps.setString(1, choiceSklad);
+                ResultSet rs = ps.executeQuery();
+                
+                while (rs.next()) {
+                    OLMP.add(new MP(rs.getString("Typ"), rs.getString("Názov"), rs.getString("Počet"),
+                            rs.getString("Sériové číslo"),rs.getString("Typ telefonu"),rs.getString("IMEI"),rs.getString("SIM"),
+                            rs.getString("Tel.cislo"),rs.getString("PUK"),rs.getString("PIN"),
+                            rs.getString("Cislo fili"), rs.getString("Dátum odoslania fili"), rs.getString("Záruka"),
+                            rs.getString("Poznámka")));
+                }
+            } catch (Exception e) {
+                System.out.println("nieco je zle");
+            }
+            return OLMP;
+        }
+        return null;
+    }
 
     public static ObservableList<Ucet> getUctyTab() throws SQLException {
         Connection conn = getConnection();
