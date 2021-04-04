@@ -246,6 +246,14 @@ public class KontrolaHWController implements Initializable {
             }
         }
         BP.setCenter(root);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PridaniePBV.fxml"));
+        try {
+            root = (Parent) fxmlLoader.load();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        BP.setLeft(root);
         
     }
     
@@ -260,6 +268,23 @@ public class KontrolaHWController implements Initializable {
         ChoiceBoxSklad.setValue("Sklad1");
 
        
+    }
+
+
+    @FXML
+    void OnClickUloz(ActionEvent event) throws IOException {
+        Parent root;
+        PridaniePBVController pridaniePBVController;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PridaniePBV.fxml"));
+        root = (Parent) fxmlLoader.load();
+        pridaniePBVController = fxmlLoader.getController();
+
+        pridaniePBVController.vytvoreniePBV();
+    }
+
+    @FXML
+    void OnClickVycisti(ActionEvent event) {
+
     }
     
 

@@ -5,34 +5,47 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="KontrolaHWController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="KontrolaHWController">
    <children>
       <BorderPane fx:id="BP" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <bottom>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="84.0" prefWidth="900.0" BorderPane.alignment="CENTER">
                 <children>
-                  <Button fx:id="BtnRefresh" layoutX="46.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickRefresh" prefHeight="26.0" prefWidth="150.0" text="Refresh" AnchorPane.leftAnchor="50.0" />
-                  <Button fx:id="BtnMenu" layoutX="673.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickSpat" prefHeight="26.0" prefWidth="150.0" text="Menu" AnchorPane.rightAnchor="50.0" />
+                  <Button fx:id="BtnVycisti" layoutX="165.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickVycisti" prefHeight="26.0" prefWidth="110.0" text="Vyčisti" />
+                  <Button fx:id="BtnRefresh" layoutX="395.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickRefresh" prefHeight="26.0" prefWidth="150.0" text="Refresh" />
+                  <Button fx:id="BtnMenu" layoutX="735.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickSpat" prefHeight="26.0" prefWidth="150.0" text="Menu" />
+                  <Button fx:id="BtnUlož" layoutX="46.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickUloz" prefHeight="26.0" prefWidth="110.0" text="Ulož" />
                </children>
             </AnchorPane>
          </bottom>
          <top>
             <AnchorPane prefHeight="131.0" prefWidth="800.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label alignment="CENTER_RIGHT" layoutX="533.0" layoutY="78.0" prefHeight="36.0" prefWidth="94.0" text="Typ zariadenia:" textAlignment="RIGHT" AnchorPane.rightAnchor="172.60000000000002" AnchorPane.topAnchor="78.0" />
-                  <Label alignment="CENTER_RIGHT" layoutY="78.0" prefHeight="36.0" prefWidth="69.0" text="Sklad:" textAlignment="RIGHT" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="78.0" />
+                  <Label alignment="CENTER_RIGHT" layoutX="351.0" layoutY="78.0" prefHeight="36.0" prefWidth="69.0" text="Sklad:" textAlignment="RIGHT" AnchorPane.rightAnchor="429.79999999999995" AnchorPane.topAnchor="78.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
                   <ChoiceBox fx:id="ChoiceBoxTypzariadenia" layoutX="635.0" layoutY="83.0" prefWidth="150.0" AnchorPane.rightAnchor="14.600000000000023" AnchorPane.topAnchor="83.0" />
                   <Label alignment="CENTER" prefHeight="83.0" prefWidth="800.0" text="Kontrola HW" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <font>
                         <Font name="Book Antiqua" size="48.0" />
                      </font>
                   </Label>
-                  <ChoiceBox fx:id="ChoiceBoxSklad" layoutX="81.0" layoutY="83.0" prefWidth="150.0" AnchorPane.leftAnchor="81.0" AnchorPane.topAnchor="83.0" />
+                  <ChoiceBox fx:id="ChoiceBoxSklad" layoutX="432.0" layoutY="83.0" prefWidth="150.0" AnchorPane.rightAnchor="268.0" AnchorPane.topAnchor="83.0" />
+                  <Label alignment="CENTER_RIGHT" layoutX="591.0" layoutY="78.0" prefHeight="36.0" prefWidth="87.0" text="Typ zariadenia:" textAlignment="RIGHT" AnchorPane.rightAnchor="172.2" AnchorPane.topAnchor="78.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
          </top>
+         <left>
+            <VBox prefHeight="274.0" prefWidth="129.0" BorderPane.alignment="CENTER" />
+         </left>
       </BorderPane>
    </children>
 </AnchorPane>

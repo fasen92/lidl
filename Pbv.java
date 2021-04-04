@@ -1,5 +1,5 @@
 public class Pbv {
-    String SC,Nazov,Pocet,Zaruka,Poznamka,Datum_odoslania,Typ;
+    String SC,Nazov,Pocet,Zaruka,Poznamka,Datum_odoslania,Typ,Sklad;
     
     public Pbv(String Typ,String Nazov,String Pocet,String SC,String Datum_odoslania,String Zaruka,String Poznamka) {
         this.Typ =Typ;
@@ -10,6 +10,23 @@ public class Pbv {
         this.Datum_odoslania= Datum_odoslania;
         this.Poznamka = Poznamka;
         
+    }
+    public Pbv(String Sklad,String Typ,String Nazov,String Pocet,String SC,String Datum_odoslania,String Zaruka,String Poznamka) {
+        this.Sklad = Sklad;
+        this.Typ =Typ;
+        this.SC =SC;
+        this.Nazov = Nazov;
+        this.Pocet = Pocet;
+        this.Zaruka= Zaruka;
+        this.Datum_odoslania= Datum_odoslania;
+        this.Poznamka = Poznamka;
+        
+    }
+    public String getSklad() {
+        return Sklad;
+    }
+    public void setSklad(String sklad) {
+        Sklad = sklad;
     }
     public String getTyp() {
         return Typ;

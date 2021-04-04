@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="370.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PridaniePBVController">
+   <children>
+      <VBox prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox prefHeight="42.0" prefWidth="370.0">
+               <children>
+                  <AnchorPane prefHeight="26.0" prefWidth="370.0">
+                     <children>
+                        <Label alignment="TOP_CENTER" layoutY="6.0" prefHeight="70.0" prefWidth="356.0" text="Nový záznam PBV" textAlignment="CENTER" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <font>
+                              <Font name="Bell MT Bold" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
+            <HBox prefHeight="32.0" prefWidth="338.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sklad" textAlignment="CENTER" wrappingWidth="98.93670463562012" />
+                  <ChoiceBox fx:id="ChoiceBoxSklad" prefWidth="150.0" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="32.0" prefWidth="338.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Typ" textAlignment="CENTER" wrappingWidth="98.93670463562012" />
+                  <TextField fx:id="TFTyp" prefHeight="30.0" prefWidth="230.0" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="32.0" prefWidth="338.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Názov" textAlignment="CENTER" wrappingWidth="98.93670463562012" />
+                  <TextField fx:id="TFNazov" prefHeight="30.0" prefWidth="230.0" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="32.0" prefWidth="338.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Počet" textAlignment="CENTER" wrappingWidth="98.93670463562012" />
+                  <TextField fx:id="TFPocet" prefHeight="30.0" prefWidth="230.0" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="32.0" prefWidth="338.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sériové číslo" textAlignment="CENTER" wrappingWidth="98.93670463562012" />
+                  <TextField fx:id="TFSeriove" prefHeight="30.0" prefWidth="230.0" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="32.0" prefWidth="338.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dátum odoslania na filiálku" textAlignment="CENTER" wrappingWidth="98.93670463562012">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Text>
+                  <DatePicker fx:id="DFOdoslanienafili" prefHeight="30.0" prefWidth="230.0" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="32.0" prefWidth="338.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Záruka" textAlignment="CENTER" wrappingWidth="98.93670463562012" />
+                  <DatePicker fx:id="DFZaruka" prefHeight="30.0" prefWidth="230.0" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="94.0" prefWidth="370.0">
+               <children>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Text layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Poznámka" textAlignment="CENTER" wrappingWidth="98.93670463562012" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="94.0" prefWidth="390.0">
+                     <children>
+                        <TextField fx:id="TAPoznamka" layoutX="61.0" layoutY="35.0" prefHeight="86.0" prefWidth="230.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="41.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
