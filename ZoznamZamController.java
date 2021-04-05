@@ -45,6 +45,9 @@ public class ZoznamZamController implements Initializable {
     private TableColumn<Ucet, String> ColumnRola;
 
     @FXML
+    private TableColumn<Ucet, Button> ColumnDetail;
+
+    @FXML
     private Label LabelBack;
 
     @FXML
@@ -85,32 +88,29 @@ public class ZoznamZamController implements Initializable {
         ColumnPriezvisko.setCellValueFactory(new PropertyValueFactory<>("priezvisko"));
         ColumnSklad.setCellValueFactory(new PropertyValueFactory<>("sklad"));
         ColumnRola.setCellValueFactory(new PropertyValueFactory<>("rola"));
+        ColumnDetail.setCellValueFactory(new PropertyValueFactory<>("button"));
 
         UcetTable = JDBMySQLConnection.getUctyTab();
         TabZamestnanci.setItems(UcetTable);
 
     }
 
-    private void ClickOnZam(){
-        TabZamestnanci.setOnMouseClicked(new EventHandler<MouseEvent>() {
+    private void ClickOnZam() {
+       /* TabZamestnanci.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
-            @Override
-            public void handle(MouseEvent event){
+           @Override
+            public void handle(MouseEvent event) {
                 Singleton x = Singleton.getInstance();
                 x.setUcet(TabZamestnanci.getItems().get(TabZamestnanci.getSelectionModel().getSelectedIndex()));
             }
 
-            
+        });*/
 
-        });
-        
-        
     }
 
-    public void StartDetailZam() throws Exception{
-        
-    }
+    public void StartDetailZam() throws Exception {
 
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

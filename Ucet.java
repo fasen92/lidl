@@ -1,7 +1,15 @@
+import java.io.IOException;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
+import javafx.scene.Node;
+
 public class Ucet {
     private int id;
     private String heslo, meno, priezvisko, sklad, rola;
-
+    private Button button;
 
     public Ucet(int id, String heslo, String meno, String priezvisko, String rola, String sklad) {
         this.id = id;
@@ -10,6 +18,27 @@ public class Ucet {
         this.priezvisko = priezvisko;
         this.sklad = sklad;
         this.rola = rola;
+        this.button = new Button("Detail");
+
+        button.setOnAction(e -> {
+            SingletonDetailZam x = SingletonDetailZam.getInstance();
+            Ucet ucet1 = new Ucet(this.id, this.heslo, this.meno, this.priezvisko, this.rola, this.sklad);
+            x.setUcet(ucet1);
+
+            Parent DetailZamParent;
+            try {
+                DetailZamParent = FXMLLoader.load(getClass().getResource("DetailZam.fxml"));
+                Scene DetailZamScene = new Scene(DetailZamParent);
+                Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                window.setScene(DetailZamScene);
+                window.show();
+
+            } catch (IOException e1) {
+
+                e1.printStackTrace();
+            }
+
+        });
     }
 
     public int getId() {
@@ -60,6 +89,12 @@ public class Ucet {
         this.rola = rola;
     }
 
-    
-    
+    public Button getButton() {
+        return button;
+    }
+
+    public void setButton(Button button) {
+        this.button = button;
+    }
+
 }

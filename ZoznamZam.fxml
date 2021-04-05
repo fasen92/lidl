@@ -14,21 +14,18 @@
             <Font name="Book Antiqua" size="48.0" />
          </font>
       </Label>
-      <TableView fx:id="TabZamestnanci" layoutX="129.0" layoutY="104.0" prefHeight="381.0" prefWidth="574.0">
+      <TableView fx:id="TabZamestnanci" layoutX="78.0" layoutY="104.0" prefHeight="381.0" prefWidth="630.0">
         <columns>
           <TableColumn fx:id="ColumnId" prefWidth="81.0" text="ID" />
           <TableColumn fx:id="ColumnMeno" prefWidth="118.0" text="Meno" />
             <TableColumn fx:id="ColumnPriezvisko" prefWidth="149.0" text="Priezvisko" />
             <TableColumn fx:id="ColumnSklad" prefWidth="107.0" text="Sklad" />
             <TableColumn fx:id="ColumnRola" prefWidth="118.0" text="Rola" />
+            <TableColumn fx:id="ColumnDetail" prefWidth="59.0" text="Detail" />
         </columns>
       </TableView>
       <Button fx:id="BtnRefresh" layoutX="129.0" layoutY="502.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="129.0" text="Refresh" />
       <Button fx:id="BtnNovyPouzivatel" layoutX="574.0" layoutY="502.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="129.0" text="Pridať zamestnanca" />
-      <Label fx:id="LabelBack" layoutX="14.0" layoutY="14.0" prefHeight="36.0" prefWidth="41.0" text="&lt;--">
-         <font>
-            <Font name="System Bold" size="23.0" />
-         </font>
-      </Label>
+      <Button fx:id="BtnSpat" layoutX="20.0" layoutY="551.0" mnemonicParsing="false" text="Späť" />
    </children>
 </AnchorPane>
