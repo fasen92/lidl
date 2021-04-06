@@ -277,25 +277,25 @@ public class KontrolaHWController implements Initializable {
 
     @FXML
     void OnClickUloz(ActionEvent event) throws IOException {
-        Parent root;
+      /*  Parent root;
         PridaniePBVController pridaniePBVController;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PridaniePBV.fxml"));
         root = (Parent) fxmlLoader.load();
         pridaniePBVController = fxmlLoader.getController();
 
         
-        pridaniePBVController.vytvoreniePBV();
+        pridaniePBVController.vytvoreniePBV();*/
     }
 
     @FXML
     void OnClickVycisti(ActionEvent event) throws IOException {
-        Parent root;
+        /*Parent root;
         PridaniePBVController pridaniePBVController;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PridaniePBV.fxml"));
         root = (Parent) fxmlLoader.load();
         pridaniePBVController = fxmlLoader.getController();
 
-        pridaniePBVController.vycisti();
+        pridaniePBVController.vycisti();*/
     }
     
 

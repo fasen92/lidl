@@ -69,7 +69,8 @@ public class JDBMySQLConnection {
     //scanner
     public static ObservableList<Scanner> getScanner(String choiceZariadenie, String choiceSklad) throws SQLException{
         // nother one
-        if (choiceZariadenie.equals("Lispettore-scanner")) {
+        
+            System.out.println("som tu");
             Connection conn = getConnection();
             ObservableList<Scanner> OLPScanner = FXCollections.observableArrayList();
 
@@ -88,8 +89,8 @@ public class JDBMySQLConnection {
 
             }
             return OLPScanner;
-        }
-        return null;
+        
+        
 
     }
 
@@ -343,6 +344,38 @@ public class JDBMySQLConnection {
     }
     private static void getQueryPbv() {
         query = "INSERT INTO `pbv`( `Sklad`, `Typ`, `Názov`, `Počet`, `Sériové číslo`,`Dátum odoslania fili`, `Záruka`, `Poznámka`) VALUES (?,?,?,?,?,?,?,?)";
+    }
+
+    public static void addtoScanner(String vyberskladu, String text, String text2, String text3, String text4,String datumodoslania, String zaruka, String text5) {
+        System.out.println("add to Scanner");
+        getQueryScanner();
+        insertScanner(vyberskladu,text,text2,text3,text4,datumodoslania,zaruka,text5);
+    }
+
+    private static void insertScanner(String vyberskladu, String text, String text2, String text3, String text4,String datumodoslania, String zaruka, String text5) {
+
+        try {
+            Connection connection = getConnection();
+            preparedStatement = connection.prepareStatement(query);
+            
+            preparedStatement.setString(1, vyberskladu);
+            preparedStatement.setString(2, text);
+            preparedStatement.setString(3, text2);
+            preparedStatement.setString(4, text3);
+            preparedStatement.setString(5, text4);
+            
+            preparedStatement.setString(6, datumodoslania);
+            preparedStatement.setString(7, zaruka);
+            preparedStatement.setString(8, text5);
+
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    private static void getQueryScanner() {
+        query = "INSERT INTO `lispettore-scanner`( `Sklad`, `Typ`, `Názov`, `Počet`, `Sériové číslo`,`Dátum odoslania fili`, `Záruka`, `Poznámka`) VALUES (?,?,?,?,?,?,?,?)";
     }
 
     

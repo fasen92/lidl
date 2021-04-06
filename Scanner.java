@@ -1,6 +1,6 @@
 public class Scanner {
     
-        String SC,Nazov,Pocet,Zaruka,	Poznamka,Datum_odoslania,Typ;
+        String SC,Nazov,Pocet,Zaruka,	Poznamka,Datum_odoslania,Typ,Sklad;
         
         public Scanner(String Typ,String Nazov,String Pocet,String SC,String Datum_odoslania,String Zaruka,String Poznamka) {
             this.Typ =Typ;
@@ -11,6 +11,24 @@ public class Scanner {
             this.Datum_odoslania= Datum_odoslania;
             this.Poznamka = Poznamka;
             
+        }
+
+        public Scanner(String Sklad,String Typ,String Nazov,String Pocet,String SC,String Datum_odoslania,String Zaruka,String Poznamka) {
+            this.Typ =Typ;
+            this.SC =SC;
+            this.Nazov = Nazov;
+            this.Pocet = Pocet;
+            this.Zaruka= Zaruka;
+            this.Datum_odoslania= Datum_odoslania;
+            this.Poznamka = Poznamka;
+            this.Sklad = Sklad;
+            
+        }
+        public void setSklad(String sklad) {
+            Sklad = sklad;
+        }
+        public String getSklad() {
+            return Sklad;
         }
         public String getTyp() {
             return Typ;

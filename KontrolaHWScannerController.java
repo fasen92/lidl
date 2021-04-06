@@ -25,7 +25,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class KontrolaHWPBVController implements Initializable{
+public class KontrolaHWScannerController implements Initializable {
 
     @FXML
     private BorderPane BP;
@@ -73,52 +73,50 @@ public class KontrolaHWPBVController implements Initializable{
     private TextField TAPoznamka;
 
     @FXML
-    private TableView<Pbv> tabulka;
+    private TableView<Scanner> tabulka;
 
     @FXML
-    private TableColumn<String, Pbv> ColumTyp;
+    private TableColumn<String, Scanner> ColumTyp;
 
     @FXML
-    private TableColumn<String, Pbv> ColumNazov;
+    private TableColumn<String, Scanner> ColumNazov;
 
     @FXML
-    private TableColumn<String, Pbv> ColumPocet;
+    private TableColumn<String, Scanner> ColumPocet;
 
     @FXML
-    private TableColumn<String, Pbv> ColumSC;
+    private TableColumn<String, Scanner> ColumSC;
 
     @FXML
-    private TableColumn<String, Pbv> ColumDatumodoslania;
+    private TableColumn<String, Scanner> ColumDatumodoslania;
 
     @FXML
-    private TableColumn<String, Pbv> ColumZaruka;
+    private TableColumn<String, Scanner> ColumZaruka;
 
     @FXML
-    private TableColumn<String, Pbv> ColumPoznamka;
+    private TableColumn<String, Scanner> ColumPoznamka;
 
-    Pbv pbv;
+    static ObservableList <Scanner> OLtable = FXCollections.observableArrayList();
+
+    Alert alert = new Alert(AlertType.INFORMATION);
+    Scanner scanner;
     String zaruka;
     String datumodoslania;
 
-    Alert alert = new Alert(AlertType.INFORMATION);
-    
-    static ObservableList <Pbv> OLtable = FXCollections.observableArrayList();
-
-
     @FXML
     void OnClickRefresh(ActionEvent event) throws SQLException, IOException {
-        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Pbv") {
+        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Lispettore-scanner") {
+            System.out.println("som aj tu");
             update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
         }
-        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Lispettore-scanner") {
-        Parent scannerParent = FXMLLoader.load(getClass().getResource("KontrolaHWScanner.fxml"));
-        Scene scannerScene = new Scene(scannerParent);
+        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Pbv") {
+        Parent pbvParent = FXMLLoader.load(getClass().getResource("KontrolaHWPBV.fxml"));
+        Scene pbvScene = new Scene(pbvParent);
         
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(scannerScene);
+        window.setScene(pbvScene);
         window.show();
         }
-        
     }
 
     @FXML
@@ -134,36 +132,32 @@ public class KontrolaHWPBVController implements Initializable{
     @FXML
     void OnClickUloz(ActionEvent event) throws SQLException {
         if (getVyberskladu(ChoiceBoxSklad).isEmpty()||TFTyp.getText().isEmpty()||TFNazov.getText().isEmpty()) {
-        alert.setTitle("Information");
-        alert.setContentText("Povynné polia sklad, typ alebo nazov nie sú vyplnené");
-        alert.showAndWait();
+            alert.setTitle("Information");
+            alert.setContentText("Povynné polia sklad, typ alebo nazov nie sú vyplnené");
+            alert.showAndWait();
+    
+            }else{
+            datumodoslania = String.valueOf(DFOdoslanienafili.getValue());
+            zaruka = String.valueOf(DFZaruka.getValue());
+            scanner = new Scanner(getVyberskladu(ChoiceBoxSklad),TFTyp.getText(),TFNazov.getText(),TFPocet.getText(), TFSeriove.getText(), datumodoslania,zaruka, TAPoznamka.getText());
+    
+            JDBMySQLConnection.addtoScanner(getVyberskladu(ChoiceBoxSklad1),TFTyp.getText(),TFNazov.getText(),TFPocet.getText(), TFSeriove.getText(), datumodoslania,zaruka, TAPoznamka.getText());
+    
+            alert.setTitle("Information");
+            alert.setContentText("Uspešne pridané");
+            alert.showAndWait();
+    
+            vycisti();
+    
+            update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
+            }
 
-        }else{
-        datumodoslania = String.valueOf(DFOdoslanienafili.getValue());
-        zaruka = String.valueOf(DFZaruka.getValue());
-        pbv = new Pbv(getVyberskladu(ChoiceBoxSklad1),TFTyp.getText(),TFNazov.getText(),TFPocet.getText(), TFSeriove.getText(), datumodoslania,zaruka, TAPoznamka.getText());
-
-        JDBMySQLConnection.addtoPbv(getVyberskladu(ChoiceBoxSklad1),TFTyp.getText(),TFNazov.getText(),TFPocet.getText(), TFSeriove.getText(), datumodoslania,zaruka, TAPoznamka.getText());
-
-        alert.setTitle("Information");
-        alert.setContentText("Uspešne pridané");
-        alert.showAndWait();
-
-        vycisti();
-
-        update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
-        }
     }
 
     @FXML
     void OnClickVycisti(ActionEvent event) {
         vycisti();
-        
-
     }
-
-
-    
     private void vycisti() {
         TFNazov.clear();
         TFTyp.clear();
@@ -190,7 +184,7 @@ public class KontrolaHWPBVController implements Initializable{
         ChoiceBoxTypzariadenia.setItems(OLzariadenia);
         ChoiceBoxSklad1.setItems(OLsklady);
 
-        ChoiceBoxTypzariadenia.setValue("Pbv");
+        ChoiceBoxTypzariadenia.setValue("Lispettore-scanner");
         ChoiceBoxSklad.setValue("Sklad1");
         ChoiceBoxSklad1.setValue("Sklad1");
 
@@ -199,8 +193,8 @@ public class KontrolaHWPBVController implements Initializable{
 
     public void update_Table(String choiceZariadenie, String choiceSklad) throws SQLException{
         
-        if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Pbv") {
-        OLtable = JDBMySQLConnection.getPbv(choiceZariadenie,choiceSklad);  
+        System.out.println("som tu");
+        OLtable = JDBMySQLConnection.getScanner(choiceZariadenie,choiceSklad);  
 
         ColumTyp.setCellValueFactory(new PropertyValueFactory<>("Typ"));
         ColumSC.setCellValueFactory(new PropertyValueFactory<>("SC"));
@@ -214,7 +208,7 @@ public class KontrolaHWPBVController implements Initializable{
         tabulka.setItems(OLtable);
         
         
-        }
+        
         
 
     }
@@ -232,4 +226,7 @@ public class KontrolaHWPBVController implements Initializable{
         }
         
     }
+        
+    
+
 }
