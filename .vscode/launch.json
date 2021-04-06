@@ -4,20 +4,21 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+        
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}",
+            //"vmArgs": "--module-path P:/JavaFX/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml",
+        },
         {
             "type": "java",
             "name": "Launch Main",
             "request": "launch",
             "mainClass": "Main",
-            "projectName": "lidl_77df80b5",
-            "vmArgs": "--module-path D:/Ivan/javafx/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml",
-        },
-        {
-            "type": "pwa-msedge",
-            "request": "launch",
-            "name": "Launch Chrome against localhost",
-            "url": "http://localhost:8080",
-            "webRoot": "${workspaceFolder}"
+            "projectName": "lidl_edb497ca",
+            "vmArgs": "--module-path P:/JavaFX/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml",
         }
     ]
 }
