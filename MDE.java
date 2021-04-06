@@ -1,5 +1,5 @@
 public class MDE {
-    String SC,Nazov,Pocet,Zaruka,Poznamka,Datum_odoslania,Typ,CF,IP,MAC,WIFI;
+    String SC,Nazov,Pocet,Zaruka,Poznamka,Datum_odoslania,Typ,CF,IP,MAC,WIFI,Sklad;
     
     
     public MDE(String Typ,String Nazov,String Pocet,String SC,String MAC,String IP,String WIFI,String CF,String Datum_odoslania,String Zaruka,String Poznamka) {
@@ -15,6 +15,28 @@ public class MDE {
         this.IP = IP;
         this.WIFI = WIFI;
         
+    }
+
+    public MDE(String Sklad,String Typ,String Nazov,String Pocet,String SC,String MAC,String IP,String WIFI,String CF,String Datum_odoslania,String Zaruka,String Poznamka) {
+        this.Typ =Typ;
+        this.SC =SC;
+        this.Nazov = Nazov;
+        this.Pocet = Pocet;
+        this.Zaruka= Zaruka;
+        this.Datum_odoslania= Datum_odoslania;
+        this.Poznamka = Poznamka;
+        this.CF = CF;
+        this.MAC = MAC;
+        this.IP = IP;
+        this.WIFI = WIFI;
+        this.Sklad = Sklad;
+        
+    }
+    public void setSklad(String sklad) {
+        Sklad = sklad;
+    }
+    public String getSklad() {
+        return Sklad;
     }
     public void setMAC(String mAC) {
         MAC = mAC;

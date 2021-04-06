@@ -377,6 +377,45 @@ public class JDBMySQLConnection {
     private static void getQueryScanner() {
         query = "INSERT INTO `lispettore-scanner`( `Sklad`, `Typ`, `Názov`, `Počet`, `Sériové číslo`,`Dátum odoslania fili`, `Záruka`, `Poznámka`) VALUES (?,?,?,?,?,?,?,?)";
     }
+    public static void addtoMDE(String vyberskladu, String text, String text2, String text3, String text4, String text5,
+            String text6, String wificheck, String text7, String datumodoslania, String zaruka, String text8) {
+        System.out.println("add to MDE");
+        getQueryMDE();
+        insertMDE(vyberskladu,text,text2,text3,text4,text5,text6,wificheck,text7,datumodoslania,zaruka,text8);
+
+
+    }
+    private static void insertMDE(String vyberskladu, String text, String text2, String text3, String text4, String text5,
+    String text6, String wificheck, String text7, String datumodoslania, String zaruka, String text8) {
+
+        try {
+            Connection connection = getConnection();
+            preparedStatement = connection.prepareStatement(query);
+            
+            preparedStatement.setString(1, vyberskladu);
+            preparedStatement.setString(2, text);
+            preparedStatement.setString(3, text2);
+            preparedStatement.setString(4, text3);
+            preparedStatement.setString(5, text4);
+
+            preparedStatement.setString(6, text5);
+            preparedStatement.setString(7, text6);
+            preparedStatement.setString(8, wificheck);
+            preparedStatement.setString(9, text7);
+            
+            preparedStatement.setString(10, datumodoslania);
+            preparedStatement.setString(11, zaruka);
+            preparedStatement.setString(12, text8);
+
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    private static void getQueryMDE() {
+        query = "INSERT INTO `mde`(`Sklad`, `Typ`, `Názov`, `Počet`, `Sériové číslo`, `MAC adresa`, `IP adresa`, `HuaweiWifi`, `Cislo fili`, `Dátum odoslania fili`,  `Záruka`, `Poznámka`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+    }
 
     
 }

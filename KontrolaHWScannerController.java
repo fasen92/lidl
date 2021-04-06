@@ -117,6 +117,14 @@ public class KontrolaHWScannerController implements Initializable {
         window.setScene(pbvScene);
         window.show();
         }
+        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="MDE") {
+            Parent scannerParent = FXMLLoader.load(getClass().getResource("KontrolaHWMDE.fxml"));
+            Scene scannerScene = new Scene(scannerParent);
+            
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+            window.setScene(scannerScene);
+            window.show();
+        }
     }
 
     @FXML
