@@ -2,6 +2,9 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
+
+import com.mysql.cj.Query;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -14,7 +17,10 @@ public class JDBMySQLConnection {
     // Driver : it comes with the jar file
     public static final String DRIVER_CLASS = "com.mysql.jdbc.Driver";
 
-    Connection conn = null;
+    static String query = null;
+    static PreparedStatement preparedStatement;
+
+    static Connection conn = null;
 
     public static Connection getConnection() throws SQLException {
 
@@ -272,6 +278,36 @@ public class JDBMySQLConnection {
         }
 
         return UcetList;
+    }
+    public static void addtoPbv(String vyberskladu, String text, String text2, String text3, String text4,String datumodoslania, String zaruka, String text5) {
+        System.out.println("add to pbv");
+        getQueryPbv();
+        insertPbv(vyberskladu,text,text2,text3,text4,datumodoslania,zaruka,text5);
+    }
+    private static void insertPbv(String vyberskladu, String text, String text2, String text3, String text4,String datumodoslania, String zaruka, String text5) {
+
+        try {
+            Connection connection = getConnection();
+            preparedStatement = connection.prepareStatement(query);
+            
+            preparedStatement.setString(1, vyberskladu);
+            preparedStatement.setString(2, text);
+            preparedStatement.setString(3, text2);
+            preparedStatement.setString(4, text3);
+            preparedStatement.setString(5, text4);
+            
+            preparedStatement.setString(6, datumodoslania);
+            preparedStatement.setString(7, zaruka);
+            preparedStatement.setString(8, text5);
+
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    private static void getQueryPbv() {
+        query = "INSERT INTO `pbv`( `Sklad`, `Typ`, `Názov`, `Počet`, `Sériové číslo`,`Dátum odoslania fili`, `Záruka`, `Poznámka`) VALUES (?,?,?,?,?,?,?,?)";
     }
 
     

@@ -45,15 +45,8 @@ public class PridaniePBVController implements Initializable  {
     }
 
     public void vytvoreniePBV(){
-        datumodoslania = String.valueOf(DFOdoslanienafili.getValue());
-        zaruka = String.valueOf(DFZaruka.getValue());
-        pbv = new Pbv(getVyberskladu(ChoiceBoxSklad),TFTyp.getText(),TFNazov.getText(),TFPocet.getText(), TFSeriove.getText(), datumodoslania,zaruka, TAPoznamka.getText());
 
-        System.out.println(pbv.getDatum_odoslania()+" "+pbv.getSklad());
         
-        System.out.println(getVyberskladu(ChoiceBoxSklad));
-        System.out.println(TFTyp.getText());
-        System.err.println(datumodoslania);
     }
 
     
@@ -68,8 +61,20 @@ public class PridaniePBVController implements Initializable  {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setup_Choiceboxs();
-        
+        ChoiceBoxSklad.setValue("Sklad1");
+
+        TFTyp.setText("Ahoj");
+
+
     }
+
+    public void vycisti() {
+        System.out.println("cistim");
+        TFTyp.clear();
+        TFNazov.setText("ahoj");
+    }
+
+    
     
 
 }

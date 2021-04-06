@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,7 +24,6 @@ public class KontrolaHWController implements Initializable {
 
     //premenné
     
-
     private String Sklad;
     private String Zariadenia;
 
@@ -115,6 +115,7 @@ public class KontrolaHWController implements Initializable {
     //load Page funkcia pre zvolenie custom fxml sceny
     private void loadPage(String page)  {
         Parent root = null;
+        Parent root2 = null;
         
 
         
@@ -133,6 +134,15 @@ public class KontrolaHWController implements Initializable {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
+        
+            try {
+                FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("PridaniePBV.fxml"));
+                root2 = (Parent) fxmlLoader2.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        
+        
         }
 
         if (page.equals("TableScanner")) {
@@ -246,14 +256,8 @@ public class KontrolaHWController implements Initializable {
             }
         }
         BP.setCenter(root);
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PridaniePBV.fxml"));
-        try {
-            root = (Parent) fxmlLoader.load();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        BP.setLeft(root);
+        BP.setLeft(root2);
+        
         
     }
     
@@ -279,12 +283,19 @@ public class KontrolaHWController implements Initializable {
         root = (Parent) fxmlLoader.load();
         pridaniePBVController = fxmlLoader.getController();
 
+        
         pridaniePBVController.vytvoreniePBV();
     }
 
     @FXML
-    void OnClickVycisti(ActionEvent event) {
+    void OnClickVycisti(ActionEvent event) throws IOException {
+        Parent root;
+        PridaniePBVController pridaniePBVController;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PridaniePBV.fxml"));
+        root = (Parent) fxmlLoader.load();
+        pridaniePBVController = fxmlLoader.getController();
 
+        pridaniePBVController.vycisti();
     }
     
 

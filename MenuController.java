@@ -32,7 +32,7 @@ public class MenuController implements Initializable{
 
     @FXML
     public void OnClickKontrolaHW(ActionEvent event) throws IOException {
-        Parent KontrolaHWParent = FXMLLoader.load(getClass().getResource("KontrolaHW.fxml"));
+        Parent KontrolaHWParent = FXMLLoader.load(getClass().getResource("KontrolaHWPBV.fxml"));
         Scene KontrolaHWScene = new Scene(KontrolaHWParent);
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -65,13 +65,13 @@ public class MenuController implements Initializable{
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
 
-        Singleton x = Singleton.getInstance();
+      /*  Singleton x = Singleton.getInstance();
         if(String.valueOf(x.ucet.getRola()).equals("Admin")){
             BtnZamestnanci.setVisible(true);
         }else{
             BtnZamestnanci.setVisible(false);
         }
-
+*/
         
     }
 
