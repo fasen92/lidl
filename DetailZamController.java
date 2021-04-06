@@ -71,7 +71,9 @@ public class DetailZamController implements Initializable {
 
     @FXML
     void OnClickSave(ActionEvent event){
-        //TODO
+       
+           
+        
     }
 
     @FXML

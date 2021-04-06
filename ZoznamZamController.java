@@ -22,6 +22,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class ZoznamZamController implements Initializable {
@@ -76,6 +77,18 @@ public class ZoznamZamController implements Initializable {
     }
 
     @FXML
+    void onClickNovyPouzivatel(ActionEvent event) throws IOException{
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PridatZamDialog.fxml"));
+        Parent parent = fxmlLoader.load();
+        
+        Scene scene = new Scene(parent, 350, 360);
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(scene);
+        stage.showAndWait();
+    }
+
+    @FXML
     void OnClickRefresh(ActionEvent event) throws IOException, SQLException {
 
         update_Table();
@@ -95,22 +108,6 @@ public class ZoznamZamController implements Initializable {
 
     }
 
-    private void ClickOnZam() {
-       /* TabZamestnanci.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-           @Override
-            public void handle(MouseEvent event) {
-                Singleton x = Singleton.getInstance();
-                x.setUcet(TabZamestnanci.getItems().get(TabZamestnanci.getSelectionModel().getSelectedIndex()));
-            }
-
-        });*/
-
-    }
-
-    public void StartDetailZam() throws Exception {
-
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -121,6 +118,5 @@ public class ZoznamZamController implements Initializable {
             e.printStackTrace();
 
         }
-        ClickOnZam();
     }
 }

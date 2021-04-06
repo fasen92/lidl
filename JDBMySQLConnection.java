@@ -279,6 +279,41 @@ public class JDBMySQLConnection {
 
         return UcetList;
     }
+
+    public static void addtoUcet(String meno, String priezvisko, String sklad, String rola) {
+        System.out.println("add to ucet");
+        int prvyLogin =1;
+        getQueryUcet();
+        insertUcet(meno,priezvisko,rola,sklad,prvyLogin);
+    }
+
+    private static void getQueryUcet() {
+        query = "INSERT INTO `ucet`( `id`, `heslo`, `meno`, `priezvisko`, `rola`,`sklad`,`prvyLogin`) VALUES (?,?,?,?,?,?,?)";
+    }
+
+    private static void insertUcet(String meno, String priezvisko, String rola, String sklad, int prvyLogin) {
+
+        try {
+            Connection connection = getConnection();
+            preparedStatement = connection.prepareStatement(query);
+            
+            preparedStatement.setString(1, null);
+            preparedStatement.setString(2, meno);
+            preparedStatement.setString(3, meno);
+            preparedStatement.setString(4, priezvisko);
+            preparedStatement.setString(5, rola);
+            preparedStatement.setString(6, sklad);
+            preparedStatement.setInt(7, prvyLogin);
+            
+
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+
     public static void addtoPbv(String vyberskladu, String text, String text2, String text3, String text4,String datumodoslania, String zaruka, String text5) {
         System.out.println("add to pbv");
         getQueryPbv();
