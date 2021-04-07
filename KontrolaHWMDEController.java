@@ -159,6 +159,14 @@ public class KontrolaHWMDEController implements Initializable {
             window.setScene(quailScene);
             window.show();
         }
+        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Rabattdrucker") {
+            Parent rabatParent = FXMLLoader.load(getClass().getResource("KontrolaHWRabattdrucker.fxml"));
+            Scene rabatScene = new Scene(rabatParent);
+            
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+            window.setScene(rabatScene);
+            window.show();
+        }
     }
 
     @FXML

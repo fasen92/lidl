@@ -3,6 +3,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import javax.print.DocFlavor.STRING;
 import javax.swing.JOptionPane;
 import javafx.scene.Node;
 import javafx.collections.FXCollections;
@@ -24,7 +25,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-public class KontrolaHWQuailController implements Initializable{
+
+public class KontrolaHWRabattdruckerController implements Initializable {
 
     @FXML
     private BorderPane BP;
@@ -48,7 +50,7 @@ public class KontrolaHWQuailController implements Initializable{
     private ChoiceBox<String> ChoiceBoxSklad;
 
     @FXML
-    private ChoiceBox<String>ChoiceBoxSklad1;
+    private ChoiceBox<String> ChoiceBoxSklad1;
 
     @FXML
     private TextField TFTyp;
@@ -63,6 +65,9 @@ public class KontrolaHWQuailController implements Initializable{
     private TextField TFSeriove;
 
     @FXML
+    private TextField TFECO;
+
+    @FXML
     private TextField TFCF;
 
     @FXML
@@ -75,59 +80,59 @@ public class KontrolaHWQuailController implements Initializable{
     private TextField TAPoznamka;
 
     @FXML
-    private TableView<Quail> tabulka;
+    private TableView<Rabattdrucker> tabulka;
 
     @FXML
-    private TableColumn<String, Quail> ColumTyp;
+    private TableColumn<String, Rabattdrucker> ColumTyp;
 
     @FXML
-    private TableColumn<String, Quail> ColumNazov;
+    private TableColumn<String, Rabattdrucker> ColumNazov;
 
     @FXML
-    private TableColumn<String, Quail> ColumPocet;
+    private TableColumn<String, Rabattdrucker> ColumPocet;
 
     @FXML
-    private TableColumn<String, Quail> ColumSC;
+    private TableColumn<String, Rabattdrucker> ColumSC;
 
     @FXML
-    private TableColumn<String, Quail> ColumCF;
+    private TableColumn<String, Rabattdrucker> ColumECO;
 
     @FXML
-    private TableColumn<String, Quail> ColumDatumodoslania;
+    private TableColumn<String, Rabattdrucker> ColumCF;
 
     @FXML
-    private TableColumn<String, Quail>ColumZaruka;
+    private TableColumn<String, Rabattdrucker> ColumDatumodoslania;
 
     @FXML
-    private TableColumn<String, Quail> ColumPoznamka;
+    private TableColumn<String, Rabattdrucker> ColumPoznamka;
+
+    @FXML
+    private TableColumn<String, Rabattdrucker> ColumZaruka;
 
     String zaruka;
     String datumodoslania;
 
     Alert alert = new Alert(AlertType.INFORMATION);
     
-    static ObservableList <Quail> OLtable = FXCollections.observableArrayList();
+    static ObservableList<Rabattdrucker> OLtable = FXCollections.observableArrayList();
 
     @FXML
-    void OnClickRefresh(ActionEvent event) throws SQLException, IOException {
-        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Quail") {
-            update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
-        }
-        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Lispettore-scanner") {
-            Parent scannerParent = FXMLLoader.load(getClass().getResource("KontrolaHWScanner.fxml"));
-            Scene scannerScene = new Scene(scannerParent);
+    void OnClickRefresh(ActionEvent event) throws IOException, SQLException {
+        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Pbv") {
+            Parent rabatParent = FXMLLoader.load(getClass().getResource("KontrolaHWPBV.fxml"));
+            Scene rabatScene = new Scene(rabatParent);
             
             Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-            window.setScene(scannerScene);
+            window.setScene(rabatScene);
             window.show();
         }
-        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Pbv") {
-            Parent pbvParent = FXMLLoader.load(getClass().getResource("KontrolaHWPBV.fxml"));
-            Scene pbvScene = new Scene(pbvParent);
+        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Lispettore-scanner") {
+        Parent scannerParent = FXMLLoader.load(getClass().getResource("KontrolaHWScanner.fxml"));
+        Scene scannerScene = new Scene(scannerParent);
         
-            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-            window.setScene(pbvScene);
-            window.show();
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(scannerScene);
+        window.show();
         }
         if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="MDE") {
             Parent scannerParent = FXMLLoader.load(getClass().getResource("KontrolaHWMDE.fxml"));
@@ -137,15 +142,18 @@ public class KontrolaHWQuailController implements Initializable{
             window.setScene(scannerScene);
             window.show();
         }
-        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Rabattdrucker") {
-            Parent rabatParent = FXMLLoader.load(getClass().getResource("KontrolaHWRabattdrucker.fxml"));
-            Scene rabatScene = new Scene(rabatParent);
+        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Quail") {
+            Parent quailParent = FXMLLoader.load(getClass().getResource("KontrolaHWQuail.fxml"));
+            Scene quailScene = new Scene(quailParent);
             
             Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-            window.setScene(rabatScene);
+            window.setScene(quailScene);
             window.show();
         }
-
+        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Rabattdrucker") {
+            
+            update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
+        }
     }
 
     @FXML
@@ -170,7 +178,7 @@ public class KontrolaHWQuailController implements Initializable{
             zaruka = String.valueOf(DFZaruka.getValue());
            
     
-            JDBMySQLConnection.addtoQuail(getVyberskladu(ChoiceBoxSklad1),TFTyp.getText(),TFNazov.getText(),TFPocet.getText(), TFSeriove.getText(), TFCF.getText(),datumodoslania,zaruka, TAPoznamka.getText());
+            JDBMySQLConnection.addtoRabattdrucker(getVyberskladu(ChoiceBoxSklad1),TFTyp.getText(),TFNazov.getText(),TFPocet.getText(), TFSeriove.getText(),TFECO.getText(),TFCF.getText(),datumodoslania,zaruka, TAPoznamka.getText());
     
             alert.setTitle("Information");
             alert.setContentText("Uspešne pridané");
@@ -184,8 +192,9 @@ public class KontrolaHWQuailController implements Initializable{
 
     @FXML
     void OnClickVycisti(ActionEvent event) {
-        vycisti();
+            vycisti();
     }
+    
     private void vycisti() {
         TFNazov.clear();
         TFTyp.clear();
@@ -196,6 +205,7 @@ public class KontrolaHWQuailController implements Initializable{
         DFZaruka.setValue(null);
         TAPoznamka.clear();
         TFCF.clear();
+        TFECO.clear();
     }
 
     public String getVyberskladu(ChoiceBox<String> ChoiceBoxSklad){
@@ -213,7 +223,7 @@ public class KontrolaHWQuailController implements Initializable{
         ChoiceBoxTypzariadenia.setItems(OLzariadenia);
         ChoiceBoxSklad1.setItems(OLsklady);
 
-        ChoiceBoxTypzariadenia.setValue("Quail");
+        ChoiceBoxTypzariadenia.setValue("Rabattdrucker");
         ChoiceBoxSklad.setValue("Sklad1");
         ChoiceBoxSklad1.setValue("Sklad1");
 
@@ -222,16 +232,18 @@ public class KontrolaHWQuailController implements Initializable{
 
     public void update_Table(String choiceZariadenie, String choiceSklad) throws SQLException{
         
-        if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Quail") {
-        OLtable = JDBMySQLConnection.getQuail(choiceZariadenie,choiceSklad);  
+        if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Rabattdrucker") {
+        OLtable = JDBMySQLConnection.getRabattdrucker(choiceZariadenie,choiceSklad);  
 
         ColumTyp.setCellValueFactory(new PropertyValueFactory<>("Typ"));
         ColumSC.setCellValueFactory(new PropertyValueFactory<>("SC"));
         ColumNazov.setCellValueFactory(new PropertyValueFactory<>("Nazov"));
         ColumPocet.setCellValueFactory(new PropertyValueFactory<>("Pocet"));
         ColumZaruka.setCellValueFactory(new PropertyValueFactory<>("Zaruka"));
+        ColumCF.setCellValueFactory(new PropertyValueFactory<>("CF"));
         ColumDatumodoslania.setCellValueFactory(new PropertyValueFactory<>("Datum_odoslania"));
         ColumPoznamka.setCellValueFactory(new PropertyValueFactory<>("Poznamka"));
+        ColumECO.setCellValueFactory(new PropertyValueFactory<>("ECO"));
 
            
         tabulka.setItems(OLtable);
@@ -243,7 +255,7 @@ public class KontrolaHWQuailController implements Initializable{
     }
 
     @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {
+    public void initialize(URL location, ResourceBundle resources) {
         System.out.println("vytvorenie pozadia");
         setup_Choiceboxs();
         
@@ -255,5 +267,7 @@ public class KontrolaHWQuailController implements Initializable{
         }
         
     }
+
+    
 
 }

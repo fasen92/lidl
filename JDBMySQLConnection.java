@@ -448,6 +448,41 @@ public class JDBMySQLConnection {
     private static void getQueryQuail() {
         query = "INSERT INTO `quail`(`Sklad`, `Typ`, `Názov`, `Počet`, `Sériové číslo`, `Cislo fili`, `Dátum odoslania fili`, `Záruka`, `Poznámka`) VALUES (?,?,?,?,?,?,?,?,?)";
     }
+    public static void addtoRabattdrucker(String vyberskladu, String text, String text2, String text3, String text4,
+            String text5, String text6, String datumodoslania, String zaruka, String text7) {
+                System.out.println("add to Rabat");
+                getQueryRabattdrucker();
+                insertRabattdrucker(vyberskladu,text,text2,text3,text4,datumodoslania,zaruka,text5,text6,text7);                
+    }
+    private static void insertRabattdrucker(String vyberskladu, String text, String text2, String text3, String text4,String datumodoslania, String zaruka, String text5, String text6,String text7) {
+
+        try {
+            Connection connection = getConnection();
+            preparedStatement = connection.prepareStatement(query);
+            
+            preparedStatement.setString(1, vyberskladu);
+            preparedStatement.setString(2, text);
+            preparedStatement.setString(3, text2);
+            preparedStatement.setString(4, text3);
+            preparedStatement.setString(5, text4);
+
+            preparedStatement.setString(6, text5);
+            
+            preparedStatement.setString(7, text6);
+
+            preparedStatement.setString(8, datumodoslania);
+            preparedStatement.setString(9, zaruka);
+            preparedStatement.setString(10, text7);
+
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    private static void getQueryRabattdrucker() {
+        query = "INSERT INTO `rabattdrucker`( `Sklad`, `Typ`, `Názov`, `Počet`, `Sériové číslo`, `Evidencne cislo`, `Cislo fili`,  `Dátum odoslania fili`, `Záruka`, `Poznámka`) VALUES (?,?,?,?,?,?,?,?,?,?)";
+    }
 
     
 }
