@@ -125,6 +125,14 @@ public class KontrolaHWScannerController implements Initializable {
             window.setScene(scannerScene);
             window.show();
         }
+        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Quail") {
+            Parent quailParent = FXMLLoader.load(getClass().getResource("KontrolaHWQuail.fxml"));
+            Scene quailScene = new Scene(quailParent);
+            
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+            window.setScene(quailScene);
+            window.show();
+        }
     }
 
     @FXML

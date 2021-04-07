@@ -2,6 +2,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+
+import javax.swing.JOptionPane;
 import javafx.scene.Node;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,7 +15,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
@@ -23,9 +24,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-
-
-public class KontrolaHWMDEController implements Initializable {
+public class KontrolaHWQuailController implements Initializable{
 
     @FXML
     private BorderPane BP;
@@ -49,7 +48,7 @@ public class KontrolaHWMDEController implements Initializable {
     private ChoiceBox<String> ChoiceBoxSklad;
 
     @FXML
-    private ChoiceBox<String> ChoiceBoxSklad1;
+    private ChoiceBox<String>ChoiceBoxSklad1;
 
     @FXML
     private TextField TFTyp;
@@ -64,15 +63,6 @@ public class KontrolaHWMDEController implements Initializable {
     private TextField TFSeriove;
 
     @FXML
-    private TextField TFMAC;
-
-    @FXML
-    private TextField TFIP;
-
-    @FXML
-    private CheckBox CheckboxWifi;
-
-    @FXML
     private TextField TFCF;
 
     @FXML
@@ -85,54 +75,42 @@ public class KontrolaHWMDEController implements Initializable {
     private TextField TAPoznamka;
 
     @FXML
-    private TableView<MDE> tabulka;
+    private TableView<Quail> tabulka;
 
     @FXML
-    private TableColumn<String, MDE> ColumTyp;
+    private TableColumn<String, Quail> ColumTyp;
 
     @FXML
-    private TableColumn<String, MDE> ColumNazov;
+    private TableColumn<String, Quail> ColumNazov;
 
     @FXML
-    private TableColumn<String, MDE> ColumPocet;
+    private TableColumn<String, Quail> ColumPocet;
 
     @FXML
-    private TableColumn<String, MDE> ColumSC;
+    private TableColumn<String, Quail> ColumSC;
 
     @FXML
-    private TableColumn<String, MDE> ColumMac;
+    private TableColumn<String, Quail> ColumCF;
 
     @FXML
-    private TableColumn<String, MDE> ColumIP;
+    private TableColumn<String, Quail> ColumDatumodoslania;
 
     @FXML
-    private TableColumn<String, MDE> ColumWifi;
+    private TableColumn<String, Quail>ColumZaruka;
 
     @FXML
-    private TableColumn<String, MDE> ColumCF;
+    private TableColumn<String, Quail> ColumPoznamka;
 
-    @FXML
-    private TableColumn<String, MDE> ColumDatumodoslania;
-
-    @FXML
-    private TableColumn<String, MDE> ColumZaruka;
-
-    @FXML
-    private TableColumn<String, MDE> ColumPoznamka;
-
-    MDE mde;
     String zaruka;
     String datumodoslania;
-    String wificheck;
-    
 
     Alert alert = new Alert(AlertType.INFORMATION);
     
-    static ObservableList<MDE> OLtable = FXCollections.observableArrayList();
+    static ObservableList <Quail> OLtable = FXCollections.observableArrayList();
 
     @FXML
-    void OnClickRefresh(ActionEvent event) throws IOException, SQLException {
-        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="MDE") {
+    void OnClickRefresh(ActionEvent event) throws SQLException, IOException {
+        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Quail") {
             update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
         }
         if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Lispettore-scanner") {
@@ -151,14 +129,15 @@ public class KontrolaHWMDEController implements Initializable {
             window.setScene(pbvScene);
             window.show();
         }
-        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Quail") {
-            Parent quailParent = FXMLLoader.load(getClass().getResource("KontrolaHWQuail.fxml"));
-            Scene quailScene = new Scene(quailParent);
+        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="MDE") {
+            Parent scannerParent = FXMLLoader.load(getClass().getResource("KontrolaHWMDE.fxml"));
+            Scene scannerScene = new Scene(scannerParent);
             
             Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-            window.setScene(quailScene);
+            window.setScene(scannerScene);
             window.show();
         }
+
     }
 
     @FXML
@@ -181,13 +160,9 @@ public class KontrolaHWMDEController implements Initializable {
             }else{
             datumodoslania = String.valueOf(DFOdoslanienafili.getValue());
             zaruka = String.valueOf(DFZaruka.getValue());
-            //scanner = new Scanner(getVyberskladu(ChoiceBoxSklad),TFTyp.getText(),TFNazov.getText(),TFPocet.getText(), TFSeriove.getText(), datumodoslania,zaruka, TAPoznamka.getText());
-            if (CheckboxWifi.isSelected()) {
-                wificheck = "1";
-            }else{
-                wificheck = "0";
-            }
-            JDBMySQLConnection.addtoMDE(getVyberskladu(ChoiceBoxSklad1),TFTyp.getText(),TFNazov.getText(),TFPocet.getText(), TFSeriove.getText(),TFMAC.getText(),TFIP.getText(),wificheck,TFCF.getText() ,datumodoslania,zaruka, TAPoznamka.getText());
+           
+    
+            JDBMySQLConnection.addtoQuail(getVyberskladu(ChoiceBoxSklad1),TFTyp.getText(),TFNazov.getText(),TFPocet.getText(), TFSeriove.getText(), TFCF.getText(),datumodoslania,zaruka, TAPoznamka.getText());
     
             alert.setTitle("Information");
             alert.setContentText("Uspešne pridané");
@@ -197,13 +172,11 @@ public class KontrolaHWMDEController implements Initializable {
     
             update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
             }
-
     }
 
     @FXML
     void OnClickVycisti(ActionEvent event) {
         vycisti();
-
     }
     private void vycisti() {
         TFNazov.clear();
@@ -214,11 +187,7 @@ public class KontrolaHWMDEController implements Initializable {
         DFOdoslanienafili.setValue(null);
         DFZaruka.setValue(null);
         TAPoznamka.clear();
-        CheckboxWifi.setSelected(false);
         TFCF.clear();
-        TFMAC.clear();
-        TFIP.clear();
-        
     }
 
     public String getVyberskladu(ChoiceBox<String> ChoiceBoxSklad){
@@ -236,24 +205,20 @@ public class KontrolaHWMDEController implements Initializable {
         ChoiceBoxTypzariadenia.setItems(OLzariadenia);
         ChoiceBoxSklad1.setItems(OLsklady);
 
-        ChoiceBoxTypzariadenia.setValue("MDE");
+        ChoiceBoxTypzariadenia.setValue("Quail");
         ChoiceBoxSklad.setValue("Sklad1");
         ChoiceBoxSklad1.setValue("Sklad1");
-        CheckboxWifi.setAllowIndeterminate(true);
 
        
     }
 
     public void update_Table(String choiceZariadenie, String choiceSklad) throws SQLException{
         
-        OLtable = JDBMySQLConnection.getMDE(choiceZariadenie,choiceSklad);  
+        if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Quail") {
+        OLtable = JDBMySQLConnection.getQuail(choiceZariadenie,choiceSklad);  
 
         ColumTyp.setCellValueFactory(new PropertyValueFactory<>("Typ"));
         ColumSC.setCellValueFactory(new PropertyValueFactory<>("SC"));
-        ColumIP.setCellValueFactory(new PropertyValueFactory<>("IP"));
-        ColumMac.setCellValueFactory(new PropertyValueFactory<>("MAC"));
-        ColumWifi.setCellValueFactory(new PropertyValueFactory<>("WIFI"));
-        ColumCF.setCellValueFactory(new PropertyValueFactory<>("CF"));
         ColumNazov.setCellValueFactory(new PropertyValueFactory<>("Nazov"));
         ColumPocet.setCellValueFactory(new PropertyValueFactory<>("Pocet"));
         ColumZaruka.setCellValueFactory(new PropertyValueFactory<>("Zaruka"));
@@ -262,11 +227,15 @@ public class KontrolaHWMDEController implements Initializable {
 
            
         tabulka.setItems(OLtable);
+        
+        
+        }
+        
 
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL arg0, ResourceBundle arg1) {
         System.out.println("vytvorenie pozadia");
         setup_Choiceboxs();
         

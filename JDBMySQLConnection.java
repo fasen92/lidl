@@ -416,6 +416,38 @@ public class JDBMySQLConnection {
     private static void getQueryMDE() {
         query = "INSERT INTO `mde`(`Sklad`, `Typ`, `Názov`, `Počet`, `Sériové číslo`, `MAC adresa`, `IP adresa`, `HuaweiWifi`, `Cislo fili`, `Dátum odoslania fili`,  `Záruka`, `Poznámka`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
     }
+    public static void addtoQuail(String vyberskladu, String text, String text2, String text3, String text4,
+            String text5, String datumodoslania, String zaruka, String text6) {
+                System.out.println("add to Quail");
+                getQueryQuail();
+                insertQuail(vyberskladu,text,text2,text3,text4,datumodoslania,zaruka,text5,text6);                
+    }
+    private static void insertQuail(String vyberskladu, String text, String text2, String text3, String text4,String datumodoslania, String zaruka, String text5, String text6) {
+
+        try {
+            Connection connection = getConnection();
+            preparedStatement = connection.prepareStatement(query);
+            
+            preparedStatement.setString(1, vyberskladu);
+            preparedStatement.setString(2, text);
+            preparedStatement.setString(3, text2);
+            preparedStatement.setString(4, text3);
+            preparedStatement.setString(5, text4);
+            preparedStatement.setString(6, text5);
+            
+            preparedStatement.setString(7, datumodoslania);
+            preparedStatement.setString(8, zaruka);
+            preparedStatement.setString(9, text6);
+
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    private static void getQueryQuail() {
+        query = "INSERT INTO `quail`(`Sklad`, `Typ`, `Názov`, `Počet`, `Sériové číslo`, `Cislo fili`, `Dátum odoslania fili`, `Záruka`, `Poznámka`) VALUES (?,?,?,?,?,?,?,?,?)";
+    }
 
     
 }
