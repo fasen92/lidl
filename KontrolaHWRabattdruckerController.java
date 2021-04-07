@@ -154,6 +154,14 @@ public class KontrolaHWRabattdruckerController implements Initializable {
             
             update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
         }
+        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Ostatné") {
+            Parent rabatParent = FXMLLoader.load(getClass().getResource("KontrolaHWOstatne.fxml"));
+            Scene rabatScene = new Scene(rabatParent);
+            
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+            window.setScene(rabatScene);
+            window.show();
+        }
     }
 
     @FXML
