@@ -7,6 +7,7 @@ import com.mysql.cj.Query;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.TextField;
 
 public class JDBMySQLConnection {
     public static final String URL = "jdbc:mysql://localhost/lidl";
@@ -238,7 +239,7 @@ public class JDBMySQLConnection {
     public static ObservableList<MP> getMP(String choiceZariadenie, String choiceSklad) throws SQLException{
         // nother one
         if (choiceZariadenie.equals("Moblný telefon")) {
-           
+           System.out.println("som na zaciatku dB");
             Connection conn = getConnection();
             ObservableList<MP> OLMP = FXCollections.observableArrayList();
 
@@ -514,6 +515,49 @@ public class JDBMySQLConnection {
     }
     private static void getQueryOstatne() {
         query = "INSERT INTO `ostatne`(`Sklad`, `Typ`, `Názov`, `Počet`, `Sériové číslo`, `Cislo fili`, `Dátum odoslania fili`, `Záruka`, `Poznámka`) VALUES (?,?,?,?,?,?,?,?,?)";
+    }
+    public static void addtoMP(String vyberskladu, String text, String text2, String text3, String text4, String text5,
+            String text6, String tFTelcCslo, String tFIMEI, String tFSIM, String tFPUK, String tFPIN,
+            String datumodoslania, String zaruka, String text7) {
+
+            getQueryMP();
+            insertMP(vyberskladu, text, text2, text3, text4, text5, text6, tFTelcCslo, tFIMEI, tFSIM, tFPUK, tFPIN, datumodoslania, zaruka, text7);
+    }
+    private static void insertMP(String vyberskladu, String text, String text2, String text3, String text4, String text5,
+    String text6, String tFTelcCslo, String tFIMEI, String tFSIM, String tFPUK, String tFPIN,
+    String datumodoslania, String zaruka, String text7) {
+            
+
+        try {
+            Connection connection = getConnection();
+            preparedStatement = connection.prepareStatement(query);
+            
+            preparedStatement.setString(1, vyberskladu);
+            preparedStatement.setString(2, text);
+            preparedStatement.setString(3, text2);
+            preparedStatement.setString(4, text3);
+            preparedStatement.setString(5, text4);
+            preparedStatement.setString(6, text5);
+
+            preparedStatement.setString(7, text6);
+            preparedStatement.setString(8, tFTelcCslo);
+            preparedStatement.setString(9, tFIMEI);
+            preparedStatement.setString(10, tFSIM);
+            preparedStatement.setString(11, tFPUK);
+            preparedStatement.setString(12, tFPIN);
+
+            preparedStatement.setString(13, datumodoslania);
+            preparedStatement.setString(14, zaruka);
+            preparedStatement.setString(15, text7);
+
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    private static void getQueryMP() {
+        query = "INSERT INTO `mobil-prepredajnu`( `Sklad`, `Typ`, `Názov`, `Typ telefonu`, `Počet`, `Sériové číslo`, `Cislo fili`, `Tel.cislo`, `IMEI`, `SIM`, `PUK`, `PIN`, `Dátum odoslania fili`, `Záruka`, `Poznámka`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     }
 
     

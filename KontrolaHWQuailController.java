@@ -153,6 +153,14 @@ public class KontrolaHWQuailController implements Initializable{
             window.setScene(rabatScene);
             window.show();
         }
+        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Moblný telefon") {
+            Parent rabatParent = FXMLLoader.load(getClass().getResource("KontrolaHWMP.fxml"));
+            Scene rabatScene = new Scene(rabatParent);
+            
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+            window.setScene(rabatScene);
+            window.show();
+        }
 
     }
 
