@@ -1,7 +1,8 @@
 public class Pbv {
-    String SC,Nazov,Pocet,Zaruka,Poznamka,Datum_odoslania,Typ,Sklad;
+    String SC,Nazov,Pocet,Zaruka,Poznamka,Datum_odoslania,Typ,Skla,ID;
     
-    public Pbv(String Typ,String Nazov,String Pocet,String SC,String Datum_odoslania,String Zaruka,String Poznamka) {
+    public Pbv(String ID,String Typ,String Nazov,String Pocet,String SC,String Datum_odoslania,String Zaruka,String Poznamka) {
+        this.ID = ID;
         this.Typ =Typ;
         this.SC =SC;
         this.Nazov = Nazov;
@@ -11,7 +12,7 @@ public class Pbv {
         this.Poznamka = Poznamka;
         
     }
-    public Pbv(String Sklad,String Typ,String Nazov,String Pocet,String SC,String Datum_odoslania,String Zaruka,String Poznamka) {
+    /*public Pbv(String Sklad,String Typ,String Nazov,String Pocet,String SC,String Datum_odoslania,String Zaruka,String Poznamka) {
         this.Sklad = Sklad;
         this.Typ =Typ;
         this.SC =SC;
@@ -21,13 +22,19 @@ public class Pbv {
         this.Datum_odoslania= Datum_odoslania;
         this.Poznamka = Poznamka;
         
+    }*/
+    public String getID() {
+        return ID;
     }
-    public String getSklad() {
+    public void setID(String iD) {
+        ID = iD;
+    }
+   /* public String getSklad() {
         return Sklad;
     }
     public void setSklad(String sklad) {
         Sklad = sklad;
-    }
+    }*/
     public String getTyp() {
         return Typ;
     }

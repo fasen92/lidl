@@ -49,7 +49,7 @@ public class JDBMySQLConnection {
 
                 while (rs.next()) {
                     
-                    OLPbv.add(new Pbv(rs.getString("Typ"), rs.getString("Názov"), rs.getString("Počet"),
+                    OLPbv.add(new Pbv(rs.getString("ID"), rs.getString("Typ"), rs.getString("Názov"), rs.getString("Počet"),
                             rs.getString("Sériové číslo"), rs.getString("Dátum odoslania fili"), rs.getString("Záruka"),
                             rs.getString("Poznámka")));
                 }
