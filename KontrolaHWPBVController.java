@@ -53,9 +53,6 @@ public class KontrolaHWPBVController implements Initializable {
     private Button BtnDelete;
 
     @FXML
-    private Button BtnEdit;
-
-    @FXML
     private Button BtnZmeny;
 
     @FXML
@@ -132,6 +129,7 @@ public class KontrolaHWPBVController implements Initializable {
 
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(scannerScene);
+            window.setMaximized(true);
             window.show();
         }
         if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "MDE") {
@@ -140,6 +138,7 @@ public class KontrolaHWPBVController implements Initializable {
 
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(scannerScene);
+            window.setMaximized(true);
             window.show();
         }
         if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Quail") {
@@ -148,6 +147,7 @@ public class KontrolaHWPBVController implements Initializable {
 
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(quailScene);
+            window.setMaximized(true);
             window.show();
         }
         if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Rabattdrucker") {
@@ -156,6 +156,7 @@ public class KontrolaHWPBVController implements Initializable {
 
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(rabatScene);
+            window.setMaximized(true);
             window.show();
         }
         if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Ostatné") {
@@ -164,6 +165,7 @@ public class KontrolaHWPBVController implements Initializable {
 
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(rabatScene);
+            window.setMaximized(true);
             window.show();
         }
         if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Moblný telefon") {
@@ -172,6 +174,7 @@ public class KontrolaHWPBVController implements Initializable {
 
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(rabatScene);
+            window.setMaximized(true);
             window.show();
         }
 
@@ -260,7 +263,7 @@ public class KontrolaHWPBVController implements Initializable {
         } else {
             
             try {
-                datumodoslania = String.valueOf(DFOdoslanienafili.getValue());
+            datumodoslania = String.valueOf(DFOdoslanienafili.getValue());
             zaruka = String.valueOf(DFZaruka.getValue());
             
             Connection conn =JDBMySQLConnection.getConnection();

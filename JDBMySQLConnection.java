@@ -58,13 +58,9 @@ public class JDBMySQLConnection {
             }
 
             OLPbv.get(0).getNazov();
-
             return OLPbv;
-
         }
-
         return null;
-
     }
 
     //scanner
@@ -82,7 +78,7 @@ public class JDBMySQLConnection {
                 
                 while (rs.next()) {
                    System.out.println(ps);
-                    OLPScanner.add(new Scanner(rs.getString("Typ"), rs.getString("Názov"), rs.getString("Počet"),
+                    OLPScanner.add(new Scanner(rs.getString("ID"),rs.getString("Typ"), rs.getString("Názov"), rs.getString("Počet"),
                             rs.getString("Sériové číslo"), rs.getString("Dátum odoslania fili"), rs.getString("Záruka"),
                             rs.getString("Poznámka")));
                 }
@@ -176,7 +172,8 @@ public class JDBMySQLConnection {
                     }else{
                         wifi = "Nie";
                     }
-                    OLMDE.add(new MDE(rs.getString("Typ"), rs.getString("Názov"), rs.getString("Počet"),
+                    System.out.println("DB index"+rs.getString("ID"));
+                    OLMDE.add(new MDE(rs.getString("ID"),rs.getString("Typ"), rs.getString("Názov"), rs.getString("Počet"),
                             rs.getString("Sériové číslo"),rs.getString("MAC adresa"),rs.getString("IP adresa"),wifi,rs.getString("Cislo fili"), rs.getString("Dátum odoslania fili"), rs.getString("Záruka"),
                             rs.getString("Poznámka")));          
                 }

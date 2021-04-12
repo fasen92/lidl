@@ -1,8 +1,8 @@
 public class Scanner {
     
-        String SC,Nazov,Pocet,Zaruka,	Poznamka,Datum_odoslania,Typ,Sklad;
+        String SC,Nazov,Pocet,Zaruka,	Poznamka,Datum_odoslania,Typ,Sklad,ID;
         
-        public Scanner(String Typ,String Nazov,String Pocet,String SC,String Datum_odoslania,String Zaruka,String Poznamka) {
+        public Scanner(String ID,String Typ,String Nazov,String Pocet,String SC,String Datum_odoslania,String Zaruka,String Poznamka) {
             this.Typ =Typ;
             this.SC =SC;
             this.Nazov = Nazov;
@@ -10,10 +10,11 @@ public class Scanner {
             this.Zaruka= Zaruka;
             this.Datum_odoslania= Datum_odoslania;
             this.Poznamka = Poznamka;
+            this.ID = ID;
             
         }
 
-        public Scanner(String Sklad,String Typ,String Nazov,String Pocet,String SC,String Datum_odoslania,String Zaruka,String Poznamka) {
+        /*public Scanner(String Sklad,String Typ,String Nazov,String Pocet,String SC,String Datum_odoslania,String Zaruka,String Poznamka) {
             this.Typ =Typ;
             this.SC =SC;
             this.Nazov = Nazov;
@@ -23,6 +24,12 @@ public class Scanner {
             this.Poznamka = Poznamka;
             this.Sklad = Sklad;
             
+        }*/
+        public String getID() {
+            return ID;
+        }
+        public void setID(String iD) {
+            ID = iD;
         }
         public void setSklad(String sklad) {
             Sklad = sklad;

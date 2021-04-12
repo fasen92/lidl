@@ -1,6 +1,10 @@
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
@@ -15,6 +19,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
@@ -22,6 +27,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -41,6 +47,12 @@ public class KontrolaHWScannerController implements Initializable {
 
     @FXML
     private Button BtnUlož;
+
+    @FXML
+    private Button BtnDelete;
+
+    @FXML
+    private Button BtnZmeny;
 
     @FXML
     private ChoiceBox<String> ChoiceBoxTypzariadenia;
@@ -102,6 +114,7 @@ public class KontrolaHWScannerController implements Initializable {
     Scanner scanner;
     String zaruka;
     String datumodoslania;
+    String index = "";
 
     @FXML
     void OnClickRefresh(ActionEvent event) throws SQLException, IOException {
@@ -115,6 +128,7 @@ public class KontrolaHWScannerController implements Initializable {
         
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(pbvScene);
+        window.setMaximized(true);
         window.show();
         }
         if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="MDE") {
@@ -123,6 +137,7 @@ public class KontrolaHWScannerController implements Initializable {
             
             Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
             window.setScene(scannerScene);
+            window.setMaximized(true);
             window.show();
         }
         if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Quail") {
@@ -131,6 +146,7 @@ public class KontrolaHWScannerController implements Initializable {
             
             Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
             window.setScene(quailScene);
+            window.setMaximized(true);
             window.show();
         }
         if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Rabattdrucker") {
@@ -139,6 +155,7 @@ public class KontrolaHWScannerController implements Initializable {
             
             Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
             window.setScene(rabatScene);
+            window.setMaximized(true);
             window.show();
         }
         if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Ostatné") {
@@ -147,6 +164,7 @@ public class KontrolaHWScannerController implements Initializable {
             
             Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
             window.setScene(rabatScene);
+            window.setMaximized(true);
             window.show();
         }
         if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Moblný telefon") {
@@ -155,8 +173,9 @@ public class KontrolaHWScannerController implements Initializable {
             
             Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
             window.setScene(rabatScene);
+            window.setMaximized(true);
             window.show();
-        }
+        }        
     }
 
     @FXML
@@ -166,6 +185,7 @@ public class KontrolaHWScannerController implements Initializable {
         
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(MenuScene);
+        window.setMaximized(true);
         window.show();
     }
 
@@ -192,6 +212,96 @@ public class KontrolaHWScannerController implements Initializable {
             update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
             }
 
+    }
+
+    @FXML
+    void OnClickDelete(ActionEvent event) throws SQLException {
+        ObservableList<Scanner> sc = tabulka.getSelectionModel().getSelectedItems();
+
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Dialog");
+        alert.setHeaderText("Dbajte na rozhodnutí");
+        alert.setContentText("Ste si istý že chcete vymazať?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            try {
+                System.out.println(sc.get(0).getID());
+
+                Connection conn = JDBMySQLConnection.getConnection();
+                String sql = "DELETE FROM `lispettore-scanner` WHERE ID = ?";
+                PreparedStatement pst;
+                pst = conn.prepareStatement(sql);
+                pst.setString(1, sc.get(0).getID());
+                pst.execute();
+                tabulka.getItems().removeAll(tabulka.getSelectionModel().getSelectedItems());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Nič nie je vybraté");
+            }
+        } else {
+            // ... user chose CANCEL or closed the dialog
+        }
+
+    }
+    //aj toto
+    @FXML
+    void OnClickUlozZmeny(ActionEvent event) throws SQLException {
+
+        if (getVyberskladu(ChoiceBoxSklad).isEmpty() || TFTyp.getText().isEmpty() || TFNazov.getText().isEmpty()) {
+            alert.setTitle("Information");
+            alert.setContentText("Povynné polia sklad, typ alebo nazov nie sú vyplnené");
+            alert.showAndWait();
+
+        } else {
+            
+            try {
+            datumodoslania = String.valueOf(DFOdoslanienafili.getValue());
+            zaruka = String.valueOf(DFZaruka.getValue());
+            
+            Connection conn =JDBMySQLConnection.getConnection();
+            PreparedStatement ps = null;
+            String value2 = ChoiceBoxSklad1.getValue();
+            String value3 = TFTyp.getText();
+            String value4 = TFNazov.getText();
+            String value5 = TFPocet.getText();
+            String value6 = TFSeriove.getText();
+            String value8 = DFOdoslanienafili.getValue().toString();
+            String value9 = DFZaruka.getValue().toString();
+            String value10 = TAPoznamka.getText();
+            
+            String sql = "UPDATE `lispettore-scanner` SET `Sklad`='"+value2+"',`Typ`='"+value3+"',`Názov`='"+value4+"',`Počet`='"+value5+"',`Sériové číslo`='"+value6+"',`Dátum odoslania fili`='"+value8+"',`Záruka`='"+value9+"',`Poznámka`='"+value10+"' WHERE ID='"+index+"'";
+
+            ps = conn.prepareStatement(sql);
+            ps.execute();
+
+            JOptionPane.showMessageDialog(null, "Uspese upravene");
+            vycisti();
+
+            update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "nikde nastala chyba");
+            }
+            
+        }
+
+    }
+
+    //zatial napic
+    @FXML
+    void getSelected(MouseEvent event) {
+        Scanner sc = tabulka.getSelectionModel().getSelectedItem();
+        System.out.println(sc.getDatum_odoslania());
+        LocalDate localDate1 = LocalDate.parse(sc.getDatum_odoslania());
+        LocalDate localDate2 = LocalDate.parse(sc.getZaruka());
+
+        TFNazov.setText(sc.getNazov());
+        TFTyp.setText(sc.getTyp());
+        TFPocet.setText(sc.getPocet());
+        TAPoznamka.setText(sc.getPoznamka());
+        TFSeriove.setText(sc.getSC());
+        DFOdoslanienafili.setValue(localDate1);
+        DFZaruka.setValue(localDate2);
+        index = sc.getID();
     }
 
     @FXML

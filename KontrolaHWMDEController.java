@@ -1,7 +1,14 @@
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.Optional;
 import java.util.ResourceBundle;
+
+import javax.swing.JOptionPane;
+
 import javafx.scene.Node;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,6 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
@@ -21,6 +29,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -124,6 +133,7 @@ public class KontrolaHWMDEController implements Initializable {
     String zaruka;
     String datumodoslania;
     String wificheck;
+    String index = "";
     
 
     Alert alert = new Alert(AlertType.INFORMATION);
@@ -229,6 +239,119 @@ public class KontrolaHWMDEController implements Initializable {
         vycisti();
 
     }
+
+    
+    @FXML
+    void OnClickDelete(ActionEvent event) throws SQLException {
+        ObservableList<MDE> mde = tabulka.getSelectionModel().getSelectedItems();
+
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Dialog");
+        alert.setHeaderText("Dbajte na rozhodnutí");
+        alert.setContentText("Ste si istý že chcete vymazať?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            try {
+                System.out.println(mde.get(0).getID());
+
+                Connection conn = JDBMySQLConnection.getConnection();
+                String sql = "DELETE FROM `mde` WHERE ID = ?";
+                PreparedStatement pst;
+                System.out.println(conn.prepareStatement(sql));
+                pst = conn.prepareStatement(sql);
+                pst.setString(1, mde.get(0).getID());
+                pst.execute();
+                tabulka.getItems().removeAll(tabulka.getSelectionModel().getSelectedItems());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Nič nie je vybraté");
+            }
+        } else {
+            // ... user chose CANCEL or closed the dialog
+        }
+
+    }
+    //aj toto
+    @FXML
+    void OnClickUlozZmeny(ActionEvent event) throws SQLException {
+
+        if (getVyberskladu(ChoiceBoxSklad).isEmpty() || TFTyp.getText().isEmpty() || TFNazov.getText().isEmpty()) {
+            alert.setTitle("Information");
+            alert.setContentText("Povynné polia sklad, typ alebo nazov nie sú vyplnené");
+            alert.showAndWait();
+
+        } else {
+            
+            try {
+            datumodoslania = String.valueOf(DFOdoslanienafili.getValue());
+            zaruka = String.valueOf(DFZaruka.getValue());
+            
+            Connection conn =JDBMySQLConnection.getConnection();
+            PreparedStatement ps = null;
+
+            if (CheckboxWifi.isSelected()) {
+                wificheck = "1";
+            }else{
+                wificheck = "0";
+            }
+            
+            String value2 = ChoiceBoxSklad1.getValue();
+            String value3 = TFTyp.getText();
+            String value4 = TFNazov.getText();
+            String value5 = TFPocet.getText();
+            String value6 = TFSeriove.getText();
+            String value7 = TFMAC.getText();
+            String value8 = TFIP.getText();
+            String value9 = wificheck;
+            String value10 = DFOdoslanienafili.getValue().toString();
+            String value11 = DFZaruka.getValue().toString();
+            String value12 = TAPoznamka.getText();
+            String value13 = TFCF.getText();
+            
+            String sql = "UPDATE `mde` SET `Sklad`='"+value2+"',`Typ`='"+value3+"',`Názov`='"+value4+"',`Počet`='"+value5+"',`Sériové číslo`='"+value6+"',`MAC adresa`='"+value7+"',`IP adresa`='"+value8+"',`HuaweiWifi`='"+value9+"',`Cislo fili`='"+value13+"',`Dátum odoslania fili`='"+value10+"',`Záruka`='"+value11+"',`Poznámka`='"+value12+"'  WHERE ID='"+index+"'";
+
+            ps = conn.prepareStatement(sql);
+            ps.execute();
+
+            JOptionPane.showMessageDialog(null, "Uspese upravene");
+            vycisti();
+
+            update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "nikde nastala chyba");
+            }            
+        }
+    }
+
+    //zatial napic
+    @FXML
+    void getSelected(MouseEvent event) {
+        MDE mde = tabulka.getSelectionModel().getSelectedItem();
+        System.out.println(mde.getDatum_odoslania());
+        LocalDate localDate1 = LocalDate.parse(mde.getDatum_odoslania());
+        LocalDate localDate2 = LocalDate.parse(mde.getZaruka());
+
+        if (mde.getWIFI() == "Ano") {
+            CheckboxWifi.setSelected(true);
+        }else{
+            CheckboxWifi.setSelected(false);
+        }
+
+        TFNazov.setText(mde.getNazov());
+        TFTyp.setText(mde.getTyp());
+        TFPocet.setText(mde.getPocet());
+        TAPoznamka.setText(mde.getPoznamka());
+        TFSeriove.setText(mde.getSC());
+        DFOdoslanienafili.setValue(localDate1);
+        DFZaruka.setValue(localDate2);
+        TFCF.setText(mde.getCF());
+        TFIP.setText(mde.getIP());
+        TFMAC.setText(mde.getMAC());
+        index = mde.getID();
+        
+        System.out.println("index"+index);
+    }
+
     private void vycisti() {
         TFNazov.clear();
         TFTyp.clear();

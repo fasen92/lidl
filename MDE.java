@@ -1,8 +1,8 @@
 public class MDE {
-    String SC,Nazov,Pocet,Zaruka,Poznamka,Datum_odoslania,Typ,CF,IP,MAC,WIFI,Sklad;
+    String SC,Nazov,Pocet,Zaruka,Poznamka,Datum_odoslania,Typ,CF,IP,MAC,WIFI,Sklad,ID;
     
     
-    public MDE(String Typ,String Nazov,String Pocet,String SC,String MAC,String IP,String WIFI,String CF,String Datum_odoslania,String Zaruka,String Poznamka) {
+    public MDE(String ID,String Typ,String Nazov,String Pocet,String SC,String MAC,String IP,String WIFI,String CF,String Datum_odoslania,String Zaruka,String Poznamka) {
         this.Typ =Typ;
         this.SC =SC;
         this.Nazov = Nazov;
@@ -14,10 +14,11 @@ public class MDE {
         this.MAC = MAC;
         this.IP = IP;
         this.WIFI = WIFI;
+        this.ID = ID;
         
     }
 
-    public MDE(String Sklad,String Typ,String Nazov,String Pocet,String SC,String MAC,String IP,String WIFI,String CF,String Datum_odoslania,String Zaruka,String Poznamka) {
+    /*public MDE(String Sklad,String Typ,String Nazov,String Pocet,String SC,String MAC,String IP,String WIFI,String CF,String Datum_odoslania,String Zaruka,String Poznamka) {
         this.Typ =Typ;
         this.SC =SC;
         this.Nazov = Nazov;
@@ -31,6 +32,12 @@ public class MDE {
         this.WIFI = WIFI;
         this.Sklad = Sklad;
         
+    }*/
+    public String getID() {
+        return ID;
+    }
+    public void setID(String iD) {
+        ID = iD;
     }
     public void setSklad(String sklad) {
         Sklad = sklad;
