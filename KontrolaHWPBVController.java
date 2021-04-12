@@ -56,6 +56,9 @@ public class KontrolaHWPBVController implements Initializable {
     private Button BtnEdit;
 
     @FXML
+    private Button BtnZmeny;
+
+    @FXML
     private ChoiceBox<String> ChoiceBoxTypzariadenia;
 
     @FXML
@@ -112,7 +115,7 @@ public class KontrolaHWPBVController implements Initializable {
     Pbv pbv;
     String zaruka;
     String datumodoslania;
-    int index = -1;
+    String index = "";
 
     Alert alert = new Alert(AlertType.INFORMATION);
 
@@ -247,31 +250,63 @@ public class KontrolaHWPBVController implements Initializable {
     }
     //aj toto
     @FXML
-    void OnClickEdit(ActionEvent event) {
+    void OnClickUlozZmeny(ActionEvent event) throws SQLException {
+
+        if (getVyberskladu(ChoiceBoxSklad).isEmpty() || TFTyp.getText().isEmpty() || TFNazov.getText().isEmpty()) {
+            alert.setTitle("Information");
+            alert.setContentText("Povynné polia sklad, typ alebo nazov nie sú vyplnené");
+            alert.showAndWait();
+
+        } else {
+            
+            try {
+                datumodoslania = String.valueOf(DFOdoslanienafili.getValue());
+            zaruka = String.valueOf(DFZaruka.getValue());
+            
+            Connection conn =JDBMySQLConnection.getConnection();
+            PreparedStatement ps = null;
+            String value2 = ChoiceBoxSklad1.getValue();
+            String value3 = TFTyp.getText();
+            String value4 = TFNazov.getText();
+            String value5 = TFPocet.getText();
+            String value6 = TFSeriove.getText();
+            String value8 = DFOdoslanienafili.getValue().toString();
+            String value9 = DFZaruka.getValue().toString();
+            String value10 = TAPoznamka.getText();
+            
+            String sql = "UPDATE `pbv` SET `Sklad`='"+value2+"',`Typ`='"+value3+"',`Názov`='"+value4+"',`Počet`='"+value5+"',`Sériové číslo`='"+value6+"',`Dátum odoslania fili`='"+value8+"',`Záruka`='"+value9+"',`Poznámka`='"+value10+"' WHERE ID='"+index+"'";
+
+            ps = conn.prepareStatement(sql);
+            ps.execute();
+
+            JOptionPane.showMessageDialog(null, "Uspese upravene");
+            vycisti();
+
+            update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "nikde nastala chyba");
+            }
+            
+        }
 
     }
+
     //zatial napic
     @FXML
     void getSelected(MouseEvent event) {
-        System.out.println("get it");
-        index = tabulka.getSelectionModel().getSelectedIndex();
-        if (index <= -1) {
-            return;
-        }
-        TFNazov.setText(ColumNazov.getCellData(index).toString());
-        TFTyp.setText(ColumTyp.getCellData(index).toString());
-        TFPocet.setText(ColumPocet.getCellData(index).toString());
-        TAPoznamka.setText(ColumPoznamka.getCellData(index).toString());
-        TFSeriove.setText(ColumSC.getCellData(index).toString());
-        DFOdoslanienafili.setValue(LOCAL_DATE(ColumDatumodoslania.getCellData(index).toString()));
-        DFZaruka.setValue(LOCAL_DATE(ColumZaruka.getCellData(index).toString()));
+        Pbv pbv = tabulka.getSelectionModel().getSelectedItem();
+        System.out.println(pbv.getDatum_odoslania());
+        LocalDate localDate1 = LocalDate.parse(pbv.getDatum_odoslania());
+        LocalDate localDate2 = LocalDate.parse(pbv.getZaruka());
 
-    }
-
-    public static final LocalDate LOCAL_DATE(String dateString) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        LocalDate localDate = LocalDate.parse(dateString, formatter);
-        return localDate;
+        TFNazov.setText(pbv.getNazov());
+        TFTyp.setText(pbv.getTyp());
+        TFPocet.setText(pbv.getPocet());
+        TAPoznamka.setText(pbv.getPoznamka());
+        TFSeriove.setText(pbv.getSC());
+        DFOdoslanienafili.setValue(localDate1);
+        DFZaruka.setValue(localDate2);
+        index = pbv.getID();
     }
 
     private void vycisti() {
