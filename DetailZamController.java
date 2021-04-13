@@ -19,9 +19,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.scene.control.Alert;
 
 public class DetailZamController implements Initializable {
     @FXML
@@ -51,6 +53,8 @@ public class DetailZamController implements Initializable {
     @FXML
     AnchorPane Apane;
 
+    Alert alert = new Alert(AlertType.INFORMATION);
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         SingletonDetailZam x = SingletonDetailZam.getInstance();
@@ -61,7 +65,7 @@ public class DetailZamController implements Initializable {
     }
 
     public void setup_Choiceboxs(String rola, String sklad) {
-        ObservableList<String> SkladList = FXCollections.observableArrayList("Sklad 1", "Sklad 2", "Sklad 3","Všetky");
+        ObservableList<String> SkladList = FXCollections.observableArrayList("Sklad 1", "Sklad 2", "Sklad 3", "Všetky");
         ObservableList<String> RolaList = FXCollections.observableArrayList("Admin", "Operating");
 
         ChoiceBoxSklad.setItems(SkladList);
@@ -73,14 +77,36 @@ public class DetailZamController implements Initializable {
     }
 
     @FXML
-    void OnClickSave(ActionEvent event){
-    SingletonDetailZam x = SingletonDetailZam.getInstance();
-           
-        
+    void OnClickSave(ActionEvent event) throws SQLException, IOException {
+        SingletonDetailZam x = SingletonDetailZam.getInstance();
+        if (getVyberSkladu(ChoiceBoxSklad).isEmpty() || getVyberRole(ChoiceBoxRola).isEmpty()
+                || txtMeno.getText().isEmpty() || txtPriezvisko.getText().isEmpty()) {
+            alert.setTitle("Chyba");
+            alert.setContentText("Povinné polia nie sú vyplnené");
+            alert.showAndWait();
+
+        } else {
+            Connection conn = JDBMySQLConnection.getConnection();
+            PreparedStatement ps = null;
+
+            int value1 = x.ucet.getId();
+            String value2 = txtMeno.getText();
+            String value3 = txtPriezvisko.getText();
+            String value4 = getVyberRole(ChoiceBoxRola);
+            String value5 = getVyberSkladu(ChoiceBoxSklad);
+
+            String sql = "UPDATE `ucet` SET `meno`='" + value2 + "',`priezvisko`='" + value3 + "',`rola`='" + value4
+                    + "',`sklad`='" + value5 + "' WHERE ID='" + value1 + "'";
+
+            ps = conn.prepareStatement(sql);
+            ps.execute();
+        }
+
+        spat(event);
     }
 
     @FXML
-    void OnClickDelete(ActionEvent event) throws SQLException, IOException{
+    void OnClickDelete(ActionEvent event) throws SQLException, IOException {
         SingletonDetailZam x = SingletonDetailZam.getInstance();
         Stage stage = (Stage) Apane.getScene().getWindow();
         Alert.AlertType type = Alert.AlertType.CONFIRMATION;
@@ -89,11 +115,12 @@ public class DetailZamController implements Initializable {
         alert.initModality(Modality.APPLICATION_MODAL);
         alert.initOwner(stage);
 
-        alert.getDialogPane().setHeaderText("Naozaj si prajete odstrániť zamestnanca "+x.ucet.getMeno()+" "+x.ucet.getPriezvisko()+"?");
+        alert.getDialogPane().setHeaderText(
+                "Naozaj si prajete odstrániť zamestnanca " + x.ucet.getMeno() + " " + x.ucet.getPriezvisko() + "?");
 
-        //prerobit
+        // prerobit
         Optional<ButtonType> result = alert.showAndWait();
-        if(result.get() == ButtonType.OK){
+        if (result.get() == ButtonType.OK) {
             Connection conn = JDBMySQLConnection.getConnection();
             String sql = "DELETE FROM `ucet` WHERE ID = ?";
             PreparedStatement pst;
@@ -102,7 +129,7 @@ public class DetailZamController implements Initializable {
             pst.setInt(1, x.ucet.getId());
             pst.execute();
             spat(event);
-        }else if(result.get() == ButtonType.CANCEL){
+        } else if (result.get() == ButtonType.CANCEL) {
 
         }
 
@@ -110,15 +137,23 @@ public class DetailZamController implements Initializable {
 
     @FXML
     void OnClickSpat(ActionEvent event) throws IOException {
-       spat(event);
+        spat(event);
     }
 
-    private void spat(ActionEvent event) throws IOException{
+    private void spat(ActionEvent event) throws IOException {
         Parent ZoznamZamParent = FXMLLoader.load(getClass().getResource("ZoznamZam.fxml"));
         Scene ZoznamZamScene = new Scene(ZoznamZamParent);
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(ZoznamZamScene);
         window.show();
+    }
+
+    public String getVyberSkladu(ChoiceBox<String> ChoiceBoxSklad) {
+        return ChoiceBoxSklad.getValue();
+    }
+
+    public String getVyberRole(ChoiceBox<String> ChoiceBoxRola) {
+        return ChoiceBoxRola.getValue();
     }
 }
