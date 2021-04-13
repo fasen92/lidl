@@ -18,16 +18,6 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="KontrolaHWRabattdruckerController">
    <children>
       <BorderPane fx:id="BP" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <bottom>
-            <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="84.0" prefWidth="900.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Button fx:id="BtnVycisti" layoutX="165.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickVycisti" prefHeight="26.0" prefWidth="110.0" text="Vyčisti" />
-                  <Button fx:id="BtnRefresh" layoutX="395.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickRefresh" prefHeight="26.0" prefWidth="150.0" text="Refresh" />
-                  <Button fx:id="BtnMenu" layoutX="735.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickSpat" prefHeight="26.0" prefWidth="150.0" text="Menu" />
-                  <Button fx:id="BtnUlož" layoutX="46.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickUloz" prefHeight="26.0" prefWidth="110.0" text="Ulož" />
-               </children>
-            </AnchorPane>
-         </bottom>
          <top>
             <AnchorPane prefHeight="131.0" prefWidth="800.0" BorderPane.alignment="CENTER">
                <children>
@@ -186,7 +176,7 @@
                </children></VBox>
          </left>
          <center>
-            <TableView fx:id="tabulka" prefHeight="250.0" prefWidth="805.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="tabulka" onMouseClicked="#getSelected" prefHeight="250.0" prefWidth="805.0" BorderPane.alignment="CENTER">
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
@@ -203,6 +193,18 @@
                </columns>
             </TableView>
          </center>
+         <bottom>
+            <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="84.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="BtnVycisti1" layoutX="251.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickVycisti" prefHeight="26.0" prefWidth="110.0" text="Vyčisti" />
+                  <Button fx:id="BtnRefresh1" layoutX="586.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickRefresh" prefHeight="26.0" prefWidth="150.0" text="Aktualizovať" />
+                  <Button fx:id="BtnMenu1" layoutX="918.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickSpat" prefHeight="26.0" prefWidth="150.0" text="Menu" />
+                  <Button fx:id="BtnUlož1" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickUloz" prefHeight="26.0" prefWidth="110.0" text="Pridaj" />
+                  <Button fx:id="BtnDelete" layoutX="751.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickDelete" prefHeight="26.0" prefWidth="150.0" text="Zmazať" />
+                  <Button fx:id="BtnZmeny" layoutX="132.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickUlozZmeny" prefHeight="26.0" prefWidth="110.0" text="Ulož zmeny" />
+               </children>
+            </AnchorPane>
+         </bottom>
       </BorderPane>
    </children>
 </AnchorPane>

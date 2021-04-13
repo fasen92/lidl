@@ -35,7 +35,8 @@ public class JDBMySQLConnection {
         }
 
     }
-    //Pbv
+
+    // Pbv
     public static ObservableList<Pbv> getPbv(String choiceZariadenie, String choiceSklad) throws SQLException {
         // first one
         if (choiceZariadenie.equals("Pbv")) {
@@ -48,10 +49,10 @@ public class JDBMySQLConnection {
                 ResultSet rs = ps.executeQuery();
 
                 while (rs.next()) {
-                    
-                    OLPbv.add(new Pbv(rs.getString("ID"), rs.getString("Typ"), rs.getString("Názov"), rs.getString("Počet"),
-                            rs.getString("Sériové číslo"), rs.getString("Dátum odoslania fili"), rs.getString("Záruka"),
-                            rs.getString("Poznámka")));
+
+                    OLPbv.add(new Pbv(rs.getString("ID"), rs.getString("Typ"), rs.getString("Názov"),
+                            rs.getString("Počet"), rs.getString("Sériové číslo"), rs.getString("Dátum odoslania fili"),
+                            rs.getString("Záruka"), rs.getString("Poznámka")));
                 }
             } catch (Exception e) {
 
@@ -63,40 +64,38 @@ public class JDBMySQLConnection {
         return null;
     }
 
-    //scanner
-    public static ObservableList<Scanner> getScanner(String choiceZariadenie, String choiceSklad) throws SQLException{
+    // scanner
+    public static ObservableList<Scanner> getScanner(String choiceZariadenie, String choiceSklad) throws SQLException {
         // nother one
-        
-            System.out.println("som tu");
-            Connection conn = getConnection();
-            ObservableList<Scanner> OLPScanner = FXCollections.observableArrayList();
 
-            try {
-                PreparedStatement ps = conn.prepareStatement("SELECT * FROM `Lispettore-scanner` Where Sklad = ?");
-                ps.setString(1, choiceSklad);
-                ResultSet rs = ps.executeQuery();
-                
-                while (rs.next()) {
-                   System.out.println(ps);
-                    OLPScanner.add(new Scanner(rs.getString("ID"),rs.getString("Typ"), rs.getString("Názov"), rs.getString("Počet"),
-                            rs.getString("Sériové číslo"), rs.getString("Dátum odoslania fili"), rs.getString("Záruka"),
-                            rs.getString("Poznámka")));
-                }
-            } catch (Exception e) {
+        System.out.println("som tu");
+        Connection conn = getConnection();
+        ObservableList<Scanner> OLPScanner = FXCollections.observableArrayList();
 
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM `Lispettore-scanner` Where Sklad = ?");
+            ps.setString(1, choiceSklad);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                System.out.println(ps);
+                OLPScanner.add(new Scanner(rs.getString("ID"), rs.getString("Typ"), rs.getString("Názov"),
+                        rs.getString("Počet"), rs.getString("Sériové číslo"), rs.getString("Dátum odoslania fili"),
+                        rs.getString("Záruka"), rs.getString("Poznámka")));
             }
-            return OLPScanner;
-        
-        
+        } catch (Exception e) {
+
+        }
+        return OLPScanner;
 
     }
 
-    //Quail
+    // Quail
 
-    public static ObservableList<Quail> getQuail(String choiceZariadenie, String choiceSklad) throws SQLException{
+    public static ObservableList<Quail> getQuail(String choiceZariadenie, String choiceSklad) throws SQLException {
         // nother one
         if (choiceZariadenie.equals("Quail")) {
-           
+
             Connection conn = getConnection();
             ObservableList<Quail> OLQuail = FXCollections.observableArrayList();
 
@@ -104,13 +103,12 @@ public class JDBMySQLConnection {
                 PreparedStatement ps = conn.prepareStatement("SELECT * FROM `quail`  Where Sklad = ?");
                 ps.setString(1, choiceSklad);
                 ResultSet rs = ps.executeQuery();
-                
+
                 while (rs.next()) {
                     OLQuail.add(new Quail(rs.getString("Typ"), rs.getString("Názov"), rs.getString("Počet"),
-                            rs.getString("Sériové číslo"),rs.getString("Cislo fili"), rs.getString("Dátum odoslania fili"), rs.getString("Záruka"),
-                            rs.getString("Poznámka")));
+                            rs.getString("Sériové číslo"), rs.getString("Cislo fili"),
+                            rs.getString("Dátum odoslania fili"), rs.getString("Záruka"), rs.getString("Poznámka")));
 
-                            
                 }
             } catch (Exception e) {
                 System.out.println("nieco je zle");
@@ -121,15 +119,11 @@ public class JDBMySQLConnection {
 
     }
 
-
-
-
-
-    //Ostatne
-    public static ObservableList<Ostatne> getOstatne(String choiceZariadenie, String choiceSklad) throws SQLException{
+    // Ostatne
+    public static ObservableList<Ostatne> getOstatne(String choiceZariadenie, String choiceSklad) throws SQLException {
         // nother one
         if (choiceZariadenie.equals("Ostatné")) {
-           
+
             Connection conn = getConnection();
             ObservableList<Ostatne> OLOstatne = FXCollections.observableArrayList();
 
@@ -137,13 +131,12 @@ public class JDBMySQLConnection {
                 PreparedStatement ps = conn.prepareStatement("SELECT * FROM `ostatne`  Where Sklad = ?");
                 ps.setString(1, choiceSklad);
                 ResultSet rs = ps.executeQuery();
-                
+
                 while (rs.next()) {
                     OLOstatne.add(new Ostatne(rs.getString("Typ"), rs.getString("Názov"), rs.getString("Počet"),
-                            rs.getString("Sériové číslo"),rs.getString("Cislo fili"), rs.getString("Dátum odoslania fili"), rs.getString("Záruka"),
-                            rs.getString("Poznámka")));
+                            rs.getString("Sériové číslo"), rs.getString("Cislo fili"),
+                            rs.getString("Dátum odoslania fili"), rs.getString("Záruka"), rs.getString("Poznámka")));
 
-                            
                 }
             } catch (Exception e) {
                 System.out.println("nieco je zle");
@@ -153,11 +146,12 @@ public class JDBMySQLConnection {
         return null;
 
     }
-    //MDE
-    public static ObservableList<MDE> getMDE(String choiceZariadenie, String choiceSklad) throws SQLException{
+
+    // MDE
+    public static ObservableList<MDE> getMDE(String choiceZariadenie, String choiceSklad) throws SQLException {
         // nother one
         if (choiceZariadenie.equals("MDE")) {
-           
+
             Connection conn = getConnection();
             ObservableList<MDE> OLMDE = FXCollections.observableArrayList();
 
@@ -169,13 +163,14 @@ public class JDBMySQLConnection {
                 while (rs.next()) {
                     if (rs.getBoolean("HuaweiWifi")) {
                         wifi = "Ano";
-                    }else{
+                    } else {
                         wifi = "Nie";
                     }
-                    System.out.println("DB index"+rs.getString("ID"));
-                    OLMDE.add(new MDE(rs.getString("ID"),rs.getString("Typ"), rs.getString("Názov"), rs.getString("Počet"),
-                            rs.getString("Sériové číslo"),rs.getString("MAC adresa"),rs.getString("IP adresa"),wifi,rs.getString("Cislo fili"), rs.getString("Dátum odoslania fili"), rs.getString("Záruka"),
-                            rs.getString("Poznámka")));          
+                    System.out.println("DB index" + rs.getString("ID"));
+                    OLMDE.add(new MDE(rs.getString("ID"), rs.getString("Typ"), rs.getString("Názov"),
+                            rs.getString("Počet"), rs.getString("Sériové číslo"), rs.getString("MAC adresa"),
+                            rs.getString("IP adresa"), wifi, rs.getString("Cislo fili"),
+                            rs.getString("Dátum odoslania fili"), rs.getString("Záruka"), rs.getString("Poznámka")));
                 }
             } catch (Exception e) {
                 System.out.println("nieco je zle");
@@ -185,11 +180,13 @@ public class JDBMySQLConnection {
         return null;
 
     }
-    //Rabattdrucker
-    public static ObservableList<Rabattdrucker> getRabattdrucker(String choiceZariadenie, String choiceSklad) throws SQLException{
+
+    // Rabattdrucker
+    public static ObservableList<Rabattdrucker> getRabattdrucker(String choiceZariadenie, String choiceSklad)
+            throws SQLException {
         // nother one
         if (choiceZariadenie.equals("Rabattdrucker")) {
-           
+
             Connection conn = getConnection();
             ObservableList<Rabattdrucker> OLRabattdrucker = FXCollections.observableArrayList();
 
@@ -197,13 +194,13 @@ public class JDBMySQLConnection {
                 PreparedStatement ps = conn.prepareStatement("SELECT * FROM `rabattdrucker`  Where Sklad = ?");
                 ps.setString(1, choiceSklad);
                 ResultSet rs = ps.executeQuery();
-                
+
                 while (rs.next()) {
-                    OLRabattdrucker.add(new Rabattdrucker(rs.getString("Typ"), rs.getString("Názov"), rs.getString("Počet"),
-                            rs.getString("Sériové číslo"),rs.getString("Evidencne cislo"),rs.getString("Cislo fili"), rs.getString("Dátum odoslania fili"), rs.getString("Záruka"),
+                    OLRabattdrucker.add(new Rabattdrucker(rs.getString("ID"),rs.getString("Typ"), rs.getString("Názov"),
+                            rs.getString("Počet"), rs.getString("Sériové číslo"), rs.getString("Evidencne cislo"),
+                            rs.getString("Cislo fili"), rs.getString("Dátum odoslania fili"), rs.getString("Záruka"),
                             rs.getString("Poznámka")));
 
-                            
                 }
             } catch (Exception e) {
                 System.out.println("nieco je zle");
@@ -213,7 +210,8 @@ public class JDBMySQLConnection {
         return null;
 
     }
-    //ucty
+
+    // ucty
     public static ArrayList<Ucet> getUcty() throws SQLException {
         Connection conn = getConnection();
         ArrayList<Ucet> UcetList = new ArrayList<Ucet>();
@@ -232,11 +230,12 @@ public class JDBMySQLConnection {
 
         return UcetList;
     }
-    //Telefon pre predajnu skratka MP
-    public static ObservableList<MP> getMP(String choiceZariadenie, String choiceSklad) throws SQLException{
+
+    // Telefon pre predajnu skratka MP
+    public static ObservableList<MP> getMP(String choiceZariadenie, String choiceSklad) throws SQLException {
         // nother one
         if (choiceZariadenie.equals("Moblný telefon")) {
-           System.out.println("som na zaciatku dB");
+            System.out.println("som na zaciatku dB");
             Connection conn = getConnection();
             ObservableList<MP> OLMP = FXCollections.observableArrayList();
 
@@ -244,11 +243,11 @@ public class JDBMySQLConnection {
                 PreparedStatement ps = conn.prepareStatement("SELECT * FROM `mobil-prepredajnu`  Where Sklad = ?");
                 ps.setString(1, choiceSklad);
                 ResultSet rs = ps.executeQuery();
-                
+
                 while (rs.next()) {
                     OLMP.add(new MP(rs.getString("Typ"), rs.getString("Názov"), rs.getString("Počet"),
-                            rs.getString("Sériové číslo"),rs.getString("Typ telefonu"),rs.getString("IMEI"),rs.getString("SIM"),
-                            rs.getString("Tel.cislo"),rs.getString("PUK"),rs.getString("PIN"),
+                            rs.getString("Sériové číslo"), rs.getString("Typ telefonu"), rs.getString("IMEI"),
+                            rs.getString("SIM"), rs.getString("Tel.cislo"), rs.getString("PUK"), rs.getString("PIN"),
                             rs.getString("Cislo fili"), rs.getString("Dátum odoslania fili"), rs.getString("Záruka"),
                             rs.getString("Poznámka")));
                 }
@@ -281,9 +280,9 @@ public class JDBMySQLConnection {
 
     public static void addtoUcet(String meno, String priezvisko, String sklad, String rola) {
         System.out.println("add to ucet");
-        int prvyLogin =1;
+        int prvyLogin = 1;
         getQueryUcet();
-        insertUcet(meno,priezvisko,rola,sklad,prvyLogin);
+        insertUcet(meno, priezvisko, rola, sklad, prvyLogin);
     }
 
     private static void getQueryUcet() {
@@ -295,7 +294,7 @@ public class JDBMySQLConnection {
         try {
             Connection connection = getConnection();
             preparedStatement = connection.prepareStatement(query);
-            
+
             preparedStatement.setString(1, null);
             preparedStatement.setString(2, meno);
             preparedStatement.setString(3, meno);
@@ -303,7 +302,6 @@ public class JDBMySQLConnection {
             preparedStatement.setString(5, rola);
             preparedStatement.setString(6, sklad);
             preparedStatement.setInt(7, prvyLogin);
-            
 
             preparedStatement.execute();
         } catch (SQLException e) {
@@ -312,24 +310,26 @@ public class JDBMySQLConnection {
         }
     }
 
-
-    public static void addtoPbv(String vyberskladu, String text, String text2, String text3, String text4,String datumodoslania, String zaruka, String text5) {
+    public static void addtoPbv(String vyberskladu, String text, String text2, String text3, String text4,
+            String datumodoslania, String zaruka, String text5) {
         System.out.println("add to pbv");
         getQueryPbv();
-        insertPbv(vyberskladu,text,text2,text3,text4,datumodoslania,zaruka,text5);
+        insertPbv(vyberskladu, text, text2, text3, text4, datumodoslania, zaruka, text5);
     }
-    private static void insertPbv(String vyberskladu, String text, String text2, String text3, String text4,String datumodoslania, String zaruka, String text5) {
+
+    private static void insertPbv(String vyberskladu, String text, String text2, String text3, String text4,
+            String datumodoslania, String zaruka, String text5) {
 
         try {
             Connection connection = getConnection();
             preparedStatement = connection.prepareStatement(query);
-            
+
             preparedStatement.setString(1, vyberskladu);
             preparedStatement.setString(2, text);
             preparedStatement.setString(3, text2);
             preparedStatement.setString(4, text3);
             preparedStatement.setString(5, text4);
-            
+
             preparedStatement.setString(6, datumodoslania);
             preparedStatement.setString(7, zaruka);
             preparedStatement.setString(8, text5);
@@ -340,28 +340,31 @@ public class JDBMySQLConnection {
             e.printStackTrace();
         }
     }
+
     private static void getQueryPbv() {
         query = "INSERT INTO `pbv`( `Sklad`, `Typ`, `Názov`, `Počet`, `Sériové číslo`,`Dátum odoslania fili`, `Záruka`, `Poznámka`) VALUES (?,?,?,?,?,?,?,?)";
     }
 
-    public static void addtoScanner(String vyberskladu, String text, String text2, String text3, String text4,String datumodoslania, String zaruka, String text5) {
+    public static void addtoScanner(String vyberskladu, String text, String text2, String text3, String text4,
+            String datumodoslania, String zaruka, String text5) {
         System.out.println("add to Scanner");
         getQueryScanner();
-        insertScanner(vyberskladu,text,text2,text3,text4,datumodoslania,zaruka,text5);
+        insertScanner(vyberskladu, text, text2, text3, text4, datumodoslania, zaruka, text5);
     }
 
-    private static void insertScanner(String vyberskladu, String text, String text2, String text3, String text4,String datumodoslania, String zaruka, String text5) {
+    private static void insertScanner(String vyberskladu, String text, String text2, String text3, String text4,
+            String datumodoslania, String zaruka, String text5) {
 
         try {
             Connection connection = getConnection();
             preparedStatement = connection.prepareStatement(query);
-            
+
             preparedStatement.setString(1, vyberskladu);
             preparedStatement.setString(2, text);
             preparedStatement.setString(3, text2);
             preparedStatement.setString(4, text3);
             preparedStatement.setString(5, text4);
-            
+
             preparedStatement.setString(6, datumodoslania);
             preparedStatement.setString(7, zaruka);
             preparedStatement.setString(8, text5);
@@ -372,24 +375,28 @@ public class JDBMySQLConnection {
             e.printStackTrace();
         }
     }
+
     private static void getQueryScanner() {
         query = "INSERT INTO `lispettore-scanner`( `Sklad`, `Typ`, `Názov`, `Počet`, `Sériové číslo`,`Dátum odoslania fili`, `Záruka`, `Poznámka`) VALUES (?,?,?,?,?,?,?,?)";
     }
+
     public static void addtoMDE(String vyberskladu, String text, String text2, String text3, String text4, String text5,
             String text6, String wificheck, String text7, String datumodoslania, String zaruka, String text8) {
         System.out.println("add to MDE");
         getQueryMDE();
-        insertMDE(vyberskladu,text,text2,text3,text4,text5,text6,wificheck,text7,datumodoslania,zaruka,text8);
-
+        insertMDE(vyberskladu, text, text2, text3, text4, text5, text6, wificheck, text7, datumodoslania, zaruka,
+                text8);
 
     }
-    private static void insertMDE(String vyberskladu, String text, String text2, String text3, String text4, String text5,
-    String text6, String wificheck, String text7, String datumodoslania, String zaruka, String text8) {
+
+    private static void insertMDE(String vyberskladu, String text, String text2, String text3, String text4,
+            String text5, String text6, String wificheck, String text7, String datumodoslania, String zaruka,
+            String text8) {
 
         try {
             Connection connection = getConnection();
             preparedStatement = connection.prepareStatement(query);
-            
+
             preparedStatement.setString(1, vyberskladu);
             preparedStatement.setString(2, text);
             preparedStatement.setString(3, text2);
@@ -400,7 +407,7 @@ public class JDBMySQLConnection {
             preparedStatement.setString(7, text6);
             preparedStatement.setString(8, wificheck);
             preparedStatement.setString(9, text7);
-            
+
             preparedStatement.setString(10, datumodoslania);
             preparedStatement.setString(11, zaruka);
             preparedStatement.setString(12, text8);
@@ -411,28 +418,32 @@ public class JDBMySQLConnection {
             e.printStackTrace();
         }
     }
+
     private static void getQueryMDE() {
         query = "INSERT INTO `mde`(`Sklad`, `Typ`, `Názov`, `Počet`, `Sériové číslo`, `MAC adresa`, `IP adresa`, `HuaweiWifi`, `Cislo fili`, `Dátum odoslania fili`,  `Záruka`, `Poznámka`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
     }
+
     public static void addtoQuail(String vyberskladu, String text, String text2, String text3, String text4,
             String text5, String datumodoslania, String zaruka, String text6) {
-                System.out.println("add to Quail");
-                getQueryQuail();
-                insertQuail(vyberskladu,text,text2,text3,text4,datumodoslania,zaruka,text5,text6);                
+        System.out.println("add to Quail");
+        getQueryQuail();
+        insertQuail(vyberskladu, text, text2, text3, text4, datumodoslania, zaruka, text5, text6);
     }
-    private static void insertQuail(String vyberskladu, String text, String text2, String text3, String text4,String datumodoslania, String zaruka, String text5, String text6) {
+
+    private static void insertQuail(String vyberskladu, String text, String text2, String text3, String text4,
+            String datumodoslania, String zaruka, String text5, String text6) {
 
         try {
             Connection connection = getConnection();
             preparedStatement = connection.prepareStatement(query);
-            
+
             preparedStatement.setString(1, vyberskladu);
             preparedStatement.setString(2, text);
             preparedStatement.setString(3, text2);
             preparedStatement.setString(4, text3);
             preparedStatement.setString(5, text4);
             preparedStatement.setString(6, text5);
-            
+
             preparedStatement.setString(7, datumodoslania);
             preparedStatement.setString(8, zaruka);
             preparedStatement.setString(9, text6);
@@ -443,21 +454,25 @@ public class JDBMySQLConnection {
             e.printStackTrace();
         }
     }
+
     private static void getQueryQuail() {
         query = "INSERT INTO `quail`(`Sklad`, `Typ`, `Názov`, `Počet`, `Sériové číslo`, `Cislo fili`, `Dátum odoslania fili`, `Záruka`, `Poznámka`) VALUES (?,?,?,?,?,?,?,?,?)";
     }
+
     public static void addtoRabattdrucker(String vyberskladu, String text, String text2, String text3, String text4,
             String text5, String text6, String datumodoslania, String zaruka, String text7) {
-                System.out.println("add to Rabat");
-                getQueryRabattdrucker();
-                insertRabattdrucker(vyberskladu,text,text2,text3,text4,datumodoslania,zaruka,text5,text6,text7);                
+        System.out.println("add to Rabat");
+        getQueryRabattdrucker();
+        insertRabattdrucker(vyberskladu, text, text2, text3, text4, datumodoslania, zaruka, text5, text6, text7);
     }
-    private static void insertRabattdrucker(String vyberskladu, String text, String text2, String text3, String text4,String datumodoslania, String zaruka, String text5, String text6,String text7) {
+
+    private static void insertRabattdrucker(String vyberskladu, String text, String text2, String text3, String text4,
+            String datumodoslania, String zaruka, String text5, String text6, String text7) {
 
         try {
             Connection connection = getConnection();
             preparedStatement = connection.prepareStatement(query);
-            
+
             preparedStatement.setString(1, vyberskladu);
             preparedStatement.setString(2, text);
             preparedStatement.setString(3, text2);
@@ -465,7 +480,7 @@ public class JDBMySQLConnection {
             preparedStatement.setString(5, text4);
 
             preparedStatement.setString(6, text5);
-            
+
             preparedStatement.setString(7, text6);
 
             preparedStatement.setString(8, datumodoslania);
@@ -478,28 +493,32 @@ public class JDBMySQLConnection {
             e.printStackTrace();
         }
     }
+
     private static void getQueryRabattdrucker() {
         query = "INSERT INTO `rabattdrucker`( `Sklad`, `Typ`, `Názov`, `Počet`, `Sériové číslo`, `Evidencne cislo`, `Cislo fili`,  `Dátum odoslania fili`, `Záruka`, `Poznámka`) VALUES (?,?,?,?,?,?,?,?,?,?)";
     }
+
     public static void addtoOstatne(String vyberskladu, String text, String text2, String text3, String text4,
             String text5, String datumodoslania, String zaruka, String text6) {
 
-                getQueryOstatne();
-                insertOstatne(vyberskladu,text,text2,text3,text4,datumodoslania,zaruka,text5,text6);   
+        getQueryOstatne();
+        insertOstatne(vyberskladu, text, text2, text3, text4, datumodoslania, zaruka, text5, text6);
     }
-    private static void insertOstatne(String vyberskladu, String text, String text2, String text3, String text4,String datumodoslania, String zaruka, String text5, String text6) {
+
+    private static void insertOstatne(String vyberskladu, String text, String text2, String text3, String text4,
+            String datumodoslania, String zaruka, String text5, String text6) {
 
         try {
             Connection connection = getConnection();
             preparedStatement = connection.prepareStatement(query);
-            
+
             preparedStatement.setString(1, vyberskladu);
             preparedStatement.setString(2, text);
             preparedStatement.setString(3, text2);
             preparedStatement.setString(4, text3);
             preparedStatement.setString(5, text4);
             preparedStatement.setString(6, text5);
-            
+
             preparedStatement.setString(7, datumodoslania);
             preparedStatement.setString(8, zaruka);
             preparedStatement.setString(9, text6);
@@ -510,25 +529,28 @@ public class JDBMySQLConnection {
             e.printStackTrace();
         }
     }
+
     private static void getQueryOstatne() {
         query = "INSERT INTO `ostatne`(`Sklad`, `Typ`, `Názov`, `Počet`, `Sériové číslo`, `Cislo fili`, `Dátum odoslania fili`, `Záruka`, `Poznámka`) VALUES (?,?,?,?,?,?,?,?,?)";
     }
+
     public static void addtoMP(String vyberskladu, String text, String text2, String text3, String text4, String text5,
             String text6, String tFTelcCslo, String tFIMEI, String tFSIM, String tFPUK, String tFPIN,
             String datumodoslania, String zaruka, String text7) {
 
-            getQueryMP();
-            insertMP(vyberskladu, text, text2, text3, text4, text5, text6, tFTelcCslo, tFIMEI, tFSIM, tFPUK, tFPIN, datumodoslania, zaruka, text7);
+        getQueryMP();
+        insertMP(vyberskladu, text, text2, text3, text4, text5, text6, tFTelcCslo, tFIMEI, tFSIM, tFPUK, tFPIN,
+                datumodoslania, zaruka, text7);
     }
-    private static void insertMP(String vyberskladu, String text, String text2, String text3, String text4, String text5,
-    String text6, String tFTelcCslo, String tFIMEI, String tFSIM, String tFPUK, String tFPIN,
-    String datumodoslania, String zaruka, String text7) {
-            
+
+    private static void insertMP(String vyberskladu, String text, String text2, String text3, String text4,
+            String text5, String text6, String tFTelcCslo, String tFIMEI, String tFSIM, String tFPUK, String tFPIN,
+            String datumodoslania, String zaruka, String text7) {
 
         try {
             Connection connection = getConnection();
             preparedStatement = connection.prepareStatement(query);
-            
+
             preparedStatement.setString(1, vyberskladu);
             preparedStatement.setString(2, text);
             preparedStatement.setString(3, text2);
@@ -553,9 +575,9 @@ public class JDBMySQLConnection {
             e.printStackTrace();
         }
     }
+
     private static void getQueryMP() {
         query = "INSERT INTO `mobil-prepredajnu`( `Sklad`, `Typ`, `Názov`, `Typ telefonu`, `Počet`, `Sériové číslo`, `Cislo fili`, `Tel.cislo`, `IMEI`, `SIM`, `PUK`, `PIN`, `Dátum odoslania fili`, `Záruka`, `Poznámka`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     }
 
-    
 }

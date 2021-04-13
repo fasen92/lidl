@@ -1,6 +1,10 @@
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javax.print.DocFlavor.STRING;
@@ -16,6 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
@@ -23,6 +28,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -111,6 +117,8 @@ public class KontrolaHWRabattdruckerController implements Initializable {
 
     String zaruka;
     String datumodoslania;
+
+    String index = "";
 
     Alert alert = new Alert(AlertType.INFORMATION);
     
@@ -211,6 +219,104 @@ public class KontrolaHWRabattdruckerController implements Initializable {
             vycisti();
     }
     
+
+    @FXML
+    void OnClickDelete(ActionEvent event) throws SQLException {
+        ObservableList<Rabattdrucker> rbt = tabulka.getSelectionModel().getSelectedItems();
+
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Dialog");
+        alert.setHeaderText("Dbajte na rozhodnutí");
+        alert.setContentText("Ste si istý že chcete vymazať?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            try {
+                System.out.println(rbt.get(0).getID());
+
+                Connection conn = JDBMySQLConnection.getConnection();
+                String sql = "DELETE FROM `rabattdrucker` WHERE ID = ?";
+                PreparedStatement pst;
+                pst = conn.prepareStatement(sql);
+                pst.setString(1, rbt.get(0).getID());
+                pst.execute();
+                tabulka.getItems().removeAll(tabulka.getSelectionModel().getSelectedItems());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Nič nie je vybraté");
+            }
+        } else {
+            // ... user chose CANCEL or closed the dialog
+        }
+
+    }
+    //aj toto
+    @FXML
+    void OnClickUlozZmeny(ActionEvent event) throws SQLException {
+
+        if (getVyberskladu(ChoiceBoxSklad).isEmpty() || TFTyp.getText().isEmpty() || TFNazov.getText().isEmpty()) {
+            alert.setTitle("Information");
+            alert.setContentText("Povynné polia sklad, typ alebo nazov nie sú vyplnené");
+            alert.showAndWait();
+
+        } else {
+            
+            try {
+            datumodoslania = String.valueOf(DFOdoslanienafili.getValue());
+            zaruka = String.valueOf(DFZaruka.getValue());
+            
+            Connection conn =JDBMySQLConnection.getConnection();
+            PreparedStatement ps = null;
+            String value2 = ChoiceBoxSklad1.getValue();
+            String value3 = TFTyp.getText();
+            String value4 = TFNazov.getText();
+            String value5 = TFPocet.getText();
+            String value6 = TFSeriove.getText();
+            
+            String value7 = TFECO.getText();
+            String value8 = TFCF.getText();
+
+
+            String value10 = DFOdoslanienafili.getValue().toString();
+            String value11 = DFZaruka.getValue().toString();
+            String value12 = TAPoznamka.getText();
+            
+            String sql = "UPDATE `rabattdrucker` SET `Sklad`='"+value2+"',`Typ`='"+value3+"',`Názov`='"+value4+"',`Počet`='"+value5+"',`Sériové číslo`='"+value6+"',`Evidencne cislo`='"+value7+"',`Cislo fili`='"+value8+"',`Dátum odoslania fili`='"+value10+"',`Záruka`='"+value11+"',`Poznámka`='"+value12+"' WHERE ID='"+index+"'";
+
+            ps = conn.prepareStatement(sql);
+            ps.execute();
+
+            JOptionPane.showMessageDialog(null, "Uspese upravene");
+            vycisti();
+
+            update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "nikde nastala chyba");
+            }
+            
+        }
+
+    }
+
+    //zatial napic
+    @FXML
+    void getSelected(MouseEvent event) {
+        Rabattdrucker rbt = tabulka.getSelectionModel().getSelectedItem();
+        System.out.println(rbt.getDatum_odoslania());
+        LocalDate localDate1 = LocalDate.parse(rbt.getDatum_odoslania());
+        LocalDate localDate2 = LocalDate.parse(rbt.getZaruka());
+
+        TFNazov.setText(rbt.getNazov());
+        TFTyp.setText(rbt.getTyp());
+        TFPocet.setText(rbt.getPocet());
+        TAPoznamka.setText(rbt.getPoznamka());
+        TFCF.setText(rbt.getCF());
+        TFECO.setText(rbt.getECO());
+        TFSeriove.setText(rbt.getSC());
+        DFOdoslanienafili.setValue(localDate1);
+        DFZaruka.setValue(localDate2);
+        index = rbt.getID();
+    }
+
     private void vycisti() {
         TFNazov.clear();
         TFTyp.clear();

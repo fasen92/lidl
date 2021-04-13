@@ -1,7 +1,7 @@
 public class Rabattdrucker {
-    String SC,ECO,Nazov,Pocet,Zaruka,Poznamka,Datum_odoslania,Typ,CF;
+    String SC,ECO,Nazov,Pocet,Zaruka,ID,Poznamka,Datum_odoslania,Typ,CF;
     
-    public Rabattdrucker(String Typ,String Nazov,String Pocet,String SC,String ECO,String CF,String Datum_odoslania,String Zaruka,String Poznamka) {
+    public Rabattdrucker(String ID,String Typ,String Nazov,String Pocet,String SC,String ECO,String CF,String Datum_odoslania,String Zaruka,String Poznamka) {
         this.Typ =Typ;
         this.SC =SC;
         this.Nazov = Nazov;
@@ -11,6 +11,14 @@ public class Rabattdrucker {
         this.Poznamka = Poznamka;
         this.CF = CF;
         this.ECO =ECO;
+        this.ID = ID;
+
+    }
+    public void setID(String iD) {
+        ID = iD;
+    }
+    public String getID() {
+        return ID;
     }
     public void setECO(String eCO) {
         ECO = eCO;
