@@ -24,8 +24,8 @@
             <TableColumn fx:id="ColumnDetail" prefWidth="59.0" text="Detail" />
         </columns>
       </TableView>
-      <Button fx:id="BtnRefresh" layoutX="129.0" layoutY="502.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="129.0" text="Refresh" />
-      <Button fx:id="BtnNovyPouzivatel" layoutX="574.0" layoutY="502.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="129.0" text="Pridať zamestnanca" />
-      <Button fx:id="BtnSpat" layoutX="20.0" layoutY="551.0" mnemonicParsing="false" text="Späť" />
+      <Button fx:id="BtnRefresh" layoutX="129.0" layoutY="502.0" mnemonicParsing="false" onAction="#OnClickRefresh" prefHeight="36.0" prefWidth="129.0" text="Refresh" />
+      <Button fx:id="BtnNovyPouzivatel" layoutX="574.0" layoutY="502.0" mnemonicParsing="false" onAction="#onClickNovyPouzivatel" prefHeight="36.0" prefWidth="129.0" text="Pridať zamestnanca" />
+      <Button fx:id="BtnSpat" layoutX="20.0" layoutY="551.0" mnemonicParsing="false" onAction="#OnClickSpat" text="Späť" />
    </children>
 </AnchorPane>

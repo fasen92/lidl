@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PridatZamDialogController">
    <children>
       <Label layoutX="70.0" layoutY="14.0" prefHeight="41.0" prefWidth="210.0" text="Nový zamestnanec">
          <font>
@@ -50,12 +50,12 @@
             </Label>
          </children>
       </AnchorPane>
-      <Button fx:id="BtnPridat" layoutX="230.0" layoutY="298.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="87.0" text="Pridať">
+      <Button fx:id="BtnPridat" layoutX="230.0" layoutY="298.0" mnemonicParsing="false" onAction="#OnClickPridatZam" prefHeight="39.0" prefWidth="87.0" text="Pridať">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="BtnZrusit" layoutX="44.0" layoutY="298.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="87.0" text="Zrušiť">
+      <Button fx:id="BtnZrusit" layoutX="44.0" layoutY="298.0" mnemonicParsing="false" onAction="#OnCLickZrusit" prefHeight="39.0" prefWidth="87.0" text="Zrušiť">
          <font>
             <Font size="18.0" />
          </font>

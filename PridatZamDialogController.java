@@ -58,6 +58,10 @@ public class PridatZamDialogController implements Initializable {
         closeStage(event);
     }
 
+    @FXML
+    void OnCLickZrusit(ActionEvent event){
+        closeStage(event);
+    }
 
 
     private void closeStage(ActionEvent event) {

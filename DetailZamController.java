@@ -1,5 +1,8 @@
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -71,13 +74,13 @@ public class DetailZamController implements Initializable {
 
     @FXML
     void OnClickSave(ActionEvent event){
-       
+    SingletonDetailZam x = SingletonDetailZam.getInstance();
            
         
     }
 
     @FXML
-    void OnClickDelete(ActionEvent event){
+    void OnClickDelete(ActionEvent event) throws SQLException, IOException{
         SingletonDetailZam x = SingletonDetailZam.getInstance();
         Stage stage = (Stage) Apane.getScene().getWindow();
         Alert.AlertType type = Alert.AlertType.CONFIRMATION;
@@ -90,22 +93,32 @@ public class DetailZamController implements Initializable {
 
         //prerobit
         Optional<ButtonType> result = alert.showAndWait();
-        if(result.get() == ButtonType.YES){
-            
-        }else if(result.get() == ButtonType.NO){
-           
+        if(result.get() == ButtonType.OK){
+            Connection conn = JDBMySQLConnection.getConnection();
+            String sql = "DELETE FROM `ucet` WHERE ID = ?";
+            PreparedStatement pst;
+            System.out.println(conn.prepareStatement(sql));
+            pst = conn.prepareStatement(sql);
+            pst.setInt(1, x.ucet.getId());
+            pst.execute();
+            spat(event);
+        }else if(result.get() == ButtonType.CANCEL){
+
         }
 
     }
 
     @FXML
     void OnClickSpat(ActionEvent event) throws IOException {
+       spat(event);
+    }
+
+    private void spat(ActionEvent event) throws IOException{
         Parent ZoznamZamParent = FXMLLoader.load(getClass().getResource("ZoznamZam.fxml"));
         Scene ZoznamZamScene = new Scene(ZoznamZamParent);
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(ZoznamZamScene);
         window.show();
-
     }
 }

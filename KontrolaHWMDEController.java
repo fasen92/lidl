@@ -277,7 +277,7 @@ public class KontrolaHWMDEController implements Initializable {
 
         if (getVyberskladu(ChoiceBoxSklad).isEmpty() || TFTyp.getText().isEmpty() || TFNazov.getText().isEmpty()) {
             alert.setTitle("Information");
-            alert.setContentText("Povynné polia sklad, typ alebo nazov nie sú vyplnené");
+            alert.setContentText("Povinné polia sklad, typ alebo nazov nie sú vyplnené");
             alert.showAndWait();
 
         } else {
@@ -313,12 +313,12 @@ public class KontrolaHWMDEController implements Initializable {
             ps = conn.prepareStatement(sql);
             ps.execute();
 
-            JOptionPane.showMessageDialog(null, "Uspese upravene");
+            JOptionPane.showMessageDialog(null, "Uspesne upravene");
             vycisti();
 
             update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "nikde nastala chyba");
+                JOptionPane.showMessageDialog(null, "niekde nastala chyba");
             }            
         }
     }
