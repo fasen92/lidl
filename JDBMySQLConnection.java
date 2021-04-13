@@ -105,7 +105,8 @@ public class JDBMySQLConnection {
                 ResultSet rs = ps.executeQuery();
 
                 while (rs.next()) {
-                    OLQuail.add(new Quail(rs.getString("Typ"), rs.getString("Názov"), rs.getString("Počet"),
+                    rs.getString("Cislo fili");
+                    OLQuail.add(new Quail(rs.getString("ID"),rs.getString("Typ"), rs.getString("Názov"), rs.getString("Počet"),
                             rs.getString("Sériové číslo"), rs.getString("Cislo fili"),
                             rs.getString("Dátum odoslania fili"), rs.getString("Záruka"), rs.getString("Poznámka")));
 
@@ -133,7 +134,7 @@ public class JDBMySQLConnection {
                 ResultSet rs = ps.executeQuery();
 
                 while (rs.next()) {
-                    OLOstatne.add(new Ostatne(rs.getString("Typ"), rs.getString("Názov"), rs.getString("Počet"),
+                    OLOstatne.add(new Ostatne(rs.getString("ID"),rs.getString("Typ"), rs.getString("Názov"), rs.getString("Počet"),
                             rs.getString("Sériové číslo"), rs.getString("Cislo fili"),
                             rs.getString("Dátum odoslania fili"), rs.getString("Záruka"), rs.getString("Poznámka")));
 
@@ -245,7 +246,7 @@ public class JDBMySQLConnection {
                 ResultSet rs = ps.executeQuery();
 
                 while (rs.next()) {
-                    OLMP.add(new MP(rs.getString("Typ"), rs.getString("Názov"), rs.getString("Počet"),
+                    OLMP.add(new MP(rs.getString("ID"),rs.getString("Typ"), rs.getString("Názov"), rs.getString("Počet"),
                             rs.getString("Sériové číslo"), rs.getString("Typ telefonu"), rs.getString("IMEI"),
                             rs.getString("SIM"), rs.getString("Tel.cislo"), rs.getString("PUK"), rs.getString("PIN"),
                             rs.getString("Cislo fili"), rs.getString("Dátum odoslania fili"), rs.getString("Záruka"),

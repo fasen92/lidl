@@ -1,6 +1,10 @@
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
@@ -15,6 +19,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
@@ -22,6 +27,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 public class KontrolaHWQuailController implements Initializable{
@@ -103,6 +109,7 @@ public class KontrolaHWQuailController implements Initializable{
 
     String zaruka;
     String datumodoslania;
+    String index = "";
 
     Alert alert = new Alert(AlertType.INFORMATION);
     
@@ -202,6 +209,102 @@ public class KontrolaHWQuailController implements Initializable{
     void OnClickVycisti(ActionEvent event) {
         vycisti();
     }
+    @FXML
+    void OnClickDelete(ActionEvent event) throws SQLException {
+        ObservableList<Quail> quail = tabulka.getSelectionModel().getSelectedItems();
+
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Dialog");
+        alert.setHeaderText("Dbajte na rozhodnutí");
+        alert.setContentText("Ste si istý že chcete vymazať?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            try {
+                System.out.println(quail.get(0).getID());
+
+                Connection conn = JDBMySQLConnection.getConnection();
+                String sql = "DELETE FROM `quail` WHERE ID = ?";
+                PreparedStatement pst;
+                pst = conn.prepareStatement(sql);
+                pst.setString(1, quail.get(0).getID());
+                pst.execute();
+                tabulka.getItems().removeAll(tabulka.getSelectionModel().getSelectedItems());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Nič nie je vybraté");
+            }
+        } else {
+            // ... user chose CANCEL or closed the dialog
+        }
+
+    }
+    //aj toto
+    @FXML
+    void OnClickUlozZmeny(ActionEvent event) throws SQLException {
+
+        if (getVyberskladu(ChoiceBoxSklad).isEmpty() || TFTyp.getText().isEmpty() || TFNazov.getText().isEmpty()) {
+            alert.setTitle("Information");
+            alert.setContentText("Povynné polia sklad, typ alebo nazov nie sú vyplnené");
+            alert.showAndWait();
+
+        } else {
+            
+            try {
+            datumodoslania = String.valueOf(DFOdoslanienafili.getValue());
+            zaruka = String.valueOf(DFZaruka.getValue());
+            
+            Connection conn =JDBMySQLConnection.getConnection();
+            PreparedStatement ps = null;
+            String value2 = ChoiceBoxSklad1.getValue();
+            String value3 = TFTyp.getText();
+            String value4 = TFNazov.getText();
+            String value5 = TFPocet.getText();
+            String value6 = TFSeriove.getText();
+            
+            
+            String value7 = TFCF.getText();
+
+
+            String value8 = DFOdoslanienafili.getValue().toString();
+            String value10 = DFZaruka.getValue().toString();
+            String value11 = TAPoznamka.getText();
+            
+            String sql = "UPDATE `quail` SET `Sklad`='"+value2+"',`Typ`='"+value3+"',`Názov`='"+value4+"',`Počet`='"+value5+"',`Sériové číslo`='"+value6+"',`Cislo fili`='"+value7+"',`Dátum odoslania fili`='"+value8+"',`Záruka`='"+value10+"',`Poznámka`='"+value11+"' WHERE ID='"+index+"'";
+
+            ps = conn.prepareStatement(sql);
+            ps.execute();
+
+            JOptionPane.showMessageDialog(null, "Uspese upravene");
+            vycisti();
+
+            update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "nikde nastala chyba");
+            }
+            
+        }
+
+    }
+
+    //zatial napic
+    @FXML
+    void getSelected(MouseEvent event) {
+        Quail quail = tabulka.getSelectionModel().getSelectedItem();
+        System.out.println(quail.getDatum_odoslania());
+        LocalDate localDate1 = LocalDate.parse(quail.getDatum_odoslania());
+        LocalDate localDate2 = LocalDate.parse(quail.getZaruka());
+
+        TFNazov.setText(quail.getNazov());
+        TFTyp.setText(quail.getTyp());
+        TFPocet.setText(quail.getPocet());
+        TAPoznamka.setText(quail.getPoznamka());
+        TFCF.setText(quail.getCF());
+        
+        TFSeriove.setText(quail.getSC());
+        DFOdoslanienafili.setValue(localDate1);
+        DFZaruka.setValue(localDate2);
+        index = quail.getID();
+    }
     private void vycisti() {
         TFNazov.clear();
         TFTyp.clear();
@@ -243,6 +346,7 @@ public class KontrolaHWQuailController implements Initializable{
 
         ColumTyp.setCellValueFactory(new PropertyValueFactory<>("Typ"));
         ColumSC.setCellValueFactory(new PropertyValueFactory<>("SC"));
+        ColumCF.setCellValueFactory(new PropertyValueFactory<>("CF"));
         ColumNazov.setCellValueFactory(new PropertyValueFactory<>("Nazov"));
         ColumPocet.setCellValueFactory(new PropertyValueFactory<>("Pocet"));
         ColumZaruka.setCellValueFactory(new PropertyValueFactory<>("Zaruka"));

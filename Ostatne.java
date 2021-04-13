@@ -1,9 +1,10 @@
 public class Ostatne {
-    String SC,Nazov,Pocet,Zaruka,Poznamka,Datum_odoslania,Typ,CF;
+    String SC,ID,Nazov,Pocet,Zaruka,Poznamka,Datum_odoslania,Typ,CF;
     
-    public Ostatne(String Typ,String Nazov,String Pocet,String SC,String CF,String Datum_odoslania,String Zaruka,String Poznamka) {
+    public Ostatne(String ID,String Typ,String Nazov,String Pocet,String SC,String CF,String Datum_odoslania,String Zaruka,String Poznamka) {
         this.Typ =Typ;
         this.SC =SC;
+        this.ID =ID;
         this.Nazov = Nazov;
         this.Pocet = Pocet;
         this.Zaruka= Zaruka;
@@ -11,6 +12,12 @@ public class Ostatne {
         this.Poznamka = Poznamka;
         this.CF = CF;
         
+    }
+    public String getID() {
+        return ID;
+    }
+    public void setID(String iD) {
+        ID = iD;
     }
     public void setCF(String cF) {
         CF = cF;

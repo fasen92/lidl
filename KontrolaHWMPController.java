@@ -1,7 +1,14 @@
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.Optional;
 import java.util.ResourceBundle;
+
+import javax.swing.JOptionPane;
+
 import javafx.scene.Node;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,6 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
@@ -21,10 +29,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class KontrolaHWMPController implements Initializable{
+public class KontrolaHWMPController implements Initializable {
     @FXML
     private BorderPane BP;
 
@@ -136,66 +145,64 @@ public class KontrolaHWMPController implements Initializable{
     @FXML
     private Button BtnUlož;
 
-    
     String zaruka;
     String datumodoslania;
+    String index = "";
 
     Alert alert = new Alert(AlertType.INFORMATION);
     ObservableList<MP> OLtable = FXCollections.observableArrayList();
-    
 
     @FXML
     void OnClickRefresh(ActionEvent event) throws IOException, SQLException {
-        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="MDE") {
+        if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "MDE") {
             Parent rabatParent = FXMLLoader.load(getClass().getResource("KontrolaHWMDE.fxml"));
             Scene rabatScene = new Scene(rabatParent);
-            
-            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(rabatScene);
             window.show();
         }
-        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Lispettore-scanner") {
+        if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Lispettore-scanner") {
             Parent scannerParent = FXMLLoader.load(getClass().getResource("KontrolaHWScanner.fxml"));
             Scene scannerScene = new Scene(scannerParent);
-            
-            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(scannerScene);
             window.show();
         }
-        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Pbv") {
+        if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Pbv") {
             Parent pbvParent = FXMLLoader.load(getClass().getResource("KontrolaHWPBV.fxml"));
             Scene pbvScene = new Scene(pbvParent);
-        
-            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(pbvScene);
             window.show();
         }
-        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Quail") {
+        if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Quail") {
             Parent quailParent = FXMLLoader.load(getClass().getResource("KontrolaHWQuail.fxml"));
             Scene quailScene = new Scene(quailParent);
-            
-            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(quailScene);
             window.show();
         }
-        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Rabattdrucker") {
+        if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Rabattdrucker") {
             Parent rabatParent = FXMLLoader.load(getClass().getResource("KontrolaHWRabattdrucker.fxml"));
             Scene rabatScene = new Scene(rabatParent);
-            
-            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(rabatScene);
             window.show();
         }
-        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Ostatné") {
+        if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Ostatné") {
             Parent rabatParent = FXMLLoader.load(getClass().getResource("KontrolaHWOstatne.fxml"));
             Scene rabatScene = new Scene(rabatParent);
-            
-            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(rabatScene);
             window.show();
         }
-        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Moblný telefon") {
-            
+        if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Moblný telefon") {
 
             update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
         }
@@ -206,32 +213,34 @@ public class KontrolaHWMPController implements Initializable{
     void OnClickSpat(ActionEvent event) throws IOException {
         Parent MenuParent = FXMLLoader.load(getClass().getResource("Menu.fxml"));
         Scene MenuScene = new Scene(MenuParent);
-        
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(MenuScene);
         window.show();
     }
 
     @FXML
     void OnClickUloz(ActionEvent event) throws SQLException {
-        if (getVyberskladu(ChoiceBoxSklad1).isEmpty()||TFTyp.getText().isEmpty()||TFNazov.getText().isEmpty()) {
+        if (getVyberskladu(ChoiceBoxSklad1).isEmpty() || TFTyp.getText().isEmpty() || TFNazov.getText().isEmpty()) {
             alert.setTitle("Information");
             alert.setContentText("Povynné polia sklad, typ alebo nazov nie sú vyplnené");
             alert.showAndWait();
-    
-            }else{
+
+        } else {
             datumodoslania = String.valueOf(DFOdoslanienafili.getValue());
             zaruka = String.valueOf(DFZaruka.getValue());
-           
-    
-            JDBMySQLConnection.addtoMP(getVyberskladu(ChoiceBoxSklad1),TFTyp.getText(),TFNazov.getText(),TFTypTel.getText(),TFPocet.getText(), TFSeriove.getText(), TFCF.getText(),TFTelcCslo.getText(),TFIMEI.getText(),TFSIM.getText(),TFPUK.getText(),TFPIN.getText(),datumodoslania,zaruka,TAPoznamka.getText());
-    
+
+            JDBMySQLConnection.addtoMP(getVyberskladu(ChoiceBoxSklad1), TFTyp.getText(), TFNazov.getText(),
+                    TFTypTel.getText(), TFPocet.getText(), TFSeriove.getText(), TFCF.getText(), TFTelcCslo.getText(),
+                    TFIMEI.getText(), TFSIM.getText(), TFPUK.getText(), TFPIN.getText(), datumodoslania, zaruka,
+                    TAPoznamka.getText());
+
             alert.setTitle("Information");
             alert.setContentText("Uspešne pridané");
             alert.showAndWait();
-    
+
             vycisti();
-    
+
             update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
         }
     }
@@ -240,6 +249,118 @@ public class KontrolaHWMPController implements Initializable{
     void OnClickVycisti(ActionEvent event) {
         vycisti();
     }
+
+    @FXML
+    void OnClickDelete(ActionEvent event) throws SQLException {
+        ObservableList<MP> mp = tabulka.getSelectionModel().getSelectedItems();
+
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Dialog");
+        alert.setHeaderText("Dbajte na rozhodnutí");
+        alert.setContentText("Ste si istý že chcete vymazať?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            try {
+                System.out.println(mp.get(0).getID());
+
+                Connection conn = JDBMySQLConnection.getConnection();
+                String sql = "DELETE FROM `mobil-prepredajnu` WHERE ID = ?";
+                PreparedStatement pst;
+                pst = conn.prepareStatement(sql);
+                pst.setString(1, mp.get(0).getID());
+                pst.execute();
+                tabulka.getItems().removeAll(tabulka.getSelectionModel().getSelectedItems());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Nič nie je vybraté");
+            }
+        } else {
+            // ... user chose CANCEL or closed the dialog
+        }
+
+    }
+
+    // aj toto
+    @FXML
+    void OnClickUlozZmeny(ActionEvent event) throws SQLException {
+
+        if (getVyberskladu(ChoiceBoxSklad).isEmpty() || TFTyp.getText().isEmpty() || TFNazov.getText().isEmpty()) {
+            alert.setTitle("Information");
+            alert.setContentText("Povynné polia sklad, typ alebo nazov nie sú vyplnené");
+            alert.showAndWait();
+
+        } else {
+
+            try {
+                datumodoslania = String.valueOf(DFOdoslanienafili.getValue());
+                zaruka = String.valueOf(DFZaruka.getValue());
+
+                Connection conn = JDBMySQLConnection.getConnection();
+                PreparedStatement ps = null;
+                String value2 = ChoiceBoxSklad1.getValue();
+                String value3 = TFTyp.getText();
+                String value4 = TFNazov.getText();
+
+                String value5 = TFTypTel.getText();
+                String value6 = TFPocet.getText();
+                String value7 = TFSeriove.getText();
+
+                String cf = TFCF.getText();
+
+                String telcislo = TFTelcCslo.getText();
+                String imei = TFIMEI.getText();
+                String puk = TFPUK.getText();
+                String pin = TFPIN.getText();
+                String sim = TFSIM.getText();
+
+                String value8 = DFOdoslanienafili.getValue().toString();
+                String value10 = DFZaruka.getValue().toString();
+                String value11 = TAPoznamka.getText();
+
+                System.out.println(value8+"--------");
+
+                String sql = "UPDATE `mobil-prepredajnu` SET `Sklad`='"+value2+"',`Typ`='"+value3+"',`Názov`='"+value4+"',`Typ telefonu`='"+value5+"',`Počet`='"+value6+"',`Sériové číslo`='"+value7+"',`Cislo fili`='"+cf+"',`Tel.cislo`='"+telcislo+"',`IMEI`='"+imei+"',`SIM`='"+sim+"',`PUK`='"+puk+"',`PIN`='"+pin+"',`Dátum odoslania fili`='"+value8+"',`Záruka`='"+value10+"',`Poznámka`='"+value11+"' WHERE ID='"+index+"'";
+
+                ps = conn.prepareStatement(sql);
+                ps.execute();
+
+                JOptionPane.showMessageDialog(null, "Uspese upravene");
+                vycisti();
+
+                update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "nikde nastala chyba");
+            }
+
+        }
+
+    }
+
+    // zatial napic
+    @FXML
+    void getSelected(MouseEvent event) {
+        MP mp = tabulka.getSelectionModel().getSelectedItem();
+        System.out.println(mp.getDatum_odoslania());
+        LocalDate localDate1 = LocalDate.parse(mp.getDatum_odoslania());
+        LocalDate localDate2 = LocalDate.parse(mp.getZaruka());
+
+        TFNazov.setText(mp.getNazov());
+        TFTyp.setText(mp.getTyp());
+        TFTypTel.setText(mp.getTyptel());
+        TFPocet.setText(mp.getPocet());
+        TAPoznamka.setText(mp.getPoznamka());
+        TFCF.setText(mp.getCF());
+        TFTelcCslo.setText(mp.getTelcislo());
+        TFIMEI.setText(mp.getIMEI());
+        TFSIM.setText(mp.getSIM());
+        TFPUK.setText(mp.getPUK());
+        TFPIN.setText(mp.getPIN());
+        TFSeriove.setText(mp.getSC());
+        DFOdoslanienafili.setValue(localDate1);
+        DFZaruka.setValue(localDate2);
+        index = mp.getID();
+    }
+
     private void vycisti() {
         TFNazov.clear();
         TFTyp.clear();
@@ -256,20 +377,21 @@ public class KontrolaHWMPController implements Initializable{
         TFTelcCslo.clear();
         TFSIM.clear();
         TFCF.clear();
-        
-        
+
     }
 
-    public String getVyberskladu(ChoiceBox<String> ChoiceBoxSklad){
+    public String getVyberskladu(ChoiceBox<String> ChoiceBoxSklad) {
         return ChoiceBoxSklad.getValue();
     }
-    public String getVyberZariadenia(ChoiceBox<String> ChoiceBoxTypzariadenia){
+
+    public String getVyberZariadenia(ChoiceBox<String> ChoiceBoxTypzariadenia) {
         return ChoiceBoxTypzariadenia.getValue();
     }
 
-    public void setup_Choiceboxs(){
-        ObservableList <String> OLsklady = FXCollections.observableArrayList("Sklad1","Sklad2","Sklad3");
-        ObservableList <String> OLzariadenia = FXCollections.observableArrayList("Pbv","Lispettore-scanner","MDE","Rabattdrucker","Quail","Moblný telefon","Ostatné");
+    public void setup_Choiceboxs() {
+        ObservableList<String> OLsklady = FXCollections.observableArrayList("Sklad1", "Sklad2", "Sklad3");
+        ObservableList<String> OLzariadenia = FXCollections.observableArrayList("Pbv", "Lispettore-scanner", "MDE",
+                "Rabattdrucker", "Quail", "Moblný telefon", "Ostatné");
 
         ChoiceBoxSklad.setItems(OLsklady);
         ChoiceBoxTypzariadenia.setItems(OLzariadenia);
@@ -278,14 +400,12 @@ public class KontrolaHWMPController implements Initializable{
         ChoiceBoxTypzariadenia.setValue("Moblný telefon");
         ChoiceBoxSklad.setValue("Sklad1");
         ChoiceBoxSklad1.setValue("Sklad1");
-        
 
-       
     }
 
-    public void update_Table(String choiceZariadenie, String choiceSklad) throws SQLException{
-        
-        OLtable = JDBMySQLConnection.getMP(choiceZariadenie,choiceSklad);  
+    public void update_Table(String choiceZariadenie, String choiceSklad) throws SQLException {
+
+        OLtable = JDBMySQLConnection.getMP(choiceZariadenie, choiceSklad);
 
         ColumTyp.setCellValueFactory(new PropertyValueFactory<>("Typ"));
         ColumSC.setCellValueFactory(new PropertyValueFactory<>("SC"));
@@ -302,7 +422,6 @@ public class KontrolaHWMPController implements Initializable{
         ColumDatumodoslania.setCellValueFactory(new PropertyValueFactory<>("Datum_odoslania"));
         ColumPoznamka.setCellValueFactory(new PropertyValueFactory<>("Poznamka"));
 
-           
         tabulka.setItems(OLtable);
 
     }
@@ -312,10 +431,10 @@ public class KontrolaHWMPController implements Initializable{
         // TODO Auto-generated method stub
         System.out.println("vytvorenie pozadia");
         setup_Choiceboxs();
-        
+
         try {
-            System.out.println(ChoiceBoxSklad.getValue()); 
-            update_Table(ChoiceBoxTypzariadenia.getValue(),ChoiceBoxSklad.getValue());
+            System.out.println(ChoiceBoxSklad.getValue());
+            update_Table(ChoiceBoxTypzariadenia.getValue(), ChoiceBoxSklad.getValue());
         } catch (SQLException e) {
             e.printStackTrace();
         }

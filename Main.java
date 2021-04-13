@@ -18,5 +18,6 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));        
         stage.setScene(new Scene(root));
         stage.show();
+
     }
 }

@@ -1,7 +1,7 @@
 public class MP {
-    String SC,Nazov,Pocet,Zaruka,Poznamka,Datum_odoslania,Typ,CF,PIN,PUK,IMEI,Typtel,Telcislo,SIM;
+    String SC,Nazov,ID,Pocet,Zaruka,Poznamka,Datum_odoslania,Typ,CF,PIN,PUK,IMEI,Typtel,Telcislo,SIM;
     
-    public MP(String Typ,String Nazov,String Pocet,String SC,String Typtel,String IMEI,String SIM,String Telcislo,String PUK,String PIN,String CF,String Datum_odoslania,String Zaruka,String Poznamka) {
+    public MP(String ID,String Typ,String Nazov,String Pocet,String SC,String Typtel,String IMEI,String SIM,String Telcislo,String PUK,String PIN,String CF,String Datum_odoslania,String Zaruka,String Poznamka) {
         this.Typ =Typ;
         this.SC =SC;
         this.Nazov = Nazov;
@@ -16,7 +16,14 @@ public class MP {
         this.Typtel = Typtel;
         this.Telcislo =Telcislo;
         this.SIM = SIM;
+        this.ID = ID;
         
+    }
+    public String getID() {
+        return ID;
+    }
+    public void setID(String iD) {
+        ID = iD;
     }
     public void setPIN(String pIN) {
         PIN = pIN;
