@@ -223,7 +223,7 @@ public class JDBMySQLConnection {
 
             while (rs.next()) {
                 UcetList.add(new Ucet(rs.getInt("id"), rs.getString("heslo"), rs.getString("meno"),
-                        rs.getString("priezvisko"), rs.getString("rola"), rs.getString("sklad")));
+                        rs.getString("priezvisko"), rs.getString("rola"), rs.getString("sklad"), rs.getInt("prvyLogin")));
             }
         } catch (Exception e) {
 
@@ -270,7 +270,7 @@ public class JDBMySQLConnection {
 
             while (rs.next()) {
                 UcetList.add(new Ucet(rs.getInt("id"), rs.getString("heslo"), rs.getString("meno"),
-                        rs.getString("priezvisko"), rs.getString("rola"), rs.getString("sklad")));
+                        rs.getString("priezvisko"), rs.getString("rola"), rs.getString("sklad"), rs.getInt("prvyLogin")));
             }
         } catch (Exception e) {
 
