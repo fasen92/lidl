@@ -39,9 +39,10 @@ public class ZmenaHeslaDialogController {
             Singleton x = Singleton.getInstance();
 
             int value1 = x.ucet.getId();
+            int value3 = 0;
             String value2 = txtHeslo.getText().trim();
 
-            String sql = "UPDATE `ucet` SET `heslo`='" + value2 + "' WHERE ID='" + value1 + "'";
+            String sql = "UPDATE `ucet` SET `heslo`='" + value2 + "',`prvyLogin`='" + value3 + "' WHERE ID='" + value1 + "'";
 
             ps = conn.prepareStatement(sql);
             ps.execute();
