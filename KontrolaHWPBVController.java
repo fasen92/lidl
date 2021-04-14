@@ -23,7 +23,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
@@ -31,6 +33,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 public class KontrolaHWPBVController implements Initializable {
 
@@ -89,7 +92,7 @@ public class KontrolaHWPBVController implements Initializable {
     private TableView<Pbv> tabulka;
 
     @FXML
-    private TableColumn<String, Pbv> ColumTyp;
+    private TableColumn<Pbv,String> ColumTyp;
 
     @FXML
     private TableColumn<String, Pbv> ColumNazov;
@@ -104,7 +107,7 @@ public class KontrolaHWPBVController implements Initializable {
     private TableColumn<String, Pbv> ColumDatumodoslania;
 
     @FXML
-    private TableColumn<String, Pbv> ColumZaruka;
+    private TableColumn<Pbv,String> ColumZaruka;
 
     @FXML
     private TableColumn<String, Pbv> ColumPoznamka;
@@ -117,11 +120,13 @@ public class KontrolaHWPBVController implements Initializable {
     Alert alert = new Alert(AlertType.INFORMATION);
 
     static ObservableList<Pbv> OLtable = FXCollections.observableArrayList();
+    static ObservableList<Pbv> OLgettable = FXCollections.observableArrayList();
 
     @FXML
     void OnClickRefresh(ActionEvent event) throws SQLException, IOException {
         if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Pbv") {
             update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
+            
         }
         if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Lispettore-scanner") {
             Parent scannerParent = FXMLLoader.load(getClass().getResource("KontrolaHWScanner.fxml"));
@@ -243,6 +248,7 @@ public class KontrolaHWPBVController implements Initializable {
                 pst.setString(1, pbv.get(0).getID());
                 pst.execute();
                 tabulka.getItems().removeAll(tabulka.getSelectionModel().getSelectedItems());
+                update_Table(ChoiceBoxTypzariadenia.getValue(), ChoiceBoxSklad.getValue());
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Nič nie je vybraté");
             }
@@ -361,8 +367,37 @@ public class KontrolaHWPBVController implements Initializable {
 
             tabulka.setItems(OLtable);
 
+            customiseFactory(ColumZaruka);
+
         }
 
+    }
+
+    private void customiseFactory(TableColumn<Pbv,String> calltypel) {
+        calltypel.setCellFactory(column -> {
+            return new TableCell<Pbv,String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                  
+                    
+                    super.updateItem(item, empty);
+                    setText(empty ? "" : getItem().toString());
+                    setGraphic(null);
+                    TableRow<Pbv> currentRow = getTableRow();
+                    if (!isEmpty()) {
+                        
+                        LocalDate date = LocalDate.parse(item);
+                        System.out.println(date);
+                        System.out.println(date.compareTo(LocalDate.now()));
+                        System.out.println(LocalDate.now());
+                        if(date.compareTo(LocalDate.now()) <= 0) 
+                            currentRow.setStyle("-fx-background-color: #CD1C24");
+                        
+                    }
+                   
+                }
+            };
+        });
     }
 
     @Override
@@ -373,6 +408,7 @@ public class KontrolaHWPBVController implements Initializable {
         try {
             System.out.println(ChoiceBoxSklad.getValue());
             update_Table(ChoiceBoxTypzariadenia.getValue(), ChoiceBoxSklad.getValue());
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
