@@ -135,6 +135,21 @@ public class DetailZamController implements Initializable {
     }
 
     @FXML
+    void OnClickResetPass(ActionEvent event) throws SQLException {
+        Connection conn = JDBMySQLConnection.getConnection();
+        PreparedStatement ps = null;
+        SingletonDetailZam x = SingletonDetailZam.getInstance();
+
+        int value1 = x.ucet.getId();
+        int value2 = 1;
+
+        String sql = "UPDATE `ucet` SET `prvyLogin`='" + value2 + "' WHERE ID='" + value1 + "'";
+
+        ps = conn.prepareStatement(sql);
+        ps.execute();
+    }
+
+    @FXML
     void OnClickSpat(ActionEvent event) throws IOException {
         spat(event);
     }

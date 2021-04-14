@@ -40,6 +40,9 @@ public class LoginController {
             if (txtId.getText().equals(String.valueOf(UcetList.get(i).getId()))
                     && txtPassword.getText().equals(UcetList.get(i).getHeslo())) {
                 podmnienka = false;
+                
+                Singleton x = Singleton.getInstance();
+                x.setUcet(UcetList.get(i));
                 if (UcetList.get(i).getPrvyLogin() == 1) {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ZmenaHeslaDialog.fxml"));
                     Parent parent = fxmlLoader.load();
@@ -49,8 +52,6 @@ public class LoginController {
                     stage.setScene(scene);
                     stage.showAndWait();
                 }
-                Singleton x = Singleton.getInstance();
-                x.setUcet(UcetList.get(i));
                 Parent MainMenuParent = FXMLLoader.load(getClass().getResource("Menu.fxml"));
                 Scene MainMenuScene = new Scene(MainMenuParent);
                 Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
