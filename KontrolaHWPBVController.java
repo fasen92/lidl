@@ -339,17 +339,57 @@ public class KontrolaHWPBVController implements Initializable {
 
     public void setup_Choiceboxs() {
         ObservableList<String> OLsklady = FXCollections.observableArrayList("Sklad1", "Sklad2", "Sklad3");
+        ObservableList<String> OLsklady3 = FXCollections.observableArrayList("Sklad3");
+        ObservableList<String> OLsklady2 = FXCollections.observableArrayList("Sklad2");
+        ObservableList<String> OLsklady1 = FXCollections.observableArrayList("Sklad1");
         ObservableList<String> OLzariadenia = FXCollections.observableArrayList("Pbv", "Lispettore-scanner", "MDE",
                 "Rabattdrucker", "Quail", "Moblný telefon", "Ostatné");
 
-        ChoiceBoxSklad.setItems(OLsklady);
-        ChoiceBoxTypzariadenia.setItems(OLzariadenia);
-        ChoiceBoxSklad1.setItems(OLsklady);
+        
 
-        ChoiceBoxTypzariadenia.setValue("Pbv");
-        ChoiceBoxSklad.setValue("Sklad1");
-        ChoiceBoxSklad1.setValue("Sklad1");
+        Singleton x = Singleton.getInstance();
+        if(String.valueOf(x.ucet.getRola()).equals("Admin")){
+            ChoiceBoxSklad.setItems(OLsklady);
+            ChoiceBoxTypzariadenia.setItems(OLzariadenia);
+            ChoiceBoxSklad1.setItems(OLsklady);
 
+            ChoiceBoxTypzariadenia.setValue("Pbv");
+            ChoiceBoxSklad.setValue("Sklad1");
+            ChoiceBoxSklad1.setValue("Sklad1");
+        }
+        if(String.valueOf(x.ucet.getSklad()).equals("Sklad 1")){
+            ChoiceBoxSklad.setItems(OLsklady1);
+            ChoiceBoxTypzariadenia.setItems(OLzariadenia);
+            ChoiceBoxSklad1.setItems(OLsklady1);
+
+            ChoiceBoxTypzariadenia.setValue("Pbv");
+            ChoiceBoxSklad.setValue("Sklad1");
+            ChoiceBoxSklad1.setValue("Sklad1");
+        }
+        if(String.valueOf(x.ucet.getSklad()).equals("Sklad 2")){
+            ChoiceBoxSklad.setItems(OLsklady2);
+            ChoiceBoxTypzariadenia.setItems(OLzariadenia);
+            ChoiceBoxSklad1.setItems(OLsklady2);
+
+            ChoiceBoxTypzariadenia.setValue("Pbv");
+            ChoiceBoxSklad.setValue("Sklad2");
+            ChoiceBoxSklad1.setValue("Sklad2");
+        }
+        if(String.valueOf(x.ucet.getSklad()).equals("Sklad 3")){
+            ChoiceBoxSklad.setItems(OLsklady3);
+            ChoiceBoxTypzariadenia.setItems(OLzariadenia);
+            ChoiceBoxSklad1.setItems(OLsklady3);
+
+            ChoiceBoxTypzariadenia.setValue("Pbv");
+            ChoiceBoxSklad.setValue("Sklad3");
+            ChoiceBoxSklad1.setValue("Sklad3");
+        }
+
+        
+
+    }
+
+    private void ifelse() {
     }
 
     public void update_Table(String choiceZariadenie, String choiceSklad) throws SQLException {
