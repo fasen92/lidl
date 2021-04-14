@@ -34,7 +34,7 @@ public class MenuController implements Initializable{
     public void OnClickKontrolaHW(ActionEvent event) throws IOException {
         Parent KontrolaHWParent = FXMLLoader.load(getClass().getResource("KontrolaHWPBV.fxml"));
         Scene KontrolaHWScene = new Scene(KontrolaHWParent);
-
+        //KontrolaHWScene.getStylesheets().add("/CSS/Tableview.css");
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(KontrolaHWScene);
         window.setMaximized(true);
