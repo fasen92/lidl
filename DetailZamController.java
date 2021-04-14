@@ -23,7 +23,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.scene.control.Alert;
 
 public class DetailZamController implements Initializable {
     @FXML

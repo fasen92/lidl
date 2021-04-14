@@ -57,8 +57,6 @@ public class ZoznamZamController implements Initializable {
 
     ObservableList<Ucet> UcetTable = FXCollections.observableArrayList();
 
-    int index = -1;
-
     Connection conn = null;
     ResultSet rs = null;
     PreparedStatement pst = null;
