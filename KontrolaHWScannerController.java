@@ -243,7 +243,7 @@ public class KontrolaHWScannerController implements Initializable {
                 JOptionPane.showMessageDialog(null, "Nič nie je vybraté");
             }
         } else {
-            // ... user chose CANCEL or closed the dialog
+    
         }
 
     }
@@ -430,11 +430,11 @@ public class KontrolaHWScannerController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("vytvorenie pozadia");
+       
         setup_Choiceboxs();
 
         try {
-            System.out.println(ChoiceBoxSklad.getValue());
+            
             update_Table(ChoiceBoxTypzariadenia.getValue(), ChoiceBoxSklad.getValue());
         } catch (SQLException e) {
             e.printStackTrace();

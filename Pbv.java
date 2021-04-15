@@ -1,9 +1,11 @@
 public class Pbv {
-    String SC,Nazov,Pocet,Zaruka,Poznamka,Datum_odoslania,Typ,Skla,ID;
+    String SC,Nazov,Pocet,Zaruka,Poznamka,Datum_odoslania,Typ,Skla,ID,Zazcinnosti,Opravacez;
     
-    public Pbv(String ID,String Typ,String Nazov,String Pocet,String SC,String Datum_odoslania,String Zaruka,String Poznamka) {
+    public Pbv(String ID,String Typ,String Nazov,String Pocet,String SC,String Zazcinnosti,String Datum_odoslania,String Zaruka,String Poznamka,String Opravacez) {
         this.ID = ID;
         this.Typ =Typ;
+        this.Zazcinnosti = Zazcinnosti;
+        this.Opravacez = Opravacez;
         this.SC =SC;
         this.Nazov = Nazov;
         this.Pocet = Pocet;
@@ -23,6 +25,18 @@ public class Pbv {
         this.Poznamka = Poznamka;
         
     }*/
+    public String getOpravacez() {
+        return Opravacez;
+    }
+    public void setOpravacez(String opravacez) {
+        Opravacez = opravacez;
+    }
+    public String getZazcinnosti() {
+        return Zazcinnosti;
+    }
+    public void setZazcinnosti(String zazcinnosti) {
+        Zazcinnosti = zazcinnosti;
+    }
     public String getID() {
         return ID;
     }

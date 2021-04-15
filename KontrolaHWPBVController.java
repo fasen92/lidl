@@ -59,6 +59,9 @@ public class KontrolaHWPBVController implements Initializable {
     private Button BtnZmeny;
 
     @FXML
+    private Button BtnOprava;
+
+    @FXML
     private ChoiceBox<String> ChoiceBoxTypzariadenia;
 
     @FXML
@@ -205,8 +208,11 @@ public class KontrolaHWPBVController implements Initializable {
         } else {
             datumodoslania = String.valueOf(DFOdoslanienafili.getValue());
             zaruka = String.valueOf(DFZaruka.getValue());
-            pbv = new Pbv(getVyberskladu(ChoiceBoxSklad1), TFTyp.getText(), TFNazov.getText(), TFPocet.getText(),
-                    TFSeriove.getText(), datumodoslania, zaruka, TAPoznamka.getText());
+            /*
+             * pbv = new Pbv(getVyberskladu(ChoiceBoxSklad1), TFTyp.getText(),
+             * TFNazov.getText(), TFPocet.getText(), TFSeriove.getText(), datumodoslania,
+             * zaruka, TAPoznamka.getText());
+             */
 
             JDBMySQLConnection.addtoPbv(getVyberskladu(ChoiceBoxSklad1), TFTyp.getText(), TFNazov.getText(),
                     TFPocet.getText(), TFSeriove.getText(), datumodoslania, zaruka, TAPoznamka.getText());
@@ -304,24 +310,24 @@ public class KontrolaHWPBVController implements Initializable {
     // zatial napic
     @FXML
     void getSelected(MouseEvent event) {
-        
+
         try {
-        Pbv pbv = tabulka.getSelectionModel().getSelectedItem();
-        LocalDate localDate1 = LocalDate.parse(pbv.getDatum_odoslania());
-        LocalDate localDate2 = LocalDate.parse(pbv.getZaruka());
-        ChoiceBoxSklad1.setValue(getVyberskladu(ChoiceBoxSklad));
-        TFNazov.setText(pbv.getNazov());
-        TFTyp.setText(pbv.getTyp());
-        TFPocet.setText(pbv.getPocet());
-        TAPoznamka.setText(pbv.getPoznamka());
-        TFSeriove.setText(pbv.getSC());
-        DFOdoslanienafili.setValue(localDate1);
-        DFZaruka.setValue(localDate2);
-        index = pbv.getID();
+            Pbv pbv = tabulka.getSelectionModel().getSelectedItem();
+            LocalDate localDate1 = LocalDate.parse(pbv.getDatum_odoslania());
+            LocalDate localDate2 = LocalDate.parse(pbv.getZaruka());
+            ChoiceBoxSklad1.setValue(getVyberskladu(ChoiceBoxSklad));
+            TFNazov.setText(pbv.getNazov());
+            TFTyp.setText(pbv.getTyp());
+            TFPocet.setText(pbv.getPocet());
+            TAPoznamka.setText(pbv.getPoznamka());
+            TFSeriove.setText(pbv.getSC());
+            DFOdoslanienafili.setValue(localDate1);
+            DFZaruka.setValue(localDate2);
+            index = pbv.getID();
         } catch (Exception e) {
-            //TODO: handle exception
+            // TODO: handle exception
         }
-        
+
     }
 
     private void vycisti() {
@@ -388,9 +394,6 @@ public class KontrolaHWPBVController implements Initializable {
 
     }
 
-    private void ifelse() {
-    }
-
     public void update_Table(String choiceZariadenie, String choiceSklad) throws SQLException {
 
         if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Pbv") {
@@ -435,12 +438,41 @@ public class KontrolaHWPBVController implements Initializable {
         });
     }
 
+    @FXML
+    void OnClickOprava(ActionEvent event) throws IOException, SQLException {
+        try {
+
+            ObservableList<Pbv> pbv = tabulka.getSelectionModel().getSelectedItems();
+            String TAtxt = "", Opravacez = "", ID = "";
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("OpravaScene.fxml"));
+            Parent root = (Parent) loader.load();
+            OpravaSceneController opravaScene = loader.getController();
+
+            TAtxt = pbv.get(0).getZazcinnosti();
+            ID = pbv.get(0).getID();
+            Opravacez = pbv.get(0).getOpravacez();
+
+            opravaScene.initData(ID, TAtxt, Opravacez,ChoiceBoxTypzariadenia.getValue());
+            Scene newScene = new Scene(root);
+            Stage newStage = new Stage();
+            newStage.setScene(newScene);
+            newStage.showAndWait();
+
+            update_Table(ChoiceBoxTypzariadenia.getValue(), ChoiceBoxSklad.getValue());
+        } catch (Exception e) {
+
+        }
+
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setup_Choiceboxs();
 
         try {
             update_Table(ChoiceBoxTypzariadenia.getValue(), ChoiceBoxSklad.getValue());
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

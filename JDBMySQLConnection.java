@@ -51,8 +51,8 @@ public class JDBMySQLConnection {
                 while (rs.next()) {
 
                     OLPbv.add(new Pbv(rs.getString("ID"), rs.getString("Typ"), rs.getString("Názov"),
-                            rs.getString("Počet"), rs.getString("Sériové číslo"), rs.getString("Dátum odoslania fili"),
-                            rs.getString("Záruka"), rs.getString("Poznámka")));
+                            rs.getString("Počet"), rs.getString("Sériové číslo"),rs.getString("Záznam činnosti"), rs.getString("Dátum odoslania fili"),
+                            rs.getString("Záruka"), rs.getString("Poznámka"), rs.getString("Oprava cez")));
                 }
             } catch (Exception e) {
 
