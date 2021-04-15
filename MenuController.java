@@ -26,6 +26,9 @@ public class MenuController implements Initializable{
     @FXML
     private Button BtnZamestnanci;
 
+    @FXML
+    private Button BtnSignOut;
+
     Ucet ucet;
     
     
@@ -40,6 +43,16 @@ public class MenuController implements Initializable{
         window.setMaximized(true);
         window.show();
 
+    }
+
+    @FXML
+    void OnClickSignOut(ActionEvent event) throws IOException{
+        Parent LoginParent = FXMLLoader.load(getClass().getResource("Login.fxml"));
+        Scene LoginScene = new Scene(LoginParent);
+
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(LoginScene);
+        window.show();
     }
 
     @FXML
@@ -62,6 +75,8 @@ public class MenuController implements Initializable{
         window.show();
 
     }
+
+
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
