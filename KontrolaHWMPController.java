@@ -85,7 +85,7 @@ public class KontrolaHWMPController implements Initializable {
     private TableColumn<String, MP> ColumDatumodoslania;
 
     @FXML
-    private TableColumn<MP,String> ColumZaruka;
+    private TableColumn<MP, String> ColumZaruka;
 
     @FXML
     private TableColumn<String, MP> ColumPoznamka;
@@ -319,9 +319,13 @@ public class KontrolaHWMPController implements Initializable {
                 String value10 = DFZaruka.getValue().toString();
                 String value11 = TAPoznamka.getText();
 
-                System.out.println(value8+"--------");
+                System.out.println(value8 + "--------");
 
-                String sql = "UPDATE `mobil-prepredajnu` SET `Sklad`='"+value2+"',`Typ`='"+value3+"',`Názov`='"+value4+"',`Typ telefonu`='"+value5+"',`Počet`='"+value6+"',`Sériové číslo`='"+value7+"',`Cislo fili`='"+cf+"',`Tel.cislo`='"+telcislo+"',`IMEI`='"+imei+"',`SIM`='"+sim+"',`PUK`='"+puk+"',`PIN`='"+pin+"',`Dátum odoslania fili`='"+value8+"',`Záruka`='"+value10+"',`Poznámka`='"+value11+"' WHERE ID='"+index+"'";
+                String sql = "UPDATE `mobil-prepredajnu` SET `Sklad`='" + value2 + "',`Typ`='" + value3 + "',`Názov`='"
+                        + value4 + "',`Typ telefonu`='" + value5 + "',`Počet`='" + value6 + "',`Sériové číslo`='"
+                        + value7 + "',`Cislo fili`='" + cf + "',`Tel.cislo`='" + telcislo + "',`IMEI`='" + imei
+                        + "',`SIM`='" + sim + "',`PUK`='" + puk + "',`PIN`='" + pin + "',`Dátum odoslania fili`='"
+                        + value8 + "',`Záruka`='" + value10 + "',`Poznámka`='" + value11 + "' WHERE ID='" + index + "'";
 
                 ps = conn.prepareStatement(sql);
                 ps.execute();
@@ -341,26 +345,31 @@ public class KontrolaHWMPController implements Initializable {
     // zatial napic
     @FXML
     void getSelected(MouseEvent event) {
-        MP mp = tabulka.getSelectionModel().getSelectedItem();
-        System.out.println(mp.getDatum_odoslania());
-        LocalDate localDate1 = LocalDate.parse(mp.getDatum_odoslania());
-        LocalDate localDate2 = LocalDate.parse(mp.getZaruka());
+        try {
+            MP mp = tabulka.getSelectionModel().getSelectedItem();
+            System.out.println(mp.getDatum_odoslania());
+            LocalDate localDate1 = LocalDate.parse(mp.getDatum_odoslania());
+            LocalDate localDate2 = LocalDate.parse(mp.getZaruka());
+            ChoiceBoxSklad1.setValue(getVyberskladu(ChoiceBoxSklad));
+            TFNazov.setText(mp.getNazov());
+            TFTyp.setText(mp.getTyp());
+            TFTypTel.setText(mp.getTyptel());
+            TFPocet.setText(mp.getPocet());
+            TAPoznamka.setText(mp.getPoznamka());
+            TFCF.setText(mp.getCF());
+            TFTelcCslo.setText(mp.getTelcislo());
+            TFIMEI.setText(mp.getIMEI());
+            TFSIM.setText(mp.getSIM());
+            TFPUK.setText(mp.getPUK());
+            TFPIN.setText(mp.getPIN());
+            TFSeriove.setText(mp.getSC());
+            DFOdoslanienafili.setValue(localDate1);
+            DFZaruka.setValue(localDate2);
+            index = mp.getID();
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
 
-        TFNazov.setText(mp.getNazov());
-        TFTyp.setText(mp.getTyp());
-        TFTypTel.setText(mp.getTyptel());
-        TFPocet.setText(mp.getPocet());
-        TAPoznamka.setText(mp.getPoznamka());
-        TFCF.setText(mp.getCF());
-        TFTelcCslo.setText(mp.getTelcislo());
-        TFIMEI.setText(mp.getIMEI());
-        TFSIM.setText(mp.getSIM());
-        TFPUK.setText(mp.getPUK());
-        TFPIN.setText(mp.getPIN());
-        TFSeriove.setText(mp.getSC());
-        DFOdoslanienafili.setValue(localDate1);
-        DFZaruka.setValue(localDate2);
-        index = mp.getID();
     }
 
     private void vycisti() {

@@ -296,21 +296,25 @@ public class KontrolaHWQuailController implements Initializable {
     // zatial napic
     @FXML
     void getSelected(MouseEvent event) {
-        Quail quail = tabulka.getSelectionModel().getSelectedItem();
-        System.out.println(quail.getDatum_odoslania());
-        LocalDate localDate1 = LocalDate.parse(quail.getDatum_odoslania());
-        LocalDate localDate2 = LocalDate.parse(quail.getZaruka());
+        try {
+            Quail quail = tabulka.getSelectionModel().getSelectedItem();
+            System.out.println(quail.getDatum_odoslania());
+            LocalDate localDate1 = LocalDate.parse(quail.getDatum_odoslania());
+            LocalDate localDate2 = LocalDate.parse(quail.getZaruka());
+            ChoiceBoxSklad1.setValue(getVyberskladu(ChoiceBoxSklad));
+            TFNazov.setText(quail.getNazov());
+            TFTyp.setText(quail.getTyp());
+            TFPocet.setText(quail.getPocet());
+            TAPoznamka.setText(quail.getPoznamka());
+            TFCF.setText(quail.getCF());
+            TFSeriove.setText(quail.getSC());
+            DFOdoslanienafili.setValue(localDate1);
+            DFZaruka.setValue(localDate2);
+            index = quail.getID();
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
 
-        TFNazov.setText(quail.getNazov());
-        TFTyp.setText(quail.getTyp());
-        TFPocet.setText(quail.getPocet());
-        TAPoznamka.setText(quail.getPoznamka());
-        TFCF.setText(quail.getCF());
-
-        TFSeriove.setText(quail.getSC());
-        DFOdoslanienafili.setValue(localDate1);
-        DFZaruka.setValue(localDate2);
-        index = quail.getID();
     }
 
     private void vycisti() {

@@ -105,7 +105,7 @@ public class KontrolaHWOstatneController implements Initializable {
     private TableColumn<String, Ostatne> ColumDatumodoslania;
 
     @FXML
-    private TableColumn< Ostatne,String> ColumZaruka;
+    private TableColumn<Ostatne, String> ColumZaruka;
 
     @FXML
     private TableColumn<String, Ostatne> ColumPoznamka;
@@ -294,21 +294,25 @@ public class KontrolaHWOstatneController implements Initializable {
     // zatial napic
     @FXML
     void getSelected(MouseEvent event) {
-        Ostatne ostatne = tabulka.getSelectionModel().getSelectedItem();
-        System.out.println(ostatne.getDatum_odoslania());
-        LocalDate localDate1 = LocalDate.parse(ostatne.getDatum_odoslania());
-        LocalDate localDate2 = LocalDate.parse(ostatne.getZaruka());
+        try {
+            Ostatne ostatne = tabulka.getSelectionModel().getSelectedItem();
+            System.out.println(ostatne.getDatum_odoslania());
+            LocalDate localDate1 = LocalDate.parse(ostatne.getDatum_odoslania());
+            LocalDate localDate2 = LocalDate.parse(ostatne.getZaruka());
+            ChoiceBoxSklad1.setValue(getVyberskladu(ChoiceBoxSklad));
+            TFNazov.setText(ostatne.getNazov());
+            TFTyp.setText(ostatne.getTyp());
+            TFPocet.setText(ostatne.getPocet());
+            TAPoznamka.setText(ostatne.getPoznamka());
+            TFCF.setText(ostatne.getCF());
+            TFSeriove.setText(ostatne.getSC());
+            DFOdoslanienafili.setValue(localDate1);
+            DFZaruka.setValue(localDate2);
+            index = ostatne.getID();
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
 
-        TFNazov.setText(ostatne.getNazov());
-        TFTyp.setText(ostatne.getTyp());
-        TFPocet.setText(ostatne.getPocet());
-        TAPoznamka.setText(ostatne.getPoznamka());
-        TFCF.setText(ostatne.getCF());
-
-        TFSeriove.setText(ostatne.getSC());
-        DFOdoslanienafili.setValue(localDate1);
-        DFZaruka.setValue(localDate2);
-        index = ostatne.getID();
     }
 
     private void vycisti() {

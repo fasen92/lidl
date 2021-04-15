@@ -105,7 +105,7 @@ public class KontrolaHWScannerController implements Initializable {
     private TableColumn<String, Scanner> ColumDatumodoslania;
 
     @FXML
-    private TableColumn<Scanner,String> ColumZaruka;
+    private TableColumn<Scanner, String> ColumZaruka;
 
     @FXML
     private TableColumn<String, Scanner> ColumPoznamka;
@@ -297,19 +297,24 @@ public class KontrolaHWScannerController implements Initializable {
     // zatial napic
     @FXML
     void getSelected(MouseEvent event) {
-        Scanner sc = tabulka.getSelectionModel().getSelectedItem();
-        System.out.println(sc.getDatum_odoslania());
-        LocalDate localDate1 = LocalDate.parse(sc.getDatum_odoslania());
-        LocalDate localDate2 = LocalDate.parse(sc.getZaruka());
+        try {
+            Scanner sc = tabulka.getSelectionModel().getSelectedItem();
+            System.out.println(sc.getDatum_odoslania());
+            LocalDate localDate1 = LocalDate.parse(sc.getDatum_odoslania());
+            LocalDate localDate2 = LocalDate.parse(sc.getZaruka());
+            ChoiceBoxSklad1.setValue(getVyberskladu(ChoiceBoxSklad));
+            TFNazov.setText(sc.getNazov());
+            TFTyp.setText(sc.getTyp());
+            TFPocet.setText(sc.getPocet());
+            TAPoznamka.setText(sc.getPoznamka());
+            TFSeriove.setText(sc.getSC());
+            DFOdoslanienafili.setValue(localDate1);
+            DFZaruka.setValue(localDate2);
+            index = sc.getID();
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
 
-        TFNazov.setText(sc.getNazov());
-        TFTyp.setText(sc.getTyp());
-        TFPocet.setText(sc.getPocet());
-        TAPoznamka.setText(sc.getPoznamka());
-        TFSeriove.setText(sc.getSC());
-        DFOdoslanienafili.setValue(localDate1);
-        DFZaruka.setValue(localDate2);
-        index = sc.getID();
     }
 
     @FXML
@@ -422,6 +427,7 @@ public class KontrolaHWScannerController implements Initializable {
             };
         });
     }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("vytvorenie pozadia");

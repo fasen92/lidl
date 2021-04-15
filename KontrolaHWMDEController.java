@@ -35,7 +35,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-
 public class KontrolaHWMDEController implements Initializable {
 
     @FXML
@@ -126,7 +125,7 @@ public class KontrolaHWMDEController implements Initializable {
     private TableColumn<String, MDE> ColumDatumodoslania;
 
     @FXML
-    private TableColumn<MDE,String> ColumZaruka;
+    private TableColumn<MDE, String> ColumZaruka;
 
     @FXML
     private TableColumn<String, MDE> ColumPoznamka;
@@ -136,62 +135,61 @@ public class KontrolaHWMDEController implements Initializable {
     String datumodoslania;
     String wificheck;
     String index = "";
-    
 
     Alert alert = new Alert(AlertType.INFORMATION);
-    
+
     static ObservableList<MDE> OLtable = FXCollections.observableArrayList();
 
     @FXML
     void OnClickRefresh(ActionEvent event) throws IOException, SQLException {
-        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="MDE") {
+        if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "MDE") {
             update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
         }
-        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Lispettore-scanner") {
+        if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Lispettore-scanner") {
             Parent scannerParent = FXMLLoader.load(getClass().getResource("KontrolaHWScanner.fxml"));
             Scene scannerScene = new Scene(scannerParent);
-            
-            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(scannerScene);
             window.show();
         }
-        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Pbv") {
+        if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Pbv") {
             Parent pbvParent = FXMLLoader.load(getClass().getResource("KontrolaHWPBV.fxml"));
             Scene pbvScene = new Scene(pbvParent);
-        
-            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(pbvScene);
             window.show();
         }
-        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Quail") {
+        if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Quail") {
             Parent quailParent = FXMLLoader.load(getClass().getResource("KontrolaHWQuail.fxml"));
             Scene quailScene = new Scene(quailParent);
-            
-            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(quailScene);
             window.show();
         }
-        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Rabattdrucker") {
+        if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Rabattdrucker") {
             Parent rabatParent = FXMLLoader.load(getClass().getResource("KontrolaHWRabattdrucker.fxml"));
             Scene rabatScene = new Scene(rabatParent);
-            
-            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(rabatScene);
             window.show();
         }
-        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Ostatné") {
+        if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Ostatné") {
             Parent rabatParent = FXMLLoader.load(getClass().getResource("KontrolaHWOstatne.fxml"));
             Scene rabatScene = new Scene(rabatParent);
-            
-            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(rabatScene);
             window.show();
         }
-        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Moblný telefon") {
+        if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Moblný telefon") {
             Parent rabatParent = FXMLLoader.load(getClass().getResource("KontrolaHWMP.fxml"));
             Scene rabatScene = new Scene(rabatParent);
-            
-            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(rabatScene);
             window.show();
         }
@@ -201,38 +199,42 @@ public class KontrolaHWMDEController implements Initializable {
     void OnClickSpat(ActionEvent event) throws IOException {
         Parent MenuParent = FXMLLoader.load(getClass().getResource("Menu.fxml"));
         Scene MenuScene = new Scene(MenuParent);
-        
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(MenuScene);
         window.show();
     }
 
     @FXML
     void OnClickUloz(ActionEvent event) throws SQLException {
-        if (getVyberskladu(ChoiceBoxSklad).isEmpty()||TFTyp.getText().isEmpty()||TFNazov.getText().isEmpty()) {
+        if (getVyberskladu(ChoiceBoxSklad).isEmpty() || TFTyp.getText().isEmpty() || TFNazov.getText().isEmpty()) {
             alert.setTitle("Information");
             alert.setContentText("Povynné polia sklad, typ alebo nazov nie sú vyplnené");
             alert.showAndWait();
-    
-            }else{
+
+        } else {
             datumodoslania = String.valueOf(DFOdoslanienafili.getValue());
             zaruka = String.valueOf(DFZaruka.getValue());
-            //scanner = new Scanner(getVyberskladu(ChoiceBoxSklad),TFTyp.getText(),TFNazov.getText(),TFPocet.getText(), TFSeriove.getText(), datumodoslania,zaruka, TAPoznamka.getText());
+            // scanner = new
+            // Scanner(getVyberskladu(ChoiceBoxSklad),TFTyp.getText(),TFNazov.getText(),TFPocet.getText(),
+            // TFSeriove.getText(), datumodoslania,zaruka, TAPoznamka.getText());
             if (CheckboxWifi.isSelected()) {
                 wificheck = "1";
-            }else{
+            } else {
                 wificheck = "0";
             }
-            JDBMySQLConnection.addtoMDE(getVyberskladu(ChoiceBoxSklad1),TFTyp.getText(),TFNazov.getText(),TFPocet.getText(), TFSeriove.getText(),TFMAC.getText(),TFIP.getText(),wificheck,TFCF.getText() ,datumodoslania,zaruka, TAPoznamka.getText());
-    
+            JDBMySQLConnection.addtoMDE(getVyberskladu(ChoiceBoxSklad1), TFTyp.getText(), TFNazov.getText(),
+                    TFPocet.getText(), TFSeriove.getText(), TFMAC.getText(), TFIP.getText(), wificheck, TFCF.getText(),
+                    datumodoslania, zaruka, TAPoznamka.getText());
+
             alert.setTitle("Information");
             alert.setContentText("Uspešne pridané");
             alert.showAndWait();
-    
+
             vycisti();
-    
+
             update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
-            }
+        }
 
     }
 
@@ -242,7 +244,6 @@ public class KontrolaHWMDEController implements Initializable {
 
     }
 
-    
     @FXML
     void OnClickDelete(ActionEvent event) throws SQLException {
         ObservableList<MDE> mde = tabulka.getSelectionModel().getSelectedItems();
@@ -273,7 +274,8 @@ public class KontrolaHWMDEController implements Initializable {
         }
 
     }
-    //aj toto
+
+    // aj toto
     @FXML
     void OnClickUlozZmeny(ActionEvent event) throws SQLException {
 
@@ -283,75 +285,83 @@ public class KontrolaHWMDEController implements Initializable {
             alert.showAndWait();
 
         } else {
-            
+
             try {
-            datumodoslania = String.valueOf(DFOdoslanienafili.getValue());
-            zaruka = String.valueOf(DFZaruka.getValue());
-            
-            Connection conn =JDBMySQLConnection.getConnection();
-            PreparedStatement ps = null;
+                datumodoslania = String.valueOf(DFOdoslanienafili.getValue());
+                zaruka = String.valueOf(DFZaruka.getValue());
 
-            if (CheckboxWifi.isSelected()) {
-                wificheck = "1";
-            }else{
-                wificheck = "0";
-            }
-            
-            String value2 = ChoiceBoxSklad1.getValue();
-            String value3 = TFTyp.getText();
-            String value4 = TFNazov.getText();
-            String value5 = TFPocet.getText();
-            String value6 = TFSeriove.getText();
-            String value7 = TFMAC.getText();
-            String value8 = TFIP.getText();
-            String value9 = wificheck;
-            String value10 = DFOdoslanienafili.getValue().toString();
-            String value11 = DFZaruka.getValue().toString();
-            String value12 = TAPoznamka.getText();
-            String value13 = TFCF.getText();
-            
-            String sql = "UPDATE `mde` SET `Sklad`='"+value2+"',`Typ`='"+value3+"',`Názov`='"+value4+"',`Počet`='"+value5+"',`Sériové číslo`='"+value6+"',`MAC adresa`='"+value7+"',`IP adresa`='"+value8+"',`HuaweiWifi`='"+value9+"',`Cislo fili`='"+value13+"',`Dátum odoslania fili`='"+value10+"',`Záruka`='"+value11+"',`Poznámka`='"+value12+"'  WHERE ID='"+index+"'";
+                Connection conn = JDBMySQLConnection.getConnection();
+                PreparedStatement ps = null;
 
-            ps = conn.prepareStatement(sql);
-            ps.execute();
+                if (CheckboxWifi.isSelected()) {
+                    wificheck = "1";
+                } else {
+                    wificheck = "0";
+                }
 
-            JOptionPane.showMessageDialog(null, "Uspesne upravene");
-            vycisti();
+                String value2 = ChoiceBoxSklad1.getValue();
+                String value3 = TFTyp.getText();
+                String value4 = TFNazov.getText();
+                String value5 = TFPocet.getText();
+                String value6 = TFSeriove.getText();
+                String value7 = TFMAC.getText();
+                String value8 = TFIP.getText();
+                String value9 = wificheck;
+                String value10 = DFOdoslanienafili.getValue().toString();
+                String value11 = DFZaruka.getValue().toString();
+                String value12 = TAPoznamka.getText();
+                String value13 = TFCF.getText();
 
-            update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
+                String sql = "UPDATE `mde` SET `Sklad`='" + value2 + "',`Typ`='" + value3 + "',`Názov`='" + value4
+                        + "',`Počet`='" + value5 + "',`Sériové číslo`='" + value6 + "',`MAC adresa`='" + value7
+                        + "',`IP adresa`='" + value8 + "',`HuaweiWifi`='" + value9 + "',`Cislo fili`='" + value13
+                        + "',`Dátum odoslania fili`='" + value10 + "',`Záruka`='" + value11 + "',`Poznámka`='" + value12
+                        + "'  WHERE ID='" + index + "'";
+
+                ps = conn.prepareStatement(sql);
+                ps.execute();
+
+                JOptionPane.showMessageDialog(null, "Uspesne upravene");
+                vycisti();
+
+                update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "niekde nastala chyba");
-            }            
+            }
         }
     }
 
-    //zatial napic
+    // zatial napic
     @FXML
     void getSelected(MouseEvent event) {
-        MDE mde = tabulka.getSelectionModel().getSelectedItem();
-        System.out.println(mde.getDatum_odoslania());
-        LocalDate localDate1 = LocalDate.parse(mde.getDatum_odoslania());
-        LocalDate localDate2 = LocalDate.parse(mde.getZaruka());
 
-        if (mde.getWIFI() == "Ano") {
-            CheckboxWifi.setSelected(true);
-        }else{
-            CheckboxWifi.setSelected(false);
+        try {
+            MDE mde = tabulka.getSelectionModel().getSelectedItem();
+            System.out.println(mde.getDatum_odoslania());
+            LocalDate localDate1 = LocalDate.parse(mde.getDatum_odoslania());
+            LocalDate localDate2 = LocalDate.parse(mde.getZaruka());
+
+            if (mde.getWIFI() == "Ano") {
+                CheckboxWifi.setSelected(true);
+            } else {
+                CheckboxWifi.setSelected(false);
+            }
+            ChoiceBoxSklad1.setValue(getVyberskladu(ChoiceBoxSklad));
+            TFNazov.setText(mde.getNazov());
+            TFTyp.setText(mde.getTyp());
+            TFPocet.setText(mde.getPocet());
+            TAPoznamka.setText(mde.getPoznamka());
+            TFSeriove.setText(mde.getSC());
+            DFOdoslanienafili.setValue(localDate1);
+            DFZaruka.setValue(localDate2);
+            TFCF.setText(mde.getCF());
+            TFIP.setText(mde.getIP());
+            TFMAC.setText(mde.getMAC());
+            index = mde.getID();
+        } catch (Exception e) {
+            // TODO: handle exception
         }
 
-        TFNazov.setText(mde.getNazov());
-        TFTyp.setText(mde.getTyp());
-        TFPocet.setText(mde.getPocet());
-        TAPoznamka.setText(mde.getPoznamka());
-        TFSeriove.setText(mde.getSC());
-        DFOdoslanienafili.setValue(localDate1);
-        DFZaruka.setValue(localDate2);
-        TFCF.setText(mde.getCF());
-        TFIP.setText(mde.getIP());
-        TFMAC.setText(mde.getMAC());
-        index = mde.getID();
-        
-        System.out.println("index"+index);
     }
 
     private void vycisti() {
@@ -367,13 +377,14 @@ public class KontrolaHWMDEController implements Initializable {
         TFCF.clear();
         TFMAC.clear();
         TFIP.clear();
-        
+
     }
 
-    public String getVyberskladu(ChoiceBox<String> ChoiceBoxSklad){
+    public String getVyberskladu(ChoiceBox<String> ChoiceBoxSklad) {
         return ChoiceBoxSklad.getValue();
     }
-    public String getVyberZariadenia(ChoiceBox<String> ChoiceBoxTypzariadenia){
+
+    public String getVyberZariadenia(ChoiceBox<String> ChoiceBoxTypzariadenia) {
         return ChoiceBoxTypzariadenia.getValue();
     }
 
@@ -422,9 +433,9 @@ public class KontrolaHWMDEController implements Initializable {
 
     }
 
-    public void update_Table(String choiceZariadenie, String choiceSklad) throws SQLException{
-        
-        OLtable = JDBMySQLConnection.getMDE(choiceZariadenie,choiceSklad);  
+    public void update_Table(String choiceZariadenie, String choiceSklad) throws SQLException {
+
+        OLtable = JDBMySQLConnection.getMDE(choiceZariadenie, choiceSklad);
 
         ColumTyp.setCellValueFactory(new PropertyValueFactory<>("Typ"));
         ColumSC.setCellValueFactory(new PropertyValueFactory<>("SC"));
@@ -438,7 +449,6 @@ public class KontrolaHWMDEController implements Initializable {
         ColumDatumodoslania.setCellValueFactory(new PropertyValueFactory<>("Datum_odoslania"));
         ColumPoznamka.setCellValueFactory(new PropertyValueFactory<>("Poznamka"));
 
-           
         tabulka.setItems(OLtable);
 
         customiseFactory(ColumZaruka);
@@ -471,14 +481,14 @@ public class KontrolaHWMDEController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("vytvorenie pozadia");
         setup_Choiceboxs();
-        
+
         try {
-            System.out.println(ChoiceBoxSklad.getValue()); 
-            update_Table(ChoiceBoxTypzariadenia.getValue(),ChoiceBoxSklad.getValue());
+            System.out.println(ChoiceBoxSklad.getValue());
+            update_Table(ChoiceBoxTypzariadenia.getValue(), ChoiceBoxSklad.getValue());
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
+
     }
 
 }

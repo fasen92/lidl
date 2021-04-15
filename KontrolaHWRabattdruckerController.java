@@ -305,21 +305,26 @@ public class KontrolaHWRabattdruckerController implements Initializable {
     // zatial napic
     @FXML
     void getSelected(MouseEvent event) {
-        Rabattdrucker rbt = tabulka.getSelectionModel().getSelectedItem();
-        System.out.println(rbt.getDatum_odoslania());
-        LocalDate localDate1 = LocalDate.parse(rbt.getDatum_odoslania());
-        LocalDate localDate2 = LocalDate.parse(rbt.getZaruka());
+        try {
+            Rabattdrucker rbt = tabulka.getSelectionModel().getSelectedItem();
+            System.out.println(rbt.getDatum_odoslania());
+            LocalDate localDate1 = LocalDate.parse(rbt.getDatum_odoslania());
+            LocalDate localDate2 = LocalDate.parse(rbt.getZaruka());
+            ChoiceBoxSklad1.setValue(getVyberZariadenia(ChoiceBoxTypzariadenia));
+            TFNazov.setText(rbt.getNazov());
+            TFTyp.setText(rbt.getTyp());
+            TFPocet.setText(rbt.getPocet());
+            TAPoznamka.setText(rbt.getPoznamka());
+            TFCF.setText(rbt.getCF());
+            TFECO.setText(rbt.getECO());
+            TFSeriove.setText(rbt.getSC());
+            DFOdoslanienafili.setValue(localDate1);
+            DFZaruka.setValue(localDate2);
+            index = rbt.getID();
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
 
-        TFNazov.setText(rbt.getNazov());
-        TFTyp.setText(rbt.getTyp());
-        TFPocet.setText(rbt.getPocet());
-        TAPoznamka.setText(rbt.getPoznamka());
-        TFCF.setText(rbt.getCF());
-        TFECO.setText(rbt.getECO());
-        TFSeriove.setText(rbt.getSC());
-        DFOdoslanienafili.setValue(localDate1);
-        DFZaruka.setValue(localDate2);
-        index = rbt.getID();
     }
 
     private void vycisti() {
@@ -410,7 +415,7 @@ public class KontrolaHWRabattdruckerController implements Initializable {
 
     }
 
-    private void customiseFactory(TableColumn<Rabattdrucker,String> calltypel) {
+    private void customiseFactory(TableColumn<Rabattdrucker, String> calltypel) {
         calltypel.setCellFactory(column -> {
             return new TableCell<Rabattdrucker, String>() {
                 @Override
