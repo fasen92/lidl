@@ -11,9 +11,9 @@
 
 <AnchorPane fx:id="back" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@CSS/style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MenuController">
    <children>
-      <VBox layoutX="313.0" layoutY="166.0" prefHeight="352.0" prefWidth="174.0">
+      <VBox layoutX="231.0" layoutY="173.0" prefHeight="391.0" prefWidth="339.0">
          <children>
-            <Button fx:id="BtnKontrolaHW" mnemonicParsing="false" onAction="#OnClickKontrolaHW" prefHeight="45.0" prefWidth="190.0" text="Kontrola HW" />
+            <Button fx:id="BtnKontrolaHW" mnemonicParsing="false" onAction="#OnClickKontrolaHW" prefHeight="57.0" prefWidth="338.0" stylesheets="@CSS/button.css" text="Kontrola HW" />
             <Button fx:id="BtnReklamácia" mnemonicParsing="false" onAction="#OnClickReklamacie" prefHeight="45.0" prefWidth="190.0" text="Reklamácia">
                <VBox.margin>
                   <Insets top="10.0" />
@@ -42,7 +42,7 @@
             <Font name="Book Antiqua" size="48.0" />
          </font>
       </Label>
-      <Button fx:id="BtnZamestnanci" layoutX="581.0" layoutY="166.0" mnemonicParsing="false" onAction="#OnClickZamestnanci" prefHeight="45.0" prefWidth="174.0" text="Zamestnanci" />
+      <Button fx:id="BtnZamestnanci" layoutX="604.0" layoutY="173.0" mnemonicParsing="false" onAction="#OnClickZamestnanci" prefHeight="45.0" prefWidth="174.0" text="Zamestnanci" />
       <Button fx:id="BtnSignOut" alignment="CENTER_RIGHT" layoutX="627.0" layoutY="32.0" mnemonicParsing="false" onAction="#OnClickSignOut" prefHeight="45.0" prefWidth="128.0" text="Odhlásiť" textAlignment="RIGHT" wrapText="true">
          <font>
             <Font size="18.0" />
