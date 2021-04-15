@@ -92,7 +92,7 @@ public class KontrolaHWPBVController implements Initializable {
     private TableView<Pbv> tabulka;
 
     @FXML
-    private TableColumn<Pbv,String> ColumTyp;
+    private TableColumn<Pbv, String> ColumTyp;
 
     @FXML
     private TableColumn<String, Pbv> ColumNazov;
@@ -107,7 +107,7 @@ public class KontrolaHWPBVController implements Initializable {
     private TableColumn<String, Pbv> ColumDatumodoslania;
 
     @FXML
-    private TableColumn<Pbv,String> ColumZaruka;
+    private TableColumn<Pbv, String> ColumZaruka;
 
     @FXML
     private TableColumn<String, Pbv> ColumPoznamka;
@@ -126,7 +126,7 @@ public class KontrolaHWPBVController implements Initializable {
     void OnClickRefresh(ActionEvent event) throws SQLException, IOException {
         if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Pbv") {
             update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
-            
+
         }
         if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Lispettore-scanner") {
             Parent scannerParent = FXMLLoader.load(getClass().getResource("KontrolaHWScanner.fxml"));
@@ -239,8 +239,6 @@ public class KontrolaHWPBVController implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
             try {
-                System.out.println(pbv.get(0).getID());
-
                 Connection conn = JDBMySQLConnection.getConnection();
                 String sql = "DELETE FROM `pbv` WHERE ID = ?";
                 PreparedStatement pst;
@@ -257,7 +255,8 @@ public class KontrolaHWPBVController implements Initializable {
         }
 
     }
-    //aj toto
+
+    // aj toto
     @FXML
     void OnClickUlozZmeny(ActionEvent event) throws SQLException {
 
@@ -267,47 +266,50 @@ public class KontrolaHWPBVController implements Initializable {
             alert.showAndWait();
 
         } else {
-            
+
             try {
-            datumodoslania = String.valueOf(DFOdoslanienafili.getValue());
-            zaruka = String.valueOf(DFZaruka.getValue());
-            
-            Connection conn =JDBMySQLConnection.getConnection();
-            PreparedStatement ps = null;
-            String value2 = ChoiceBoxSklad1.getValue();
-            String value3 = TFTyp.getText();
-            String value4 = TFNazov.getText();
-            String value5 = TFPocet.getText();
-            String value6 = TFSeriove.getText();
-            String value8 = DFOdoslanienafili.getValue().toString();
-            String value9 = DFZaruka.getValue().toString();
-            String value10 = TAPoznamka.getText();
-            
-            String sql = "UPDATE `pbv` SET `Sklad`='"+value2+"',`Typ`='"+value3+"',`Názov`='"+value4+"',`Počet`='"+value5+"',`Sériové číslo`='"+value6+"',`Dátum odoslania fili`='"+value8+"',`Záruka`='"+value9+"',`Poznámka`='"+value10+"' WHERE ID='"+index+"'";
+                datumodoslania = String.valueOf(DFOdoslanienafili.getValue());
+                zaruka = String.valueOf(DFZaruka.getValue());
 
-            ps = conn.prepareStatement(sql);
-            ps.execute();
+                Connection conn = JDBMySQLConnection.getConnection();
+                PreparedStatement ps = null;
+                String value2 = ChoiceBoxSklad1.getValue();
+                String value3 = TFTyp.getText();
+                String value4 = TFNazov.getText();
+                String value5 = TFPocet.getText();
+                String value6 = TFSeriove.getText();
+                String value8 = DFOdoslanienafili.getValue().toString();
+                String value9 = DFZaruka.getValue().toString();
+                String value10 = TAPoznamka.getText();
 
-            JOptionPane.showMessageDialog(null, "Uspese upravene");
-            vycisti();
+                String sql = "UPDATE `pbv` SET `Sklad`='" + value2 + "',`Typ`='" + value3 + "',`Názov`='" + value4
+                        + "',`Počet`='" + value5 + "',`Sériové číslo`='" + value6 + "',`Dátum odoslania fili`='"
+                        + value8 + "',`Záruka`='" + value9 + "',`Poznámka`='" + value10 + "' WHERE ID='" + index + "'";
 
-            update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
+                ps = conn.prepareStatement(sql);
+                ps.execute();
+
+                JOptionPane.showMessageDialog(null, "Uspese upravene");
+                vycisti();
+
+                update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "nikde nastala chyba");
             }
-            
+
         }
 
     }
 
-    //zatial napic
+    // zatial napic
     @FXML
     void getSelected(MouseEvent event) {
+        
+        try {
         Pbv pbv = tabulka.getSelectionModel().getSelectedItem();
-        System.out.println(pbv.getDatum_odoslania());
         LocalDate localDate1 = LocalDate.parse(pbv.getDatum_odoslania());
         LocalDate localDate2 = LocalDate.parse(pbv.getZaruka());
-
+        ChoiceBoxSklad1.setValue(getVyberskladu(ChoiceBoxSklad));
         TFNazov.setText(pbv.getNazov());
         TFTyp.setText(pbv.getTyp());
         TFPocet.setText(pbv.getPocet());
@@ -316,6 +318,10 @@ public class KontrolaHWPBVController implements Initializable {
         DFOdoslanienafili.setValue(localDate1);
         DFZaruka.setValue(localDate2);
         index = pbv.getID();
+        } catch (Exception e) {
+            //TODO: handle exception
+        }
+        
     }
 
     private void vycisti() {
@@ -345,47 +351,40 @@ public class KontrolaHWPBVController implements Initializable {
         ObservableList<String> OLzariadenia = FXCollections.observableArrayList("Pbv", "Lispettore-scanner", "MDE",
                 "Rabattdrucker", "Quail", "Moblný telefon", "Ostatné");
 
-        
-
         Singleton x = Singleton.getInstance();
-        if(String.valueOf(x.ucet.getRola()).equals("Admin")){
+        ChoiceBoxTypzariadenia.setValue("Pbv");
+        if (String.valueOf(x.ucet.getRola()).equals("Admin")) {
             ChoiceBoxSklad.setItems(OLsklady);
             ChoiceBoxTypzariadenia.setItems(OLzariadenia);
             ChoiceBoxSklad1.setItems(OLsklady);
 
-            ChoiceBoxTypzariadenia.setValue("Pbv");
             ChoiceBoxSklad.setValue("Sklad1");
             ChoiceBoxSklad1.setValue("Sklad1");
         }
-        if(String.valueOf(x.ucet.getSklad()).equals("Sklad 1")){
+        if (String.valueOf(x.ucet.getSklad()).equals("Sklad 1")) {
             ChoiceBoxSklad.setItems(OLsklady1);
             ChoiceBoxTypzariadenia.setItems(OLzariadenia);
             ChoiceBoxSklad1.setItems(OLsklady1);
 
-            ChoiceBoxTypzariadenia.setValue("Pbv");
             ChoiceBoxSklad.setValue("Sklad1");
             ChoiceBoxSklad1.setValue("Sklad1");
         }
-        if(String.valueOf(x.ucet.getSklad()).equals("Sklad 2")){
+        if (String.valueOf(x.ucet.getSklad()).equals("Sklad 2")) {
             ChoiceBoxSklad.setItems(OLsklady2);
             ChoiceBoxTypzariadenia.setItems(OLzariadenia);
             ChoiceBoxSklad1.setItems(OLsklady2);
 
-            ChoiceBoxTypzariadenia.setValue("Pbv");
             ChoiceBoxSklad.setValue("Sklad2");
             ChoiceBoxSklad1.setValue("Sklad2");
         }
-        if(String.valueOf(x.ucet.getSklad()).equals("Sklad 3")){
+        if (String.valueOf(x.ucet.getSklad()).equals("Sklad 3")) {
             ChoiceBoxSklad.setItems(OLsklady3);
             ChoiceBoxTypzariadenia.setItems(OLzariadenia);
             ChoiceBoxSklad1.setItems(OLsklady3);
 
-            ChoiceBoxTypzariadenia.setValue("Pbv");
             ChoiceBoxSklad.setValue("Sklad3");
             ChoiceBoxSklad1.setValue("Sklad3");
         }
-
-        
 
     }
 
@@ -413,28 +412,24 @@ public class KontrolaHWPBVController implements Initializable {
 
     }
 
-    private void customiseFactory(TableColumn<Pbv,String> calltypel) {
+    private void customiseFactory(TableColumn<Pbv, String> calltypel) {
         calltypel.setCellFactory(column -> {
-            return new TableCell<Pbv,String>() {
+            return new TableCell<Pbv, String>() {
                 @Override
                 protected void updateItem(String item, boolean empty) {
-                  
-                    
+
                     super.updateItem(item, empty);
                     setText(empty ? "" : getItem().toString());
                     setGraphic(null);
                     TableRow<Pbv> currentRow = getTableRow();
                     if (!isEmpty()) {
-                        
+
                         LocalDate date = LocalDate.parse(item);
-                        System.out.println(date);
-                        System.out.println(date.compareTo(LocalDate.now()));
-                        System.out.println(LocalDate.now());
-                        if(date.compareTo(LocalDate.now()) <= 0) 
+                        if (date.compareTo(LocalDate.now()) <= 0)
                             currentRow.setStyle("-fx-background-color: #CD1C24");
-                        
+
                     }
-                   
+
                 }
             };
         });
@@ -442,13 +437,10 @@ public class KontrolaHWPBVController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("vytvorenie pozadia");
         setup_Choiceboxs();
 
         try {
-            System.out.println(ChoiceBoxSklad.getValue());
             update_Table(ChoiceBoxTypzariadenia.getValue(), ChoiceBoxSklad.getValue());
-            
         } catch (SQLException e) {
             e.printStackTrace();
         }

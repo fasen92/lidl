@@ -23,7 +23,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
@@ -113,7 +115,7 @@ public class KontrolaHWRabattdruckerController implements Initializable {
     private TableColumn<String, Rabattdrucker> ColumPoznamka;
 
     @FXML
-    private TableColumn<String, Rabattdrucker> ColumZaruka;
+    private TableColumn<Rabattdrucker, String> ColumZaruka;
 
     String zaruka;
     String datumodoslania;
@@ -121,60 +123,60 @@ public class KontrolaHWRabattdruckerController implements Initializable {
     String index = "";
 
     Alert alert = new Alert(AlertType.INFORMATION);
-    
+
     static ObservableList<Rabattdrucker> OLtable = FXCollections.observableArrayList();
 
     @FXML
     void OnClickRefresh(ActionEvent event) throws IOException, SQLException {
-        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Pbv") {
+        if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Pbv") {
             Parent rabatParent = FXMLLoader.load(getClass().getResource("KontrolaHWPBV.fxml"));
             Scene rabatScene = new Scene(rabatParent);
-            
-            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(rabatScene);
             window.show();
         }
-        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Lispettore-scanner") {
-        Parent scannerParent = FXMLLoader.load(getClass().getResource("KontrolaHWScanner.fxml"));
-        Scene scannerScene = new Scene(scannerParent);
-        
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(scannerScene);
-        window.show();
-        }
-        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="MDE") {
-            Parent scannerParent = FXMLLoader.load(getClass().getResource("KontrolaHWMDE.fxml"));
+        if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Lispettore-scanner") {
+            Parent scannerParent = FXMLLoader.load(getClass().getResource("KontrolaHWScanner.fxml"));
             Scene scannerScene = new Scene(scannerParent);
-            
-            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(scannerScene);
             window.show();
         }
-        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Quail") {
+        if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "MDE") {
+            Parent scannerParent = FXMLLoader.load(getClass().getResource("KontrolaHWMDE.fxml"));
+            Scene scannerScene = new Scene(scannerParent);
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(scannerScene);
+            window.show();
+        }
+        if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Quail") {
             Parent quailParent = FXMLLoader.load(getClass().getResource("KontrolaHWQuail.fxml"));
             Scene quailScene = new Scene(quailParent);
-            
-            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(quailScene);
             window.show();
         }
-        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Rabattdrucker") {
-            
+        if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Rabattdrucker") {
+
             update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
         }
-        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Ostatné") {
+        if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Ostatné") {
             Parent rabatParent = FXMLLoader.load(getClass().getResource("KontrolaHWOstatne.fxml"));
             Scene rabatScene = new Scene(rabatParent);
-            
-            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(rabatScene);
             window.show();
         }
-        if (getVyberZariadenia(ChoiceBoxTypzariadenia)=="Moblný telefon") {
+        if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Moblný telefon") {
             Parent rabatParent = FXMLLoader.load(getClass().getResource("KontrolaHWMP.fxml"));
             Scene rabatScene = new Scene(rabatParent);
-            
-            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(rabatScene);
             window.show();
         }
@@ -184,41 +186,41 @@ public class KontrolaHWRabattdruckerController implements Initializable {
     void OnClickSpat(ActionEvent event) throws IOException {
         Parent MenuParent = FXMLLoader.load(getClass().getResource("Menu.fxml"));
         Scene MenuScene = new Scene(MenuParent);
-        
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(MenuScene);
         window.show();
     }
 
     @FXML
     void OnClickUloz(ActionEvent event) throws SQLException {
-        if (getVyberskladu(ChoiceBoxSklad).isEmpty()||TFTyp.getText().isEmpty()||TFNazov.getText().isEmpty()) {
+        if (getVyberskladu(ChoiceBoxSklad).isEmpty() || TFTyp.getText().isEmpty() || TFNazov.getText().isEmpty()) {
             alert.setTitle("Information");
             alert.setContentText("Povynné polia sklad, typ alebo nazov nie sú vyplnené");
             alert.showAndWait();
-    
-            }else{
+
+        } else {
             datumodoslania = String.valueOf(DFOdoslanienafili.getValue());
             zaruka = String.valueOf(DFZaruka.getValue());
-           
-    
-            JDBMySQLConnection.addtoRabattdrucker(getVyberskladu(ChoiceBoxSklad1),TFTyp.getText(),TFNazov.getText(),TFPocet.getText(), TFSeriove.getText(),TFECO.getText(),TFCF.getText(),datumodoslania,zaruka, TAPoznamka.getText());
-    
+
+            JDBMySQLConnection.addtoRabattdrucker(getVyberskladu(ChoiceBoxSklad1), TFTyp.getText(), TFNazov.getText(),
+                    TFPocet.getText(), TFSeriove.getText(), TFECO.getText(), TFCF.getText(), datumodoslania, zaruka,
+                    TAPoznamka.getText());
+
             alert.setTitle("Information");
             alert.setContentText("Uspešne pridané");
             alert.showAndWait();
-    
+
             vycisti();
-    
+
             update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
         }
     }
 
     @FXML
     void OnClickVycisti(ActionEvent event) {
-            vycisti();
+        vycisti();
     }
-    
 
     @FXML
     void OnClickDelete(ActionEvent event) throws SQLException {
@@ -249,7 +251,8 @@ public class KontrolaHWRabattdruckerController implements Initializable {
         }
 
     }
-    //aj toto
+
+    // aj toto
     @FXML
     void OnClickUlozZmeny(ActionEvent event) throws SQLException {
 
@@ -259,45 +262,47 @@ public class KontrolaHWRabattdruckerController implements Initializable {
             alert.showAndWait();
 
         } else {
-            
+
             try {
-            datumodoslania = String.valueOf(DFOdoslanienafili.getValue());
-            zaruka = String.valueOf(DFZaruka.getValue());
-            
-            Connection conn =JDBMySQLConnection.getConnection();
-            PreparedStatement ps = null;
-            String value2 = ChoiceBoxSklad1.getValue();
-            String value3 = TFTyp.getText();
-            String value4 = TFNazov.getText();
-            String value5 = TFPocet.getText();
-            String value6 = TFSeriove.getText();
-            
-            String value7 = TFECO.getText();
-            String value8 = TFCF.getText();
+                datumodoslania = String.valueOf(DFOdoslanienafili.getValue());
+                zaruka = String.valueOf(DFZaruka.getValue());
 
+                Connection conn = JDBMySQLConnection.getConnection();
+                PreparedStatement ps = null;
+                String value2 = ChoiceBoxSklad1.getValue();
+                String value3 = TFTyp.getText();
+                String value4 = TFNazov.getText();
+                String value5 = TFPocet.getText();
+                String value6 = TFSeriove.getText();
 
-            String value10 = DFOdoslanienafili.getValue().toString();
-            String value11 = DFZaruka.getValue().toString();
-            String value12 = TAPoznamka.getText();
-            
-            String sql = "UPDATE `rabattdrucker` SET `Sklad`='"+value2+"',`Typ`='"+value3+"',`Názov`='"+value4+"',`Počet`='"+value5+"',`Sériové číslo`='"+value6+"',`Evidencne cislo`='"+value7+"',`Cislo fili`='"+value8+"',`Dátum odoslania fili`='"+value10+"',`Záruka`='"+value11+"',`Poznámka`='"+value12+"' WHERE ID='"+index+"'";
+                String value7 = TFECO.getText();
+                String value8 = TFCF.getText();
 
-            ps = conn.prepareStatement(sql);
-            ps.execute();
+                String value10 = DFOdoslanienafili.getValue().toString();
+                String value11 = DFZaruka.getValue().toString();
+                String value12 = TAPoznamka.getText();
 
-            JOptionPane.showMessageDialog(null, "Uspese upravene");
-            vycisti();
+                String sql = "UPDATE `rabattdrucker` SET `Sklad`='" + value2 + "',`Typ`='" + value3 + "',`Názov`='"
+                        + value4 + "',`Počet`='" + value5 + "',`Sériové číslo`='" + value6 + "',`Evidencne cislo`='"
+                        + value7 + "',`Cislo fili`='" + value8 + "',`Dátum odoslania fili`='" + value10 + "',`Záruka`='"
+                        + value11 + "',`Poznámka`='" + value12 + "' WHERE ID='" + index + "'";
 
-            update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
+                ps = conn.prepareStatement(sql);
+                ps.execute();
+
+                JOptionPane.showMessageDialog(null, "Uspese upravene");
+                vycisti();
+
+                update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "nikde nastala chyba");
             }
-            
+
         }
 
     }
 
-    //zatial napic
+    // zatial napic
     @FXML
     void getSelected(MouseEvent event) {
         Rabattdrucker rbt = tabulka.getSelectionModel().getSelectedItem();
@@ -330,66 +335,116 @@ public class KontrolaHWRabattdruckerController implements Initializable {
         TFECO.clear();
     }
 
-    public String getVyberskladu(ChoiceBox<String> ChoiceBoxSklad){
+    public String getVyberskladu(ChoiceBox<String> ChoiceBoxSklad) {
         return ChoiceBoxSklad.getValue();
     }
-    public String getVyberZariadenia(ChoiceBox<String> ChoiceBoxTypzariadenia){
+
+    public String getVyberZariadenia(ChoiceBox<String> ChoiceBoxTypzariadenia) {
         return ChoiceBoxTypzariadenia.getValue();
     }
 
-    public void setup_Choiceboxs(){
-        ObservableList <String> OLsklady = FXCollections.observableArrayList("Sklad1","Sklad2","Sklad3");
-        ObservableList <String> OLzariadenia = FXCollections.observableArrayList("Pbv","Lispettore-scanner","MDE","Rabattdrucker","Quail","Moblný telefon","Ostatné");
+    public void setup_Choiceboxs() {
+        ObservableList<String> OLsklady = FXCollections.observableArrayList("Sklad1", "Sklad2", "Sklad3");
+        ObservableList<String> OLsklady3 = FXCollections.observableArrayList("Sklad3");
+        ObservableList<String> OLsklady2 = FXCollections.observableArrayList("Sklad2");
+        ObservableList<String> OLsklady1 = FXCollections.observableArrayList("Sklad1");
+        ObservableList<String> OLzariadenia = FXCollections.observableArrayList("Pbv", "Lispettore-scanner", "MDE",
+                "Rabattdrucker", "Quail", "Moblný telefon", "Ostatné");
 
-        ChoiceBoxSklad.setItems(OLsklady);
-        ChoiceBoxTypzariadenia.setItems(OLzariadenia);
-        ChoiceBoxSklad1.setItems(OLsklady);
-
+        Singleton x = Singleton.getInstance();
         ChoiceBoxTypzariadenia.setValue("Rabattdrucker");
-        ChoiceBoxSklad.setValue("Sklad1");
-        ChoiceBoxSklad1.setValue("Sklad1");
+        if (String.valueOf(x.ucet.getRola()).equals("Admin")) {
+            ChoiceBoxSklad.setItems(OLsklady);
+            ChoiceBoxTypzariadenia.setItems(OLzariadenia);
+            ChoiceBoxSklad1.setItems(OLsklady);
 
-       
+            ChoiceBoxSklad.setValue("Sklad1");
+            ChoiceBoxSklad1.setValue("Sklad1");
+        }
+        if (String.valueOf(x.ucet.getSklad()).equals("Sklad 1")) {
+            ChoiceBoxSklad.setItems(OLsklady1);
+            ChoiceBoxTypzariadenia.setItems(OLzariadenia);
+            ChoiceBoxSklad1.setItems(OLsklady1);
+
+            ChoiceBoxSklad.setValue("Sklad1");
+            ChoiceBoxSklad1.setValue("Sklad1");
+        }
+        if (String.valueOf(x.ucet.getSklad()).equals("Sklad 2")) {
+            ChoiceBoxSklad.setItems(OLsklady2);
+            ChoiceBoxTypzariadenia.setItems(OLzariadenia);
+            ChoiceBoxSklad1.setItems(OLsklady2);
+
+            ChoiceBoxSklad.setValue("Sklad2");
+            ChoiceBoxSklad1.setValue("Sklad2");
+        }
+        if (String.valueOf(x.ucet.getSklad()).equals("Sklad 3")) {
+            ChoiceBoxSklad.setItems(OLsklady3);
+            ChoiceBoxTypzariadenia.setItems(OLzariadenia);
+            ChoiceBoxSklad1.setItems(OLsklady3);
+
+            ChoiceBoxSklad.setValue("Sklad3");
+            ChoiceBoxSklad1.setValue("Sklad3");
+        }
+
     }
 
-    public void update_Table(String choiceZariadenie, String choiceSklad) throws SQLException{
-        
+    public void update_Table(String choiceZariadenie, String choiceSklad) throws SQLException {
+
         if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Rabattdrucker") {
-        OLtable = JDBMySQLConnection.getRabattdrucker(choiceZariadenie,choiceSklad);  
+            OLtable = JDBMySQLConnection.getRabattdrucker(choiceZariadenie, choiceSklad);
 
-        ColumTyp.setCellValueFactory(new PropertyValueFactory<>("Typ"));
-        ColumSC.setCellValueFactory(new PropertyValueFactory<>("SC"));
-        ColumNazov.setCellValueFactory(new PropertyValueFactory<>("Nazov"));
-        ColumPocet.setCellValueFactory(new PropertyValueFactory<>("Pocet"));
-        ColumZaruka.setCellValueFactory(new PropertyValueFactory<>("Zaruka"));
-        ColumCF.setCellValueFactory(new PropertyValueFactory<>("CF"));
-        ColumDatumodoslania.setCellValueFactory(new PropertyValueFactory<>("Datum_odoslania"));
-        ColumPoznamka.setCellValueFactory(new PropertyValueFactory<>("Poznamka"));
-        ColumECO.setCellValueFactory(new PropertyValueFactory<>("ECO"));
+            ColumTyp.setCellValueFactory(new PropertyValueFactory<>("Typ"));
+            ColumSC.setCellValueFactory(new PropertyValueFactory<>("SC"));
+            ColumNazov.setCellValueFactory(new PropertyValueFactory<>("Nazov"));
+            ColumPocet.setCellValueFactory(new PropertyValueFactory<>("Pocet"));
+            ColumZaruka.setCellValueFactory(new PropertyValueFactory<>("Zaruka"));
+            ColumCF.setCellValueFactory(new PropertyValueFactory<>("CF"));
+            ColumDatumodoslania.setCellValueFactory(new PropertyValueFactory<>("Datum_odoslania"));
+            ColumPoznamka.setCellValueFactory(new PropertyValueFactory<>("Poznamka"));
+            ColumECO.setCellValueFactory(new PropertyValueFactory<>("ECO"));
 
-           
-        tabulka.setItems(OLtable);
-        
-        
+            tabulka.setItems(OLtable);
+
+            customiseFactory(ColumZaruka);
         }
-        
 
+    }
+
+    private void customiseFactory(TableColumn<Rabattdrucker,String> calltypel) {
+        calltypel.setCellFactory(column -> {
+            return new TableCell<Rabattdrucker, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+
+                    super.updateItem(item, empty);
+                    setText(empty ? "" : getItem().toString());
+                    setGraphic(null);
+                    TableRow<Rabattdrucker> currentRow = getTableRow();
+                    if (!isEmpty()) {
+
+                        LocalDate date = LocalDate.parse(item);
+                        if (date.compareTo(LocalDate.now()) <= 0)
+                            currentRow.setStyle("-fx-background-color: #CD1C24");
+
+                    }
+
+                }
+            };
+        });
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("vytvorenie pozadia");
         setup_Choiceboxs();
-        
+
         try {
-            System.out.println(ChoiceBoxSklad.getValue()); 
-            update_Table(ChoiceBoxTypzariadenia.getValue(),ChoiceBoxSklad.getValue());
+            System.out.println(ChoiceBoxSklad.getValue());
+            update_Table(ChoiceBoxTypzariadenia.getValue(), ChoiceBoxSklad.getValue());
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
-    }
 
-    
+    }
 
 }

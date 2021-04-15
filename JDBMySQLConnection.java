@@ -68,7 +68,6 @@ public class JDBMySQLConnection {
     public static ObservableList<Scanner> getScanner(String choiceZariadenie, String choiceSklad) throws SQLException {
         // nother one
 
-        System.out.println("som tu");
         Connection conn = getConnection();
         ObservableList<Scanner> OLPScanner = FXCollections.observableArrayList();
 
@@ -78,7 +77,7 @@ public class JDBMySQLConnection {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                System.out.println(ps);
+
                 OLPScanner.add(new Scanner(rs.getString("ID"), rs.getString("Typ"), rs.getString("Názov"),
                         rs.getString("Počet"), rs.getString("Sériové číslo"), rs.getString("Dátum odoslania fili"),
                         rs.getString("Záruka"), rs.getString("Poznámka")));
@@ -106,8 +105,8 @@ public class JDBMySQLConnection {
 
                 while (rs.next()) {
                     rs.getString("Cislo fili");
-                    OLQuail.add(new Quail(rs.getString("ID"),rs.getString("Typ"), rs.getString("Názov"), rs.getString("Počet"),
-                            rs.getString("Sériové číslo"), rs.getString("Cislo fili"),
+                    OLQuail.add(new Quail(rs.getString("ID"), rs.getString("Typ"), rs.getString("Názov"),
+                            rs.getString("Počet"), rs.getString("Sériové číslo"), rs.getString("Cislo fili"),
                             rs.getString("Dátum odoslania fili"), rs.getString("Záruka"), rs.getString("Poznámka")));
 
                 }
@@ -134,8 +133,8 @@ public class JDBMySQLConnection {
                 ResultSet rs = ps.executeQuery();
 
                 while (rs.next()) {
-                    OLOstatne.add(new Ostatne(rs.getString("ID"),rs.getString("Typ"), rs.getString("Názov"), rs.getString("Počet"),
-                            rs.getString("Sériové číslo"), rs.getString("Cislo fili"),
+                    OLOstatne.add(new Ostatne(rs.getString("ID"), rs.getString("Typ"), rs.getString("Názov"),
+                            rs.getString("Počet"), rs.getString("Sériové číslo"), rs.getString("Cislo fili"),
                             rs.getString("Dátum odoslania fili"), rs.getString("Záruka"), rs.getString("Poznámka")));
 
                 }
@@ -167,7 +166,7 @@ public class JDBMySQLConnection {
                     } else {
                         wifi = "Nie";
                     }
-                    System.out.println("DB index" + rs.getString("ID"));
+
                     OLMDE.add(new MDE(rs.getString("ID"), rs.getString("Typ"), rs.getString("Názov"),
                             rs.getString("Počet"), rs.getString("Sériové číslo"), rs.getString("MAC adresa"),
                             rs.getString("IP adresa"), wifi, rs.getString("Cislo fili"),
@@ -197,10 +196,10 @@ public class JDBMySQLConnection {
                 ResultSet rs = ps.executeQuery();
 
                 while (rs.next()) {
-                    OLRabattdrucker.add(new Rabattdrucker(rs.getString("ID"),rs.getString("Typ"), rs.getString("Názov"),
-                            rs.getString("Počet"), rs.getString("Sériové číslo"), rs.getString("Evidencne cislo"),
-                            rs.getString("Cislo fili"), rs.getString("Dátum odoslania fili"), rs.getString("Záruka"),
-                            rs.getString("Poznámka")));
+                    OLRabattdrucker.add(new Rabattdrucker(rs.getString("ID"), rs.getString("Typ"),
+                            rs.getString("Názov"), rs.getString("Počet"), rs.getString("Sériové číslo"),
+                            rs.getString("Evidencne cislo"), rs.getString("Cislo fili"),
+                            rs.getString("Dátum odoslania fili"), rs.getString("Záruka"), rs.getString("Poznámka")));
 
                 }
             } catch (Exception e) {
@@ -223,7 +222,8 @@ public class JDBMySQLConnection {
 
             while (rs.next()) {
                 UcetList.add(new Ucet(rs.getInt("id"), rs.getString("heslo"), rs.getString("meno"),
-                        rs.getString("priezvisko"), rs.getString("rola"), rs.getString("sklad"), rs.getInt("prvyLogin")));
+                        rs.getString("priezvisko"), rs.getString("rola"), rs.getString("sklad"),
+                        rs.getInt("prvyLogin")));
             }
         } catch (Exception e) {
 
@@ -236,7 +236,7 @@ public class JDBMySQLConnection {
     public static ObservableList<MP> getMP(String choiceZariadenie, String choiceSklad) throws SQLException {
         // nother one
         if (choiceZariadenie.equals("Moblný telefon")) {
-            System.out.println("som na zaciatku dB");
+
             Connection conn = getConnection();
             ObservableList<MP> OLMP = FXCollections.observableArrayList();
 
@@ -246,11 +246,11 @@ public class JDBMySQLConnection {
                 ResultSet rs = ps.executeQuery();
 
                 while (rs.next()) {
-                    OLMP.add(new MP(rs.getString("ID"),rs.getString("Typ"), rs.getString("Názov"), rs.getString("Počet"),
-                            rs.getString("Sériové číslo"), rs.getString("Typ telefonu"), rs.getString("IMEI"),
-                            rs.getString("SIM"), rs.getString("Tel.cislo"), rs.getString("PUK"), rs.getString("PIN"),
-                            rs.getString("Cislo fili"), rs.getString("Dátum odoslania fili"), rs.getString("Záruka"),
-                            rs.getString("Poznámka")));
+                    OLMP.add(new MP(rs.getString("ID"), rs.getString("Typ"), rs.getString("Názov"),
+                            rs.getString("Počet"), rs.getString("Sériové číslo"), rs.getString("Typ telefonu"),
+                            rs.getString("IMEI"), rs.getString("SIM"), rs.getString("Tel.cislo"), rs.getString("PUK"),
+                            rs.getString("PIN"), rs.getString("Cislo fili"), rs.getString("Dátum odoslania fili"),
+                            rs.getString("Záruka"), rs.getString("Poznámka")));
                 }
             } catch (Exception e) {
                 System.out.println("nieco je zle");
@@ -270,7 +270,8 @@ public class JDBMySQLConnection {
 
             while (rs.next()) {
                 UcetList.add(new Ucet(rs.getInt("id"), rs.getString("heslo"), rs.getString("meno"),
-                        rs.getString("priezvisko"), rs.getString("rola"), rs.getString("sklad"), rs.getInt("prvyLogin")));
+                        rs.getString("priezvisko"), rs.getString("rola"), rs.getString("sklad"),
+                        rs.getInt("prvyLogin")));
             }
         } catch (Exception e) {
 
@@ -426,7 +427,6 @@ public class JDBMySQLConnection {
 
     public static void addtoQuail(String vyberskladu, String text, String text2, String text3, String text4,
             String text5, String datumodoslania, String zaruka, String text6) {
-        System.out.println("add to Quail");
         getQueryQuail();
         insertQuail(vyberskladu, text, text2, text3, text4, datumodoslania, zaruka, text5, text6);
     }
@@ -462,7 +462,6 @@ public class JDBMySQLConnection {
 
     public static void addtoRabattdrucker(String vyberskladu, String text, String text2, String text3, String text4,
             String text5, String text6, String datumodoslania, String zaruka, String text7) {
-        System.out.println("add to Rabat");
         getQueryRabattdrucker();
         insertRabattdrucker(vyberskladu, text, text2, text3, text4, datumodoslania, zaruka, text5, text6, text7);
     }

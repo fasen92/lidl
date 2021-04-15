@@ -24,7 +24,9 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
@@ -83,7 +85,7 @@ public class KontrolaHWMPController implements Initializable {
     private TableColumn<String, MP> ColumDatumodoslania;
 
     @FXML
-    private TableColumn<String, MP> ColumZaruka;
+    private TableColumn<MP,String> ColumZaruka;
 
     @FXML
     private TableColumn<String, MP> ColumPoznamka;
@@ -390,16 +392,46 @@ public class KontrolaHWMPController implements Initializable {
 
     public void setup_Choiceboxs() {
         ObservableList<String> OLsklady = FXCollections.observableArrayList("Sklad1", "Sklad2", "Sklad3");
+        ObservableList<String> OLsklady3 = FXCollections.observableArrayList("Sklad3");
+        ObservableList<String> OLsklady2 = FXCollections.observableArrayList("Sklad2");
+        ObservableList<String> OLsklady1 = FXCollections.observableArrayList("Sklad1");
         ObservableList<String> OLzariadenia = FXCollections.observableArrayList("Pbv", "Lispettore-scanner", "MDE",
                 "Rabattdrucker", "Quail", "Moblný telefon", "Ostatné");
 
-        ChoiceBoxSklad.setItems(OLsklady);
-        ChoiceBoxTypzariadenia.setItems(OLzariadenia);
-        ChoiceBoxSklad1.setItems(OLsklady);
-
+        Singleton x = Singleton.getInstance();
         ChoiceBoxTypzariadenia.setValue("Moblný telefon");
-        ChoiceBoxSklad.setValue("Sklad1");
-        ChoiceBoxSklad1.setValue("Sklad1");
+        if (String.valueOf(x.ucet.getRola()).equals("Admin")) {
+            ChoiceBoxSklad.setItems(OLsklady);
+            ChoiceBoxTypzariadenia.setItems(OLzariadenia);
+            ChoiceBoxSklad1.setItems(OLsklady);
+
+            ChoiceBoxSklad.setValue("Sklad1");
+            ChoiceBoxSklad1.setValue("Sklad1");
+        }
+        if (String.valueOf(x.ucet.getSklad()).equals("Sklad 1")) {
+            ChoiceBoxSklad.setItems(OLsklady1);
+            ChoiceBoxTypzariadenia.setItems(OLzariadenia);
+            ChoiceBoxSklad1.setItems(OLsklady1);
+
+            ChoiceBoxSklad.setValue("Sklad1");
+            ChoiceBoxSklad1.setValue("Sklad1");
+        }
+        if (String.valueOf(x.ucet.getSklad()).equals("Sklad 2")) {
+            ChoiceBoxSklad.setItems(OLsklady2);
+            ChoiceBoxTypzariadenia.setItems(OLzariadenia);
+            ChoiceBoxSklad1.setItems(OLsklady2);
+
+            ChoiceBoxSklad.setValue("Sklad2");
+            ChoiceBoxSklad1.setValue("Sklad2");
+        }
+        if (String.valueOf(x.ucet.getSklad()).equals("Sklad 3")) {
+            ChoiceBoxSklad.setItems(OLsklady3);
+            ChoiceBoxTypzariadenia.setItems(OLzariadenia);
+            ChoiceBoxSklad1.setItems(OLsklady3);
+
+            ChoiceBoxSklad.setValue("Sklad3");
+            ChoiceBoxSklad1.setValue("Sklad3");
+        }
 
     }
 
@@ -424,6 +456,31 @@ public class KontrolaHWMPController implements Initializable {
 
         tabulka.setItems(OLtable);
 
+        customiseFactory(ColumZaruka);
+
+    }
+
+    private void customiseFactory(TableColumn<MP, String> calltypel) {
+        calltypel.setCellFactory(column -> {
+            return new TableCell<MP, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+
+                    super.updateItem(item, empty);
+                    setText(empty ? "" : getItem().toString());
+                    setGraphic(null);
+                    TableRow<MP> currentRow = getTableRow();
+                    if (!isEmpty()) {
+
+                        LocalDate date = LocalDate.parse(item);
+                        if (date.compareTo(LocalDate.now()) <= 0)
+                            currentRow.setStyle("-fx-background-color: #CD1C24");
+
+                    }
+
+                }
+            };
+        });
     }
 
     @Override
