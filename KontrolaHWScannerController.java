@@ -201,8 +201,6 @@ public class KontrolaHWScannerController implements Initializable {
         } else {
             datumodoslania = String.valueOf(DFOdoslanienafili.getValue());
             zaruka = String.valueOf(DFZaruka.getValue());
-            scanner = new Scanner(getVyberskladu(ChoiceBoxSklad), TFTyp.getText(), TFNazov.getText(), TFPocet.getText(),
-                    TFSeriove.getText(), datumodoslania, zaruka, TAPoznamka.getText());
 
             JDBMySQLConnection.addtoScanner(getVyberskladu(ChoiceBoxSklad1), TFTyp.getText(), TFNazov.getText(),
                     TFPocet.getText(), TFSeriove.getText(), datumodoslania, zaruka, TAPoznamka.getText());
@@ -243,7 +241,7 @@ public class KontrolaHWScannerController implements Initializable {
                 JOptionPane.showMessageDialog(null, "Nič nie je vybraté");
             }
         } else {
-    
+
         }
 
     }
@@ -313,6 +311,34 @@ public class KontrolaHWScannerController implements Initializable {
             index = sc.getID();
         } catch (Exception e) {
             // TODO: handle exception
+        }
+
+    }
+
+    @FXML
+    void OnClickOprava(ActionEvent event) throws IOException, SQLException {
+        try {
+
+            ObservableList<Scanner> scanner = tabulka.getSelectionModel().getSelectedItems();
+            String TAtxt = "", Opravacez = "", ID = "";
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("OpravaScene.fxml"));
+            Parent root = (Parent) loader.load();
+            OpravaSceneController opravaScene = loader.getController();
+
+            TAtxt = scanner.get(0).getZazcinnosti();
+            ID = scanner.get(0).getID();
+            Opravacez = scanner.get(0).getOpravacez();
+
+            opravaScene.initData(ID, TAtxt, Opravacez, ChoiceBoxTypzariadenia.getValue());
+            Scene newScene = new Scene(root);
+            Stage newStage = new Stage();
+            newStage.setScene(newScene);
+            newStage.showAndWait();
+
+            update_Table(ChoiceBoxTypzariadenia.getValue(), ChoiceBoxSklad.getValue());
+        } catch (Exception e) {
+
         }
 
     }
@@ -430,11 +456,11 @@ public class KontrolaHWScannerController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-       
+
         setup_Choiceboxs();
 
         try {
-            
+
             update_Table(ChoiceBoxTypzariadenia.getValue(), ChoiceBoxSklad.getValue());
         } catch (SQLException e) {
             e.printStackTrace();

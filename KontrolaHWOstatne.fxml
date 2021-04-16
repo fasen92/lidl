@@ -190,12 +190,13 @@
          <bottom>
             <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="84.0" prefWidth="900.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="BtnVycisti1" layoutX="251.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickVycisti" prefHeight="26.0" prefWidth="110.0" text="Vyčisti" />
-                  <Button fx:id="BtnRefresh1" layoutX="586.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickRefresh" prefHeight="26.0" prefWidth="150.0" text="Aktualizovať" />
-                  <Button fx:id="BtnMenu1" layoutX="918.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickSpat" prefHeight="26.0" prefWidth="150.0" text="Menu" />
-                  <Button fx:id="BtnUlož1" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickUloz" prefHeight="26.0" prefWidth="110.0" text="Pridaj" />
-                  <Button fx:id="BtnDelete" layoutX="751.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickDelete" prefHeight="26.0" prefWidth="150.0" text="Zmazať" />
-                  <Button fx:id="BtnZmeny" layoutX="132.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickUlozZmeny" prefHeight="26.0" prefWidth="110.0" text="Ulož zmeny" />
+                  <Button fx:id="BtnVycisti" layoutX="251.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickVycisti" prefHeight="26.0" prefWidth="110.0" text="Vyčisti" />
+                  <Button fx:id="BtnRefresh" layoutX="586.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickRefresh" prefHeight="26.0" prefWidth="150.0" text="Aktualizovať" />
+                  <Button fx:id="BtnOprava" layoutX="918.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickOprava" prefHeight="26.0" prefWidth="150.0" text="Oprava" />
+                  <Button fx:id="BtnUlož" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickUloz" prefHeight="26.0" prefWidth="110.0" text="Pridaj" />
+                  <Button fx:id="BtnDelete1" layoutX="751.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickDelete" prefHeight="26.0" prefWidth="150.0" text="Zmazať" />
+                  <Button fx:id="BtnZmeny1" layoutX="132.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickUlozZmeny" prefHeight="26.0" prefWidth="110.0" text="Ulož zmeny" />
+                  <Button fx:id="BtnMenu11" layoutX="1086.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickSpat" prefHeight="26.0" prefWidth="150.0" text="Menu" />
                </children>
             </AnchorPane>
          </bottom>

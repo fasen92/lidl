@@ -326,6 +326,33 @@ public class KontrolaHWOstatneController implements Initializable {
         TAPoznamka.clear();
         TFCF.clear();
     }
+    @FXML
+    void OnClickOprava(ActionEvent event) throws IOException, SQLException {
+        try {
+
+            ObservableList<Ostatne> ostatne = tabulka.getSelectionModel().getSelectedItems();
+            String TAtxt = "", Opravacez = "", ID = "";
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("OpravaScene.fxml"));
+            Parent root = (Parent) loader.load();
+            OpravaSceneController opravaScene = loader.getController();
+
+            TAtxt = ostatne.get(0).getZazcinnosti();
+            ID = ostatne.get(0).getID();
+            Opravacez = ostatne.get(0).getOpravacez();
+
+            opravaScene.initData(ID, TAtxt, Opravacez,ChoiceBoxTypzariadenia.getValue());
+            Scene newScene = new Scene(root);
+            Stage newStage = new Stage();
+            newStage.setScene(newScene);
+            newStage.showAndWait();
+
+            update_Table(ChoiceBoxTypzariadenia.getValue(), ChoiceBoxSklad.getValue());
+        } catch (Exception e) {
+
+        }
+
+    }
 
     public String getVyberskladu(ChoiceBox<String> ChoiceBoxSklad) {
         return ChoiceBoxSklad.getValue();

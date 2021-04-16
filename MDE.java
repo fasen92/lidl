@@ -1,8 +1,8 @@
 public class MDE {
-    String SC, Nazov, Pocet, Zaruka, Poznamka, Datum_odoslania, Typ, CF, IP, MAC, WIFI, Sklad, ID;
+    String SC, Nazov, Pocet, Zaruka, Poznamka, Datum_odoslania, Typ, CF, IP, MAC, WIFI, Sklad, ID,Zazcinnosti,Opravacez;
 
     public MDE(String ID, String Typ, String Nazov, String Pocet, String SC, String MAC, String IP, String WIFI,
-            String CF, String Datum_odoslania, String Zaruka, String Poznamka) {
+            String CF,String Zazcinnosti, String Datum_odoslania, String Zaruka, String Poznamka,String Opravacez) {
         this.Typ = Typ;
         this.SC = SC;
         this.Nazov = Nazov;
@@ -15,9 +15,22 @@ public class MDE {
         this.IP = IP;
         this.WIFI = WIFI;
         this.ID = ID;
+        this.Zazcinnosti = Zazcinnosti;
+        this.Opravacez = Opravacez;
 
     }
-
+    public String getOpravacez() {
+        return Opravacez;
+    }
+    public void setOpravacez(String opravacez) {
+        Opravacez = opravacez;
+    }
+    public String getZazcinnosti() {
+        return Zazcinnosti;
+    }
+    public void setZazcinnosti(String zazcinnosti) {
+        Zazcinnosti = zazcinnosti;
+    }
     public String getID() {
         return ID;
     }

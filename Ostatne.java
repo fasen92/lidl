@@ -1,7 +1,7 @@
 public class Ostatne {
-    String SC,ID,Nazov,Pocet,Zaruka,Poznamka,Datum_odoslania,Typ,CF;
+    String SC,ID,Nazov,Pocet,Zaruka,Poznamka,Datum_odoslania,Typ,CF,Zazcinnosti,Opravacez;
     
-    public Ostatne(String ID,String Typ,String Nazov,String Pocet,String SC,String CF,String Datum_odoslania,String Zaruka,String Poznamka) {
+    public Ostatne(String ID,String Typ,String Nazov,String Pocet,String SC,String CF,String Zazcinnosti,String Datum_odoslania,String Zaruka,String Poznamka,String Opravacez) {
         this.Typ =Typ;
         this.SC =SC;
         this.ID =ID;
@@ -11,7 +11,21 @@ public class Ostatne {
         this.Datum_odoslania= Datum_odoslania;
         this.Poznamka = Poznamka;
         this.CF = CF;
+        this.Zazcinnosti = Zazcinnosti;
+        this.Opravacez = Opravacez;
         
+    }
+    public String getOpravacez() {
+        return Opravacez;
+    }
+    public void setOpravacez(String opravacez) {
+        Opravacez = opravacez;
+    }
+    public String getZazcinnosti() {
+        return Zazcinnosti;
+    }
+    public void setZazcinnosti(String zazcinnosti) {
+        Zazcinnosti = zazcinnosti;
     }
     public String getID() {
         return ID;

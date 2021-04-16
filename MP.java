@@ -1,7 +1,7 @@
 public class MP {
-    String SC,Nazov,ID,Pocet,Zaruka,Poznamka,Datum_odoslania,Typ,CF,PIN,PUK,IMEI,Typtel,Telcislo,SIM;
+    String SC,Nazov,ID,Pocet,Zaruka,Poznamka,Datum_odoslania,Typ,CF,PIN,PUK,IMEI,Typtel,Telcislo,SIM,Zazcinnosti,Opravacez;
     
-    public MP(String ID,String Typ,String Nazov,String Pocet,String SC,String Typtel,String IMEI,String SIM,String Telcislo,String PUK,String PIN,String CF,String Datum_odoslania,String Zaruka,String Poznamka) {
+    public MP(String ID,String Typ,String Nazov,String Pocet,String SC,String Typtel,String IMEI,String SIM,String Telcislo,String PUK,String PIN,String CF,String Zazcinnosti,String Datum_odoslania,String Zaruka,String Poznamka,String Opravacez) {
         this.Typ =Typ;
         this.SC =SC;
         this.Nazov = Nazov;
@@ -17,7 +17,21 @@ public class MP {
         this.Telcislo =Telcislo;
         this.SIM = SIM;
         this.ID = ID;
+        this.Opravacez = Opravacez;
+        this.Zazcinnosti =Zazcinnosti;
         
+    }
+    public String getOpravacez() {
+        return Opravacez;
+    }
+    public void setOpravacez(String opravacez) {
+        Opravacez = opravacez;
+    }
+    public String getZazcinnosti() {
+        return Zazcinnosti;
+    }
+    public void setZazcinnosti(String zazcinnosti) {
+        Zazcinnosti = zazcinnosti;
     }
     public String getID() {
         return ID;

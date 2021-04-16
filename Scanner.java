@@ -1,8 +1,8 @@
 public class Scanner {
     
-        String SC,Nazov,Pocet,Zaruka,	Poznamka,Datum_odoslania,Typ,Sklad,ID;
+        String SC,Nazov,Pocet,Zaruka,Poznamka,Datum_odoslania,Typ,Sklad,ID,Zazcinnosti,Opravacez;
         
-        public Scanner(String ID,String Typ,String Nazov,String Pocet,String SC,String Datum_odoslania,String Zaruka,String Poznamka) {
+        public Scanner(String ID,String Typ,String Nazov,String Pocet,String SC,String Zazcinnosti,String Datum_odoslania,String Zaruka,String Poznamka,String Opravacez) {
             this.Typ =Typ;
             this.SC =SC;
             this.Nazov = Nazov;
@@ -11,20 +11,23 @@ public class Scanner {
             this.Datum_odoslania= Datum_odoslania;
             this.Poznamka = Poznamka;
             this.ID = ID;
+            this.Opravacez = Opravacez;
+            this.Zazcinnosti = Zazcinnosti;
             
         }
+        public void setOpravacez(String opravacez) {
+            Opravacez = opravacez;
+        }
+        public String getOpravacez() {
+            return Opravacez;
+        }
+        public void setZazcinnosti(String zazcinnosti) {
+            Zazcinnosti = zazcinnosti;
+        }
+        public String getZazcinnosti() {
+            return Zazcinnosti;
+        }
 
-        /*public Scanner(String Sklad,String Typ,String Nazov,String Pocet,String SC,String Datum_odoslania,String Zaruka,String Poznamka) {
-            this.Typ =Typ;
-            this.SC =SC;
-            this.Nazov = Nazov;
-            this.Pocet = Pocet;
-            this.Zaruka= Zaruka;
-            this.Datum_odoslania= Datum_odoslania;
-            this.Poznamka = Poznamka;
-            this.Sklad = Sklad;
-            
-        }*/
         public String getID() {
             return ID;
         }

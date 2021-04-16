@@ -49,8 +49,31 @@ public class OpravaSceneController implements Initializable {
              sql= "UPDATE `pbv` SET `Záznam činnosti`='" + value1 + "',`Oprava cez`='" + value2 + "'WHERE ID='" + ID
                 + "'";
         }
+        if (Zariadenie == "Lispettore-scanner") {
+            sql= "UPDATE `lispettore-scanner` SET `Záznam činnosti`='" + value1 + "',`Oprava cez`='" + value2 + "'WHERE ID='" + ID
+               + "'";
+        }
+        if (Zariadenie == "Quail") {
+            sql= "UPDATE `quail` SET `Záznam činnosti`='" + value1 + "',`Oprava cez`='" + value2 + "'WHERE ID='" + ID
+               + "'";
+        }
+        if (Zariadenie == "MDE") {
+            sql= "UPDATE `mde` SET `Záznam činnosti`='" + value1 + "',`Oprava cez`='" + value2 + "'WHERE ID='" + ID
+               + "'";
+        }
+        if (Zariadenie == "Rabattdrucker") {
+            sql= "UPDATE `rabattdrucker` SET `Záznam činnosti`='" + value1 + "',`Oprava cez`='" + value2 + "'WHERE ID='" + ID
+               + "'";
+        }
+        if (Zariadenie == "Moblný telefon") {
+            sql= "UPDATE `mobil-prepredajnu` SET `Záznam činnosti`='" + value1 + "',`Oprava cez`='" + value2 + "'WHERE ID='" + ID
+               + "'";
+        }
+        if (Zariadenie == "Ostatné") {
+            sql= "UPDATE `ostatne` SET `Záznam činnosti`='" + value1 + "',`Oprava cez`='" + value2 + "'WHERE ID='" + ID
+               + "'";
+        }
         
-
         ps = conn.prepareStatement(sql);
         ps.execute();
 

@@ -437,8 +437,33 @@ public class KontrolaHWRabattdruckerController implements Initializable {
             };
         });
     }
-    
-   
+    @FXML
+    void OnClickOprava(ActionEvent event) throws IOException, SQLException {
+        try {
+
+            ObservableList<Rabattdrucker> rabat = tabulka.getSelectionModel().getSelectedItems();
+            String TAtxt = "", Opravacez = "", ID = "";
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("OpravaScene.fxml"));
+            Parent root = (Parent) loader.load();
+            OpravaSceneController opravaScene = loader.getController();
+
+            TAtxt = rabat.get(0).getZazcinnosti();
+            ID = rabat.get(0).getID();
+            Opravacez = rabat.get(0).getOpravacez();
+
+            opravaScene.initData(ID, TAtxt, Opravacez,ChoiceBoxTypzariadenia.getValue());
+            Scene newScene = new Scene(root);
+            Stage newStage = new Stage();
+            newStage.setScene(newScene);
+            newStage.showAndWait();
+
+            update_Table(ChoiceBoxTypzariadenia.getValue(), ChoiceBoxSklad.getValue());
+        } catch (Exception e) {
+
+        }
+
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

@@ -364,6 +364,34 @@ public class KontrolaHWMDEController implements Initializable {
 
     }
 
+    @FXML
+    void OnClickOprava(ActionEvent event) throws IOException, SQLException {
+        try {
+
+            ObservableList<MDE> mde = tabulka.getSelectionModel().getSelectedItems();
+            String TAtxt = "", Opravacez = "", ID = "";
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("OpravaScene.fxml"));
+            Parent root = (Parent) loader.load();
+            OpravaSceneController opravaScene = loader.getController();
+
+            TAtxt = mde.get(0).getZazcinnosti();
+            ID = mde.get(0).getID();
+            Opravacez = mde.get(0).getOpravacez();
+
+            opravaScene.initData(ID, TAtxt, Opravacez,ChoiceBoxTypzariadenia.getValue());
+            Scene newScene = new Scene(root);
+            Stage newStage = new Stage();
+            newStage.setScene(newScene);
+            newStage.showAndWait();
+
+            update_Table(ChoiceBoxTypzariadenia.getValue(), ChoiceBoxSklad.getValue());
+        } catch (Exception e) {
+
+        }
+
+    }
+
     private void vycisti() {
         TFNazov.clear();
         TFTyp.clear();

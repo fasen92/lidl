@@ -27,7 +27,6 @@ public class JDBMySQLConnection {
 
         try {
             Connection conn = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
-            JOptionPane.showMessageDialog(null, "Connected");
             return conn;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -79,8 +78,8 @@ public class JDBMySQLConnection {
             while (rs.next()) {
 
                 OLPScanner.add(new Scanner(rs.getString("ID"), rs.getString("Typ"), rs.getString("Názov"),
-                        rs.getString("Počet"), rs.getString("Sériové číslo"), rs.getString("Dátum odoslania fili"),
-                        rs.getString("Záruka"), rs.getString("Poznámka")));
+                        rs.getString("Počet"), rs.getString("Sériové číslo"), rs.getString("Záznam činnosti"), rs.getString("Dátum odoslania fili"),
+                        rs.getString("Záruka"), rs.getString("Poznámka"), rs.getString("Oprava cez")));
             }
         } catch (Exception e) {
 
@@ -106,9 +105,8 @@ public class JDBMySQLConnection {
                 while (rs.next()) {
                     rs.getString("Cislo fili");
                     OLQuail.add(new Quail(rs.getString("ID"), rs.getString("Typ"), rs.getString("Názov"),
-                            rs.getString("Počet"), rs.getString("Sériové číslo"), rs.getString("Cislo fili"),
-                            rs.getString("Dátum odoslania fili"), rs.getString("Záruka"), rs.getString("Poznámka")));
-
+                            rs.getString("Počet"), rs.getString("Sériové číslo"), rs.getString("Cislo fili"),rs.getString("Záznam činnosti"),
+                            rs.getString("Dátum odoslania fili"), rs.getString("Záruka"), rs.getString("Poznámka"),rs.getString("Oprava cez")));
                 }
             } catch (Exception e) {
                 System.out.println("nieco je zle");
@@ -135,7 +133,7 @@ public class JDBMySQLConnection {
                 while (rs.next()) {
                     OLOstatne.add(new Ostatne(rs.getString("ID"), rs.getString("Typ"), rs.getString("Názov"),
                             rs.getString("Počet"), rs.getString("Sériové číslo"), rs.getString("Cislo fili"),
-                            rs.getString("Dátum odoslania fili"), rs.getString("Záruka"), rs.getString("Poznámka")));
+                            rs.getString("Záznam činnosti"),rs.getString("Dátum odoslania fili"), rs.getString("Záruka"), rs.getString("Poznámka"),rs.getString("Oprava cez")));
 
                 }
             } catch (Exception e) {
@@ -170,7 +168,7 @@ public class JDBMySQLConnection {
                     OLMDE.add(new MDE(rs.getString("ID"), rs.getString("Typ"), rs.getString("Názov"),
                             rs.getString("Počet"), rs.getString("Sériové číslo"), rs.getString("MAC adresa"),
                             rs.getString("IP adresa"), wifi, rs.getString("Cislo fili"),
-                            rs.getString("Dátum odoslania fili"), rs.getString("Záruka"), rs.getString("Poznámka")));
+                            rs.getString("Záznam činnosti"),rs.getString("Dátum odoslania fili"), rs.getString("Záruka"), rs.getString("Poznámka"),rs.getString("Oprava cez")));
                 }
             } catch (Exception e) {
                 System.out.println("nieco je zle");
@@ -199,7 +197,7 @@ public class JDBMySQLConnection {
                     OLRabattdrucker.add(new Rabattdrucker(rs.getString("ID"), rs.getString("Typ"),
                             rs.getString("Názov"), rs.getString("Počet"), rs.getString("Sériové číslo"),
                             rs.getString("Evidencne cislo"), rs.getString("Cislo fili"),
-                            rs.getString("Dátum odoslania fili"), rs.getString("Záruka"), rs.getString("Poznámka")));
+                            rs.getString("Záznam činnosti"), rs.getString("Dátum odoslania fili"), rs.getString("Záruka"), rs.getString("Poznámka"),rs.getString("Oprava cez")));
 
                 }
             } catch (Exception e) {
@@ -249,8 +247,8 @@ public class JDBMySQLConnection {
                     OLMP.add(new MP(rs.getString("ID"), rs.getString("Typ"), rs.getString("Názov"),
                             rs.getString("Počet"), rs.getString("Sériové číslo"), rs.getString("Typ telefonu"),
                             rs.getString("IMEI"), rs.getString("SIM"), rs.getString("Tel.cislo"), rs.getString("PUK"),
-                            rs.getString("PIN"), rs.getString("Cislo fili"), rs.getString("Dátum odoslania fili"),
-                            rs.getString("Záruka"), rs.getString("Poznámka")));
+                            rs.getString("PIN"), rs.getString("Cislo fili"),rs.getString("Záznam činnosti"), rs.getString("Dátum odoslania fili"),
+                            rs.getString("Záruka"), rs.getString("Poznámka"),rs.getString("Oprava cez")));
                 }
             } catch (Exception e) {
                 System.out.println("nieco je zle");
