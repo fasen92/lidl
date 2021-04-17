@@ -4,10 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.ResourceBundle;
-
 import javax.swing.JOptionPane;
 import javafx.scene.Node;
 import javafx.collections.FXCollections;
@@ -33,9 +31,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
+//Classa ktorá riadi zariadenia PBV
 public class KontrolaHWPBVController implements Initializable {
+
+    // Objekty ktoré sa viažu k scene .fxml
 
     @FXML
     private BorderPane BP;
@@ -115,6 +115,8 @@ public class KontrolaHWPBVController implements Initializable {
     @FXML
     private TableColumn<String, Pbv> ColumPoznamka;
 
+    // Localne premenne
+
     Pbv pbv;
     String zaruka;
     String datumodoslania;
@@ -124,6 +126,8 @@ public class KontrolaHWPBVController implements Initializable {
 
     static ObservableList<Pbv> OLtable = FXCollections.observableArrayList();
     static ObservableList<Pbv> OLgettable = FXCollections.observableArrayList();
+
+    // funkcia aktualizuje cele okno pri zmenach vyberu a novych údajoch v DB
 
     @FXML
     void OnClickRefresh(ActionEvent event) throws SQLException, IOException {
@@ -137,7 +141,7 @@ public class KontrolaHWPBVController implements Initializable {
 
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(scannerScene);
-            window.setMaximized(true);
+            // window.setMaximized(true);
             window.show();
         }
         if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "MDE") {
@@ -188,6 +192,9 @@ public class KontrolaHWPBVController implements Initializable {
 
     }
 
+    // je funkcia aktivovana pri clicku na Menu
+    // Zmeni okno na hl. menu
+
     @FXML
     void OnClickSpat(ActionEvent event) throws IOException {
         Parent MenuParent = FXMLLoader.load(getClass().getResource("Menu.fxml"));
@@ -197,6 +204,8 @@ public class KontrolaHWPBVController implements Initializable {
         window.setScene(MenuScene);
         window.show();
     }
+
+    //Pokial som vyplnil atributy tato funkcia prida zariadenie do DB
 
     @FXML
     void OnClickUloz(ActionEvent event) throws SQLException {
@@ -208,11 +217,6 @@ public class KontrolaHWPBVController implements Initializable {
         } else {
             datumodoslania = String.valueOf(DFOdoslanienafili.getValue());
             zaruka = String.valueOf(DFZaruka.getValue());
-            /*
-             * pbv = new Pbv(getVyberskladu(ChoiceBoxSklad1), TFTyp.getText(),
-             * TFNazov.getText(), TFPocet.getText(), TFSeriove.getText(), datumodoslania,
-             * zaruka, TAPoznamka.getText());
-             */
 
             JDBMySQLConnection.addtoPbv(getVyberskladu(ChoiceBoxSklad1), TFTyp.getText(), TFNazov.getText(),
                     TFPocet.getText(), TFSeriove.getText(), datumodoslania, zaruka, TAPoznamka.getText());
@@ -226,6 +230,8 @@ public class KontrolaHWPBVController implements Initializable {
             update_Table(getVyberZariadenia(ChoiceBoxTypzariadenia), getVyberskladu(ChoiceBoxSklad));
         }
     }
+
+    // je funkcia ktora sa aktivuje pri clicknuti na vycisti a spusti funkciu vycisti()
 
     @FXML
     void OnClickVycisti(ActionEvent event) {
@@ -257,12 +263,12 @@ public class KontrolaHWPBVController implements Initializable {
                 JOptionPane.showMessageDialog(null, "Nič nie je vybraté");
             }
         } else {
-            // ... user chose CANCEL or closed the dialog
+
         }
 
     }
 
-    // aj toto
+    // Pokial som z tabulky zvolil zariadenie a upravil jeho atribúty tato btn click funkcia uozi zmeny
     @FXML
     void OnClickUlozZmeny(ActionEvent event) throws SQLException {
 
@@ -307,7 +313,8 @@ public class KontrolaHWPBVController implements Initializable {
 
     }
 
-    // zatial napic
+    // Funkcia sa spusta ked kliknem na miesto v tabulke a pokial sa kliklo na zariadenie toto zariadenie 
+    //a jeho atributy sa zobrazia na lavo v textových poliach 
     @FXML
     void getSelected(MouseEvent event) {
 
@@ -325,11 +332,13 @@ public class KontrolaHWPBVController implements Initializable {
             DFZaruka.setValue(localDate2);
             index = pbv.getID();
         } catch (Exception e) {
-            // TODO: handle exception
+            System.out.println(e);
         }
 
     }
 
+    //je samotna funkcia ktora vycisti vsetky textove polia 
+    
     private void vycisti() {
         TFNazov.clear();
         TFTyp.clear();
@@ -341,13 +350,19 @@ public class KontrolaHWPBVController implements Initializable {
         TAPoznamka.clear();
     }
 
+    //funkcia mi vrati aktualne zvoleny sklad
+
     public String getVyberskladu(ChoiceBox<String> ChoiceBoxSklad) {
         return ChoiceBoxSklad.getValue();
     }
 
+    //funkcia mi vrati aktualne zvolene zariadenie
+
     public String getVyberZariadenia(ChoiceBox<String> ChoiceBoxTypzariadenia) {
         return ChoiceBoxTypzariadenia.getValue();
     }
+
+    //pri nacitanie okna so zariadenim s nacitaju sklady a zariadenia do vyberovych boxov na vrchu tabulky
 
     public void setup_Choiceboxs() {
         ObservableList<String> OLsklady = FXCollections.observableArrayList("Sklad1", "Sklad2", "Sklad3");
@@ -394,6 +409,8 @@ public class KontrolaHWPBVController implements Initializable {
 
     }
 
+    //funkcia priamo vklada udaje z DB do samotneho objektu tabuky a konkretnych stlpcov 
+
     public void update_Table(String choiceZariadenie, String choiceSklad) throws SQLException {
 
         if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Pbv") {
@@ -414,6 +431,8 @@ public class KontrolaHWPBVController implements Initializable {
         }
 
     }
+
+    //tato funkcia zisti ci su zariadenia po zaruke a ak su tak ich podfarbí červenou
 
     private void customiseFactory(TableColumn<Pbv, String> calltypel) {
         calltypel.setCellFactory(column -> {
@@ -438,6 +457,8 @@ public class KontrolaHWPBVController implements Initializable {
         });
     }
 
+    //tato funkcia otvori dialog s opravou 
+
     @FXML
     void OnClickOprava(ActionEvent event) throws IOException, SQLException {
         try {
@@ -453,7 +474,7 @@ public class KontrolaHWPBVController implements Initializable {
             ID = pbv.get(0).getID();
             Opravacez = pbv.get(0).getOpravacez();
 
-            opravaScene.initData(ID, TAtxt, Opravacez,ChoiceBoxTypzariadenia.getValue());
+            opravaScene.initData(ID, TAtxt, Opravacez, ChoiceBoxTypzariadenia.getValue());
             Scene newScene = new Scene(root);
             Stage newStage = new Stage();
             newStage.setScene(newScene);
@@ -465,6 +486,8 @@ public class KontrolaHWPBVController implements Initializable {
         }
 
     }
+
+    //je funkcia ktora sa vzdy spusta ked sa otvara dany stage 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

@@ -158,6 +158,7 @@ public class KontrolaHWRabattdruckerController implements Initializable {
 
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(quailScene);
+            window.setMaximized(true);
             window.show();
         }
         if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Rabattdrucker") {
