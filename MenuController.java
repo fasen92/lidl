@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -22,6 +23,9 @@ public class MenuController implements Initializable{
 
     @FXML
     private Button BtnReklamácia;
+
+    @FXML
+    private AnchorPane ap;
 
     @FXML
     private Button BtnZaznamakci;
@@ -41,14 +45,19 @@ public class MenuController implements Initializable{
 
     @FXML
     public void OnClickKontrolaHW(ActionEvent event) throws IOException {
-        Parent KontrolaHWParent = FXMLLoader.load(getClass().getResource("KontrolaHWPBV.fxml"));
-        Scene KontrolaHWScene = new Scene(KontrolaHWParent);
-        //KontrolaHWScene.getStylesheets().add("/CSS/Tableview.css");
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(KontrolaHWScene);
-        window.setMaximized(true);
-        window.show();
-
+        Stage primaryStage = (Stage) ap.getScene().getWindow();
+        primaryStage.close();
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("KontrolaHWPBV.fxml"));
+        Parent root = (Parent) loader.load();
+        Scene newScene = new Scene(root);    
+        Stage newStage = new Stage();
+        newStage.getIcons().add(new Image("/images/LidlLogo.png"));
+        
+        newStage.setScene(newScene);
+        newStage.setTitle("Asset Management HW");
+        newStage.show();
+        
     }
 
     @FXML

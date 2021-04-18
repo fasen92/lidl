@@ -18,10 +18,13 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
         stage.getIcons().add(new Image("/images/LidlLogo.png"));
-        stage.setTitle("Asset Management");
+        stage.setTitle("Asset Management ");
         stage.setResizable(false);     
         stage.setScene(new Scene(root));
         stage.show();
 
+        
+
     }
+    
 }
