@@ -128,9 +128,8 @@ public class DetailZamController implements Initializable {
             pst.execute();
             spat(event);
         } else if (result.get() == ButtonType.CANCEL) {
-
+            
         }
-
     }
 
     @FXML

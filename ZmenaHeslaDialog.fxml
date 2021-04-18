@@ -13,7 +13,7 @@
             <Font name="Yu Gothic Light" size="34.0" />
          </font>
       </Label>
-      <AnchorPane layoutX="36.0" layoutY="104.0" prefHeight="200.0" prefWidth="280.0" style="-fx-background-color: #0f52ba;">
+      <AnchorPane layoutX="36.0" layoutY="104.0" prefHeight="202.0" prefWidth="280.0" style="-fx-background-color: #0f52ba;">
          <children>
             <Label layoutX="32.0" layoutY="14.0" text="Nové heslo" textFill="WHITE">
                <font>
@@ -25,29 +25,29 @@
                   <Font name="Yu Gothic Bold" size="20.0" />
                </font>
             </Label>
-            <PasswordField fx:id="txtHeslo" layoutX="30.0" layoutY="50.0">
+            <PasswordField fx:id="txtHeslo" layoutX="30.0" layoutY="50.0" prefHeight="39.0" prefWidth="220.0">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Yu Gothic Bold" size="18.0" />
                </font>
             </PasswordField>
-            <PasswordField fx:id="txtHesloZnova" layoutX="30.0" layoutY="140.0">
+            <PasswordField fx:id="txtHesloZnova" layoutX="30.0" layoutY="140.0" prefHeight="39.0" prefWidth="220.0">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Yu Gothic Bold" size="18.0" />
                </font>
             </PasswordField>
          </children>
       </AnchorPane>
-      <Button fx:id="BtnSave" layoutX="210.0" layoutY="314.0" mnemonicParsing="false" onAction="#OnClickSave" prefHeight="52.0" prefWidth="116.0" stylesheets="@CSS/button.css" text="Uložiť">
+      <Button fx:id="BtnSave" layoutX="216.0" layoutY="319.0" mnemonicParsing="false" onAction="#OnClickSave" prefHeight="47.0" prefWidth="100.0" stylesheets="@CSS/button.css" text="Uložiť">
          <font>
             <Font size="18.0" />
          </font></Button>
-      <Button fx:id="BtnZrusit" layoutX="27.0" layoutY="314.0" mnemonicParsing="false" onAction="#OnClickZrusit" prefHeight="52.0" prefWidth="116.0" stylesheets="@CSS/button.css" text="Zrušiť">
+      <Button fx:id="BtnZrusit" layoutX="36.0" layoutY="319.0" mnemonicParsing="false" onAction="#OnClickZrusit" prefHeight="47.0" prefWidth="100.0" stylesheets="@CSS/button.css" text="Zrušiť">
          <font>
             <Font size="18.0" />
          </font></Button>
       <Label fx:id="LabelChyba" layoutX="63.0" layoutY="57.0" prefHeight="39.0" prefWidth="224.0" textFill="RED" visible="false">
          <font>
-            <Font size="18.0" />
+            <Font name="Yu Gothic Bold" size="18.0" />
          </font>
       </Label>
    </children>

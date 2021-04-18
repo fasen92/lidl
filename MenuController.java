@@ -95,9 +95,6 @@ public class MenuController implements Initializable{
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        /*Image hw = new Image("/images/HW.png");
-        img1.setImage(hw);*/
-
       Singleton x = Singleton.getInstance();
         if(String.valueOf(x.ucet.getRola()).equals("Admin")){
             BtnZamestnanci.setVisible(true);
