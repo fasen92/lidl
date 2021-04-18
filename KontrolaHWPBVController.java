@@ -202,28 +202,21 @@ public class KontrolaHWPBVController implements Initializable {
 
     @FXML
     void OnClickSpat(ActionEvent event) throws IOException {
-        /*Parent MenuParent = FXMLLoader.load(getClass().getResource("Menu.fxml"));
-        Scene MenuScene = new Scene(MenuParent);
-
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(MenuScene);
-        window.show();*/
-
         Stage primaryStage = (Stage) ap.getScene().getWindow();
         primaryStage.close();
-        
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu.fxml"));
         Parent root = (Parent) loader.load();
-        Scene newScene = new Scene(root);    
+        Scene newScene = new Scene(root);
         Stage newStage = new Stage();
         newStage.getIcons().add(new Image("/images/LidlLogo.png"));
-        
+
         newStage.setScene(newScene);
         newStage.setTitle("Asset Management");
         newStage.show();
     }
 
-    //Pokial som vyplnil atributy tato funkcia prida zariadenie do DB
+    // Pokial som vyplnil atributy tato funkcia prida zariadenie do DB
 
     @FXML
     void OnClickUloz(ActionEvent event) throws SQLException {
@@ -249,7 +242,8 @@ public class KontrolaHWPBVController implements Initializable {
         }
     }
 
-    // je funkcia ktora sa aktivuje pri clicknuti na vycisti a spusti funkciu vycisti()
+    // je funkcia ktora sa aktivuje pri clicknuti na vycisti a spusti funkciu
+    // vycisti()
 
     @FXML
     void OnClickVycisti(ActionEvent event) {
@@ -274,9 +268,25 @@ public class KontrolaHWPBVController implements Initializable {
                 PreparedStatement pst;
                 pst = conn.prepareStatement(sql);
                 pst.setString(1, pbv.get(0).getID());
+                String Nazov =  pbv.get(0).getNazov();
                 pst.execute();
                 tabulka.getItems().removeAll(tabulka.getSelectionModel().getSelectedItems());
                 update_Table(ChoiceBoxTypzariadenia.getValue(), ChoiceBoxSklad.getValue());
+
+                
+
+                
+
+                Singleton x = Singleton.getInstance();
+                
+                String Meno = x.ucet.getMeno();
+                System.out.println("Meno" + Meno);
+                String Priezvisko = x.ucet.getPriezvisko();
+                System.out.println("Priez" + Priezvisko);
+                String Akcia = "Odstanene PBV -"+Nazov;
+                System.out.println(Akcia);
+
+                JDBMySQLConnection.addtoZazAkci( Meno, Priezvisko, Akcia);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Nič nie je vybraté");
             }
@@ -286,7 +296,8 @@ public class KontrolaHWPBVController implements Initializable {
 
     }
 
-    // Pokial som z tabulky zvolil zariadenie a upravil jeho atribúty tato btn click funkcia uozi zmeny
+    // Pokial som z tabulky zvolil zariadenie a upravil jeho atribúty tato btn click
+    // funkcia uozi zmeny
     @FXML
     void OnClickUlozZmeny(ActionEvent event) throws SQLException {
 
@@ -331,8 +342,9 @@ public class KontrolaHWPBVController implements Initializable {
 
     }
 
-    // Funkcia sa spusta ked kliknem na miesto v tabulke a pokial sa kliklo na zariadenie toto zariadenie 
-    //a jeho atributy sa zobrazia na lavo v textových poliach 
+    // Funkcia sa spusta ked kliknem na miesto v tabulke a pokial sa kliklo na
+    // zariadenie toto zariadenie
+    // a jeho atributy sa zobrazia na lavo v textových poliach
     @FXML
     void getSelected(MouseEvent event) {
 
@@ -355,8 +367,8 @@ public class KontrolaHWPBVController implements Initializable {
 
     }
 
-    //je samotna funkcia ktora vycisti vsetky textove polia 
-    
+    // je samotna funkcia ktora vycisti vsetky textove polia
+
     private void vycisti() {
         TFNazov.clear();
         TFTyp.clear();
@@ -368,19 +380,20 @@ public class KontrolaHWPBVController implements Initializable {
         TAPoznamka.clear();
     }
 
-    //funkcia mi vrati aktualne zvoleny sklad
+    // funkcia mi vrati aktualne zvoleny sklad
 
     public String getVyberskladu(ChoiceBox<String> ChoiceBoxSklad) {
         return ChoiceBoxSklad.getValue();
     }
 
-    //funkcia mi vrati aktualne zvolene zariadenie
+    // funkcia mi vrati aktualne zvolene zariadenie
 
     public String getVyberZariadenia(ChoiceBox<String> ChoiceBoxTypzariadenia) {
         return ChoiceBoxTypzariadenia.getValue();
     }
 
-    //pri nacitanie okna so zariadenim s nacitaju sklady a zariadenia do vyberovych boxov na vrchu tabulky
+    // pri nacitanie okna so zariadenim s nacitaju sklady a zariadenia do vyberovych
+    // boxov na vrchu tabulky
 
     public void setup_Choiceboxs() {
         ObservableList<String> OLsklady = FXCollections.observableArrayList("Sklad1", "Sklad2", "Sklad3");
@@ -427,7 +440,8 @@ public class KontrolaHWPBVController implements Initializable {
 
     }
 
-    //funkcia priamo vklada udaje z DB do samotneho objektu tabuky a konkretnych stlpcov 
+    // funkcia priamo vklada udaje z DB do samotneho objektu tabuky a konkretnych
+    // stlpcov
 
     public void update_Table(String choiceZariadenie, String choiceSklad) throws SQLException {
 
@@ -450,7 +464,8 @@ public class KontrolaHWPBVController implements Initializable {
 
     }
 
-    //tato funkcia zisti ci su zariadenia po zaruke a ak su tak ich podfarbí červenou
+    // tato funkcia zisti ci su zariadenia po zaruke a ak su tak ich podfarbí
+    // červenou
 
     private void customiseFactory(TableColumn<Pbv, String> calltypel) {
         calltypel.setCellFactory(column -> {
@@ -475,7 +490,7 @@ public class KontrolaHWPBVController implements Initializable {
         });
     }
 
-    //tato funkcia otvori dialog s opravou 
+    // tato funkcia otvori dialog s opravou
 
     @FXML
     void OnClickOprava(ActionEvent event) throws IOException, SQLException {
@@ -505,7 +520,7 @@ public class KontrolaHWPBVController implements Initializable {
 
     }
 
-    //je funkcia ktora sa vzdy spusta ked sa otvara dany stage 
+    // je funkcia ktora sa vzdy spusta ked sa otvara dany stage
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

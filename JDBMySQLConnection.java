@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -50,8 +51,9 @@ public class JDBMySQLConnection {
                 while (rs.next()) {
 
                     OLPbv.add(new Pbv(rs.getString("ID"), rs.getString("Typ"), rs.getString("Názov"),
-                            rs.getString("Počet"), rs.getString("Sériové číslo"),rs.getString("Záznam činnosti"), rs.getString("Dátum odoslania fili"),
-                            rs.getString("Záruka"), rs.getString("Poznámka"), rs.getString("Oprava cez")));
+                            rs.getString("Počet"), rs.getString("Sériové číslo"), rs.getString("Záznam činnosti"),
+                            rs.getString("Dátum odoslania fili"), rs.getString("Záruka"), rs.getString("Poznámka"),
+                            rs.getString("Oprava cez")));
                 }
             } catch (Exception e) {
 
@@ -78,8 +80,9 @@ public class JDBMySQLConnection {
             while (rs.next()) {
 
                 OLPScanner.add(new Scanner(rs.getString("ID"), rs.getString("Typ"), rs.getString("Názov"),
-                        rs.getString("Počet"), rs.getString("Sériové číslo"), rs.getString("Záznam činnosti"), rs.getString("Dátum odoslania fili"),
-                        rs.getString("Záruka"), rs.getString("Poznámka"), rs.getString("Oprava cez")));
+                        rs.getString("Počet"), rs.getString("Sériové číslo"), rs.getString("Záznam činnosti"),
+                        rs.getString("Dátum odoslania fili"), rs.getString("Záruka"), rs.getString("Poznámka"),
+                        rs.getString("Oprava cez")));
             }
         } catch (Exception e) {
 
@@ -105,8 +108,9 @@ public class JDBMySQLConnection {
                 while (rs.next()) {
                     rs.getString("Cislo fili");
                     OLQuail.add(new Quail(rs.getString("ID"), rs.getString("Typ"), rs.getString("Názov"),
-                            rs.getString("Počet"), rs.getString("Sériové číslo"), rs.getString("Cislo fili"),rs.getString("Záznam činnosti"),
-                            rs.getString("Dátum odoslania fili"), rs.getString("Záruka"), rs.getString("Poznámka"),rs.getString("Oprava cez")));
+                            rs.getString("Počet"), rs.getString("Sériové číslo"), rs.getString("Cislo fili"),
+                            rs.getString("Záznam činnosti"), rs.getString("Dátum odoslania fili"),
+                            rs.getString("Záruka"), rs.getString("Poznámka"), rs.getString("Oprava cez")));
                 }
             } catch (Exception e) {
                 System.out.println("nieco je zle");
@@ -133,7 +137,8 @@ public class JDBMySQLConnection {
                 while (rs.next()) {
                     OLOstatne.add(new Ostatne(rs.getString("ID"), rs.getString("Typ"), rs.getString("Názov"),
                             rs.getString("Počet"), rs.getString("Sériové číslo"), rs.getString("Cislo fili"),
-                            rs.getString("Záznam činnosti"),rs.getString("Dátum odoslania fili"), rs.getString("Záruka"), rs.getString("Poznámka"),rs.getString("Oprava cez")));
+                            rs.getString("Záznam činnosti"), rs.getString("Dátum odoslania fili"),
+                            rs.getString("Záruka"), rs.getString("Poznámka"), rs.getString("Oprava cez")));
 
                 }
             } catch (Exception e) {
@@ -168,7 +173,8 @@ public class JDBMySQLConnection {
                     OLMDE.add(new MDE(rs.getString("ID"), rs.getString("Typ"), rs.getString("Názov"),
                             rs.getString("Počet"), rs.getString("Sériové číslo"), rs.getString("MAC adresa"),
                             rs.getString("IP adresa"), wifi, rs.getString("Cislo fili"),
-                            rs.getString("Záznam činnosti"),rs.getString("Dátum odoslania fili"), rs.getString("Záruka"), rs.getString("Poznámka"),rs.getString("Oprava cez")));
+                            rs.getString("Záznam činnosti"), rs.getString("Dátum odoslania fili"),
+                            rs.getString("Záruka"), rs.getString("Poznámka"), rs.getString("Oprava cez")));
                 }
             } catch (Exception e) {
                 System.out.println("nieco je zle");
@@ -197,7 +203,8 @@ public class JDBMySQLConnection {
                     OLRabattdrucker.add(new Rabattdrucker(rs.getString("ID"), rs.getString("Typ"),
                             rs.getString("Názov"), rs.getString("Počet"), rs.getString("Sériové číslo"),
                             rs.getString("Evidencne cislo"), rs.getString("Cislo fili"),
-                            rs.getString("Záznam činnosti"), rs.getString("Dátum odoslania fili"), rs.getString("Záruka"), rs.getString("Poznámka"),rs.getString("Oprava cez")));
+                            rs.getString("Záznam činnosti"), rs.getString("Dátum odoslania fili"),
+                            rs.getString("Záruka"), rs.getString("Poznámka"), rs.getString("Oprava cez")));
 
                 }
             } catch (Exception e) {
@@ -247,8 +254,9 @@ public class JDBMySQLConnection {
                     OLMP.add(new MP(rs.getString("ID"), rs.getString("Typ"), rs.getString("Názov"),
                             rs.getString("Počet"), rs.getString("Sériové číslo"), rs.getString("Typ telefonu"),
                             rs.getString("IMEI"), rs.getString("SIM"), rs.getString("Tel.cislo"), rs.getString("PUK"),
-                            rs.getString("PIN"), rs.getString("Cislo fili"),rs.getString("Záznam činnosti"), rs.getString("Dátum odoslania fili"),
-                            rs.getString("Záruka"), rs.getString("Poznámka"),rs.getString("Oprava cez")));
+                            rs.getString("PIN"), rs.getString("Cislo fili"), rs.getString("Záznam činnosti"),
+                            rs.getString("Dátum odoslania fili"), rs.getString("Záruka"), rs.getString("Poznámka"),
+                            rs.getString("Oprava cez")));
                 }
             } catch (Exception e) {
                 System.out.println("nieco je zle");
@@ -576,6 +584,55 @@ public class JDBMySQLConnection {
 
     private static void getQueryMP() {
         query = "INSERT INTO `mobil-prepredajnu`( `Sklad`, `Typ`, `Názov`, `Typ telefonu`, `Počet`, `Sériové číslo`, `Cislo fili`, `Tel.cislo`, `IMEI`, `SIM`, `PUK`, `PIN`, `Dátum odoslania fili`, `Záruka`, `Poznámka`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    }
+
+    public static ObservableList<Osoba> getUctyZazAkci() throws SQLException {
+        Connection conn = getConnection();
+        ObservableList<Osoba> OsobaList = FXCollections.observableArrayList();
+        System.out.println("2");
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM `zaznamy-akci`");
+            ResultSet rs = ps.executeQuery();
+            System.out.println("3");
+            while (rs.next()) {
+                OsobaList.add(new Osoba(rs.getString("ID"), rs.getString("Meno"), rs.getString("Priezvisko"),
+                        rs.getString("Cas"), rs.getString("Akcia")));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return OsobaList;
+    }
+
+    public static void addtoZazAkci( String Meno, String Priezvisko,  String Akcia) {
+        getQueryZazakci();
+        String Cas = LocalDate.now().toString();
+        insertZazakci(Meno,Priezvisko,Cas,Akcia);
+    }
+
+    private static void insertZazakci(String Meno, String Priezvisko, String Cas, String Akcia) {
+
+        try {
+            Connection connection = getConnection();
+            preparedStatement = connection.prepareStatement(query);
+
+            
+            preparedStatement.setString(1, Meno);
+            preparedStatement.setString(2, Priezvisko);
+            preparedStatement.setString(3, Cas);
+            preparedStatement.setString(4, Akcia);
+
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    private static void getQueryZazakci() {
+        query = "INSERT INTO `zaznamy-akci`(`Meno`, `Priezvisko`, `Cas`, `Akcia`) VALUES (?,?,?,?)";
+        
     }
 
 }

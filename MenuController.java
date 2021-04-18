@@ -76,8 +76,20 @@ public class MenuController implements Initializable{
     }
 
     @FXML
-    void OnClickZaznamAkci(ActionEvent event) {
-
+    void OnClickZaznamAkci(ActionEvent event) throws IOException {
+        Stage primaryStage = (Stage) ap.getScene().getWindow();
+        primaryStage.close();
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ZaznamAkci.fxml"));
+        Parent root = (Parent) loader.load();
+        Scene newScene = new Scene(root);    
+        Stage newStage = new Stage();
+        newStage.getIcons().add(new Image("/images/LidlLogo.png"));
+        
+        newStage.setScene(newScene);
+        newStage.setTitle("Záznam akcí");
+        newStage.show();
+        
     }
 
     @FXML
