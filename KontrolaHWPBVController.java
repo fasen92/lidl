@@ -28,7 +28,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -36,6 +38,9 @@ import javafx.stage.Stage;
 public class KontrolaHWPBVController implements Initializable {
 
     // Objekty ktoré sa viažu k scene .fxml
+
+    @FXML
+    private AnchorPane ap;
 
     @FXML
     private BorderPane BP;
@@ -197,12 +202,25 @@ public class KontrolaHWPBVController implements Initializable {
 
     @FXML
     void OnClickSpat(ActionEvent event) throws IOException {
-        Parent MenuParent = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+        /*Parent MenuParent = FXMLLoader.load(getClass().getResource("Menu.fxml"));
         Scene MenuScene = new Scene(MenuParent);
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(MenuScene);
-        window.show();
+        window.show();*/
+
+        Stage primaryStage = (Stage) ap.getScene().getWindow();
+        primaryStage.close();
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu.fxml"));
+        Parent root = (Parent) loader.load();
+        Scene newScene = new Scene(root);    
+        Stage newStage = new Stage();
+        newStage.getIcons().add(new Image("/images/LidlLogo.png"));
+        
+        newStage.setScene(newScene);
+        newStage.setTitle("Asset Management");
+        newStage.show();
     }
 
     //Pokial som vyplnil atributy tato funkcia prida zariadenie do DB
