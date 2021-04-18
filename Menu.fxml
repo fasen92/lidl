@@ -11,11 +11,11 @@
 
 <AnchorPane fx:id="ap" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MenuController">
    <children>
-      <VBox layoutX="266.0" layoutY="248.0" prefHeight="352.0" prefWidth="469.0">
+      <VBox layoutX="190.0" layoutY="230.0" prefHeight="352.0" prefWidth="469.0">
          <children>
             <Button fx:id="BtnKontrolaHW" mnemonicParsing="false" onAction="#OnClickKontrolaHW" prefHeight="63.0" prefWidth="472.0" stylesheets="@CSS/buttonMain.css" text="Kontrola HW">
                <font>
-                  <Font size="28.0" />
+                  <Font size="20.0" />
                </font></Button>
             <Button fx:id="BtnReklamácia" mnemonicParsing="false" onAction="#OnClickReklamacie" prefHeight="63.0" prefWidth="470.0" stylesheets="@CSS/buttonMain.css" text="Reklamácia">
                <VBox.margin>
@@ -56,9 +56,9 @@
       </VBox>
       <AnchorPane fx:id="back" prefHeight="206.0" prefWidth="800.0" stylesheets="@CSS/style.css">
          <children>
-            <Label alignment="CENTER" layoutX="284.0" layoutY="45.0" prefHeight="109.0" prefWidth="301.0" text="MENU" textFill="WHITE">
+            <Label alignment="CENTER" layoutX="270.0" layoutY="48.0" prefHeight="109.0" prefWidth="301.0" text="MENU" textFill="WHITE">
                <font>
-                  <Font name="Yu Gothic Light" size="96.0" />
+                  <Font name="Yu Gothic Light" size="65.0" />
                </font>
             </Label>
             <Button fx:id="BtnSignOut" alignment="CENTER_RIGHT" layoutX="645.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickSignOut" prefHeight="46.0" prefWidth="141.0" text="Odhlásiť" textAlignment="RIGHT" wrapText="true">
@@ -71,51 +71,48 @@
                   <Image url="@images/signout.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="31.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="129.0" fitWidth="134.0" layoutX="46.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/lidlLogo.png" />
                </image>
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="side" layoutX="-6.0" layoutY="206.0" prefHeight="394.0" prefWidth="200.0" style="-fx-background-color: #0f52ba;" stylesheets="@CSS/style.css">
+      <AnchorPane fx:id="ach1" layoutX="94.0" layoutY="236.0" prefHeight="46.0" prefWidth="56.0" style="-fx-background-color: #ffffff;" stylesheets="@CSS/style.css">
          <children>
-            <AnchorPane fx:id="ach1" layoutX="63.0" layoutY="31.0" prefHeight="65.0" prefWidth="75.0" style="-fx-background-color: #ffffff;" stylesheets="@CSS/achP.css">
-               <children>
-                  <ImageView fx:id="img1" fitHeight="63.0" fitWidth="62.0" layoutX="7.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/HW.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </AnchorPane>
-            <AnchorPane fx:id="ach4" layoutX="63.0" layoutY="281.0" prefHeight="65.0" prefWidth="75.0" style="-fx-background-color: #ffffff;" stylesheets="@CSS/achP.css">
-               <children>
-                  <ImageView fx:id="img4" fitHeight="63.0" fitWidth="62.0" layoutX="7.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/EM.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </AnchorPane>
-            <AnchorPane fx:id="ach3" layoutX="63.0" layoutY="197.0" prefHeight="65.0" prefWidth="75.0" style="-fx-background-color: #ffffff;" stylesheets="@CSS/achP.css">
-               <children>
-                  <ImageView fx:id="img3" fitHeight="63.0" fitWidth="62.0" layoutX="7.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/LOG.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </AnchorPane>
-            <AnchorPane fx:id="ach2" layoutX="63.0" layoutY="113.0" prefHeight="65.0" prefWidth="75.0" style="-fx-background-color: #ffffff;" stylesheets="@CSS/achP.css">
-               <children>
-                  <ImageView fx:id="img2" fitHeight="63.0" fitWidth="62.0" layoutX="7.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/RP.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </AnchorPane>
-         </children></AnchorPane>
+            <ImageView fx:id="img1" fitHeight="42.0" fitWidth="41.0" layoutX="8.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/HW.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="ach4" layoutX="94.0" layoutY="477.0" prefHeight="46.0" prefWidth="56.0" style="-fx-background-color: #ffffff;" stylesheets="@CSS/style.css">
+         <children>
+            <ImageView fx:id="img4" fitHeight="42.0" fitWidth="41.0" layoutX="7.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/EM.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="ach3" layoutX="94.0" layoutY="395.0" prefHeight="46.0" prefWidth="56.0" style="-fx-background-color: #ffffff;" stylesheets="@CSS/style.css">
+         <children>
+            <ImageView fx:id="img3" fitHeight="42.0" fitWidth="41.0" layoutX="7.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/LOG.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="ach2" layoutX="94.0" layoutY="315.0" prefHeight="46.0" prefWidth="56.0" style="-fx-background-color: #ffffff;" stylesheets="@CSS/style.css">
+         <children>
+            <ImageView fx:id="img2" fitHeight="42.0" fitWidth="41.0" layoutX="8.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/RP.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

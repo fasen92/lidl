@@ -7,55 +7,55 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PridatZamDialogController">
+<AnchorPane fx:id="NovyZ" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="350.0" stylesheets="@CSS/style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PridatZamDialogController">
    <children>
-      <Label layoutX="70.0" layoutY="14.0" prefHeight="41.0" prefWidth="210.0" text="Nový zamestnanec">
+      <Label layoutX="68.0" layoutY="14.0" prefHeight="41.0" prefWidth="215.0" text="Nový zamestnanec" textFill="WHITE">
          <font>
-            <Font size="24.0" />
+            <Font name="Yu Gothic Light" size="26.0" />
          </font>
       </Label>
-      <AnchorPane layoutX="26.0" layoutY="68.0" prefHeight="223.0" prefWidth="299.0">
+      <AnchorPane layoutX="26.0" layoutY="68.0" prefHeight="223.0" prefWidth="299.0" style="-fx-background-color: #0f52ba;">
          <children>
-            <Label layoutX="21.0" layoutY="17.0" prefHeight="39.0" prefWidth="62.0" text="Meno:">
+            <Label layoutX="21.0" layoutY="17.0" prefHeight="39.0" prefWidth="62.0" text="Meno:" textFill="WHITE">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Yu Gothic Bold" size="18.0" />
                </font>
             </Label>
             <TextField fx:id="txtMeno" layoutX="78.0" layoutY="17.0" prefHeight="39.0" prefWidth="144.0">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Yu Gothic Bold" size="18.0" />
                </font>
             </TextField>
-            <Label layoutX="21.0" layoutY="68.0" prefHeight="39.0" prefWidth="87.0" text="Priezvisko:">
+            <Label layoutX="8.0" layoutY="68.0" prefHeight="39.0" prefWidth="100.0" text="Priezvisko:" textFill="WHITE">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Yu Gothic Bold" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="txtPriezvisko" layoutX="108.0" layoutY="68.0" prefHeight="25.0" prefWidth="178.0">
+            <TextField fx:id="txtPriezvisko" layoutX="108.0" layoutY="68.0" prefHeight="39.0" prefWidth="178.0">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Yu Gothic Bold" size="18.0" />
                </font>
             </TextField>
             <ChoiceBox fx:id="ChoiceBoxRola" layoutX="162.0" layoutY="165.0" prefHeight="39.0" prefWidth="120.0" />
             <ChoiceBox fx:id="ChoiceBoxSklad" layoutX="21.0" layoutY="165.0" prefHeight="39.0" prefWidth="114.0" />
-            <Label layoutX="21.0" layoutY="127.0" prefHeight="27.0" prefWidth="49.0" text="Sklad:">
+            <Label layoutX="21.0" layoutY="127.0" prefHeight="27.0" prefWidth="62.0" text="Sklad:" textFill="#fff9f9">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Yu Gothic Bold" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="162.0" layoutY="127.0" text="Rola:">
+            <Label layoutX="162.0" layoutY="130.0" text="Rola:" textFill="#fff6f6">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Yu Gothic Bold" size="18.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
-      <Button fx:id="BtnPridat" layoutX="230.0" layoutY="298.0" mnemonicParsing="false" onAction="#OnClickPridatZam" prefHeight="39.0" prefWidth="87.0" text="Pridať">
+      <Button fx:id="BtnPridat" layoutX="224.0" layoutY="298.0" mnemonicParsing="false" onAction="#OnClickPridatZam" prefHeight="41.0" prefWidth="93.0" stylesheets="@CSS/button.css" text="Pridať">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="BtnZrusit" layoutX="44.0" layoutY="298.0" mnemonicParsing="false" onAction="#OnCLickZrusit" prefHeight="39.0" prefWidth="87.0" text="Zrušiť">
+      <Button fx:id="BtnZrusit" layoutX="37.0" layoutY="298.0" mnemonicParsing="false" onAction="#OnCLickZrusit" prefHeight="39.0" prefWidth="87.0" stylesheets="@CSS/button.css" text="Zrušiť">
          <font>
             <Font size="18.0" />
          </font>
