@@ -1,3 +1,67 @@
 #back{
     -fx-background-color : linear-gradient(#007FFF, #004FAC);
+    -fx-border-style: hidden hidden solid  hidden; 
+        -fx-border-width: 7;
+        -fx-border-color: #e7030c;
+}
+
+#side{
+    -fx-border-style: hidden solid hidden  hidden; 
+        -fx-border-width: 7;
+        -fx-border-color: #e7030c;
+}
+
+#BtnSignOut{
+    -fx-background-color: 
+        #007FFF,
+         #007FFF,
+         #FFFFFF;
+    -fx-background-insets: 0,1,4,5;
+    -fx-background-radius: 10,15,5;
+    -fx-padding: 15 30 15 30;
+    -fx-font-family: "Yu Gothic Medium";
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #007FFF;
+    -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);
+}
+
+#zmenaH{
+    -fx-background-color : linear-gradient(#007FFF, #004FAC);
+}
+
+#Apane{
+    -fx-background-color : linear-gradient(#007FFF, #004FAC);
+}
+
+#ach1{
+    -fx-border-style: solid; 
+        -fx-border-width: 2;
+        -fx-border-color: #e7030c;
+    -fx-border-radius: 10,15,5;
+    -fx-background-radius: 11,16,6;
+}
+
+#ach2{
+    -fx-border-style: solid; 
+        -fx-border-width: 2;
+        -fx-border-color: #e7030c;
+    -fx-border-radius: 10,15,5;
+    -fx-background-radius: 11,16,6;
+}
+
+#ach3{
+    -fx-border-style: solid; 
+        -fx-border-width: 2;
+        -fx-border-color: #e7030c;
+    -fx-border-radius: 10,15,5;
+    -fx-background-radius: 11,16,6;
+}
+
+#ach4{
+    -fx-border-style: solid; 
+        -fx-border-width: 2;
+        -fx-border-color: #e7030c;
+    -fx-border-radius: 10,15,5;
+    -fx-background-radius: 11,16,6;
 }

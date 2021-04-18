@@ -31,6 +31,7 @@ public class Ucet {
                 DetailZamParent = FXMLLoader.load(getClass().getResource("DetailZam.fxml"));
                 Scene DetailZamScene = new Scene(DetailZamParent);
                 Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                window.setResizable(false);
                 window.setScene(DetailZamScene);
                 window.show();
 

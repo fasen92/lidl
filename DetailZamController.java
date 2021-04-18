@@ -60,7 +60,6 @@ public class DetailZamController implements Initializable {
         txtMeno.setText(x.ucet.getMeno());
         txtPriezvisko.setText(x.ucet.getPriezvisko());
         setup_Choiceboxs(x.ucet.getRola(), x.ucet.getSklad());
-
     }
 
     public void setup_Choiceboxs(String rola, String sklad) {

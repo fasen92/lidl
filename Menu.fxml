@@ -9,23 +9,40 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="back" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@CSS/style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MenuController">
    <children>
-      <VBox layoutX="231.0" layoutY="173.0" prefHeight="391.0" prefWidth="339.0">
+      <VBox layoutX="266.0" layoutY="248.0" prefHeight="352.0" prefWidth="469.0">
          <children>
-            <Button fx:id="BtnKontrolaHW" mnemonicParsing="false" onAction="#OnClickKontrolaHW" prefHeight="57.0" prefWidth="338.0" stylesheets="@CSS/button.css" text="Kontrola HW" />
-            <Button fx:id="BtnReklamácia" mnemonicParsing="false" onAction="#OnClickReklamacie" prefHeight="45.0" prefWidth="190.0" text="Reklamácia">
+            <Button fx:id="BtnKontrolaHW" mnemonicParsing="false" onAction="#OnClickKontrolaHW" prefHeight="63.0" prefWidth="472.0" stylesheets="@CSS/button.css" text="Kontrola HW">
+               <font>
+                  <Font size="28.0" />
+               </font></Button>
+            <Button fx:id="BtnReklamácia" mnemonicParsing="false" onAction="#OnClickReklamacie" prefHeight="63.0" prefWidth="470.0" stylesheets="@CSS/button.css" text="Reklamácia">
                <VBox.margin>
-                  <Insets top="10.0" />
+                  <Insets top="20.0" />
                </VBox.margin>
+               <font>
+                  <Font size="28.0" />
+               </font>
             </Button>
-            <Button fx:id="BtnZaznamakci" mnemonicParsing="false" onAction="#OnClickZaznamAkci" prefHeight="45.0" prefWidth="190.0" text="Záznam akcí">
+            <Button fx:id="BtnZaznamakci" mnemonicParsing="false" onAction="#OnClickZaznamAkci" prefHeight="63.0" prefWidth="473.0" stylesheets="@CSS/button.css" text="Záznam akcí">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
                <VBox.margin>
-                  <Insets top="10.0" />
+                  <Insets top="20.0" />
                </VBox.margin>
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Button>
+            <Button fx:id="BtnZamestnanci" mnemonicParsing="false" onAction="#OnClickZamestnanci" prefHeight="63.0" prefWidth="474.0" stylesheets="@CSS/button.css" text="Zamestnanci">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="28.0" />
+               </font>
             </Button>
             <Button fx:id="BtnZamestnanci" mnemonicParsing="false" onAction="#OnClickZamestnanci" prefHeight="45.0" prefWidth="190.0" text="Zoznam zamestnancov " visible="false">
                <opaqueInsets>
@@ -37,21 +54,68 @@
             </Button>
          </children>
       </VBox>
-      <Label alignment="CENTER" layoutX="313.0" layoutY="32.0" prefHeight="53.0" prefWidth="174.0" text="MENU">
-         <font>
-            <Font name="Book Antiqua" size="48.0" />
-         </font>
-      </Label>
-      <Button fx:id="BtnZamestnanci" layoutX="604.0" layoutY="173.0" mnemonicParsing="false" onAction="#OnClickZamestnanci" prefHeight="45.0" prefWidth="174.0" text="Zamestnanci" />
-      <Button fx:id="BtnSignOut" alignment="CENTER_RIGHT" layoutX="627.0" layoutY="32.0" mnemonicParsing="false" onAction="#OnClickSignOut" prefHeight="45.0" prefWidth="128.0" text="Odhlásiť" textAlignment="RIGHT" wrapText="true">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <ImageView fitHeight="35.0" fitWidth="41.0" layoutX="633.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/signout.png" />
-         </image>
-      </ImageView>
+      <AnchorPane fx:id="back" prefHeight="206.0" prefWidth="800.0" stylesheets="@CSS/style.css">
+         <children>
+            <Label alignment="CENTER" layoutX="284.0" layoutY="45.0" prefHeight="109.0" prefWidth="301.0" text="MENU" textFill="WHITE">
+               <font>
+                  <Font name="Yu Gothic Light" size="96.0" />
+               </font>
+            </Label>
+            <Button fx:id="BtnSignOut" alignment="CENTER_RIGHT" layoutX="645.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickSignOut" prefHeight="46.0" prefWidth="141.0" text="Odhlásiť" textAlignment="RIGHT" wrapText="true">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="35.0" fitWidth="41.0" layoutX="661.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/signout.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="31.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/lidlLogo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="side" layoutX="-6.0" layoutY="206.0" prefHeight="394.0" prefWidth="200.0" style="-fx-background-color: #0f52ba;" stylesheets="@CSS/style.css">
+         <children>
+            <AnchorPane fx:id="ach1" layoutX="63.0" layoutY="31.0" prefHeight="65.0" prefWidth="75.0" style="-fx-background-color: #ffffff;" stylesheets="@CSS/achP.css">
+               <children>
+                  <ImageView fitHeight="63.0" fitWidth="62.0" layoutX="7.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/HW.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="ach4" layoutX="63.0" layoutY="281.0" prefHeight="65.0" prefWidth="75.0" style="-fx-background-color: #ffffff;" stylesheets="@CSS/achP.css">
+               <children>
+                  <ImageView fitHeight="63.0" fitWidth="62.0" layoutX="7.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/EM.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="ach3" layoutX="63.0" layoutY="203.0" prefHeight="65.0" prefWidth="75.0" style="-fx-background-color: #ffffff;" stylesheets="@CSS/achP.css">
+               <children>
+                  <ImageView fitHeight="63.0" fitWidth="62.0" layoutX="7.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/LOG.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="ach2" layoutX="63.0" layoutY="113.0" prefHeight="65.0" prefWidth="75.0" style="-fx-background-color: #ffffff;" stylesheets="@CSS/achP.css">
+               <children>
+                  <ImageView fx:id="ach2" fitHeight="63.0" fitWidth="62.0" layoutX="7.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/RP.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children></AnchorPane>
    </children>
 </AnchorPane>
