@@ -1,0 +1,14 @@
+.button{
+    -fx-background-color: 
+        #007FFF,
+         #007FFF,
+         #FFFFFF;
+    -fx-background-insets: 0,1,4,5;
+    -fx-background-radius: 10,15,5;
+    -fx-padding: 13 25 13 25;
+    -fx-font-size: 28px;
+    -fx-font-family: "Yu Gothic Medium";
+    -fx-font-weight: bold;
+    -fx-text-fill: #007FFF;
+    /*-fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);*/
+}

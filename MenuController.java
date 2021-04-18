@@ -7,9 +7,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import javafx.scene.Node;
 
 public class MenuController implements Initializable{
@@ -28,6 +31,9 @@ public class MenuController implements Initializable{
 
     @FXML
     private Button BtnSignOut;
+
+    @FXML
+    private ImageView img1;
 
     Ucet ucet;
     
@@ -80,12 +86,15 @@ public class MenuController implements Initializable{
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+        /*Image hw = new Image("/images/HW.png");
+        img1.setImage(hw);*/
 
       Singleton x = Singleton.getInstance();
         if(String.valueOf(x.ucet.getRola()).equals("Admin")){
             BtnZamestnanci.setVisible(true);
         }else{
             BtnZamestnanci.setVisible(false);
+            BtnZamestnanci.setStyle("display:none");
         }
         
     }
