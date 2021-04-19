@@ -299,6 +299,7 @@ public class KontrolaHWMDEController implements Initializable {
                 pst.setString(1, mde.get(0).getID());
                 pst.execute();
                 tabulka.getItems().removeAll(tabulka.getSelectionModel().getSelectedItems());
+                update_Table(ChoiceBoxTypzariadenia.getValue(), ChoiceBoxSklad.getValue());
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Nič nie je vybraté");
             }
