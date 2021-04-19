@@ -11,6 +11,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -24,6 +26,9 @@ public class LoginController {
 
     @FXML
     private Label txtLabel;
+
+    @FXML
+    private AnchorPane ap;
 
     @FXML
     private void zavriOkno(ActionEvent event) {
@@ -40,7 +45,7 @@ public class LoginController {
             if (txtId.getText().equals(String.valueOf(UcetList.get(i).getId()))
                     && txtPassword.getText().equals(UcetList.get(i).getHeslo())) {
                 podmnienka = false;
-                
+
                 Singleton x = Singleton.getInstance();
                 x.setUcet(UcetList.get(i));
                 if (UcetList.get(i).getPrvyLogin() == 1) {
@@ -52,11 +57,36 @@ public class LoginController {
                     stage.setScene(scene);
                     stage.showAndWait();
                 }
-                Parent MainMenuParent = FXMLLoader.load(getClass().getResource("Menu.fxml"));
-                Scene MainMenuScene = new Scene(MainMenuParent);
-                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                window.setScene(MainMenuScene);
-                window.show();
+                if (String.valueOf(UcetList.get(i).getRola()).equals("Admin")) {
+                    Stage primaryStage = (Stage) ap.getScene().getWindow();
+                    primaryStage.close();
+
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu.fxml"));
+                    Parent root = (Parent) loader.load();
+                    Scene ZoznamZamScene = new Scene(root);
+                    Stage newStage = new Stage();
+                    newStage.setResizable(false);
+                    newStage.getIcons().add(new Image("/images/LidlLogo.png"));
+
+                    newStage.setScene(ZoznamZamScene);
+                    newStage.setTitle("Asset Management Menu");
+                    newStage.show();
+                } else {
+                    Stage primaryStage = (Stage) ap.getScene().getWindow();
+                    primaryStage.close();
+
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("MenuZam.fxml"));
+                    Parent root = (Parent) loader.load();
+                    Scene ZoznamZamScene = new Scene(root);
+                    Stage newStage = new Stage();
+                    newStage.setResizable(false);
+                    newStage.getIcons().add(new Image("/images/LidlLogo.png"));
+
+                    newStage.setScene(ZoznamZamScene);
+                    newStage.setTitle("Asset Management Menu");
+                    newStage.show();
+                }
+
             }
         }
 

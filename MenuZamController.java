@@ -12,8 +12,7 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.scene.Node;
 
-public class MenuController{
-
+public class MenuZamController{
     @FXML
     private Button BtnKontrolaHW;
 
@@ -102,6 +101,6 @@ public class MenuController{
         newStage.setScene(ZoznamZamScene);
         newStage.setTitle("Zoznam zamestnancov");
         newStage.show();
-
     }
+
 }

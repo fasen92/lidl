@@ -30,11 +30,33 @@
     -fx-background-color : linear-gradient(#007FFF, #004FAC);
 }
 
+#PBV{
+    -fx-background-color : linear-gradient(#007FFF, #004FAC);
+}
+
+#Ostatne{
+    -fx-background-color : linear-gradient(#007FFF, #004FAC);
+}
+
 #Apane{
     -fx-background-color : linear-gradient(#007FFF, #004FAC);
 }
 
 #NovyZ{
+    -fx-background-color : linear-gradient(#007FFF, #004FAC);
+}
+
+#MDE{
+    -fx-background-color : linear-gradient(#007FFF, #004FAC);
+    -fx-font-family: "Yu Gothic";
+    -fx-font-weight: bold;
+}
+
+#MP{
+    -fx-background-color : linear-gradient(#007FFF, #004FAC);
+}
+
+#ap{
     -fx-background-color : linear-gradient(#007FFF, #004FAC);
 }
 

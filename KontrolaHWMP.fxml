@@ -19,23 +19,23 @@
    <children>
       <BorderPane fx:id="BP" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
-            <AnchorPane prefHeight="0.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="0.0" prefWidth="1000.0" style="-fx-background-color: #007FFF;" BorderPane.alignment="CENTER">
                <children>
-                  <Label alignment="CENTER_RIGHT" layoutX="351.0" layoutY="78.0" prefHeight="36.0" prefWidth="69.0" text="Sklad:" textAlignment="RIGHT" AnchorPane.rightAnchor="429.79999999999995" AnchorPane.topAnchor="78.0">
+                  <Label alignment="CENTER_RIGHT" layoutX="793.0" layoutY="78.0" prefHeight="36.0" prefWidth="69.0" text="Sklad:" textAlignment="RIGHT" textFill="#fffafa" AnchorPane.rightAnchor="438.0" AnchorPane.topAnchor="78.0">
                      <font>
-                        <Font name="System Bold" size="12.0" />
+                        <Font name="Yu Gothic Bold" size="13.0" />
                      </font>
                   </Label>
                   <ChoiceBox fx:id="ChoiceBoxTypzariadenia" layoutX="635.0" layoutY="83.0" prefWidth="150.0" AnchorPane.rightAnchor="14.600000000000023" AnchorPane.topAnchor="83.0" />
-                  <Label alignment="CENTER" prefHeight="83.0" prefWidth="800.0" text="Kontrola HW" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <Label alignment="CENTER" prefHeight="83.0" prefWidth="800.0" text="Kontrola HW" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <font>
-                        <Font name="Book Antiqua" size="48.0" />
+                        <Font name="Yu Gothic Light" size="48.0" />
                      </font>
                   </Label>
-                  <ChoiceBox fx:id="ChoiceBoxSklad" layoutX="432.0" layoutY="83.0" prefWidth="150.0" AnchorPane.rightAnchor="268.0" AnchorPane.topAnchor="83.0" />
-                  <Label alignment="CENTER_RIGHT" layoutX="591.0" layoutY="78.0" prefHeight="36.0" prefWidth="87.0" text="Typ zariadenia:" textAlignment="RIGHT" AnchorPane.rightAnchor="172.2" AnchorPane.topAnchor="78.0">
+                  <ChoiceBox fx:id="ChoiceBoxSklad" layoutX="874.0" layoutY="84.0" prefWidth="150.0" AnchorPane.rightAnchor="276.0" AnchorPane.topAnchor="84.0" />
+                  <Label alignment="CENTER_RIGHT" layoutX="591.0" layoutY="78.0" prefHeight="36.0" prefWidth="99.0" text="Typ zariadenia:" textAlignment="RIGHT" textFill="WHITE" AnchorPane.rightAnchor="172.0" AnchorPane.topAnchor="78.0">
                      <font>
-                        <Font name="System Bold" size="12.0" />
+                        <Font name="Yu Gothic Bold" size="13.0" />
                      </font>
                   </Label>
                </children>
@@ -69,7 +69,7 @@
                <children>
                   <VBox prefHeight="704.0" prefWidth="370.0">
                      <children>
-                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="370.0">
+                        <AnchorPane fx:id="MP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="370.0" stylesheets="@CSS/style.css">
                            <children>
                               <VBox prefHeight="580.0" prefWidth="370.0" AnchorPane.bottomAnchor="115.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
@@ -77,9 +77,9 @@
                                        <children>
                                           <AnchorPane prefHeight="26.0" prefWidth="370.0">
                                              <children>
-                                                <Label alignment="TOP_CENTER" layoutY="6.0" prefHeight="70.0" prefWidth="356.0" text="Nový záznam Mobil" textAlignment="CENTER" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <Label alignment="TOP_CENTER" layoutY="6.0" prefHeight="70.0" prefWidth="356.0" text="Nový záznam Mobil" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <font>
-                                                      <Font name="Bell MT Bold" size="18.0" />
+                                                      <Font name="Yu Gothic Bold" size="18.0" />
                                                    </font>
                                                 </Label>
                                              </children>
@@ -88,7 +88,10 @@
                                     </HBox>
                                     <HBox prefHeight="0.0" prefWidth="338.0">
                                        <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sklad" textAlignment="CENTER" wrappingWidth="98.93670463562012" />
+                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Sklad" textAlignment="CENTER" wrappingWidth="98.93670463562012">
+                                             <font>
+                                                <Font name="Yu Gothic Bold" size="13.0" />
+                                             </font></Text>
                                           <ChoiceBox fx:id="ChoiceBoxSklad1" prefWidth="150.0" />
                                        </children>
                                        <VBox.margin>
@@ -97,8 +100,14 @@
                                     </HBox>
                                     <HBox prefHeight="0.0" prefWidth="338.0">
                                        <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Typ" textAlignment="CENTER" wrappingWidth="98.93670463562012" />
-                                          <TextField fx:id="TFTyp" prefHeight="30.0" prefWidth="230.0" />
+                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Typ" textAlignment="CENTER" wrappingWidth="98.93670463562012">
+                                             <font>
+                                                <Font name="Yu Gothic Bold" size="13.0" />
+                                             </font></Text>
+                                          <TextField fx:id="TFTyp" prefHeight="30.0" prefWidth="230.0">
+                                             <font>
+                                                <Font name="Yu Gothic Bold" size="12.0" />
+                                             </font></TextField>
                                        </children>
                                        <VBox.margin>
                                           <Insets bottom="10.0" />
@@ -106,8 +115,14 @@
                                     </HBox>
                                     <HBox prefHeight="0.0" prefWidth="338.0">
                                        <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Názov" textAlignment="CENTER" wrappingWidth="98.93670463562012" />
-                                          <TextField fx:id="TFNazov" prefHeight="30.0" prefWidth="230.0" />
+                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Názov" textAlignment="CENTER" wrappingWidth="98.93670463562012">
+                                             <font>
+                                                <Font name="Yu Gothic Bold" size="13.0" />
+                                             </font></Text>
+                                          <TextField fx:id="TFNazov" prefHeight="30.0" prefWidth="230.0">
+                                             <font>
+                                                <Font name="Yu Gothic Bold" size="12.0" />
+                                             </font></TextField>
                                        </children>
                                        <VBox.margin>
                                           <Insets bottom="10.0" />
@@ -115,8 +130,14 @@
                                     </HBox>
                                     <HBox prefHeight="0.0" prefWidth="338.0">
                                        <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Typ telefonu" textAlignment="CENTER" wrappingWidth="98.93670463562012" />
-                                          <TextField fx:id="TFTypTel" prefHeight="30.0" prefWidth="230.0" />
+                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Typ telefonu" textAlignment="CENTER" wrappingWidth="98.93670463562012">
+                                             <font>
+                                                <Font name="Yu Gothic Bold" size="13.0" />
+                                             </font></Text>
+                                          <TextField fx:id="TFTypTel" prefHeight="30.0" prefWidth="230.0">
+                                             <font>
+                                                <Font name="Yu Gothic Bold" size="12.0" />
+                                             </font></TextField>
                                        </children>
                                        <VBox.margin>
                                           <Insets bottom="10.0" />
@@ -124,8 +145,14 @@
                                     </HBox>
                                     <HBox prefHeight="0.0" prefWidth="338.0">
                                        <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Počet" textAlignment="CENTER" wrappingWidth="98.93670463562012" />
-                                          <TextField fx:id="TFPocet" prefHeight="30.0" prefWidth="230.0" />
+                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Počet" textAlignment="CENTER" wrappingWidth="98.93670463562012">
+                                             <font>
+                                                <Font name="Yu Gothic Bold" size="13.0" />
+                                             </font></Text>
+                                          <TextField fx:id="TFPocet" prefHeight="30.0" prefWidth="230.0">
+                                             <font>
+                                                <Font name="Yu Gothic Bold" size="12.0" />
+                                             </font></TextField>
                                        </children>
                                        <VBox.margin>
                                           <Insets bottom="10.0" />
@@ -133,8 +160,14 @@
                                     </HBox>
                                     <HBox prefHeight="0.0" prefWidth="338.0">
                                        <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sériové číslo" textAlignment="CENTER" wrappingWidth="98.93670463562012" />
-                                          <TextField fx:id="TFSeriove" prefHeight="30.0" prefWidth="230.0" />
+                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Sériové číslo" textAlignment="CENTER" wrappingWidth="98.93670463562012">
+                                             <font>
+                                                <Font name="Yu Gothic Bold" size="13.0" />
+                                             </font></Text>
+                                          <TextField fx:id="TFSeriove" prefHeight="30.0" prefWidth="230.0">
+                                             <font>
+                                                <Font name="Yu Gothic Bold" size="12.0" />
+                                             </font></TextField>
                                        </children>
                                        <VBox.margin>
                                           <Insets bottom="10.0" />
@@ -142,18 +175,30 @@
                                     </HBox>
                                     <HBox prefHeight="0.0" prefWidth="370.0">
                                        <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Číslo filiálky" textAlignment="CENTER" wrappingWidth="98.93670463562012" />
+                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Číslo filiálky" textAlignment="CENTER" wrappingWidth="98.93670463562012">
+                                             <font>
+                                                <Font name="Yu Gothic Bold" size="13.0" />
+                                             </font></Text>
                                           <TextField fx:id="TFCF" maxHeight="-Infinity" prefHeight="30.0" prefWidth="230.0">
                                              <HBox.margin>
                                                 <Insets bottom="10.0" />
                                              </HBox.margin>
+                                             <font>
+                                                <Font name="Yu Gothic Bold" size="12.0" />
+                                             </font>
                                           </TextField>
                                        </children>
                                     </HBox>
                                     <HBox prefHeight="0.0" prefWidth="338.0">
                                        <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Telefonne číslo" textAlignment="CENTER" wrappingWidth="98.93670463562012" />
-                                          <TextField fx:id="TFTelcCslo" prefHeight="30.0" prefWidth="230.0" />
+                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefonne číslo" textAlignment="CENTER" wrappingWidth="98.93670463562012">
+                                             <font>
+                                                <Font name="Yu Gothic Bold" size="13.0" />
+                                             </font></Text>
+                                          <TextField fx:id="TFTelcCslo" prefHeight="30.0" prefWidth="230.0">
+                                             <font>
+                                                <Font name="Yu Gothic Bold" size="12.0" />
+                                             </font></TextField>
                                        </children>
                                        <VBox.margin>
                                           <Insets bottom="10.0" />
@@ -161,8 +206,14 @@
                                     </HBox>
                                     <HBox prefHeight="0.0" prefWidth="338.0">
                                        <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="IMEI" textAlignment="CENTER" wrappingWidth="98.93670463562012" />
-                                          <TextField fx:id="TFIMEI" prefHeight="30.0" prefWidth="230.0" />
+                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="IMEI" textAlignment="CENTER" wrappingWidth="98.93670463562012">
+                                             <font>
+                                                <Font name="Yu Gothic Bold" size="13.0" />
+                                             </font></Text>
+                                          <TextField fx:id="TFIMEI" prefHeight="30.0" prefWidth="230.0">
+                                             <font>
+                                                <Font name="Yu Gothic Bold" size="12.0" />
+                                             </font></TextField>
                                        </children>
                                        <VBox.margin>
                                           <Insets bottom="10.0" />
@@ -170,8 +221,14 @@
                                     </HBox>
                                     <HBox prefHeight="0.0" prefWidth="338.0">
                                        <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SIM" textAlignment="CENTER" wrappingWidth="98.93670463562012" />
-                                          <TextField fx:id="TFSIM" prefHeight="30.0" prefWidth="230.0" />
+                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="SIM" textAlignment="CENTER" wrappingWidth="98.93670463562012">
+                                             <font>
+                                                <Font name="Yu Gothic Bold" size="13.0" />
+                                             </font></Text>
+                                          <TextField fx:id="TFSIM" prefHeight="30.0" prefWidth="230.0">
+                                             <font>
+                                                <Font name="Yu Gothic Bold" size="12.0" />
+                                             </font></TextField>
                                        </children>
                                        <VBox.margin>
                                           <Insets bottom="10.0" />
@@ -179,8 +236,14 @@
                                     </HBox>
                                     <HBox prefHeight="0.0" prefWidth="338.0">
                                        <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="PUK" textAlignment="CENTER" wrappingWidth="98.93670463562012" />
-                                          <TextField fx:id="TFPUK" prefHeight="30.0" prefWidth="230.0" />
+                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="PUK" textAlignment="CENTER" wrappingWidth="98.93670463562012">
+                                             <font>
+                                                <Font name="Yu Gothic Bold" size="13.0" />
+                                             </font></Text>
+                                          <TextField fx:id="TFPUK" prefHeight="30.0" prefWidth="230.0">
+                                             <font>
+                                                <Font name="Yu Gothic Bold" size="12.0" />
+                                             </font></TextField>
                                        </children>
                                        <VBox.margin>
                                           <Insets bottom="10.0" />
@@ -188,8 +251,14 @@
                                     </HBox>
                                     <HBox prefHeight="0.0" prefWidth="338.0">
                                        <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="PIN" textAlignment="CENTER" wrappingWidth="98.93670463562012" />
-                                          <TextField fx:id="TFPIN" prefHeight="30.0" prefWidth="230.0" />
+                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="PIN" textAlignment="CENTER" wrappingWidth="98.93670463562012">
+                                             <font>
+                                                <Font name="Yu Gothic Bold" size="13.0" />
+                                             </font></Text>
+                                          <TextField fx:id="TFPIN" prefHeight="30.0" prefWidth="230.0">
+                                             <font>
+                                                <Font name="Yu Gothic Bold" size="12.0" />
+                                             </font></TextField>
                                        </children>
                                        <VBox.margin>
                                           <Insets bottom="10.0" />
@@ -197,10 +266,13 @@
                                     </HBox>
                                     <HBox prefHeight="0.0" prefWidth="338.0">
                                        <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dátum odoslania na filiálku" textAlignment="CENTER" wrappingWidth="98.93670463562012">
+                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Dátum odoslania na filiálku" textAlignment="CENTER" wrappingWidth="98.93670463562012">
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
+                                             <font>
+                                                <Font name="Yu Gothic Bold" size="12.0" />
+                                             </font>
                                           </Text>
                                           <DatePicker fx:id="DFOdoslanienafili" prefHeight="30.0" prefWidth="230.0" />
                                        </children>
@@ -210,7 +282,10 @@
                                     </HBox>
                                     <HBox prefHeight="0.0" prefWidth="338.0">
                                        <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Záruka" textAlignment="CENTER" wrappingWidth="98.93670463562012" />
+                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Záruka" textAlignment="CENTER" wrappingWidth="98.93670463562012">
+                                             <font>
+                                                <Font name="Yu Gothic Bold" size="13.0" />
+                                             </font></Text>
                                           <DatePicker fx:id="DFZaruka" prefHeight="30.0" prefWidth="230.0" />
                                        </children>
                                        <VBox.margin>
@@ -221,12 +296,18 @@
                                        <children>
                                           <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                              <children>
-                                                <Text layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Poznámka" textAlignment="CENTER" wrappingWidth="98.93670463562012" />
+                                                <Text fill="WHITE" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Poznámka" textAlignment="CENTER" wrappingWidth="98.93670463562012">
+                                                   <font>
+                                                      <Font name="Yu Gothic Bold" size="13.0" />
+                                                   </font></Text>
                                              </children>
                                           </AnchorPane>
                                           <AnchorPane prefHeight="94.0" prefWidth="390.0">
                                              <children>
-                                                <TextField fx:id="TAPoznamka" layoutX="61.0" layoutY="35.0" prefHeight="45.0" prefWidth="226.0" AnchorPane.bottomAnchor="-23.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="0.0" />
+                                                <TextField fx:id="TAPoznamka" layoutX="61.0" layoutY="35.0" prefHeight="45.0" prefWidth="226.0" AnchorPane.bottomAnchor="-23.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="0.0">
+                                                   <font>
+                                                      <Font name="Yu Gothic Bold" size="12.0" />
+                                                   </font></TextField>
                                              </children>
                                           </AnchorPane>
                                        </children>
@@ -241,15 +322,15 @@
             </VBox>
          </left>
          <bottom>
-            <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="84.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+            <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="56.0" prefWidth="1300.0" style="-fx-background-color: #004FAC;" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="BtnVycisti" layoutX="251.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickVycisti" prefHeight="26.0" prefWidth="110.0" text="Vyčisti" />
-                  <Button fx:id="BtnRefresh" layoutX="586.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickRefresh" prefHeight="26.0" prefWidth="150.0" text="Aktualizovať" />
-                  <Button fx:id="BtnOprava" layoutX="918.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickOprava" prefHeight="26.0" prefWidth="150.0" text="Oprava" />
-                  <Button fx:id="BtnUlož" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickUloz" prefHeight="26.0" prefWidth="110.0" text="Pridaj" />
-                  <Button fx:id="BtnDelete1" layoutX="751.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickDelete" prefHeight="26.0" prefWidth="150.0" text="Zmazať" />
-                  <Button fx:id="BtnZmeny1" layoutX="132.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickUlozZmeny" prefHeight="26.0" prefWidth="110.0" text="Ulož zmeny" />
-                  <Button fx:id="BtnMenu11" layoutX="1086.0" layoutY="14.0" mnemonicParsing="false" onAction="#OnClickSpat" prefHeight="26.0" prefWidth="150.0" text="Menu" />
+                  <Button fx:id="BtnVycisti" layoutX="277.0" layoutY="8.0" mnemonicParsing="false" onAction="#OnClickVycisti" prefHeight="26.0" prefWidth="110.0" stylesheets="@CSS/button.css" text="Vyčisti" />
+                  <Button fx:id="BtnRefresh" layoutX="587.0" layoutY="7.0" mnemonicParsing="false" onAction="#OnClickRefresh" prefHeight="26.0" prefWidth="150.0" stylesheets="@CSS/button.css" text="Aktualizovať" />
+                  <Button fx:id="BtnOprava" layoutX="921.0" layoutY="7.0" mnemonicParsing="false" onAction="#OnClickOprava" prefHeight="26.0" prefWidth="150.0" stylesheets="@CSS/button.css" text="Oprava" />
+                  <Button fx:id="BtnUlož" layoutX="14.0" layoutY="7.0" mnemonicParsing="false" onAction="#OnClickUloz" prefHeight="26.0" prefWidth="110.0" stylesheets="@CSS/button.css" text="Pridaj" />
+                  <Button fx:id="BtnDelete1" layoutX="757.0" layoutY="7.0" mnemonicParsing="false" onAction="#OnClickDelete" prefHeight="26.0" prefWidth="150.0" stylesheets="@CSS/button.css" text="Zmazať" />
+                  <Button fx:id="BtnZmeny1" layoutX="134.0" layoutY="7.0" mnemonicParsing="false" onAction="#OnClickUlozZmeny" prefHeight="41.0" prefWidth="134.0" stylesheets="@CSS/button.css" text="Ulož zmeny" />
+                  <Button fx:id="BtnMenu11" layoutX="1088.0" layoutY="7.0" mnemonicParsing="false" onAction="#OnClickSpat" prefHeight="26.0" prefWidth="150.0" stylesheets="@CSS/button.css" text="Menu" />
                </children>
             </AnchorPane>
          </bottom>

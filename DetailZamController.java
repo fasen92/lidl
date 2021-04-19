@@ -20,6 +20,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -153,12 +154,18 @@ public class DetailZamController implements Initializable {
     }
 
     private void spat(ActionEvent event) throws IOException {
-        Parent ZoznamZamParent = FXMLLoader.load(getClass().getResource("ZoznamZam.fxml"));
-        Scene ZoznamZamScene = new Scene(ZoznamZamParent);
+        Stage primaryStage = (Stage) Apane.getScene().getWindow();
+        primaryStage.close();
 
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(ZoznamZamScene);
-        window.show();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ZoznamZam.fxml"));
+        Parent root = (Parent) loader.load();
+        Scene ZoznamZamScene = new Scene(root);
+        Stage newStage = new Stage();
+        newStage.getIcons().add(new Image("/images/LidlLogo.png"));
+
+        newStage.setScene(ZoznamZamScene);
+        newStage.setTitle("Zoznam zamestnancov");
+        newStage.show();
     }
 
     public String getVyberSkladu(ChoiceBox<String> ChoiceBoxSklad) {

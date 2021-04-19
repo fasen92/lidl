@@ -13,7 +13,7 @@
    <children>
       <AnchorPane fx:id="Zzam" layoutY="-1.0" prefHeight="135.0" prefWidth="800.0" stylesheets="@CSS/style.css">
          <children>
-            <Label layoutX="182.0" layoutY="23.0" prefHeight="90.0" prefWidth="437.0" text="Zoznam zamestnancov" textFill="WHITE">
+            <Label layoutX="182.0" layoutY="23.0" prefHeight="90.0" prefWidth="437.0" text="Zoznam zamestnancov" textFill="WHITE" AnchorPane.topAnchor="23.0">
                <font>
                   <Font name="Yu Gothic Light" size="44.0" />
                </font>
@@ -22,7 +22,7 @@
       </AnchorPane>
       <AnchorPane fx:id="Zzam2" layoutY="134.0" prefHeight="466.0" prefWidth="800.0" stylesheets="@CSS/style.css">
          <children>
-            <TableView fx:id="TabZamestnanci" layoutX="85.0" layoutY="14.0" prefHeight="352.0" prefWidth="630.0">
+            <TableView fx:id="TabZamestnanci" layoutX="85.0" layoutY="14.0" prefHeight="352.0" prefWidth="630.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="14.0">
               <columns>
                 <TableColumn fx:id="ColumnId" prefWidth="81.0" text="ID" />
                 <TableColumn fx:id="ColumnMeno" prefWidth="118.0" text="Meno" />
@@ -31,11 +31,14 @@
                   <TableColumn fx:id="ColumnRola" prefWidth="118.0" text="Rola" />
                   <TableColumn fx:id="ColumnDetail" prefWidth="56.0" text="Detail" />
               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
             </TableView>
-            <Button fx:id="BtnNovyPouzivatel" layoutX="548.0" layoutY="389.0" mnemonicParsing="false" onAction="#onClickNovyPouzivatel" prefHeight="47.0" prefWidth="209.0" stylesheets="@CSS/button.css" text="Pridať zamestnanca" />
-            <Button fx:id="BtnSpat" layoutX="16.0" layoutY="405.0" mnemonicParsing="false" onAction="#OnClickSpat" stylesheets="@CSS/button.css" text="Späť" />
+            <Button fx:id="BtnNovyPouzivatel" layoutX="563.0" layoutY="389.0" mnemonicParsing="false" onAction="#onClickNovyPouzivatel" prefHeight="47.0" prefWidth="209.0" stylesheets="@CSS/button.css" text="Pridať zamestnanca" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="28.0" />
+            <Button fx:id="BtnSpat" layoutX="16.0" layoutY="405.0" mnemonicParsing="false" onAction="#OnClickSpat" stylesheets="@CSS/button.css" text="Späť" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="16.0" />
             <Button fx:id="BtnRefresh" layoutX="483.0" layoutY="389.0" mnemonicParsing="false" onAction="#OnClickRefresh" prefHeight="47.0" prefWidth="51.0" stylesheets="@CSS/button.css" />
-            <ImageView fitHeight="31.0" fitWidth="31.0" layoutX="493.0" layoutY="397.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="31.0" fitWidth="31.0" layoutX="493.0" layoutY="397.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="38.0" AnchorPane.rightAnchor="276.0">
                <image>
                   <Image url="@images/RFRSH.png" />
                </image>
