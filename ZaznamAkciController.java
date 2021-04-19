@@ -44,7 +44,7 @@ public class ZaznamAkciController implements Initializable {
 
     @FXML
     private Button BtnMenu;
-    
+
     @FXML
     private Button BtnAktualizuj;
 
@@ -52,18 +52,40 @@ public class ZaznamAkciController implements Initializable {
 
     @FXML
     void OnClickMenu(ActionEvent event) throws IOException {
-        Stage primaryStage = (Stage) ap.getScene().getWindow();
-        primaryStage.close();
+        Singleton x = Singleton.getInstance();
+        String ucet = x.ucet.getRola();
+
+        if (ucet.equals("Admin")) {
+            Stage primaryStage = (Stage) ap.getScene().getWindow();
+            primaryStage.close();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu.fxml"));
+            Parent root = (Parent) loader.load();
+            Scene newScene = new Scene(root);
+            Stage newStage = new Stage();
+            newStage.getIcons().add(new Image("/images/LidlLogo.png"));
+
+            newStage.setScene(newScene);
+            newStage.setResizable(false);
+            newStage.setTitle("Asset Management");
+            newStage.show();
+        }
         
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu.fxml"));
-        Parent root = (Parent) loader.load();
-        Scene newScene = new Scene(root);    
-        Stage newStage = new Stage();
-        newStage.getIcons().add(new Image("/images/LidlLogo.png"));
-        
-        newStage.setScene(newScene);
-        newStage.setTitle("Asset Management");
-        newStage.show();
+        if (ucet.equals("Operating") || ucet.equals("Skladnik")) {
+            Stage primaryStage = (Stage) ap.getScene().getWindow();
+            primaryStage.close();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("MenuZam.fxml"));
+            Parent root = (Parent) loader.load();
+            Scene newScene = new Scene(root);
+            Stage newStage = new Stage();
+            newStage.getIcons().add(new Image("/images/LidlLogo.png"));
+
+            newStage.setScene(newScene);
+            newStage.setResizable(false);
+            newStage.setTitle("Asset Management");
+            newStage.show();
+        }
     
     }
     @FXML

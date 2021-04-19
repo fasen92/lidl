@@ -202,18 +202,41 @@ public class KontrolaHWPBVController implements Initializable {
 
     @FXML
     void OnClickSpat(ActionEvent event) throws IOException {
-        Stage primaryStage = (Stage) ap.getScene().getWindow();
-        primaryStage.close();
+        Singleton x = Singleton.getInstance();
+        String ucet = x.ucet.getRola();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu.fxml"));
-        Parent root = (Parent) loader.load();
-        Scene newScene = new Scene(root);
-        Stage newStage = new Stage();
-        newStage.getIcons().add(new Image("/images/LidlLogo.png"));
+        if (ucet.equals("Admin")) {
+            Stage primaryStage = (Stage) ap.getScene().getWindow();
+            primaryStage.close();
 
-        newStage.setScene(newScene);
-        newStage.setTitle("Asset Management");
-        newStage.show();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu.fxml"));
+            Parent root = (Parent) loader.load();
+            Scene newScene = new Scene(root);
+            Stage newStage = new Stage();
+            newStage.getIcons().add(new Image("/images/LidlLogo.png"));
+
+            newStage.setScene(newScene);
+            newStage.setResizable(false);
+            newStage.setTitle("Asset Management");
+            newStage.show();
+        }
+        
+        if (ucet.equals("Operating") || ucet.equals("Skladnik")) {
+            Stage primaryStage = (Stage) ap.getScene().getWindow();
+            primaryStage.close();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("MenuZam.fxml"));
+            Parent root = (Parent) loader.load();
+            Scene newScene = new Scene(root);
+            Stage newStage = new Stage();
+            newStage.getIcons().add(new Image("/images/LidlLogo.png"));
+
+            newStage.setScene(newScene);
+            newStage.setResizable(false);
+            newStage.setTitle("Asset Management");
+            newStage.show();
+        }
+
     }
 
     // Pokial som vyplnil atributy tato funkcia prida zariadenie do DB
@@ -268,25 +291,21 @@ public class KontrolaHWPBVController implements Initializable {
                 PreparedStatement pst;
                 pst = conn.prepareStatement(sql);
                 pst.setString(1, pbv.get(0).getID());
-                String Nazov =  pbv.get(0).getNazov();
+                String Nazov = pbv.get(0).getNazov();
                 pst.execute();
                 tabulka.getItems().removeAll(tabulka.getSelectionModel().getSelectedItems());
                 update_Table(ChoiceBoxTypzariadenia.getValue(), ChoiceBoxSklad.getValue());
 
-                
-
-                
-
                 Singleton x = Singleton.getInstance();
-                
+
                 String Meno = x.ucet.getMeno();
                 System.out.println("Meno" + Meno);
                 String Priezvisko = x.ucet.getPriezvisko();
                 System.out.println("Priez" + Priezvisko);
-                String Akcia = "Odstanene PBV -"+Nazov;
+                String Akcia = "Odstanene PBV -" + Nazov;
                 System.out.println(Akcia);
 
-                JDBMySQLConnection.addtoZazAkci( Meno, Priezvisko, Akcia);
+                JDBMySQLConnection.addtoZazAkci(Meno, Priezvisko, Akcia);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Nič nie je vybraté");
             }

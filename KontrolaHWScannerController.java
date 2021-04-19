@@ -29,11 +29,16 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class KontrolaHWScannerController implements Initializable {
+
+    @FXML
+    private AnchorPane ap;
 
     @FXML
     private BorderPane BP;
@@ -182,13 +187,40 @@ public class KontrolaHWScannerController implements Initializable {
 
     @FXML
     void OnClickSpat(ActionEvent event) throws IOException {
-        Parent MenuParent = FXMLLoader.load(getClass().getResource("Menu.fxml"));
-        Scene MenuScene = new Scene(MenuParent);
+        Singleton x = Singleton.getInstance();
+        String ucet = x.ucet.getRola();
 
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(MenuScene);
-        window.setMaximized(true);
-        window.show();
+        if (ucet.equals("Admin")) {
+            Stage primaryStage = (Stage) ap.getScene().getWindow();
+            primaryStage.close();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu.fxml"));
+            Parent root = (Parent) loader.load();
+            Scene newScene = new Scene(root);
+            Stage newStage = new Stage();
+            newStage.getIcons().add(new Image("/images/LidlLogo.png"));
+
+            newStage.setScene(newScene);
+            newStage.setResizable(false);
+            newStage.setTitle("Asset Management");
+            newStage.show();
+        }
+
+        if (ucet.equals("Operating") || ucet.equals("Skladnik")) {
+            Stage primaryStage = (Stage) ap.getScene().getWindow();
+            primaryStage.close();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("MenuZam.fxml"));
+            Parent root = (Parent) loader.load();
+            Scene newScene = new Scene(root);
+            Stage newStage = new Stage();
+            newStage.getIcons().add(new Image("/images/LidlLogo.png"));
+
+            newStage.setScene(newScene);
+            newStage.setResizable(false);
+            newStage.setTitle("Asset Management");
+            newStage.show();
+        }
     }
 
     @FXML

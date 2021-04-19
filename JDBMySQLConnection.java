@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TextField;
 
 public class JDBMySQLConnection {
-    public static final String URL = "jdbc:mysql://localhost/lidl2";
+    public static final String URL = "jdbc:mysql://localhost/lidl";
     // User name pre potrebu zmejdbc
     public static final String USER_NAME = "dusan";
     // Password pre potrebu zmen
