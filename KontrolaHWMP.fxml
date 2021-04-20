@@ -42,7 +42,7 @@
             </AnchorPane>
          </top>
          <center>
-            <TableView fx:id="tabulka" maxHeight="-Infinity" onMouseClicked="#getSelected" prefHeight="577.0" prefWidth="630.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="tabulka" onMouseClicked="#getSelected" BorderPane.alignment="CENTER">
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
