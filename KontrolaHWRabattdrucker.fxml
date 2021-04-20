@@ -44,11 +44,11 @@
          <left>
             <VBox prefHeight="274.0" prefWidth="129.0" BorderPane.alignment="CENTER">
                <children>
-                  <VBox prefHeight="532.0" prefWidth="370.0">
+                  <VBox fx:id="PBV" prefHeight="532.0" prefWidth="370.0" stylesheets="@CSS/style.css">
                      <children>
                         <VBox prefHeight="638.0" prefWidth="370.0">
                            <children>
-                              <AnchorPane fx:id="PBV" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="370.0" stylesheets="@CSS/style.css">
+                              <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="370.0" stylesheets="@CSS/style.css">
                                  <children>
                                     <VBox prefHeight="535.0" prefWidth="370.0" AnchorPane.bottomAnchor="-51.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>

@@ -67,9 +67,9 @@
          <left>
             <VBox prefHeight="726.0" prefWidth="370.0" BorderPane.alignment="CENTER">
                <children>
-                  <VBox prefHeight="704.0" prefWidth="370.0">
+                  <VBox fx:id="MP" prefHeight="704.0" prefWidth="370.0" stylesheets="@CSS/style.css">
                      <children>
-                        <AnchorPane fx:id="MP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="370.0" stylesheets="@CSS/style.css">
+                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="370.0" stylesheets="@CSS/style.css">
                            <children>
                               <VBox prefHeight="580.0" prefWidth="370.0" AnchorPane.bottomAnchor="115.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
