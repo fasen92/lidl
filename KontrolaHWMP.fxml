@@ -65,9 +65,9 @@
             </TableView>
          </center>
          <left>
-            <VBox prefHeight="726.0" prefWidth="370.0" BorderPane.alignment="CENTER">
+            <VBox fx:id="MP" prefHeight="726.0" prefWidth="370.0" stylesheets="@CSS/style.css" BorderPane.alignment="CENTER">
                <children>
-                  <VBox fx:id="MP" prefHeight="704.0" prefWidth="370.0" stylesheets="@CSS/style.css">
+                  <VBox prefHeight="704.0" prefWidth="370.0" stylesheets="@CSS/style.css">
                      <children>
                         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="370.0" stylesheets="@CSS/style.css">
                            <children>

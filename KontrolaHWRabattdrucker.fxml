@@ -42,9 +42,9 @@
             </AnchorPane>
          </top>
          <left>
-            <VBox prefHeight="274.0" prefWidth="129.0" BorderPane.alignment="CENTER">
+            <VBox fx:id="PBV" prefHeight="274.0" prefWidth="129.0" stylesheets="@CSS/style.css" BorderPane.alignment="CENTER">
                <children>
-                  <VBox fx:id="PBV" prefHeight="532.0" prefWidth="370.0" stylesheets="@CSS/style.css">
+                  <VBox prefHeight="532.0" prefWidth="370.0" stylesheets="@CSS/style.css">
                      <children>
                         <VBox prefHeight="638.0" prefWidth="370.0">
                            <children>
