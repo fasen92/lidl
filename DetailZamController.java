@@ -65,7 +65,7 @@ public class DetailZamController implements Initializable {
 
     public void setup_Choiceboxs(String rola, String sklad) {
         ObservableList<String> SkladList = FXCollections.observableArrayList("Sklad 1", "Sklad 2", "Sklad 3", "Všetky");
-        ObservableList<String> RolaList = FXCollections.observableArrayList("Admin", "Operating");
+        ObservableList<String> RolaList = FXCollections.observableArrayList("Admin", "Operating", "Skladník");
 
         ChoiceBoxSklad.setItems(SkladList);
         ChoiceBoxRola.setItems(RolaList);
