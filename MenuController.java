@@ -99,6 +99,7 @@ public class MenuController{
         Stage newStage = new Stage();
         newStage.getIcons().add(new Image("/images/LidlLogo.png"));
 
+        newStage.setResizable(false);
         newStage.setScene(ZoznamZamScene);
         newStage.setTitle("Zoznam zamestnancov");
         newStage.show();

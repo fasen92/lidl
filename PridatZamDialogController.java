@@ -72,7 +72,7 @@ public class PridatZamDialogController implements Initializable {
 
     public void setup_Choiceboxs() {
         ObservableList<String> SkladList = FXCollections.observableArrayList("Sklad 1", "Sklad 2", "Sklad 3","Všetky");
-        ObservableList<String> RolaList = FXCollections.observableArrayList("Admin", "Operating");
+        ObservableList<String> RolaList = FXCollections.observableArrayList("Admin", "Operating", "Skladník");
 
         ChoiceBoxSklad.setItems(SkladList);
         ChoiceBoxRola.setItems(RolaList);

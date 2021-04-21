@@ -162,6 +162,7 @@ public class DetailZamController implements Initializable {
         Scene ZoznamZamScene = new Scene(root);
         Stage newStage = new Stage();
         newStage.getIcons().add(new Image("/images/LidlLogo.png"));
+        newStage.setResizable(false);
 
         newStage.setScene(ZoznamZamScene);
         newStage.setTitle("Zoznam zamestnancov");
