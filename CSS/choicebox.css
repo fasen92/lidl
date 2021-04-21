@@ -1,0 +1,15 @@
+.choice-box .context-menu { -fx-background-color: #FFFFFF; -fx-font-size : 15px; }
+
+.choice-box .menu-item:focused { -fx-background-color: #007FFF; }
+
+.choice-box .menu-item > .label { -fx-text-fill: #007FFF; }
+
+.choice-box .menu-item:focused > .label { -fx-text-fill: #FFFFFF; }
+
+.choice-box {
+    -fx-background-color: #FFFFFF;
+    -fx-mark-color: #007FFF;  
+  }
+  
+ 
+  .choice-box > .label { -fx-text-fill: #007FFF; }

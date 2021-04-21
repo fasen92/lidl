@@ -10,7 +10,7 @@
 
 .choice-box .menu-item:focused { -fx-background-color: #007FFF; }
 
-.choice-box .menu-item > .label { -fx-text-fill: #007FFF; }
+.choice-box .menu-item > .label { -fx-text-fill: #007FFF; -fx-font-size : 13px;}
 
 .choice-box .menu-item:focused > .label { -fx-text-fill: #FFFFFF; }
 
@@ -20,7 +20,7 @@
   }
   
  
-  .choice-box > .label { -fx-text-fill: #007FFF; }
+  .choice-box > .label { -fx-text-fill: #007FFF; -fx-font-size : 13px;}
 
 
 #side{
