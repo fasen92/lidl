@@ -287,7 +287,6 @@ public class JDBMySQLConnection {
     }
 
     public static void addtoUcet(String meno, String priezvisko, String sklad, String rola) {
-        System.out.println("add to ucet");
         int prvyLogin = 1;
         getQueryUcet();
         insertUcet(meno, priezvisko, rola, sklad, prvyLogin);
@@ -320,7 +319,7 @@ public class JDBMySQLConnection {
 
     public static void addtoPbv(String vyberskladu, String text, String text2, String text3, String text4,
             String datumodoslania, String zaruka, String text5) {
-        System.out.println("add to pbv");
+        
         getQueryPbv();
         insertPbv(vyberskladu, text, text2, text3, text4, datumodoslania, zaruka, text5);
     }
@@ -355,7 +354,7 @@ public class JDBMySQLConnection {
 
     public static void addtoScanner(String vyberskladu, String text, String text2, String text3, String text4,
             String datumodoslania, String zaruka, String text5) {
-        System.out.println("add to Scanner");
+        
         getQueryScanner();
         insertScanner(vyberskladu, text, text2, text3, text4, datumodoslania, zaruka, text5);
     }
@@ -390,7 +389,7 @@ public class JDBMySQLConnection {
 
     public static void addtoMDE(String vyberskladu, String text, String text2, String text3, String text4, String text5,
             String text6, String wificheck, String text7, String datumodoslania, String zaruka, String text8) {
-        System.out.println("add to MDE");
+        
         getQueryMDE();
         insertMDE(vyberskladu, text, text2, text3, text4, text5, text6, wificheck, text7, datumodoslania, zaruka,
                 text8);
@@ -589,11 +588,11 @@ public class JDBMySQLConnection {
     public static ObservableList<Osoba> getUctyZazAkci() throws SQLException {
         Connection conn = getConnection();
         ObservableList<Osoba> OsobaList = FXCollections.observableArrayList();
-        System.out.println("2");
+        
         try {
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM `zaznamy-akci`");
             ResultSet rs = ps.executeQuery();
-            System.out.println("3");
+            
             while (rs.next()) {
                 OsobaList.add(new Osoba(rs.getString("ID"), rs.getString("Meno"), rs.getString("Priezvisko"),
                         rs.getString("Cas"), rs.getString("Akcia")));

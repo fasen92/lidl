@@ -16,7 +16,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
         stage.getIcons().add(new Image("/images/LidlLogo.png"));
         stage.setTitle("Asset Management");
         stage.setResizable(false);

@@ -206,7 +206,7 @@ public class KontrolaHWScannerController implements Initializable {
             newStage.show();
         }
 
-        if (ucet.equals("Operating") || ucet.equals("Skladnik")) {
+        if (ucet.equals("Operating") || ucet.equals("Skladník")) {
             Stage primaryStage = (Stage) ap.getScene().getWindow();
             primaryStage.close();
 
