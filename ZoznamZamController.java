@@ -101,7 +101,7 @@ public class ZoznamZamController implements Initializable {
 
     public void update_Table() throws SQLException {
 
-        ColumnId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        ColumnId.setCellValueFactory(new PropertyValueFactory<>("prihlasenie"));
         ColumnMeno.setCellValueFactory(new PropertyValueFactory<>("meno"));
         ColumnPriezvisko.setCellValueFactory(new PropertyValueFactory<>("priezvisko"));
         ColumnSklad.setCellValueFactory(new PropertyValueFactory<>("sklad"));

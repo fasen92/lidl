@@ -228,7 +228,7 @@ public class JDBMySQLConnection {
             while (rs.next()) {
                 UcetList.add(new Ucet(rs.getInt("id"), rs.getString("heslo"), rs.getString("meno"),
                         rs.getString("priezvisko"), rs.getString("rola"), rs.getString("sklad"),
-                        rs.getInt("prvyLogin")));
+                        rs.getInt("prvyLogin"), rs.getString("prihlasenie")));
             }
         } catch (Exception e) {
 
@@ -277,7 +277,7 @@ public class JDBMySQLConnection {
             while (rs.next()) {
                 UcetList.add(new Ucet(rs.getInt("id"), rs.getString("heslo"), rs.getString("meno"),
                         rs.getString("priezvisko"), rs.getString("rola"), rs.getString("sklad"),
-                        rs.getInt("prvyLogin")));
+                        rs.getInt("prvyLogin"), rs.getString("prihlasenie")));
             }
         } catch (Exception e) {
 
@@ -286,17 +286,17 @@ public class JDBMySQLConnection {
         return UcetList;
     }
 
-    public static void addtoUcet(String meno, String priezvisko, String sklad, String rola) {
+    public static void addtoUcet(String meno, String priezvisko, String sklad, String rola, String prihlasenie) {
         int prvyLogin = 1;
         getQueryUcet();
-        insertUcet(meno, priezvisko, rola, sklad, prvyLogin);
+        insertUcet(meno, priezvisko, rola, sklad, prvyLogin, prihlasenie);
     }
 
     private static void getQueryUcet() {
-        query = "INSERT INTO `ucet`( `id`, `heslo`, `meno`, `priezvisko`, `rola`,`sklad`,`prvyLogin`) VALUES (?,?,?,?,?,?,?)";
+        query = "INSERT INTO `ucet`( `id`, `heslo`, `meno`, `priezvisko`, `rola`,`sklad`,`prvyLogin`, `prihlasenie`) VALUES (?,?,?,?,?,?,?,?)";
     }
 
-    private static void insertUcet(String meno, String priezvisko, String rola, String sklad, int prvyLogin) {
+    private static void insertUcet(String meno, String priezvisko, String rola, String sklad, int prvyLogin, String prihlasenie) {
 
         try {
             Connection connection = getConnection();
@@ -309,6 +309,8 @@ public class JDBMySQLConnection {
             preparedStatement.setString(5, rola);
             preparedStatement.setString(6, sklad);
             preparedStatement.setInt(7, prvyLogin);
+            preparedStatement.setString(8, prihlasenie);
+
 
             preparedStatement.execute();
         } catch (SQLException e) {

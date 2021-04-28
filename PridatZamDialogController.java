@@ -1,4 +1,6 @@
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
@@ -15,7 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class PridatZamDialogController implements Initializable {
-    
+
     @FXML
     TextField txtMeno;
 
@@ -35,43 +37,57 @@ public class PridatZamDialogController implements Initializable {
     ChoiceBox<String> ChoiceBoxRola;
 
     @FXML
-    void OnClickPridatZam(ActionEvent event) {
+    void OnClickPridatZam(ActionEvent event) throws SQLException {
         String meno = String.valueOf(txtMeno.getText().trim());
         String priezvisko = String.valueOf(txtPriezvisko.getText().trim());
         String sklad = getVyberSkladu(ChoiceBoxSklad);
         String rola = getVyberRole(ChoiceBoxRola);
+        ArrayList<Ucet> UcetList = JDBMySQLConnection.getUcty();
+        String prihlasenie = priezvisko;
 
-        if(meno == ""){
-            JOptionPane.showMessageDialog(null, "Meno nie je vyplnené.");
-        }else if(priezvisko == ""){
-            JOptionPane.showMessageDialog(null, "Priezvisko nie je vyplnené.");
-        }else if(sklad == ""){
-            JOptionPane.showMessageDialog(null, "Nebol vybratý sklad.");
-        }else if(rola == ""){
-            JOptionPane.showMessageDialog(null, "Nebola Vybratá rola.");
-        }else{
-            JDBMySQLConnection.addtoUcet(meno, priezvisko, sklad, rola);
+        for (int i = 0; i < UcetList.size(); i++) {
+            if (prihlasenie.equals(UcetList.get(i).getPrihlasenie())) {
+
+                for (int j = 0; j < UcetList.size(); j++) {
+                    if (UcetList.get(j).getPrihlasenie().equals(priezvisko + String.valueOf(meno.charAt(0)).toUpperCase())) {
+                        prihlasenie = priezvisko + String.valueOf(meno.charAt(0)).toUpperCase() + meno.substring(1, 3);
+                        break;
+                    } else {
+                        prihlasenie = priezvisko + String.valueOf(meno.charAt(0)).toUpperCase();
+                    }
+                }
+
+            }
         }
-        
 
+        if (meno == "") {
+            JOptionPane.showMessageDialog(null, "Meno nie je vyplnené.");
+        } else if (priezvisko == "") {
+            JOptionPane.showMessageDialog(null, "Priezvisko nie je vyplnené.");
+        } else if (sklad == "") {
+            JOptionPane.showMessageDialog(null, "Nebol vybratý sklad.");
+        } else if (rola == "") {
+            JOptionPane.showMessageDialog(null, "Nebola Vybratá rola.");
+        } else {
+            JDBMySQLConnection.addtoUcet(meno, priezvisko, sklad, rola, prihlasenie);
+        }
 
         closeStage(event);
     }
 
     @FXML
-    void OnCLickZrusit(ActionEvent event){
+    void OnCLickZrusit(ActionEvent event) {
         closeStage(event);
     }
 
-
     private void closeStage(ActionEvent event) {
-        Node  source = (Node)  event.getSource(); 
-        Stage stage  = (Stage) source.getScene().getWindow();
+        Node source = (Node) event.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
         stage.close();
     }
 
     public void setup_Choiceboxs() {
-        ObservableList<String> SkladList = FXCollections.observableArrayList("Sklad 1", "Sklad 2", "Sklad 3","Všetky");
+        ObservableList<String> SkladList = FXCollections.observableArrayList("Sklad 1", "Sklad 2", "Sklad 3", "Všetky");
         ObservableList<String> RolaList = FXCollections.observableArrayList("Admin", "Operating", "Skladník");
 
         ChoiceBoxSklad.setItems(SkladList);
@@ -88,11 +104,11 @@ public class PridatZamDialogController implements Initializable {
 
     }
 
-    public String getVyberSkladu(ChoiceBox<String> ChoiceBoxSklad){
+    public String getVyberSkladu(ChoiceBox<String> ChoiceBoxSklad) {
         return ChoiceBoxSklad.getValue();
     }
 
-    public String getVyberRole(ChoiceBox<String> ChoiceBoxRola){
+    public String getVyberRole(ChoiceBox<String> ChoiceBoxRola) {
         return ChoiceBoxRola.getValue();
     }
 }

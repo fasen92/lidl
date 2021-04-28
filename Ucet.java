@@ -1,4 +1,7 @@
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -8,10 +11,10 @@ import javafx.scene.Node;
 
 public class Ucet {
     private int id, prvyLogin;
-    private String heslo, meno, priezvisko, sklad, rola;
+    private String heslo, meno, priezvisko, sklad, rola, prihlasenie;
     private Button button;
 
-    public Ucet(int id, String heslo, String meno, String priezvisko, String rola, String sklad, int prvyLogin) {
+    public Ucet(int id, String heslo, String meno, String priezvisko, String rola, String sklad, int prvyLogin, String prihlasenie) {
         this.id = id;
         this.heslo = heslo;
         this.meno = meno;
@@ -19,11 +22,12 @@ public class Ucet {
         this.sklad = sklad;
         this.rola = rola;
         this.prvyLogin = prvyLogin;
+        this.prihlasenie = prihlasenie;
         this.button = new Button("Detail");
 
         button.setOnAction(e -> {
             SingletonDetailZam x = SingletonDetailZam.getInstance();
-            Ucet ucet1 = new Ucet(this.id, this.heslo, this.meno, this.priezvisko, this.rola, this.sklad, this.prvyLogin);
+            Ucet ucet1 = new Ucet(this.id, this.heslo, this.meno, this.priezvisko, this.rola, this.sklad, this.prvyLogin, this.prihlasenie);
             x.setUcet(ucet1);
 
             Parent DetailZamParent;
@@ -41,6 +45,15 @@ public class Ucet {
             }
 
         });
+    }
+
+    public String getPrihlasenie() {
+        return prihlasenie;
+    }
+
+
+    public void setPrihlasenie(String prihlasenie) {
+        this.prihlasenie = prihlasenie;
     }
 
     public int getId() {

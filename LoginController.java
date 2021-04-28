@@ -42,7 +42,7 @@ public class LoginController {
         boolean podmnienka = true;
 
         for (int i = 0; i < UcetList.size(); i++) {
-            if (txtId.getText().equals(String.valueOf(UcetList.get(i).getId()))
+            if (txtId.getText().equals(String.valueOf(UcetList.get(i).getPrihlasenie()))
                     && txtPassword.getText().equals(UcetList.get(i).getHeslo())) {
                 podmnienka = false;
 

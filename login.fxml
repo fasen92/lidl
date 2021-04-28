@@ -13,24 +13,24 @@
    <children>
       <AnchorPane layoutX="39.0" layoutY="75.0" prefHeight="350.0" prefWidth="350.0" style="-fx-background-color: #003f8a;">
          <children>
-            <TextField fx:id="txtId" layoutX="45.0" layoutY="150.0" prefHeight="38.0" prefWidth="260.0" promptText="Id">
+            <TextField fx:id="txtId" layoutX="45.0" layoutY="150.0" prefHeight="38.0" prefWidth="260.0" promptText="Prihlasovacie meno">
                <font>
-                  <Font size="14.0" />
+                  <Font name="Yu Gothic Bold" size="14.0" />
                </font>
             </TextField>
             <PasswordField fx:id="txtPassword" layoutX="45.0" layoutY="215.0" prefHeight="38.0" prefWidth="260.0" promptText="Heslo">
                <font>
-                  <Font size="15.0" />
+                  <Font name="Yu Gothic Bold" size="14.0" />
                </font>
             </PasswordField>
             <Button fx:id="btnLogin" layoutX="47.0" layoutY="275.0" mnemonicParsing="false" onAction="#Login" prefHeight="39.0" prefWidth="260.0" style="-fx-background-color: #004fac;" text="Prihlásiť" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="18.0" />
+                  <Font name="Yu Gothic Bold" size="18.0" />
                </font>
             </Button>
-            <Label layoutX="91.0" layoutY="37.0" prefHeight="39.0" prefWidth="169.0" text="Prihlásenie" textAlignment="CENTER" textFill="WHITE">
+            <Label layoutX="91.0" layoutY="37.0" prefHeight="43.0" prefWidth="178.0" text="Prihlásenie" textAlignment="CENTER" textFill="WHITE">
                <font>
-                  <Font size="35.0" />
+                  <Font name="Yu Gothic Light" size="36.0" />
                </font>
             </Label>
             <Label fx:id="txtLabel" layoutX="51.0" layoutY="88.0" prefHeight="39.0" prefWidth="249.0" text="Zadané údaje nie sú validné" textAlignment="CENTER" textFill="RED" textOverrun="CENTER_ELLIPSIS" visible="false">
