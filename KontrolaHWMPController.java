@@ -237,7 +237,7 @@ public class KontrolaHWMPController implements Initializable {
             newStage.show();
         }
         
-        if (ucet.equals("Operating") || ucet.equals("Skladnik")) {
+        if (ucet.equals("Operating") || ucet.equals("Skladník")) {
             Stage primaryStage = (Stage) ap.getScene().getWindow();
             primaryStage.close();
 
@@ -304,9 +304,21 @@ public class KontrolaHWMPController implements Initializable {
                 PreparedStatement pst;
                 pst = conn.prepareStatement(sql);
                 pst.setString(1, mp.get(0).getID());
+                String Nazov = mp.get(0).getNazov();
                 pst.execute();
                 tabulka.getItems().removeAll(tabulka.getSelectionModel().getSelectedItems());
                 update_Table(ChoiceBoxTypzariadenia.getValue(), ChoiceBoxSklad.getValue());
+
+                Singleton x = Singleton.getInstance();
+
+                String Meno = x.ucet.getMeno();
+                System.out.println("Meno" + Meno);
+                String Priezvisko = x.ucet.getPriezvisko();
+                System.out.println("Priez" + Priezvisko);
+                String Akcia = "Odstranene Mobil -" + Nazov;
+                System.out.println(Akcia);
+
+                JDBMySQLConnection.addtoZazAkci(Meno, Priezvisko, Akcia);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Nič nie je vybraté");
             }

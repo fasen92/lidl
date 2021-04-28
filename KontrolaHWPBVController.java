@@ -155,7 +155,7 @@ public class KontrolaHWPBVController implements Initializable {
 
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(scannerScene);
-            window.setMaximized(true);
+            //window.setMaximized(true);
             window.show();
         }
         if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Quail") {
@@ -164,7 +164,7 @@ public class KontrolaHWPBVController implements Initializable {
 
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(quailScene);
-            window.setMaximized(true);
+            //window.setMaximized(true);
             window.show();
         }
         if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Rabattdrucker") {
@@ -173,7 +173,7 @@ public class KontrolaHWPBVController implements Initializable {
 
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(rabatScene);
-            window.setMaximized(true);
+            //window.setMaximized(true);
             window.show();
         }
         if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Ostatné") {
@@ -182,7 +182,7 @@ public class KontrolaHWPBVController implements Initializable {
 
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(rabatScene);
-            window.setMaximized(true);
+            //window.setMaximized(true);
             window.show();
         }
         if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Moblný telefon") {
@@ -191,7 +191,7 @@ public class KontrolaHWPBVController implements Initializable {
 
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(rabatScene);
-            window.setMaximized(true);
+           // window.setMaximized(true);
             window.show();
         }
 
@@ -302,7 +302,7 @@ public class KontrolaHWPBVController implements Initializable {
                 System.out.println("Meno" + Meno);
                 String Priezvisko = x.ucet.getPriezvisko();
                 System.out.println("Priez" + Priezvisko);
-                String Akcia = "Odstanene PBV -" + Nazov;
+                String Akcia = "Odstranene PBV -" + Nazov;
                 System.out.println(Akcia);
 
                 JDBMySQLConnection.addtoZazAkci(Meno, Priezvisko, Akcia);

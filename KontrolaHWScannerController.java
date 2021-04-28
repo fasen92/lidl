@@ -135,7 +135,7 @@ public class KontrolaHWScannerController implements Initializable {
 
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(pbvScene);
-            window.setMaximized(true);
+            //window.setMaximized(true);
             window.show();
         }
         if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "MDE") {
@@ -144,7 +144,7 @@ public class KontrolaHWScannerController implements Initializable {
 
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(scannerScene);
-            window.setMaximized(true);
+            //window.setMaximized(true);
             window.show();
         }
         if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Quail") {
@@ -153,7 +153,7 @@ public class KontrolaHWScannerController implements Initializable {
 
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(quailScene);
-            window.setMaximized(true);
+            //window.setMaximized(true);
             window.show();
         }
         if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Rabattdrucker") {
@@ -162,7 +162,7 @@ public class KontrolaHWScannerController implements Initializable {
 
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(rabatScene);
-            window.setMaximized(true);
+            //window.setMaximized(true);
             window.show();
         }
         if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Ostatné") {
@@ -171,7 +171,7 @@ public class KontrolaHWScannerController implements Initializable {
 
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(rabatScene);
-            window.setMaximized(true);
+            //window.setMaximized(true);
             window.show();
         }
         if (getVyberZariadenia(ChoiceBoxTypzariadenia) == "Moblný telefon") {
@@ -180,7 +180,7 @@ public class KontrolaHWScannerController implements Initializable {
 
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(rabatScene);
-            window.setMaximized(true);
+            //window.setMaximized(true);
             window.show();
         }
     }
@@ -267,9 +267,21 @@ public class KontrolaHWScannerController implements Initializable {
                 PreparedStatement pst;
                 pst = conn.prepareStatement(sql);
                 pst.setString(1, sc.get(0).getID());
+                String Nazov = sc.get(0).getNazov();
                 pst.execute();
                 tabulka.getItems().removeAll(tabulka.getSelectionModel().getSelectedItems());
                 update_Table(ChoiceBoxTypzariadenia.getValue(), ChoiceBoxSklad.getValue());
+
+                Singleton x = Singleton.getInstance();
+
+                String Meno = x.ucet.getMeno();
+                System.out.println("Meno" + Meno);
+                String Priezvisko = x.ucet.getPriezvisko();
+                System.out.println("Priez" + Priezvisko);
+                String Akcia = "Odstranene Scanner -" + Nazov;
+                System.out.println(Akcia);
+
+                JDBMySQLConnection.addtoZazAkci(Meno, Priezvisko, Akcia);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Nič nie je vybraté");
             }

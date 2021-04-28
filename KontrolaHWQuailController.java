@@ -266,9 +266,21 @@ public class KontrolaHWQuailController implements Initializable {
                 PreparedStatement pst;
                 pst = conn.prepareStatement(sql);
                 pst.setString(1, quail.get(0).getID());
+                String Nazov = quail.get(0).getNazov();
                 pst.execute();
                 tabulka.getItems().removeAll(tabulka.getSelectionModel().getSelectedItems());
                 update_Table(ChoiceBoxTypzariadenia.getValue(), ChoiceBoxSklad.getValue());
+
+                Singleton x = Singleton.getInstance();
+
+                String Meno = x.ucet.getMeno();
+                System.out.println("Meno" + Meno);
+                String Priezvisko = x.ucet.getPriezvisko();
+                System.out.println("Priez" + Priezvisko);
+                String Akcia = "Odstranene Quail -" + Nazov;
+                System.out.println(Akcia);
+
+                JDBMySQLConnection.addtoZazAkci(Meno, Priezvisko, Akcia);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Nič nie je vybraté");
             }
