@@ -53,7 +53,7 @@ public class JDBMySQLConnection {
                     OLPbv.add(new Pbv(rs.getString("ID"), rs.getString("Typ"), rs.getString("Názov"),
                             rs.getString("Počet"), rs.getString("Sériové číslo"), rs.getString("Záznam činnosti"),
                             rs.getString("Dátum odoslania fili"), rs.getString("Záruka"), rs.getString("Poznámka"),
-                            rs.getString("Oprava cez")));
+                            rs.getString("Oprava_cez")));
                 }
             } catch (Exception e) {
 
@@ -110,7 +110,7 @@ public class JDBMySQLConnection {
                     OLQuail.add(new Quail(rs.getString("ID"), rs.getString("Typ"), rs.getString("Názov"),
                             rs.getString("Počet"), rs.getString("Sériové číslo"), rs.getString("Cislo fili"),
                             rs.getString("Záznam činnosti"), rs.getString("Dátum odoslania fili"),
-                            rs.getString("Záruka"), rs.getString("Poznámka"), rs.getString("Oprava cez")));
+                            rs.getString("Záruka"), rs.getString("Poznámka"), rs.getString("Oprava_cez")));
                 }
             } catch (Exception e) {
                 System.out.println("nieco je zle");
@@ -634,6 +634,35 @@ public class JDBMySQLConnection {
     private static void getQueryZazakci() {
         query = "INSERT INTO `zaznamy-akci`(`Meno`, `Priezvisko`, `Cas`, `Akcia`) VALUES (?,?,?,?)";
         
+    }
+
+    public static ObservableList<Zariadenie> getOprava() throws SQLException {
+            Connection conn = getConnection();
+        ObservableList<Zariadenie> ZarList = FXCollections.observableArrayList();
+        
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM `pbv` WHERE Oprava_cez !='Vporiadku' || 'NULL'");
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                ZarList.add(new Zariadenie(rs.getString("Typ"), rs.getString("Názov"), rs.getString("Oprava_cez"),rs.getString("Záznam činnosti"), rs.getString("Sklad")));
+            }
+        } catch (Exception e) {
+            System.out.println("PBV"+e);
+        }
+
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM `quail` WHERE Oprava_cez !='Vporiadku' || 'NULL'");
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                ZarList.add(new Zariadenie(rs.getString("Typ"), rs.getString("Názov"), rs.getString("Oprava_cez"),rs.getString("Záznam činnosti"), rs.getString("Sklad")));
+            }
+        } catch (Exception e) {
+            System.out.println("Quail"+e);
+        }
+
+        return ZarList;   
     }
 
 }

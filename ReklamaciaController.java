@@ -19,28 +19,28 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class ZaznamAkciController implements Initializable {
-    
+public class ReklamaciaController implements Initializable{
+
     @FXML
     private AnchorPane ap;
 
     @FXML
-    private TableView<Osoba> tabulka;
+    private TableView<Zariadenie> tabulka;
 
     @FXML
-    private TableColumn<Osoba, String> ColumnID;
+    private TableColumn<Zariadenie, String> ColumnTyp;
 
     @FXML
-    private TableColumn<Osoba, String> ColumnMeno;
+    private TableColumn<Zariadenie, String> ColumnNazov;
 
     @FXML
-    private TableColumn<Osoba, String> ColumnPriezvisko;
+    private TableColumn<Zariadenie, String> ColumnOpravacez;
 
     @FXML
-    private TableColumn<Osoba, String> ColumnDatum;
+    private TableColumn<Zariadenie, String> ColumnPoznamka;
 
     @FXML
-    private TableColumn<Osoba, String> ColumnAkcia;
+    private TableColumn<Zariadenie, String> ColumnSklad;
 
     @FXML
     private Button BtnMenu;
@@ -48,7 +48,12 @@ public class ZaznamAkciController implements Initializable {
     @FXML
     private Button BtnAktualizuj;
 
-    ObservableList<Osoba> OsobaTable = FXCollections.observableArrayList();
+    ObservableList<Zariadenie> ZariadenieTable = FXCollections.observableArrayList();
+
+    @FXML
+    void OnClickAktualizuj(ActionEvent event) throws SQLException {
+        update_Table();
+    }
 
     @FXML
     void OnClickMenu(ActionEvent event) throws IOException {
@@ -86,30 +91,25 @@ public class ZaznamAkciController implements Initializable {
             newStage.setTitle("Asset Management");
             newStage.show();
         }
-    
     }
-    @FXML
-    void OnClickAktualizuj(ActionEvent event) throws SQLException {
-        update_Table();
-    }
-
     public void update_Table() throws SQLException {
 
-        ColumnID.setCellValueFactory(new PropertyValueFactory<>("ID"));
-        ColumnMeno.setCellValueFactory(new PropertyValueFactory<>("Meno"));
-        ColumnPriezvisko.setCellValueFactory(new PropertyValueFactory<>("Priezvisko"));
-        ColumnDatum.setCellValueFactory(new PropertyValueFactory<>("Datum"));
-        ColumnAkcia.setCellValueFactory(new PropertyValueFactory<>("Akcia"));
+        ColumnTyp.setCellValueFactory(new PropertyValueFactory<>("Typ"));
+        ColumnNazov.setCellValueFactory(new PropertyValueFactory<>("Nazov"));
+        ColumnOpravacez.setCellValueFactory(new PropertyValueFactory<>("Opravacez"));
+        ColumnPoznamka.setCellValueFactory(new PropertyValueFactory<>("Poznamka"));
+        ColumnSklad.setCellValueFactory(new PropertyValueFactory<>("Sklad"));
+       
+       
 
-        OsobaTable = JDBMySQLConnection.getUctyZazAkci();
+        ZariadenieTable = JDBMySQLConnection.getOprava();
         
-        tabulka.setItems(OsobaTable);
+        tabulka.setItems(ZariadenieTable);
 
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        
         try {
             update_Table();
         } catch (Exception e) {
@@ -117,6 +117,5 @@ public class ZaznamAkciController implements Initializable {
         }
         
     }
-
 
 }

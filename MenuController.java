@@ -67,8 +67,19 @@ public class MenuController{
     }
 
     @FXML
-    void OnClickReklamacie(ActionEvent event) {
-
+    void OnClickReklamacie(ActionEvent event) throws IOException {
+        Stage primaryStage = (Stage) ap.getScene().getWindow();
+        primaryStage.close();
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ReklamaciaScene.fxml"));
+        Parent root = (Parent) loader.load();
+        Scene newScene = new Scene(root);    
+        Stage newStage = new Stage();
+        newStage.getIcons().add(new Image("/images/LidlLogo.png"));
+        
+        newStage.setScene(newScene);
+        newStage.setTitle("Záznam akcí");
+        newStage.show();
     }
 
     @FXML

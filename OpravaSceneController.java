@@ -46,7 +46,7 @@ public class OpravaSceneController implements Initializable {
         String value1 = TAOprava.getText();
         String value2 = ChoiceBox.getValue();
         if (Zariadenie == "Pbv") {
-             sql= "UPDATE `pbv` SET `Záznam činnosti`='" + value1 + "',`Oprava cez`='" + value2 + "'WHERE ID='" + ID
+             sql= "UPDATE `pbv` SET `Záznam činnosti`='" + value1 + "',`Oprava_cez`='" + value2 + "'WHERE ID='" + ID
                 + "'";
         }
         if (Zariadenie == "Lispettore-scanner") {
@@ -54,7 +54,7 @@ public class OpravaSceneController implements Initializable {
                + "'";
         }
         if (Zariadenie == "Quail") {
-            sql= "UPDATE `quail` SET `Záznam činnosti`='" + value1 + "',`Oprava cez`='" + value2 + "'WHERE ID='" + ID
+            sql= "UPDATE `quail` SET `Záznam činnosti`='" + value1 + "',`Oprava_cez`='" + value2 + "'WHERE ID='" + ID
                + "'";
         }
         if (Zariadenie == "MDE") {
