@@ -236,7 +236,7 @@ public class KontrolaHWRabattdruckerController implements Initializable {
         } else {
             datumodoslania = String.valueOf(DFOdoslanienafili.getValue());
             zaruka = String.valueOf(DFZaruka.getValue());
-
+            System.out.println(getVyberskladu(ChoiceBoxSklad1));
             JDBMySQLConnection.addtoRabattdrucker(getVyberskladu(ChoiceBoxSklad1), TFTyp.getText(), TFNazov.getText(),
                     TFPocet.getText(), TFSeriove.getText(), TFECO.getText(), TFCF.getText(), datumodoslania, zaruka,
                     TAPoznamka.getText());
@@ -317,6 +317,7 @@ public class KontrolaHWRabattdruckerController implements Initializable {
                 Connection conn = JDBMySQLConnection.getConnection();
                 PreparedStatement ps = null;
                 String value2 = ChoiceBoxSklad1.getValue();
+                System.out.println("value 2"+value2);
                 String value3 = TFTyp.getText();
                 String value4 = TFNazov.getText();
                 String value5 = TFPocet.getText();
@@ -357,7 +358,7 @@ public class KontrolaHWRabattdruckerController implements Initializable {
             System.out.println(rbt.getDatum_odoslania());
             LocalDate localDate1 = LocalDate.parse(rbt.getDatum_odoslania());
             LocalDate localDate2 = LocalDate.parse(rbt.getZaruka());
-            ChoiceBoxSklad1.setValue(getVyberZariadenia(ChoiceBoxTypzariadenia));
+            ChoiceBoxSklad1.setValue(getVyberZariadenia(ChoiceBoxSklad));
             TFNazov.setText(rbt.getNazov());
             TFTyp.setText(rbt.getTyp());
             TFPocet.setText(rbt.getPocet());
@@ -438,6 +439,7 @@ public class KontrolaHWRabattdruckerController implements Initializable {
             ChoiceBoxSklad1.setValue("Sklad3");
         }
 
+
     }
 
     public void update_Table(String choiceZariadenie, String choiceSklad) throws SQLException {
@@ -514,7 +516,7 @@ public class KontrolaHWRabattdruckerController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("vytvorenie pozadia");
+        
         setup_Choiceboxs();
 
         try {

@@ -1,5 +1,5 @@
 public class Rabattdrucker {
-    String SC,ECO,Nazov,Pocet,Zaruka,ID,Poznamka,Datum_odoslania,Typ,CF,Zazcinnosti,Opravacez;
+    String SC,ECO,Nazov,Pocet,Zaruka,ID,Poznamka,Datum_odoslania,Typ,CF,Zazcinnosti,Opravacez,Sklad;
     
     public Rabattdrucker(String ID,String Typ,String Nazov,String Pocet,String SC,String ECO,String CF,String Zazcinnosti,String Datum_odoslania,String Zaruka,String Poznamka,String Opravacez) {
         this.Typ =Typ;
@@ -15,6 +15,12 @@ public class Rabattdrucker {
         this.Opravacez = Opravacez;
         this.Zazcinnosti = Zazcinnosti;
 
+    }
+    public String getSklad() {
+        return Sklad;
+    }
+    public void setSklad(String sklad) {
+        Sklad = sklad;
     }
     public String getOpravacez() {
         return Opravacez;

@@ -309,6 +309,7 @@ public class KontrolaHWScannerController implements Initializable {
                 Connection conn = JDBMySQLConnection.getConnection();
                 PreparedStatement ps = null;
                 String value2 = ChoiceBoxSklad1.getValue();
+                System.out.println("value 2"+value2);
                 String value3 = TFTyp.getText();
                 String value4 = TFNazov.getText();
                 String value5 = TFPocet.getText();

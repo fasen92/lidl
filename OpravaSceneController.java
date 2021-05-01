@@ -62,7 +62,7 @@ public class OpravaSceneController implements Initializable {
                + "'";
         }
         if (Zariadenie == "Rabattdrucker") {
-            sql= "UPDATE `rabattdrucker` SET `Záznam činnosti`='" + value1 + "',`Oprava cez`='" + value2 + "'WHERE ID='" + ID
+            sql= "UPDATE `rabattdrucker` SET `Záznam činnosti`='" + value1 + "',`Oprava_cez`='" + value2 + "'WHERE ID='" + ID
                + "'";
         }
         if (Zariadenie == "Moblný telefon") {
