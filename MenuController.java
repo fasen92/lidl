@@ -78,7 +78,7 @@ public class MenuController{
         newStage.getIcons().add(new Image("/images/LidlLogo.png"));
         
         newStage.setScene(newScene);
-        newStage.setTitle("Záznam akcí");
+        newStage.setTitle("Reklamácie");
         newStage.show();
     }
 
